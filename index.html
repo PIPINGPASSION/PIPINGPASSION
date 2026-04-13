@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piping Passion &mdash; Field Knowledge for Industrial Piping Designers</title>
+<meta name="description" content="Practical knowledge for industrial piping designers. Field tips, brownfield wisdom, scan-to-model workflows and technical reference &mdash; by Geoffroy Falot.">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .hero {
+    position: relative; min-height: calc(100vh - 62px);
+    display: flex; align-items: center;
+    padding: 5rem 2.5rem 4rem; overflow: hidden;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    left: 38vw; top: 0; width: 2px; height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    opacity: 0.1; transform: rotate(8deg);
+    pointer-events: none;
+  }
+  .hero-grid {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    display: grid; grid-template-columns: 1fr 240px;
+    gap: 4rem; align-items: center;
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.82rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .hero-eyebrow::before { content: ''; width: 28px; height: 2px; background: var(--gold); }
+  .hero-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: clamp(2.8rem, 5vw, 4.5rem);
+    line-height: 1.0; letter-spacing: -0.01em;
+    color: var(--white); text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .hero-title .gold { color: var(--gold-lt); }
+  .hero-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 600; font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+    color: var(--muted); margin-bottom: 1.8rem;
+  }
+  .hero-desc { font-size: 1.05rem; color: #B0C4D8; max-width: 510px; margin-bottom: 2.2rem; }
+  .hero-cta { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+
+  /* Book aside */
+  .book-aside { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; }
+  .book-cover-wrap {
+    width: 150px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 4px 4px 0 rgba(201,147,10,0.2);
+    border-radius: 5px; overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .book-cover-wrap img { width: 100%; display: block; }
+  .book-aside-meta {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.1em; color: var(--muted);
+    text-transform: uppercase; text-align: center;
+  }
+  .book-aside-link {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem; font-weight: 700;
+    letter-spacing: 0.1em; color: var(--gold);
+    text-decoration: none; text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .book-aside-link:hover { opacity: 0.75; }
+
+  /* Stats bar */
+  .stats-bar {
+    background: var(--navy-3); border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1.4rem 2.5rem;
+  }
+  .stats-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; gap: 3rem; align-items: center;
+  }
+  .stat { text-align: center; }
+  .stat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 900; font-size: 2rem; color: var(--gold-lt);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  }
+  .stat-divider { width: 1px; height: 40px; background: var(--border); }
+
+  /* Featured tip */
+  .featured-tip { padding: 4.5rem 2.5rem; }
+  .tip-feature-card {
+    display: grid; grid-template-columns: 4px 1fr;
+    gap: 2.2rem; align-items: start;
+    max-width: 800px;
+  }
+  .tip-feature-accent { background: var(--gold); border-radius: 2px; }
+  .tip-feature-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem; font-weight: 700;
+    letter-spacing: 0.18em; color: var(--gold); text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .tip-feature-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.1rem);
+    color: var(--white); line-height: 1.15; margin-bottom: 0.9rem;
+  }
+  .tip-feature-body { font-size: 1rem; color: #B0C4D8; line-height: 1.75; max-width: 640px; }
+  .tip-feature-footer {
+    display: flex; align-items: center; gap: 1.2rem; margin-top: 1.2rem;
+  }
+
+  /* Sections nav */
+  .sections-nav { padding: 4rem 2.5rem; background: var(--navy-2); border-top: 1px solid var(--border); }
+  .sections-grid {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 1px; border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+  }
+  .section-card {
+    background: var(--navy-2); padding: 1.8rem 1.4rem;
+    text-decoration: none; color: var(--white);
+    transition: background 0.2s; position: relative; overflow: hidden;
+  }
+  .section-card::before {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 2px;
+    background: var(--gold); transform: scaleX(0);
+    transform-origin: left; transition: transform 0.25s;
+  }
+  .section-card:hover { background: var(--navy-3); }
+  .section-card:hover::before { transform: scaleX(1); }
+  .section-card-icon { font-size: 1.4rem; margin-bottom: 0.8rem; opacity: 0.65; display: block; }
+  .section-card-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1.05rem; margin-bottom: 0.35rem; color: var(--white);
+  }
+  .section-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.45; }
+  .section-card-arrow {
+    display: block; margin-top: 1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); opacity: 0; transition: opacity 0.2s;
+  }
+  .section-card:hover .section-card-arrow { opacity: 1; }
+
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .book-aside { display: none; }
+    .sections-grid { grid-template-columns: 1fr 1fr; }
+    .stats-inner { flex-wrap: wrap; gap: 1.5rem; }
+    .stat-divider { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="deco-wrap"><img class="sk-l" src="assets/sk-a.svg" alt=""><img class="sk-r" src="assets/sk-c.svg" alt=""></div>
+
+
+<nav>
+  <a class="nav-logo" href="index.html"><span>PIPING</span>PASSION</a>
+  <ul class="nav-links">
+    <li><a href="pages/field-tips.html">Field Tips</a></li>
+    <li><a href="pages/field-stories.html">Field Stories</a></li>
+    <li><a href="pages/brownfield.html">Brownfield</a></li>
+    <li><a href="pages/scan-to-model.html">Scan-to-Model</a></li>
+    <li><a href="pages/codes-standards.html">Codes</a></li>
+    <li><a href="pages/tools.html">Tools</a></li>
+    <li><a href="pages/career.html">Career</a></li>
+    <li><a href="pages/books.html">Books</a></li>
+    <li><a class="nav-cta" href="pages/contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="position:relative">
+  <div class="hero-grid">
+    <div class="hero-content">
+      <p class="hero-eyebrow">For industrial piping designers</p>
+      <h1 class="hero-title">
+        Your Seniors<br>Are Retiring.<br>
+        <span class="gold">Their Knowledge<br>Doesn't Have To.</span>
+      </h1>
+      <p class="hero-subtitle">Field wisdom for the next generation of piping designers.</p>
+      <p class="hero-desc">
+        Seven years on brownfield sites taught me what no textbook covers &mdash;
+        the decisions, the workarounds, the judgment calls that only come
+        from standing next to someone who's been doing this for thirty years.
+        This site is where that knowledge lives.
+      </p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="pages/field-tips.html">Browse Field Tips</a>
+        <a class="btn-ghost" href="pages/about.html">About this site &rarr;</a>
+      </div>
+    </div>
+    <div class="book-aside">
+      <div class="book-cover-wrap">
+        <img src="assets/front-cover.jpg" alt="The Piping Designer's Companion">
+      </div>
+      <p class="book-aside-meta">25 chapters · 66 tips</p>
+      <a class="book-aside-link" href="pages/the-book.html">Learn more &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<div class="gold-bar"></div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><div class="stat-num">25</div><div class="stat-label">Chapters</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">66</div><div class="stat-label">Field-Tested Tips</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">14</div><div class="stat-label">Field Stories</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">70+</div><div class="stat-label">Glossary Terms</div></div>
+    <div class="stat-divider"></div>
+    <div class="stat"><div class="stat-num">7</div><div class="stat-label">Years on Site</div></div>
+  </div>
+</div>
+
+<!-- FEATURED TIP -->
+<section class="featured-tip reveal">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="section-tag">Tip of the day</div>
+    <div class="tip-feature-card">
+      <div class="tip-feature-accent"></div>
+      <div>
+        <p class="tip-feature-num">Tip #12 · Brownfield Layout</p>
+        <h2 class="tip-feature-title">Never trust an old drawing &mdash; verify clearances in the field before routing.</h2>
+        <p class="tip-feature-body">
+          As-built drawings on revamp projects are almost always wrong. Pipes move during shutdowns, supports get repositioned, equipment gets replaced without anyone updating the documentation. Walk the corridor yourself with a tape measure before you commit to a routing. Ten minutes of field verification saves three days of rework &mdash; and spares you the conversation with the client about why the new line doesn't fit.
+        </p>
+        <div class="tip-feature-footer">
+          <span class="tag">Brownfield</span>
+          <a class="btn-ghost" href="pages/field-tips.html">Read full tip &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-bar"></div>
+
+<!-- SECTIONS NAV -->
+<section class="sections-nav reveal reveal-delay-1">
+  <div class="sections-grid">
+    <a class="section-card" href="pages/field-tips.html">
+      <span class="section-card-icon">⚙</span>
+      <div class="section-card-title">Field Tips</div>
+      <div class="section-card-desc">Practical advice from seven years on site. No theory, no filler.</div>
+      <span class="section-card-arrow">Browse tips &rarr;</span>
+    </a>
+    <a class="section-card" href="pages/brownfield.html">
+      <span class="section-card-icon">🏗</span>
+      <div class="section-card-title">Brownfield</div>
+      <div class="section-card-desc">Revamps, retrofits, clashes and as-built surprises.</div>
+      <span class="section-card-arrow">Explore &rarr;</span>
+    </a>
+    <a class="section-card" href="pages/scan-to-model.html">
+      <span class="section-card-icon">📡</span>
+      <div class="section-card-title">Scan-to-Model</div>
+      <div class="section-card-desc">3D laser scanning workflows for brownfield piping projects.</div>
+      <span class="section-card-arrow">Learn more &rarr;</span>
+    </a>
+    <a class="section-card" href="pages/reference.html">
+      <span class="section-card-icon">📐</span>
+      <div class="section-card-title">Reference</div>
+      <div class="section-card-desc">Flanges, fittings, pipe schedules. The data you actually need on site.</div>
+      <span class="section-card-arrow">Open tables &rarr;</span>
+    </a>
+    <a class="section-card" href="pages/the-book.html">
+      <span class="section-card-icon">📖</span>
+      <div class="section-card-title">The Book</div>
+      <div class="section-card-desc">The Piping Designer's Companion &mdash; 45 years of field wisdom, preserved.</div>
+      <span class="section-card-arrow">Get the book &rarr;</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo"><span>PIPING</span>PASSION</div>
+  <div class="footer-links">
+    <a href="pages/field-tips.html">Field Tips</a>
+    <a href="pages/books.html">Books</a>
+    <a href="pages/contact.html">Contact</a>
+    <a href="pages/about.html">About</a>
+  </div>
+  <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
