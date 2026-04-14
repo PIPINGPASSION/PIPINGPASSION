@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Field Tips &mdash; Piping Passion</title>
+<title>Tip #05 &mdash; Piping Passion</title>
 <link rel="stylesheet" href="../css/style.css">
 <style>
 /* ═══════════════════════════════════════════
@@ -449,32 +449,31 @@ footer {
   footer { flex-direction: column; align-items: flex-start; }
 }
 
-.filter-bar {
-  padding:1.2rem 2.5rem;
-  background:var(--navy-3);border-bottom:1px solid var(--border);
-  display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;
-}
-.filter-label {
-  font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-right:.4rem;
-}
-.filter-btn {
-  font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
-  background:transparent;border:1px solid var(--border);border-radius:3px;
-  padding:.4rem 1rem;cursor:pointer;transition:all .18s;
-}
-.filter-btn:hover,.filter-btn.active{color:var(--navy);background:var(--gold);border-color:var(--gold);}
-.tips-container{max-width:900px;margin:0 auto;padding:3rem 2.5rem;}
+.tip-page{max-width:760px;margin:0 auto;padding:4rem 2.5rem}
+.tip-page-num{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
+.tip-page-num::before{content:'';width:22px;height:2px;background:var(--gold)}
+.tip-page-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.15;color:var(--white);margin-bottom:1rem}
+.tip-divider{width:60px;height:3px;background:var(--gold);margin:2rem 0;border-radius:2px}
+.tip-body{font-size:1.05rem;color:#B0C4D8;line-height:1.85;margin-bottom:1.2rem}
+.tip-body strong{color:var(--white);font-weight:600}
+.callout{background:var(--navy-3);border-left:3px solid var(--gold);padding:1.2rem 1.6rem;border-radius:0 6px 6px 0;margin:1.8rem 0}
+.callout-label{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.callout-text{font-size:.95rem;color:#B0C4D8;line-height:1.7;font-style:italic}
+.tip-nav{display:flex;justify-content:space-between;align-items:center;padding:2rem 0;border-top:1px solid var(--border);margin-top:3rem}
+.tip-nav a{font-family:'Barlow Condensed',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.tip-nav a:hover{color:var(--gold-lt)}
+.back-link{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2rem;transition:color .2s}
+.back-link:hover{color:var(--gold)}
+.tip-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
 </style>
 </head>
 <body>
-<div class="deco-wrap"><img class="sk-l" src="../assets/sk-b.svg" alt=""><img class="sk-r" src="../assets/sk-d.svg" alt=""></div>
+
 <nav>
   <a class="nav-logo" href="../index.html"><span>PIPING</span>PASSION</a>
   <ul class="nav-links">
     <li><a href="field-tips.html" class="active">Field Tips</a></li>
-    <li><a href="field-stories.html">Field Stories</a></li>
+    <li><a href="field-stories.html" >Field Stories</a></li>
     <li><a href="brownfield.html">Brownfield</a></li>
     <li><a href="scan-to-model.html">Scan-to-Model</a></li>
     <li><a href="codes-standards.html">Codes</a></li>
@@ -487,182 +486,43 @@ footer {
 </nav>
 <div class="page-header">
   <div class="page-header-inner">
-    <p class="page-eyebrow">Practical knowledge</p>
-    <h1 class="page-title">Field <span>Tips</span></h1>
-    <p class="page-desc">66 field-tested tips distilled from real projects, real mistakes, and real conversations with senior professionals. Short, direct, applicable on Monday morning.</p>
+    <p class="page-eyebrow">Field tip</p>
+    <h1 class="page-title"><span>Tip #05</span></h1>
   </div>
 </div>
-<div class="filter-bar">
-  <span class="filter-label">Filter:</span>
-  <button type="button" class="filter-btn active" data-cat="all">All</button>
-  <button type="button" class="filter-btn" data-cat="layout">Layout</button>
-  <button type="button" class="filter-btn" data-cat="brownfield">Brownfield</button>
-  <button type="button" class="filter-btn" data-cat="welding">Welding</button>
-  <button type="button" class="filter-btn" data-cat="supports">Supports</button>
-  <button type="button" class="filter-btn" data-cat="valves">Valves</button>
-  <button type="button" class="filter-btn" data-cat="scan">Scan-to-Model</button>
-</div>
-<div class="tips-container">
-
-
-  <a class="tip-item" href="tip-01.html" data-cat="brownfield">
-    <div class="tip-accent-bar" style="background:var(--gold-lt)"></div>
+<div class="tip-page reveal">
+  <a class="back-link" href="field-tips.html">&larr; All field tips</a>
+  <p class="tip-page-num">Tip #05 &middot; Valves</p>
+  <h1 class="tip-page-title">Always confirm handwheel orientation with operations &mdash; not just the P&ID.</h1>
+  <div class="tip-tags"><span class="tag">Valves</span></div>
+  <div class="tip-divider"></div>
+  <p class="tip-body">Before you finalize any valve placement, mentally operate the valve. Imagine yourself standing in front of it. Can you grip the handwheel? Can you see the position indicator? Can you read the valve tag?</p>
+<p class="tip-body">A valve that is correct on the P&amp;ID but impossible to operate safely from grade level is useless. Verify the operator&rsquo;s access route during the model review, not at FAT. Once steelwork is fabricated and equipment is installed, relocating a valve becomes a multi-discipline change.</p>
+<div class="callout"><div class="callout-label">From the book</div><div class="callout-text">Can you attach a wrench to the packing gland? If the valve has a bolted bonnet, can you remove the bonnet bolts and lift out the internals for maintenance? If any answer is no, redesign the installation before it becomes someone else&rsquo;s problem in the field.</div></div>
+<p class="tip-body"><strong>The takeaway:</strong> P&amp;ID compliance and operability are not the same thing. Walk through the model from the operator&rsquo;s perspective before you finalize any valve placement.</p>
+  <div class="tip-nav">
+    <a href="tip-04.html">&larr; Previous tip</a>
+    <a href="field-tips.html">All tips</a>
+    <a href="tip-06.html">Next tip &rarr;</a>
+  </div>
+  <div class="book-promo" style="margin-top:3rem">
+    <div class="book-promo-cover"><img src="../assets/front-cover.jpg" alt="The Piping Designer&rsquo;s Companion"></div>
     <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #01</span>
-        <span class="tag">Brownfield</span>
-      </div>
-      <h2 class="tip-heading">Walk the line before you draw it.</h2>
-      <p class="tip-excerpt">Before routing any new line in a revamp project, physically walk the corridor with a tape measure. What's on the drawing is rarely what's actually there.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
+      <p class="book-promo-meta">25 Chapters &middot; 66 Tips &middot; Complete Brownfield Guide</p>
+      <p class="book-promo-title">The Piping Designer&rsquo;s Companion</p>
+      <p class="book-promo-text">This tip is one of 66 in the book.</p>
+      <a class="btn-primary" href="https://mybook.to/pgMcn1" target="_blank">Get the book &rarr;</a>
     </div>
-  </a>
-
-  <a class="tip-item" href="tip-02.html" data-cat="layout">
-    <div class="tip-accent-bar" style="background:var(--gold)"></div>
-    <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #02</span>
-        <span class="tag">Layout</span>
-      </div>
-      <h2 class="tip-heading">Route for maintenance access first, aesthetics never.</h2>
-      <p class="tip-excerpt">The best layout is the one a fitter can work on at 3am during an emergency shutdown. Every valve needs a body, every instrument needs a face.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
-    </div>
-  </a>
-
-  <a class="tip-item" href="tip-03.html" data-cat="welding">
-    <div class="tip-accent-bar" style="background:#D85A30"></div>
-    <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #03</span>
-        <span class="tag" style="background:#D85A30">Welding</span>
-      </div>
-      <h2 class="tip-heading">Minimum SMAW clearance is 200mm &mdash; and that's already tight.</h2>
-      <p class="tip-excerpt">SMAW needs 200mm around the joint. In confined brownfield spaces, consider orbital welding above NPS 1½ or GTAW for accessibility. Never design a weld you can't execute.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
-    </div>
-  </a>
-
-  <a class="tip-item" href="tip-04.html" data-cat="supports">
-    <div class="tip-accent-bar" style="background:var(--gold)"></div>
-    <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #04</span>
-        <span class="tag">Supports</span>
-      </div>
-      <h2 class="tip-heading">Design your first support before your first elbow.</h2>
-      <p class="tip-excerpt">Pipe support locations drive routing decisions more than people realise. Lock in your structural attachment points early &mdash; changing them late costs everyone time.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
-    </div>
-  </a>
-
-  <a class="tip-item" href="tip-05.html" data-cat="valves">
-    <div class="tip-accent-bar" style="background:var(--gold)"></div>
-    <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #05</span>
-        <span class="tag">Valves</span>
-      </div>
-      <h2 class="tip-heading">Always confirm handwheel orientation with operations &mdash; not just the P&ID.</h2>
-      <p class="tip-excerpt">A valve that's correct on the P&ID but impossible to operate from grade level is useless. Verify the operator's access route during the model review, not at FAT.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
-    </div>
-  </a>
-
-  <a class="tip-item" href="tip-06.html" data-cat="brownfield">
-    <div class="tip-accent-bar" style="background:var(--gold-lt)"></div>
-    <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #06</span>
-        <span class="tag">Brownfield</span>
-      </div>
-      <h2 class="tip-heading">The as-built drawing is a hypothesis, not a fact.</h2>
-      <p class="tip-excerpt">Treat every dimension on an existing drawing as unverified until you've personally checked it. The older the plant, the higher the probability that reality and documentation have diverged.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
-    </div>
-  </a>
-
-  <a class="tip-item" href="tip-07.html" data-cat="scan">
-    <div class="tip-accent-bar" style="background:#7F77DD"></div>
-    <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #07</span>
-        <span class="tag" style="background:#7F77DD">Scan-to-Model</span>
-      </div>
-      <h2 class="tip-heading">Register your scan stations before you leave site &mdash; not at the office.</h2>
-      <p class="tip-excerpt">Cloud registration errors discovered back at the desk mean another site visit. Use a field tablet to do a quick sanity check on scan overlap and registration quality before you pack up.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
-    </div>
-  </a>
-
-  <a class="tip-item" href="tip-08.html" data-cat="layout">
-    <div class="tip-accent-bar" style="background:var(--gold)"></div>
-    <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #08</span>
-        <span class="tag">Layout</span>
-      </div>
-      <h2 class="tip-heading">Drain points belong at the lowest accessible point &mdash; not just the lowest point.</h2>
-      <p class="tip-excerpt">A drain that can't be reached by a technician with a wrench will never get used. Factor in platform levels and obstruction clearances when placing drain valves.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
-    </div>
-  </a>
-
-  <a class="tip-item" href="tip-09.html" data-cat="welding">
-    <div class="tip-accent-bar" style="background:#D85A30"></div>
-    <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #09</span>
-        <span class="tag" style="background:#D85A30">Welding</span>
-      </div>
-      <h2 class="tip-heading">Keep branch welds at least 1.5D from the nearest fitting on the header.</h2>
-      <p class="tip-excerpt">Too close and the heat-affected zones overlap, creating potential weak points that stress analysis won't catch. This is the kind of detail that doesn't appear in codes but every good senior knows.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
-    </div>
-  </a>
-
-  <a class="tip-item" href="tip-10.html" data-cat="supports">
-    <div class="tip-accent-bar" style="background:var(--gold)"></div>
-    <div>
-      <div class="tip-meta-row">
-        <span class="tip-num">Tip #10</span>
-        <span class="tag">Supports</span>
-      </div>
-      <h2 class="tip-heading">A guide without a stop is half a support system.</h2>
-      <p class="tip-excerpt">Guides control lateral movement; stops control axial. Using only guides on a thermal expansion loop means the pipe will find its own stop &mdash; usually a structural beam or an adjacent nozzle.</p>
-      <div class="tip-footer"><span class="tip-read">Read full tip &rarr;</span></div>
-    </div>
-  </a>
-
-
+  </div>
 </div>
 <footer>
   <div class="footer-logo"><span>PIPING</span>PASSION</div>
-  <div class="footer-links">
-    <a href="../index.html">Home</a>
-    <a href="field-tips.html">Field Tips</a>
-    <a href="books.html">Books</a>
-    <a href="contact.html">Contact</a>
-    <a href="about.html">About</a>
-  </div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="field-tips.html">Field Tips</a><a href="books.html">Books</a><a href="contact.html">Contact</a><a href="about.html">About</a></div>
   <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
 </footer>
 <script>
-var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible')});},{threshold:0.05});
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});
 document.querySelectorAll('.reveal').forEach(function(r){obs.observe(r);});
-var btns=document.querySelectorAll('.filter-btn');
-var tips=document.querySelectorAll('.tip-item');
-btns.forEach(function(btn){
-  btn.addEventListener('click',function(){
-    btns.forEach(function(b){b.classList.remove('active');});
-    this.classList.add('active');
-    var cat=this.getAttribute('data-cat');
-    tips.forEach(function(t){
-      t.style.display=(cat==='all'||t.getAttribute('data-cat')===cat)?'grid':'none';
-    });
-  });
-});
 </script>
 </body>
 </html>
