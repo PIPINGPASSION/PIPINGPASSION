@@ -434,7 +434,6 @@ footer {
 }
 @media (max-width: 768px) {
   nav { padding: 0 1.2rem; }
-  .nav-links { display: none; }
   .page-header { padding: 3rem 1.2rem 2rem; }
   .section { padding: 3rem 1.2rem; }
   .container { padding: 0 1.2rem; }
