@@ -395,7 +395,7 @@ footer {
 
 
 /* ── SIDE SKETCHES ── */
-.deco-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.deco-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 .deco-wrap img {
   position: absolute; opacity: 0.11;
   width: calc((100vw - 1100px) / 2 - 10px);
@@ -407,6 +407,40 @@ footer {
 @media (max-width: 1200px) { .deco-wrap { display: none; } }
 
 /* ── RESPONSIVE ── */
+
+/* ── HAMBURGER ── */
+.nav-toggle {
+  display: none; flex-direction: column; justify-content: center;
+  gap: 5px; cursor: pointer; background: none; border: none; padding: 4px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--gold); border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none; flex-direction: column; gap: 0;
+    position: absolute; top: 62px; left: 0; right: 0;
+    background: rgba(9,21,42,0.98); border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0; z-index: 200;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; padding: 0.85rem 2rem;
+    border-bottom: 1px solid var(--border); font-size: 0.9rem;
+  }
+  .nav-links .nav-cta {
+    margin: 0.5rem 2rem; border-radius: 4px;
+    text-align: center; border: 1px solid var(--border);
+  }
+}
 @media (max-width: 768px) {
   nav { padding: 0 1.2rem; }
   .nav-links { display: none; }
@@ -417,50 +451,6 @@ footer {
   footer { flex-direction: column; align-items: flex-start; }
 }
 
-.filter-bar {
-    padding: 1.5rem 2.5rem;
-    background: var(--navy-3); border-bottom: 1px solid var(--border);
-    display: flex; gap: 0.6rem; flex-wrap: wrap; align-items: center;
-  }
-  .filter-label {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.72rem; font-weight: 700;
-    letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--muted); margin-right: 0.4rem;
-  }
-  .filter-btn {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.75rem; font-weight: 700;
-    letter-spacing: 0.14em; text-transform: uppercase;
-    color: var(--muted); background: transparent;
-    border: 1px solid var(--border); border-radius: 3px;
-    padding: 0.3rem 0.9rem; cursor: pointer;
-    transition: all 0.18s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    color: var(--navy); background: var(--gold); border-color: var(--gold);
-  }
-  .tips-container { max-width: 900px; margin: 0 auto; padding: 3rem 2.5rem; }
-  .tip-item {
-    display: grid; grid-template-columns: 4px 1fr;
-    gap: 1.6rem; align-items: start;
-    background: var(--navy-2); padding: 1.8rem 2rem;
-    text-decoration: none; color: var(--white);
-    border-bottom: 1px solid var(--border);
-    transition: background 0.18s; display: grid;
-  }
-  .tip-item:first-child { border-top: 1px solid var(--border); border-radius: 6px 6px 0 0; }
-  .tip-item:last-child { border-radius: 0 0 6px 6px; }
-  .tip-item:hover { background: var(--navy-3); }
-  .tip-accent-bar { border-radius: 2px; }
-  .tip-meta-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.35rem; flex-wrap: wrap; }
-  .tip-num { font-family: 'Barlow Condensed', sans-serif; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase; }
-  .tip-heading { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--white); line-height: 1.2; margin-bottom: 0.4rem; }
-  .tip-excerpt { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
-  .tip-footer { display: flex; align-items: center; gap: 1rem; margin-top: 0.9rem; }
-  .tip-read { font-family: 'Barlow Condensed', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  .tip-item:hover .tip-read { color: var(--gold-lt); }
-  .hidden { display: none; }
 </style>
 </head>
 <body>
@@ -537,7 +527,7 @@ footer {
         <span class="tag" style="background:#D85A30">Welding</span>
       </div>
       <h2 class="tip-heading">Minimum SMAW clearance is 200mm &mdash; and that's already tight.</h2>
-      <p class="tip-excerpt">SMAW needs 200mm around the joint. In confined brownfield spaces, consider orbital welding above NPS 1Â½ or GTAW for accessibility. Never design a weld you can't execute.</p>
+      <p class="tip-excerpt">SMAW needs 200mm around the joint. In confined brownfield spaces, consider orbital welding above NPS 1½ or GTAW for accessibility. Never design a weld you can't execute.</p>
       <div class="tip-footer"><span class="tip-read">Read full tip â</span></div>
     </div>
   </a>
