@@ -473,7 +473,7 @@ footer {
   .book-img-placeholder { max-width: 180px; margin: 0 auto; }
 }
 
-@media(max-width:600px){.book-row{grid-template-columns:1fr}.book-img-wrap,.book-img-placeholder{max-width:160px;margin:0 auto}}
+@media(max-width:640px){.book-row{display:flex;flex-direction:column;align-items:center;text-align:left}.book-img-wrap,.book-img-placeholder{width:160px;flex-shrink:0}.book-row>div:last-child{width:100%}}
 </style>
 </head>
 <body>
@@ -521,7 +521,7 @@ footer {
   </div>
 
     <!-- BOOK 2: PIPING LAYOUT -->
-  <div class="book-row reveal reveal-delay-1">
+  <div class="book-row reveal">
     <div class="book-img-wrap">
       <img src="../assets/layout-cover.jpg" alt="Piping Layout: The Complete Guide">
     </div>
@@ -530,14 +530,12 @@ footer {
       <h2 class="book-title">Piping Layout: <span>The Complete Guide</span></h2>
       <div class="book-meta">38 Chapters &middot; 200+ Field Tips &middot; All Major Equipment</div>
       <p class="book-desc">A comprehensive, chapter-by-chapter guide to equipment piping and routing &mdash; from pump and vessel connections to pipe rack layout &mdash; giving designers the practical rules and real-world logic behind every routing decision.</p>
-      <div class="book-cta-row">
-        <form class="notify-form" name="notify" method="POST" data-netlify="true" style="display:flex;gap:0.6rem"><input type="hidden" name="form-name" value="notify"><input class="notify-input" type="email" name="email" placeholder="your@email.com"><button class="btn-primary" type="submit">Notify me</button></form>
-      </div>
+      <div class="book-cta-row"><a class="btn-primary" style="opacity:0.5;cursor:default;pointer-events:none">Available soon on Amazon</a></div>
     </div>
   </div>
 
   <!-- BOOK 3: PIPING STRESS -->
-  <div class="book-row reveal reveal-delay-2">
+  <div class="book-row reveal">
     <div class="book-img-wrap">
       <img src="../assets/stress-cover.jpg" alt="Piping Stress for Designers">
     </div>
@@ -546,9 +544,7 @@ footer {
       <h2 class="book-title">Piping Stress <span>for Designers</span></h2>
       <div class="book-meta">Designer-Focused &middot; Flexibility &middot; Supports &middot; Nozzle Loads</div>
       <p class="book-desc">A designer-friendly introduction to flexibility, supports, and nozzle loads &mdash; bridging the gap between stress engineering theory and what piping designers actually need to know on the job.</p>
-      <div class="book-cta-row">
-        <form class="notify-form" name="notify" method="POST" data-netlify="true" style="display:flex;gap:0.6rem"><input type="hidden" name="form-name" value="notify"><input class="notify-input" type="email" name="email" placeholder="your@email.com"><button class="btn-primary" type="submit">Notify me</button></form>
-      </div>
+      <div class="book-cta-row"><a class="btn-primary" style="opacity:0.5;cursor:default;pointer-events:none">Available soon on Amazon</a></div>
     </div>
   </div>
 
