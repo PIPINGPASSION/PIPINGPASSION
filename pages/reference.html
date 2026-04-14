@@ -449,19 +449,10 @@ footer {
   footer { flex-direction: column; align-items: flex-start; }
 }
 
-.ref-nav {
-  background:var(--navy-3);border-bottom:1px solid var(--border);
-  padding:1.2rem 2.5rem;display:flex;gap:.8rem;flex-wrap:wrap;
-}
-.ref-nav-btn {
-  font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
-  background:none;border:1px solid var(--border);border-radius:3px;
-  padding:.35rem 1rem;cursor:pointer;transition:all .18s;
-}
+.ref-nav{background:var(--navy-3);border-bottom:1px solid var(--border);padding:1.2rem 2.5rem;display:flex;gap:.5rem;flex-wrap:wrap;}
+.ref-nav-btn{font-family:'Barlow Condensed',sans-serif;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);background:none;border:1px solid var(--border);border-radius:3px;padding:.35rem .9rem;cursor:pointer;transition:all .18s;}
 .ref-nav-btn.active,.ref-nav-btn:hover{color:var(--navy);background:var(--gold);border-color:var(--gold);}
-.ref-section{display:none;}
-.ref-section.active{display:block;}
+.ref-section{display:none;}.ref-section.active{display:block;}
 .ref-content{max-width:1200px;margin:0 auto;padding:3.5rem 2.5rem;}
 .table-wrap{overflow-x:auto;margin-bottom:3rem;}
 .table-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.4rem;text-transform:uppercase;color:var(--white);margin-bottom:.4rem;}
@@ -483,7 +474,7 @@ footer {
     <li><a href="codes-standards.html">Codes</a></li>
     <li><a href="tools.html">Tools</a></li>
     <li><a href="career.html">Career</a></li>
-    <li><a href="reference.html">Reference</a></li>
+    <li><a href="reference.html" class="active">Reference</a></li>
     <li><a href="books.html">Books</a></li>
     <li><a class="nav-cta" href="contact.html">Contact</a></li>
   </ul>
@@ -493,7 +484,7 @@ footer {
   <div class="page-header-inner">
     <p class="page-eyebrow">ASME &middot; API &middot; MSS &middot; ASTM</p>
     <h1 class="page-title">Technical <span>Reference</span></h1>
-    <p class="page-desc">The data you actually need on the job. Pipe schedules, flange ratings, fitting dimensions, bolt lengths, conversion tables &mdash; sourced from ASME B36.10, B16.5, B16.9, B16.11 and MSS SP-58.</p>
+    <p class="page-desc">The data you actually need on the job &mdash; pipe schedules, flange ratings, fitting dimensions, bolt lengths, support types, nozzle loads and conversion tables. Sourced from ASME, API and MSS standards.</p>
   </div>
 </div>
 
@@ -501,14 +492,22 @@ footer {
   <button class="ref-nav-btn active" data-tab="schedules">Pipe Schedules</button>
   <button class="ref-nav-btn" data-tab="flanges">Flange Ratings</button>
   <button class="ref-nav-btn" data-tab="bw">Butt-Weld Fittings</button>
-  <button class="ref-nav-btn" data-tab="sw">Socket-Weld Fittings</button>
+  <button class="ref-nav-btn" data-tab="sw">Socket-Weld</button>
   <button class="ref-nav-btn" data-tab="bolts">Bolt Lengths</button>
+  <button class="ref-nav-btn" data-tab="olets">Olets</button>
+  <button class="ref-nav-btn" data-tab="valves-ff">Valve Face-to-Face</button>
+  <button class="ref-nav-btn" data-tab="supports">Support Types</button>
+  <button class="ref-nav-btn" data-tab="gaskets">Gaskets</button>
+  <button class="ref-nav-btn" data-tab="branch">Branch Reinforcement</button>
   <button class="ref-nav-btn" data-tab="weight">Pipe Weight</button>
+  <button class="ref-nav-btn" data-tab="hydrotest">Hydrotest</button>
+  <button class="ref-nav-btn" data-tab="nozzle">Nozzle Loads</button>
   <button class="ref-nav-btn" data-tab="convert">Conversions</button>
   <button class="ref-nav-btn" data-tab="insulation">Insulation</button>
 </div>
 
 <div class="ref-content reveal">
+
 
   <!-- PIPE SCHEDULES -->
   <div class="ref-section active" id="tab-schedules">
@@ -815,7 +814,280 @@ footer {
     <p class="note">Min C-C = minimum centre-to-centre spacing between two pipes of equal size with equal insulation, with 25mm clearance between insulation surfaces. Always check insulation clearances in 3D model with insulation layer turned ON before issuing for construction.</p>
   </div>
 
+
+
+  <!-- OLETS -->
+  <div class="ref-section" id="tab-olets">
+    <h2 class="table-title">Olet Dimensions &mdash; MSS SP-97</h2>
+    <p class="table-desc">Branch outlet fittings: Weldolet (butt-weld), Sockolet (socket-weld), Threadolet (threaded), Elbolet (elbow branch). Use olet when branch &lt; 50% of header size; use tee when branch &ge; 50% of header. Dimensions in mm.</p>
+    <h3 class="sub-title">Weldolet &mdash; Run Pipe OD &times; Branch Size</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Run Pipe</th><th>Branch 1&rdquo;</th><th>Branch 1&frac12;&rdquo;</th><th>Branch 2&rdquo;</th><th>Branch 3&rdquo;</th><th>Branch 4&rdquo;</th><th>Branch 6&rdquo;</th><th>Branch 8&rdquo;</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">2&rdquo;</td><td>48</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">3&rdquo;</td><td>52</td><td>57</td><td>64</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>57</td><td>60</td><td>70</td><td>83</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>64</td><td>67</td><td>76</td><td>95</td><td>111</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name col-highlight">8&rdquo;</td><td>70</td><td>73</td><td>83</td><td>102</td><td>121</td><td>152</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>76</td><td>79</td><td>89</td><td>108</td><td>127</td><td>165</td><td>184</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>79</td><td>83</td><td>95</td><td>114</td><td>133</td><td>171</td><td>197</td></tr>
+          <tr><td class="col-name">16&rdquo;</td><td>86</td><td>92</td><td>105</td><td>127</td><td>149</td><td>191</td><td>222</td></tr>
+          <tr><td class="col-name">20&rdquo;</td><td>95</td><td>102</td><td>117</td><td>140</td><td>165</td><td>210</td><td>248</td></tr>
+          <tr><td class="col-name">24&rdquo;</td><td>105</td><td>111</td><td>127</td><td>152</td><td>178</td><td>229</td><td>267</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="sub-title">Sockolet &amp; Threadolet &mdash; Height (mm)</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Run Pipe</th><th>Sockolet &frac12;&rdquo;</th><th>Sockolet &frac34;&rdquo;</th><th>Sockolet 1&rdquo;</th><th>Sockolet 1&frac12;&rdquo;</th><th>Sockolet 2&rdquo;</th><th>Threadolet &frac12;&rdquo;</th><th>Threadolet 1&rdquo;</th><th>Threadolet 2&rdquo;</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">2&rdquo;</td><td>35</td><td>38</td><td>44</td><td>51</td><td>&mdash;</td><td>32</td><td>41</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">3&rdquo;</td><td>38</td><td>41</td><td>48</td><td>54</td><td>60</td><td>35</td><td>44</td><td>57</td></tr>
+          <tr><td class="col-name">4&rdquo;</td><td>41</td><td>44</td><td>51</td><td>57</td><td>64</td><td>38</td><td>48</td><td>60</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>44</td><td>48</td><td>54</td><td>60</td><td>70</td><td>41</td><td>51</td><td>67</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>48</td><td>51</td><td>57</td><td>64</td><td>76</td><td>44</td><td>54</td><td>73</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>54</td><td>57</td><td>64</td><td>73</td><td>86</td><td>51</td><td>60</td><td>83</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: MSS SP-97. Heights are approximate &mdash; verify with manufacturer data sheets for exact dimensions. Weldolet height = distance from run pipe centreline to top of fitting. Sockolet and Threadolet heights from run pipe OD surface.</p>
+  </div>
+
+  <!-- VALVE FACE-TO-FACE -->
+  <div class="ref-section" id="tab-valves-ff">
+    <h2 class="table-title">Valve Face-to-Face Dimensions &mdash; ASME B16.10</h2>
+    <p class="table-desc">Face-to-face (F-F) dimensions (mm) for flanged valves. Critical for isometric dimensioning and spool fabrication. Class 150 and 300 shown &mdash; higher classes are shorter in some valve types.</p>
+    <h3 class="sub-title">Gate Valves &mdash; Flanged RF</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>Class 150</th><th>Class 300</th><th>Class 600</th><th>Class 900</th><th>Class 1500</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">1&rdquo;</td><td>178</td><td>191</td><td>222</td><td>254</td><td>286</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;</td><td>216</td><td>229</td><td>254</td><td>279</td><td>343</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>229</td><td>241</td><td>292</td><td>318</td><td>394</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>279</td><td>305</td><td>381</td><td>381</td><td>470</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>305</td><td>356</td><td>457</td><td>457</td><td>546</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>394</td><td>444</td><td>559</td><td>610</td><td>705</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>457</td><td>521</td><td>660</td><td>737</td><td>864</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>533</td><td>610</td><td>787</td><td>864</td><td>1054</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>610</td><td>711</td><td>914</td><td>991</td><td>1232</td></tr>
+          <tr><td class="col-name">16&rdquo;</td><td>737</td><td>864</td><td>1118</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">20&rdquo;</td><td>838</td><td>991</td><td>1321</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">24&rdquo;</td><td>991</td><td>1143</td><td>1549</td><td>&mdash;</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="sub-title">Globe &amp; Check Valves &mdash; Class 150/300 (mm)</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>Globe Cl 150</th><th>Globe Cl 300</th><th>Swing Check Cl 150</th><th>Swing Check Cl 300</th><th>Ball Valve Cl 150</th><th>Ball Valve Cl 300</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">1&rdquo;</td><td>292</td><td>305</td><td>178</td><td>191</td><td>140</td><td>165</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;</td><td>356</td><td>368</td><td>216</td><td>229</td><td>165</td><td>190</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>419</td><td>432</td><td>229</td><td>241</td><td>178</td><td>216</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>508</td><td>559</td><td>279</td><td>305</td><td>203</td><td>254</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>610</td><td>660</td><td>305</td><td>356</td><td>229</td><td>305</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>762</td><td>813</td><td>394</td><td>444</td><td>267</td><td>394</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>914</td><td>1016</td><td>457</td><td>521</td><td>292</td><td>457</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>1067</td><td>1168</td><td>533</td><td>610</td><td>330</td><td>533</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>1219</td><td>1321</td><td>610</td><td>711</td><td>356</td><td>610</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: ASME B16.10-2009. All dimensions in mm, flanged raised-face ends. Butterfly valve F-F dimensions per API 609. Control valve F-F varies by manufacturer &mdash; always verify with vendor data sheet before finalising isometric.</p>
+  </div>
+
+  <!-- SUPPORT TYPES -->
+  <div class="ref-section" id="tab-supports">
+    <h2 class="table-title">Pipe Support Types &mdash; MSS SP-58</h2>
+    <p class="table-desc">Standard pipe support types as defined by MSS SP-58. These type numbers are referenced universally in stress reports and piping specifications. Know these cold.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Type</th><th>Name</th><th>Function</th><th>Typical Use</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name col-highlight">1</td><td>Adjustable Pipe Ring Hanger</td><td>Vertical load, free lateral &amp; axial</td><td>Non-insulated, non-critical</td><td>Most common hanger type</td></tr>
+          <tr><td class="col-name">2</td><td>Pipe Ring with Extension</td><td>Vertical load</td><td>Increased clearance needed</td><td>Long shank version of Type 1</td></tr>
+          <tr><td class="col-name col-highlight">3</td><td>Pipe Clamp</td><td>Vertical load, restrains pipe</td><td>Insulated pipe</td><td>Used with rod hangers</td></tr>
+          <tr><td class="col-name">5</td><td>Pipe Covering Protection Saddle</td><td>Vertical load, protects insulation</td><td>Insulated pipe on shoes</td><td>Prevents insulation crush</td></tr>
+          <tr><td class="col-name col-highlight">7</td><td>Adjustable Band Hanger</td><td>Vertical load</td><td>Light service, small bore</td><td>Quick installation</td></tr>
+          <tr><td class="col-name col-highlight">9</td><td>Adjustable Swivel Ring</td><td>Vertical load, allows swing</td><td>Thermal movement expected</td><td>Swivels in one plane</td></tr>
+          <tr><td class="col-name">10</td><td>Split Ring / Hinged Ring</td><td>Vertical load</td><td>Where full ring impractical</td><td>Easy field installation</td></tr>
+          <tr><td class="col-name col-highlight">24</td><td>Pipe Shoe</td><td>Vertical load on insulated pipe</td><td>Insulated lines on structure</td><td>Extends below insulation to contact steel</td></tr>
+          <tr><td class="col-name col-highlight">35</td><td>Welded Beam Attachment</td><td>Attachment to structural steel</td><td>Permanent overhead attachment</td><td>Requires weld procedure</td></tr>
+          <tr><td class="col-name col-highlight">36</td><td>Beam Clamp</td><td>Attachment to structural steel</td><td>Temporary or no welding allowed</td><td>Quick installation, lower load capacity</td></tr>
+          <tr><td class="col-name col-highlight">37</td><td>Pipe Clamp (heavy)</td><td>Vertical load + restraint</td><td>Guide base, anchor base</td><td>Foundation for guides and stops</td></tr>
+          <tr><td class="col-name col-highlight">38</td><td>Double Bolt Pipe Clamp</td><td>Vertical load + lateral restraint</td><td>Guide applications</td><td>Most common guide type &mdash; know this one</td></tr>
+          <tr><td class="col-name">39</td><td>Pipe Saddle Support</td><td>Vertical load, resting support</td><td>Non-insulated pipe on grade/slab</td><td>Simple, economical</td></tr>
+          <tr><td class="col-name col-highlight">40</td><td>Adjustable Pipe Saddle</td><td>Vertical load, elevation adjustable</td><td>Grade-mounted supports</td><td>Height adjustable during install</td></tr>
+          <tr><td class="col-name">41</td><td>Single Pipe Roll</td><td>Vertical load, allows axial movement</td><td>Long runs with thermal expansion</td><td>Low friction axial movement</td></tr>
+          <tr><td class="col-name">42</td><td>Adjustable Roller Hanger</td><td>Vertical load + axial movement</td><td>Overhead with thermal movement</td><td>Roller allows pipe to move</td></tr>
+          <tr><td class="col-name col-highlight">51</td><td>Constant Spring Hanger</td><td>Constant vertical load through travel</td><td>High-temp lines, critical equipment</td><td>Pre-loaded spring, constant force</td></tr>
+          <tr><td class="col-name col-highlight">52</td><td>Variable Spring Hanger</td><td>Variable vertical support through travel</td><td>Moderate thermal movement</td><td>Load varies with deflection &mdash; check variability %</td></tr>
+          <tr><td class="col-name">54</td><td>Pipe Anchor</td><td>Restrains all 6 degrees of freedom</td><td>Anchor points in stress analysis</td><td>Full restraint &mdash; transfers all loads to structure</td></tr>
+          <tr><td class="col-name col-highlight">57</td><td>Snubber / Shock Absorber</td><td>Resists dynamic loads, free under static</td><td>Seismic, water hammer, PSV reaction</td><td>Rigid under dynamic, free under thermal</td></tr>
+          <tr><td class="col-name">59</td><td>Sway Brace</td><td>Lateral restraint, allows thermal</td><td>Lateral bracing, seismic</td><td>Spring-loaded, resists lateral dynamic</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: MSS SP-58 &amp; MSS SP-69. Types 51 and 52 require spring design by stress engineer. Type 54 (anchor) transfers all forces to structure &mdash; verify structural capacity before specifying. Types 37/38 are most common for guides; Type 54 for anchors. Highlighted types are the ones you will encounter on 90% of projects.</p>
+  </div>
+
+  <!-- GASKETS -->
+  <div class="ref-section" id="tab-gaskets">
+    <h2 class="table-title">Gasket Dimensions &mdash; ASME B16.20 / B16.21</h2>
+    <p class="table-desc">Gasket dimensions (mm) for raised-face (RF) and ring-type joint (RTJ) flanges per ASME B16.21 (non-metallic) and B16.20 (metallic). A gasket is single-use &mdash; never reuse a gasket.</p>
+    <h3 class="sub-title">Raised-Face Spiral-Wound Gaskets &mdash; B16.20 (mm)</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>Class 150 OD</th><th>Class 150 ID</th><th>Class 300 OD</th><th>Class 300 ID</th><th>Class 600/900 OD</th><th>Class 600/900 ID</th><th>Class 1500 OD</th><th>Class 2500 OD</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">&frac12;&rdquo;</td><td>39.6</td><td>15.8</td><td>39.6</td><td>15.8</td><td>39.6</td><td>15.8</td><td>39.6</td><td>53.8</td></tr>
+          <tr><td class="col-name">1&rdquo;</td><td>50.8</td><td>26.7</td><td>57.2</td><td>26.7</td><td>57.2</td><td>26.7</td><td>63.5</td><td>73.0</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;</td><td>66.7</td><td>38.1</td><td>73.0</td><td>38.1</td><td>73.0</td><td>38.1</td><td>82.6</td><td>101.6</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>82.6</td><td>50.8</td><td>88.9</td><td>50.8</td><td>88.9</td><td>50.8</td><td>101.6</td><td>123.8</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>107.9</td><td>77.8</td><td>120.6</td><td>77.8</td><td>120.6</td><td>77.8</td><td>133.4</td><td>165.1</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>133.4</td><td>102.4</td><td>149.2</td><td>102.4</td><td>149.2</td><td>102.4</td><td>161.9</td><td>196.9</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>184.1</td><td>154.0</td><td>200.0</td><td>154.0</td><td>200.0</td><td>154.0</td><td>219.1</td><td>263.5</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>235.0</td><td>203.2</td><td>254.0</td><td>203.2</td><td>254.0</td><td>203.2</td><td>279.4</td><td>323.8</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>285.8</td><td>254.5</td><td>308.0</td><td>254.5</td><td>308.0</td><td>254.5</td><td>342.9</td><td>387.3</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>336.5</td><td>304.8</td><td>365.1</td><td>304.8</td><td>365.1</td><td>304.8</td><td>406.4</td><td>469.9</td></tr>
+          <tr><td class="col-name">16&rdquo;</td><td>438.1</td><td>387.4</td><td>469.9</td><td>387.4</td><td>469.9</td><td>387.4</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">20&rdquo;</td><td>539.7</td><td>488.9</td><td>571.5</td><td>488.9</td><td>571.5</td><td>488.9</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">24&rdquo;</td><td>641.4</td><td>590.6</td><td>679.4</td><td>590.6</td><td>679.4</td><td>590.6</td><td>&mdash;</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="sub-title">RTJ Ring Gaskets &mdash; B16.20 Ring Numbers</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>Class 150</th><th>Class 300</th><th>Class 600</th><th>Class 900</th><th>Class 1500</th><th>Class 2500</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">1&rdquo;</td><td>R11</td><td>R13</td><td>R16</td><td>R16</td><td>R18</td><td>R20</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;</td><td>R14</td><td>R16</td><td>R20</td><td>R20</td><td>R23</td><td>R26</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>R17</td><td>R20</td><td>R23</td><td>R23</td><td>R26</td><td>R31</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>R24</td><td>R27</td><td>R31</td><td>R35</td><td>R37</td><td>R41</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>R31</td><td>R35</td><td>R37</td><td>R41</td><td>R45</td><td>R49</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>R41</td><td>R45</td><td>R47</td><td>R53</td><td>R55</td><td>R63</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>R51</td><td>R53</td><td>R55</td><td>R63</td><td>R66</td><td>R74</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>R57</td><td>R61</td><td>R65</td><td>R73</td><td>R78</td><td>R84</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>R65</td><td>R69</td><td>R73</td><td>R82</td><td>R86</td><td>R90</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: ASME B16.20-2017, B16.21-2016. Spiral wound gaskets: verify inner ring and outer ring requirements per service. RTJ rings: R = oval cross-section (standard), RX = pressure-energised, BX = high-pressure API 6BX service. Always specify ring number on isometric.</p>
+  </div>
+
+  <!-- BRANCH REINFORCEMENT -->
+  <div class="ref-section" id="tab-branch">
+    <h2 class="table-title">Branch Reinforcement &mdash; ASME B31.3 Para 304.3</h2>
+    <p class="table-desc">Quick reference for branch connection reinforcement requirements. When is a reinforcing pad required? Use this table as a first check &mdash; always confirm with stress engineer for critical services.</p>
+    <h3 class="sub-title">Tee vs Olet Selection Guide</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Branch / Header Ratio</th><th>Preferred Fitting</th><th>Reinforcement Typically Required?</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name col-highlight">Branch &ge; 0.75 &times; Header</td><td>Equal or Reducing Tee (B16.9)</td><td>No &mdash; tee is self-reinforced</td><td>Best option for large branches</td></tr>
+          <tr><td class="col-name col-highlight">0.5 &le; Branch &lt; 0.75 &times; Header</td><td>Reducing Tee (B16.9) or Weldolet</td><td>Depends on schedule &mdash; calc required</td><td>Check with stress engineer</td></tr>
+          <tr><td class="col-name">0.25 &le; Branch &lt; 0.5 &times; Header</td><td>Weldolet preferred</td><td>Often no &mdash; Weldolet self-reinforced</td><td>Weldolet inherently reinforced</td></tr>
+          <tr><td class="col-name">Branch &lt; 0.25 &times; Header</td><td>Sockolet / Threadolet / Weldolet</td><td>No for standard schedules</td><td>Small bore branch &mdash; olet standard</td></tr>
+          <tr><td class="col-name">Set-on / Set-in Branch</td><td>Avoid &mdash; use olet or tee</td><td>Always required + calc mandatory</td><td>Not recommended for pressure services</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="sub-title">Required Reinforcement Area &mdash; B31.3 Simplified</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Header NPS</th><th>Branch NPS</th><th>Min Header Schedule for No Pad (Cl 150 / 300 bar)</th><th>Typical Pad Width (mm)</th><th>Pad Thickness</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">4&rdquo;</td><td>2&rdquo;</td><td>Sch 40 usually adequate</td><td>50</td><td>= branch WT min</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>2&rdquo;</td><td>Sch 40 usually adequate</td><td>60</td><td>= branch WT min</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>4&rdquo;</td><td>Sch 80 often needed</td><td>100</td><td>= branch WT min</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>4&rdquo;</td><td>Sch 40 usually adequate</td><td>100</td><td>= branch WT min</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>6&rdquo;</td><td>Sch 80 often needed</td><td>130</td><td>= branch WT min</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>8&rdquo;</td><td>Sch 80 often needed</td><td>160</td><td>= branch WT min</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: ASME B31.3-2020, Para 304.3. These are guidance values only &mdash; actual reinforcement requirement depends on design pressure, temperature, material, and exact wall thicknesses. Always perform the B31.3 area replacement calculation or use your stress engineer&rsquo;s judgment. A Weldolet or integrally reinforced tee is always preferable to a pad for high-pressure, high-temperature, or cyclic service.</p>
+  </div>
+
+  <!-- HYDROTEST -->
+  <div class="ref-section" id="tab-hydrotest">
+    <h2 class="table-title">Hydrotest Pressure &mdash; ASME B31.3</h2>
+    <p class="table-desc">Minimum hydrotest pressure = 1.5 &times; Design Pressure &times; (Allowable stress at test temp / Allowable stress at design temp). Pneumatic test = 1.1 &times; DP. Maximum test pressure limited by yield strength.</p>
+    <h3 class="sub-title">Hydrotest Pressure by Flange Class &mdash; A105 Carbon Steel</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Flange Class</th><th>Max Design Pressure at 50&deg;C (bar)</th><th>Min Hydrotest Pressure (bar)</th><th>Max Hydrotest (yield limited)</th><th>Test Medium</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">150</td><td>19.6</td><td>29.4</td><td>~35</td><td>Water at &lt;50&deg;C</td></tr>
+          <tr><td class="col-name col-highlight">300</td><td>51.1</td><td>76.7</td><td>~90</td><td>Water at &lt;50&deg;C</td></tr>
+          <tr><td class="col-name col-highlight">600</td><td>102.1</td><td>153.2</td><td>~175</td><td>Water at &lt;50&deg;C</td></tr>
+          <tr><td class="col-name col-highlight">900</td><td>153.2</td><td>229.8</td><td>~260</td><td>Water at &lt;50&deg;C</td></tr>
+          <tr><td class="col-name">1500</td><td>255.3</td><td>382.9</td><td>~430</td><td>Water at &lt;50&deg;C</td></tr>
+          <tr><td class="col-name">2500</td><td>425.5</td><td>638.3</td><td>~710</td><td>Water at &lt;50&deg;C</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="sub-title">Test Blind Thickness (Temporary Blinds) &mdash; Guidance</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>Class 150 (mm)</th><th>Class 300 (mm)</th><th>Class 600 (mm)</th><th>Class 900 (mm)</th><th>Class 1500 (mm)</th><th>Material</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">2&rdquo;</td><td>10</td><td>13</td><td>19</td><td>25</td><td>32</td><td>A105 / A516 Gr70</td></tr>
+          <tr><td class="col-name">3&rdquo;</td><td>13</td><td>16</td><td>22</td><td>29</td><td>38</td><td>A105 / A516 Gr70</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>13</td><td>19</td><td>25</td><td>35</td><td>44</td><td>A105 / A516 Gr70</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>16</td><td>22</td><td>32</td><td>44</td><td>57</td><td>A105 / A516 Gr70</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>19</td><td>25</td><td>38</td><td>51</td><td>70</td><td>A105 / A516 Gr70</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>22</td><td>29</td><td>44</td><td>60</td><td>83</td><td>A105 / A516 Gr70</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>25</td><td>32</td><td>51</td><td>70</td><td>95</td><td>A105 / A516 Gr70</td></tr>
+          <tr><td class="col-name">16&rdquo;</td><td>29</td><td>38</td><td>64</td><td>&mdash;</td><td>&mdash;</td><td>A105 / A516 Gr70</td></tr>
+          <tr><td class="col-name">20&rdquo;</td><td>35</td><td>44</td><td>76</td><td>&mdash;</td><td>&mdash;</td><td>A105 / A516 Gr70</td></tr>
+          <tr><td class="col-name">24&rdquo;</td><td>41</td><td>51</td><td>89</td><td>&mdash;</td><td>&mdash;</td><td>A105 / A516 Gr70</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Blind thicknesses are guidance values for full-face contact blinds at test pressure. Always calculate per ASME VIII Div.1 UG-34 or B31.3 para 345. Verify material yield strength. Add corrosion allowance for reusable blinds. Hydrotest temperature must be at least 17&deg;C above the nil-ductility transition temperature of the material.</p>
+  </div>
+
+  <!-- NOZZLE LOADS -->
+  <div class="ref-section" id="tab-nozzle">
+    <h2 class="table-title">Allowable Nozzle Loads &mdash; API 610 / API 617 / NEMA SM23</h2>
+    <p class="table-desc">Maximum allowable forces and moments on equipment nozzles. These are the limits your piping stress analysis must satisfy. Values shown are typical &mdash; always verify against vendor datasheet which may differ significantly.</p>
+    <h3 class="sub-title">Centrifugal Pumps &mdash; API 610 (12th Ed.) Table 4</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Nozzle Size</th><th>Fx (N)</th><th>Fy (N)</th><th>Fz (N)</th><th>Mx (N&middot;m)</th><th>My (N&middot;m)</th><th>Mz (N&middot;m)</th><th>Fr resultant (N)</th><th>Mr resultant (N&middot;m)</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">DN 50 (2&rdquo;)</td><td>1110</td><td>1480</td><td>1110</td><td>540</td><td>400</td><td>540</td><td>2220</td><td>810</td></tr>
+          <tr><td class="col-name">DN 80 (3&rdquo;)</td><td>1600</td><td>2140</td><td>1600</td><td>810</td><td>610</td><td>810</td><td>3200</td><td>1220</td></tr>
+          <tr><td class="col-name col-highlight">DN 100 (4&rdquo;)</td><td>2000</td><td>2670</td><td>2000</td><td>1080</td><td>810</td><td>1080</td><td>4000</td><td>1620</td></tr>
+          <tr><td class="col-name col-highlight">DN 150 (6&rdquo;)</td><td>2890</td><td>3850</td><td>2890</td><td>1760</td><td>1350</td><td>1760</td><td>5780</td><td>2640</td></tr>
+          <tr><td class="col-name">DN 200 (8&rdquo;)</td><td>3780</td><td>5030</td><td>3780</td><td>2700</td><td>2030</td><td>2700</td><td>7560</td><td>4050</td></tr>
+          <tr><td class="col-name">DN 250 (10&rdquo;)</td><td>4670</td><td>6230</td><td>4670</td><td>3650</td><td>2700</td><td>3650</td><td>9340</td><td>5400</td></tr>
+          <tr><td class="col-name">DN 300 (12&rdquo;)</td><td>5560</td><td>7430</td><td>5560</td><td>4730</td><td>3510</td><td>4730</td><td>11120</td><td>7020</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3 class="sub-title">Steam Turbines &mdash; NEMA SM23 (Guidance Values)</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Nozzle Size</th><th>Max Force Any Direction (N)</th><th>Max Moment Any Direction (N&middot;m)</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">DN 50 (2&rdquo;)</td><td>890</td><td>340</td><td>Inlet/exhaust nozzles</td></tr>
+          <tr><td class="col-name">DN 100 (4&rdquo;)</td><td>1780</td><td>680</td><td>Apply NEMA multipliers for actual turbine</td></tr>
+          <tr><td class="col-name">DN 150 (6&rdquo;)</td><td>2670</td><td>1020</td><td>Vendor datasheet governs &mdash; always request</td></tr>
+          <tr><td class="col-name">DN 200 (8&rdquo;)</td><td>3560</td><td>1360</td><td>NEMA values are often conservative minimum</td></tr>
+          <tr><td class="col-name">DN 250 (10&rdquo;)</td><td>4450</td><td>1700</td><td>Some vendors accept 2&times; NEMA with analysis</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: API 610 12th Ed. Table 4, NEMA SM23. These are <strong>minimum</strong> values &mdash; some vendors impose stricter limits, especially for high-speed or high-temperature machines. Always obtain vendor-specific allowables at project start. API 617 (centrifugal compressors) uses similar format &mdash; request Table 1 from vendor. Nozzle load compliance is mandatory &mdash; exceeding limits can void equipment warranty and cause seal failures.</p>
+  </div>
 </div>
+
 <footer>
   <div class="footer-logo"><span>PIPING</span>PASSION</div>
   <div class="footer-links">
@@ -828,18 +1100,18 @@ footer {
   <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
 </footer>
 <script>
-const btns = document.querySelectorAll('.ref-nav-btn');
-const sections = document.querySelectorAll('.ref-section');
-btns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    btns.forEach(b => b.classList.remove('active'));
-    sections.forEach(s => s.classList.remove('active'));
+const btns=document.querySelectorAll('.ref-nav-btn');
+const sections=document.querySelectorAll('.ref-section');
+btns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    btns.forEach(b=>b.classList.remove('active'));
+    sections.forEach(s=>s.classList.remove('active'));
     btn.classList.add('active');
-    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
   });
 });
-const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), {threshold:0.05});
-document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.05});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 </script>
 </body>
 </html>

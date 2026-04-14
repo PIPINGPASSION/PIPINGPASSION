@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tools &amp; Software &mdash; Piping Passion</title>
+<title>P&amp;ID Symbols &mdash; Piping Passion</title>
 <link rel="stylesheet" href="../css/style.css">
-<style>
-/* ═══════════════════════════════════════════
+<style>/* ═══════════════════════════════════════════
    PIPINGPASSION.COM — SHARED STYLESHEET
    Palette: Navy #09152A · Gold #C9930A · #F0B429
    ═══════════════════════════════════════════ */
@@ -449,32 +448,17 @@ footer {
   footer { flex-direction: column; align-items: flex-start; }
 }
 
-</style>
-<style>
-.tools-wrap { max-width: 1000px; margin: 0 auto; padding: 3.5rem 2.5rem; }
-.tools-category { margin-bottom: 3.5rem; }
-.tools-cat-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800; font-size: 1.4rem; text-transform: uppercase;
-  color: var(--white); margin-bottom: 1.5rem;
-  display: flex; align-items: center; gap: 1rem;
-}
-.tools-cat-title::after { content: ''; flex:1; height:1px; background: var(--border); }
-.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-.tool-card { background: var(--navy-2); padding: 1.8rem 1.6rem; border-right: 1px solid var(--border); }
-.tool-name { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; color:var(--white); margin-bottom:0.3rem; }
-.tool-maker { font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:0.6rem; }
-.tool-desc { font-size:0.85rem; color:var(--muted); line-height:1.6; }
-.tool-verdict { display:flex; align-items:center; gap:0.5rem; margin-top:0.8rem; font-size:0.78rem; color:var(--muted); }
-.verdict-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-.verdict-green { background:#1D9E75; }
-.verdict-amber { background:var(--gold); }
-.verdict-muted { background:var(--dim); }
-</style>
+.symbols-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:2.5rem;}
+.symbol-card{background:var(--navy-2);padding:1.4rem;border-right:1px solid var(--border);}
+.symbol-card:hover{background:var(--navy-3);}
+.symbol-svg{width:60px;height:50px;display:block;margin:0 auto .8rem;}
+.symbol-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:.95rem;color:var(--white);text-align:center;margin-bottom:.3rem;}
+.symbol-desc{font-size:.78rem;color:var(--muted);text-align:center;line-height:1.4;}
+.pid-cat-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.3rem;text-transform:uppercase;color:var(--white);margin:2.5rem 0 1rem;display:flex;align-items:center;gap:1rem;}
+.pid-cat-title::after{content:'';flex:1;height:1px;background:var(--border);}</style>
 </head>
 <body>
-<div class="deco-wrap"><img class="sk-l" src="../assets/sk-a.svg" alt=""><img class="sk-r" src="../assets/sk-d.svg" alt=""></div>
-
+<div class="deco-wrap"><img class="sk-l" src="../assets/sk-c.svg" alt=""><img class="sk-r" src="../assets/sk-f.svg" alt=""></div>
 <nav>
   <a class="nav-logo" href="../index.html"><span>PIPING</span>PASSION</a>
   <ul class="nav-links">
@@ -496,91 +480,54 @@ footer {
 </nav>
 <div class="page-header">
   <div class="page-header-inner">
-    <p class="page-eyebrow">3D Design &middot; Scanning &middot; Productivity</p>
-    <h1 class="page-title">Tools &amp; <span>Software</span></h1>
-    <p class="page-desc">Honest assessments from someone who uses these tools on real projects. Not marketing copy &mdash; field perspective.</p>
+    <p class="page-eyebrow">Valves &middot; Instruments &middot; Equipment &middot; Piping</p>
+    <h1 class="page-title">P&amp;ID <span>Symbols</span></h1>
+    <p class="page-desc">The most common P&amp;ID symbols a piping designer encounters, with practical notes on what they mean for your routing and layout decisions. Based on ISA 5.1 and ISO 10628 conventions.</p>
   </div>
 </div>
-<div class="tools-wrap reveal">
+<div style="max-width:1100px;margin:0 auto;padding:3.5rem 2.5rem;" class="reveal">
+  <h2 class="pid-cat-title">Valves</h2>
+<div class="symbols-grid">
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="22" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="38" y1="25" x2="50" y2="25" stroke="#C9930A" stroke-width="2"/><polygon points="22,15 38,25 22,35" stroke="#C9930A" stroke-width="1.5" fill="none"/><polygon points="38,15 22,25 38,35" stroke="#C9930A" stroke-width="1.5" fill="none"/><line x1="30" y1="15" x2="30" y2="8" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Gate Valve</div><div class="symbol-desc">Bidirectional shutoff. Used for isolation. Do not use for throttling.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="22" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="38" y1="25" x2="50" y2="25" stroke="#C9930A" stroke-width="2"/><polygon points="22,15 38,25 22,35" stroke="#C9930A" stroke-width="1.5" fill="none"/><polygon points="38,35 22,25 38,15" stroke="#C9930A" stroke-width="1.5" fill="none"/><line x1="30" y1="15" x2="30" y2="8" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Globe Valve</div><div class="symbol-desc">Throttling valve. Higher pressure drop than gate. Flow direction matters.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="20" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="40" y1="25" x2="50" y2="25" stroke="#C9930A" stroke-width="2"/><circle cx="30" cy="25" r="10" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="15" x2="30" y2="8" stroke="#C9930A" stroke-width="2"/></svg><div class="symbol-name">Ball Valve</div><div class="symbol-desc">Quarter-turn, full bore, low pressure drop. Preferred for on/off service.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="22" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="38" y1="25" x2="50" y2="25" stroke="#C9930A" stroke-width="2"/><polygon points="22,15 38,25 22,35" stroke="#C9930A" stroke-width="1.5" fill="none"/><line x1="38" y1="15" x2="38" y2="35" stroke="#C9930A" stroke-width="2"/></svg><div class="symbol-name">Check Valve</div><div class="symbol-desc">Allows flow in one direction only. Arrow on P&ID shows flow direction.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="50" y2="25" stroke="#C9930A" stroke-width="1.5"/><ellipse cx="30" cy="25" rx="3" ry="12" stroke="#C9930A" stroke-width="1.5"/><circle cx="30" cy="25" r="12" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="13" x2="30" y2="8" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Butterfly Valve</div><div class="symbol-desc">Wafer or lug body. Low face-to-face. High Cv. Throttling or on/off.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="20" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="40" y1="25" x2="50" y2="25" stroke="#C9930A" stroke-width="2"/><polygon points="20,15 40,25 20,35" stroke="#C9930A" stroke-width="1.5" fill="none"/><polygon points="40,15 20,25 40,35" stroke="#C9930A" stroke-width="1.5" fill="none"/><circle cx="30" cy="10" r="6" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="16" x2="30" y2="25" stroke="#C9930A" stroke-width="1.5" stroke-dasharray="2 2"/></svg><div class="symbol-name">Control Valve</div><div class="symbol-desc">Throttles flow automatically based on process signal. Requires upstream straight run.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="22" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="38" y1="25" x2="50" y2="25" stroke="#C9930A" stroke-width="2"/><polygon points="22,15 38,25 22,35" stroke="#C9930A" stroke-width="1.5" fill="none"/><polygon points="38,35 22,25 38,15" stroke="#C9930A" stroke-width="1.5" fill="none"/><path d="M34,15 L34,8 L38,8" stroke="#C9930A" stroke-width="1.5" fill="none"/></svg><div class="symbol-name">PSV / Safety Valve</div><div class="symbol-desc">Spring-loaded. Opens at set pressure. Must be vertical. Size outlet for reaction forces.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="22" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="38" y1="25" x2="50" y2="25" stroke="#C9930A" stroke-width="2"/><polygon points="22,15 38,25 22,35" stroke="#C9930A" stroke-width="1.5" fill="none"/><line x1="38" y1="15" x2="38" y2="35" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="8" x2="38" y2="15" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Needle Valve</div><div class="symbol-desc">Fine throttling for small bore instrument connections. Not for isolation.</div></div>
+</div>
+<h2 class="pid-cat-title">Instruments</h2>
+<div class="symbols-grid">
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="28" r="14" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="14" x2="30" y2="8" stroke="#C9930A" stroke-width="1.5" stroke-dasharray="2 2"/><text x="30" y="32" text-anchor="middle" fill="#C9930A" font-size="8" font-family="monospace">PI</text></svg><div class="symbol-name">Pressure Indicator (PI)</div><div class="symbol-desc">Local pressure gauge. No signal output. Verify accessibility for operator.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="28" r="14" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="14" x2="30" y2="8" stroke="#C9930A" stroke-width="1.5"/><text x="30" y="32" text-anchor="middle" fill="#C9930A" font-size="8" font-family="monospace">PT</text></svg><div class="symbol-name">Pressure Transmitter (PT)</div><div class="symbol-desc">Transmits pressure signal to DCS. Requires process connection with isolation valve.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="28" r="14" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="14" x2="30" y2="8" stroke="#C9930A" stroke-width="1.5" stroke-dasharray="2 2"/><text x="30" y="32" text-anchor="middle" fill="#C9930A" font-size="8" font-family="monospace">FI</text></svg><div class="symbol-name">Flow Indicator (FI)</div><div class="symbol-desc">Local flow indication. Various element types: orifice plate, rotameter, etc.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="28" r="14" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="14" x2="30" y2="8" stroke="#C9930A" stroke-width="1.5"/><text x="30" y="32" text-anchor="middle" fill="#C9930A" font-size="8" font-family="monospace">TE</text></svg><div class="symbol-name">Temperature Element (TE)</div><div class="symbol-desc">Thermowell + sensor. Verify thermowell fits inside pipe and insertion length is correct.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="28" r="14" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="14" x2="30" y2="8" stroke="#C9930A" stroke-width="1.5" stroke-dasharray="2 2"/><text x="30" y="32" text-anchor="middle" fill="#C9930A" font-size="8" font-family="monospace">LI</text></svg><div class="symbol-name">Level Indicator (LI)</div><div class="symbol-desc">Local level gauge on vessel. Connections must be on vessel, not piping.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="10" r="8" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="18" x2="30" y2="25" stroke="#C9930A" stroke-width="1.5"/><line x1="10" y1="35" x2="20" y2="35" stroke="#C9930A" stroke-width="2"/><line x1="40" y1="35" x2="50" y2="35" stroke="#C9930A" stroke-width="2"/><polygon points="20,27 40,35 20,43" stroke="#C9930A" stroke-width="1.5" fill="none"/><polygon points="40,27 20,35 40,43" stroke="#C9930A" stroke-width="1.5" fill="none"/></svg><div class="symbol-name">Control Valve (FCV)</div><div class="symbol-desc">Flow control valve. Tag prefix indicates variable: F=flow, P=pressure, T=temp, L=level.</div></div>
+</div>
+<h2 class="pid-cat-title">Equipment</h2>
+<div class="symbols-grid">
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><ellipse cx="30" cy="10" rx="18" ry="7" stroke="#C9930A" stroke-width="1.5"/><line x1="12" y1="10" x2="12" y2="38" stroke="#C9930A" stroke-width="1.5"/><line x1="48" y1="10" x2="48" y2="38" stroke="#C9930A" stroke-width="1.5"/><ellipse cx="30" cy="38" rx="18" ry="7" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Vessel / Drum</div><div class="symbol-desc">Pressure vessel. Nozzle orientation from vendor drawing. Check bundle pull direction on exchangers.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="15" width="44" height="20" stroke="#C9930A" stroke-width="1.5"/><line x1="8" y1="25" x2="52" y2="25" stroke="#C9930A" stroke-width="1" stroke-dasharray="3 2"/><line x1="10" y1="20" x2="50" y2="20" stroke="#C9930A" stroke-width="0.8" opacity="0.5"/><line x1="10" y1="30" x2="50" y2="30" stroke="#C9930A" stroke-width="0.8" opacity="0.5"/></svg><div class="symbol-name">Heat Exchanger</div><div class="symbol-desc">Shell & tube exchanger. Allow bundle pull clearance. Identify shell side vs tube side.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="30" cy="28" r="14" stroke="#C9930A" stroke-width="1.5"/><line x1="10" y1="28" x2="16" y2="28" stroke="#C9930A" stroke-width="2"/><line x1="30" y1="14" x2="30" y2="8" stroke="#C9930A" stroke-width="2"/><path d="M20,28 Q26,20 30,14" stroke="#C9930A" stroke-width="1.5" fill="none"/></svg><div class="symbol-name">Centrifugal Pump</div><div class="symbol-desc">Most common rotating equipment. Suction conditions critical. Check nozzle loads vs API 610.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><polygon points="15,40 45,40 45,15 15,15" stroke="#C9930A" stroke-width="1.5" fill="none"/><line x1="15" y1="15" x2="45" y2="40" stroke="#C9930A" stroke-width="1" opacity="0.5"/><line x1="5" y1="28" x2="15" y2="28" stroke="#C9930A" stroke-width="2"/><line x1="45" y1="22" x2="55" y2="22" stroke="#C9930A" stroke-width="2"/></svg><div class="symbol-name">Compressor</div><div class="symbol-desc">High nozzle load sensitivity. API 617. Vibration isolation critical. Dynamic analysis required.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="20" y="5" width="20" height="42" rx="3" stroke="#C9930A" stroke-width="1.5"/><line x1="20" y1="15" x2="40" y2="15" stroke="#C9930A" stroke-width="0.8" stroke-dasharray="2 2"/><line x1="20" y1="25" x2="40" y2="25" stroke="#C9930A" stroke-width="0.8" stroke-dasharray="2 2"/><line x1="20" y1="35" x2="40" y2="35" stroke="#C9930A" stroke-width="0.8" stroke-dasharray="2 2"/></svg><div class="symbol-name">Column / Tower</div><div class="symbol-desc">Distillation column. Multiple nozzles at various elevations. Check tray numbering convention.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="10" y1="25" x2="22" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="38" y1="25" x2="50" y2="25" stroke="#C9930A" stroke-width="2"/><rect x="22" y="15" width="16" height="20" stroke="#C9930A" stroke-width="1.5"/><line x1="22" y1="15" x2="38" y2="35" stroke="#C9930A" stroke-width="1.5"/><line x1="30" y1="35" x2="30" y2="43" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Filter / Strainer</div><div class="symbol-desc">Y-strainer or basket strainer. Orient drain for accessibility. Space for basket removal.</div></div>
+</div>
+<h2 class="pid-cat-title">Piping Symbols</h2>
+<div class="symbols-grid">
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="18" y2="25" stroke="#C9930A" stroke-width="2"/><circle cx="22" cy="25" r="6" stroke="#C9930A" stroke-width="1.5"/><line x1="28" y1="25" x2="32" y2="25" stroke="#C9930A" stroke-width="1.5"/><circle cx="36" cy="25" r="6" stroke="#C9930A" stroke-width="1.5" stroke-dasharray="2 1"/><line x1="42" y1="25" x2="55" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="30" y1="19" x2="30" y2="12" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Spectacle Blind</div><div class="symbol-desc">Two-position blind — solid or open. Flipped to isolate or reinstate. Show position on P&ID.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="35" x2="15" y2="35" stroke="#C9930A" stroke-width="2"/><line x1="15" y1="35" x2="15" y2="15" stroke="#C9930A" stroke-width="2"/><line x1="15" y1="15" x2="45" y2="15" stroke="#C9930A" stroke-width="2"/><line x1="45" y1="15" x2="45" y2="35" stroke="#C9930A" stroke-width="2"/><line x1="45" y1="35" x2="55" y2="35" stroke="#C9930A" stroke-width="2"/></svg><div class="symbol-name">Expansion Loop</div><div class="symbol-desc">Absorbs thermal expansion. Dimension in 3D model with insulation. Coordinate with stress engineer.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="15" y2="25" stroke="#C9930A" stroke-width="2"/><path d="M15,25 Q20,18 25,25 Q30,32 35,25 Q40,18 45,25" stroke="#C9930A" stroke-width="2" fill="none"/><line x1="45" y1="25" x2="55" y2="25" stroke="#C9930A" stroke-width="2"/></svg><div class="symbol-name">Flexible Hose</div><div class="symbol-desc">Flexible connection to absorb vibration or movement. Limited service temperature range.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="15" y2="25" stroke="#C9930A" stroke-width="3"/><path d="M15,20 L35,23 M15,30 L35,27" stroke="#C9930A" stroke-width="1.5"/><line x1="35" y1="25" x2="55" y2="25" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Reducer (Concentric)</div><div class="symbol-desc">Symmetrical size change. Use eccentric on pump suction (flat side up to prevent gas lock).</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="15" y1="25" x2="45" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="30" y1="25" x2="30" y2="38" stroke="#C9930A" stroke-width="2"/><polygon points="22,38 38,38 30,46" stroke="#C9930A" stroke-width="1.5" fill="none"/></svg><div class="symbol-name">Drain / Vent Point</div><div class="symbol-desc">Connection to drain or vent the line. Every low point needs a drain, every high point a vent.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="25" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="25" y1="15" x2="25" y2="35" stroke="#C9930A" stroke-width="3"/><line x1="28" y1="15" x2="28" y2="35" stroke="#C9930A" stroke-width="3"/><line x1="28" y1="25" x2="55" y2="25" stroke="#C9930A" stroke-width="2"/></svg><div class="symbol-name">Flange</div><div class="symbol-desc">Bolted joint for maintenance access, valve installation, or equipment connection.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="55" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="30" y1="18" x2="30" y2="32" stroke="#C9930A" stroke-width="3"/><line x1="26" y1="18" x2="34" y2="18" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Weld (Field)</div><div class="symbol-desc">Field weld — made during construction on site. Minimize field welds; maximize shop fabrication.</div></div>
+<div class="symbol-card"><svg class="symbol-svg" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="5" y1="25" x2="55" y2="25" stroke="#C9930A" stroke-width="2"/><line x1="30" y1="18" x2="30" y2="32" stroke="#C9930A" stroke-width="2"/><circle cx="30" cy="25" r="4" stroke="#C9930A" stroke-width="1.5"/></svg><div class="symbol-name">Weld (Shop)</div><div class="symbol-desc">Shop weld — made in fabrication shop. Lower cost, better quality control than field weld.</div></div>
+</div>
 
-  <div class="tools-category">
-    <h2 class="tools-cat-title">3D Piping Design</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-name">AVEVA E3D / PDMS</div>
-        <div class="tool-maker">AVEVA</div>
-        <div class="tool-desc">The industry standard for large EPC projects. Steep learning curve, powerful spec-driven workflow. Dominant in European and Middle Eastern petrochemical.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Industry standard for major EPCs</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">AutoCAD Plant 3D</div>
-        <div class="tool-maker">Autodesk</div>
-        <div class="tool-desc">More accessible entry point, widely used by smaller engineering firms. Good integration with AutoCAD ecosystem. Catalog-driven. Familiar if you come from a 2D AutoCAD background.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Strong for mid-size projects</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">SmartPlant 3D / S3D</div>
-        <div class="tool-maker">Hexagon / Intergraph</div>
-        <div class="tool-desc">Rule-driven design with strong integration to SmartPlant suite. Common on large US and Asian projects. Data-centric approach. Heavy infrastructure investment required.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>Large project / US market focus</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">Navisworks</div>
-        <div class="tool-maker">Autodesk</div>
-        <div class="tool-desc">The go-to for model review, clash detection and 4D scheduling. Not a design tool &mdash; an aggregation and review tool. Essential for multi-discipline coordination.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Essential for clash review</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tools-category">
-    <h2 class="tools-cat-title">Scan-to-Model &amp; Point Cloud</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-name">Leica Cyclone</div>
-        <div class="tool-maker">Leica Geosystems</div>
-        <div class="tool-desc">Industry-leading point cloud registration and processing. The benchmark for accuracy. Pairs naturally with Leica RTC360 and BLK360 scanners.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Benchmark for accuracy</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">Autodesk ReCap</div>
-        <div class="tool-maker">Autodesk</div>
-        <div class="tool-desc">Point cloud management and preparation. Integrates directly with Plant 3D and Navisworks. Good for importing and cleaning scans before design work.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Seamless Autodesk integration</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">CloudCompare</div>
-        <div class="tool-maker">Open source</div>
-        <div class="tool-desc">Free, powerful, and surprisingly capable for point cloud analysis, comparison, and basic processing. Steep learning curve but excellent for verifying registration quality and change detection.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Free &mdash; no excuse not to learn it</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">Trimble RealWorks</div>
-        <div class="tool-maker">Trimble</div>
-        <div class="tool-desc">Strong alternative to Cyclone for registration and feature extraction. Paired with Trimble X7 scanners. Growing presence in construction and industrial markets.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>Strong Trimble ecosystem fit</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="tools-category">
-    <h2 class="tools-cat-title">Stress Analysis</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-name">CAESAR II</div>
-        <div class="tool-maker">Hexagon</div>
-        <div class="tool-desc">The global standard for pipe stress analysis. Every stress engineer knows it. As a piping designer, you don&rsquo;t run it yourself &mdash; but you need to understand what it&rsquo;s checking and how your routing decisions affect the results.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Global stress analysis standard</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">ROHR2</div>
-        <div class="tool-maker">SIGMA Ingenieurgesellschaft</div>
-        <div class="tool-desc">Widely used in European (especially German) engineering. Full-featured stress analysis with strong code coverage including EN 13480. Common on German and Dutch EPC projects.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>European market focus</div>
-      </div>
-    </div>
-  </div>
-
+  <p style="font-size:.8rem;color:var(--dim);margin-top:2rem;font-style:italic;">Note: P&ID symbols vary between companies and projects. Always read the legend sheet on day one &mdash; never assume a symbol means the same thing as your last project.</p>
 </div>
 <footer>
   <div class="footer-logo"><span>PIPING</span>PASSION</div>
@@ -594,8 +541,8 @@ footer {
   <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
 </footer>
 <script>
-  const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.05});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 </script>
 </body>
 </html>

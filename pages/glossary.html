@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glossary &mdash; Piping Passion</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>/* ═══════════════════════════════════════════
+   PIPINGPASSION.COM — SHARED STYLESHEET
+   Palette: Navy #09152A · Gold #C9930A · #F0B429
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+:root {
+  --navy:    #09152A;
+  --navy-2:  #0D1E38;
+  --navy-3:  #142645;
+  --navy-4:  #06101E;
+  --gold:    #C9930A;
+  --gold-lt: #F0B429;
+  --white:   #F5F0E8;
+  --muted:   #8EA3BE;
+  --dim:     #3D5A7A;
+  --border:  rgba(201,147,10,0.18);
+  --border-s: rgba(201,147,10,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(9,21,42,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.1rem; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-links .nav-cta {
+  color: var(--gold); border: 1px solid var(--border);
+  padding: 0.22rem 0.9rem; border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  padding: 5rem 2.5rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 60%);
+  z-index: 0;
+}
+.page-header-inner { position: relative; z-index: 1; max-width: 900px; }
+.page-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.page-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--gold); flex-shrink: 0; }
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.0; color: var(--white);
+  text-transform: uppercase; letter-spacing: -0.01em;
+  margin-bottom: 0.8rem;
+}
+.page-title span { color: var(--gold-lt); }
+.page-desc {
+  font-size: 1.05rem; color: var(--muted);
+  max-width: 620px; line-height: 1.75;
+}
+
+
+/* ── PIPE DECORATION ── */
+.page-header::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 340px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='400' viewBox='0 0 340 400'%3E%3Cg opacity='0.07' stroke='%23C9930A' fill='none' stroke-linecap='round'%3E%3Crect x='60' y='40' width='220' height='40' rx='20' stroke-width='8'/%3E%3Crect x='60' y='40' width='220' height='40' rx='20' stroke-width='2' opacity='0.5'/%3E%3Cline x1='60' y1='60' x2='20' y2='60' stroke-width='8'/%3E%3Ccircle cx='20' cy='60' r='16' stroke-width='5'/%3E%3Cline x1='280' y1='60' x2='320' y2='60' stroke-width='8'/%3E%3Crect x='308' y='44' width='24' height='32' rx='4' stroke-width='4'/%3E%3Crect x='60' y='140' width='220' height='40' rx='20' stroke-width='8'/%3E%3Cline x1='60' y1='160' x2='20' y2='160' stroke-width='8'/%3E%3Ccircle cx='20' cy='160' r='16' stroke-width='5'/%3E%3Cline x1='280' y1='160' x2='340' y2='160' stroke-width='6'/%3E%3Crect x='60' y='240' width='160' height='36' rx='18' stroke-width='8'/%3E%3Cline x1='220' y1='258' x2='280' y2='258' stroke-width='6'/%3E%3Ccircle cx='280' cy='258' r='14' stroke-width='4'/%3E%3Cline x1='170' y1='80' x2='170' y2='140' stroke-width='8'/%3E%3Cline x1='120' y1='180' x2='120' y2='240' stroke-width='8'/%3E%3Crect x='60' y='320' width='100' height='32' rx='16' stroke-width='6'/%3E%3Cline x1='160' y1='336' x2='220' y2='336' stroke-width='6'/%3E%3Ccircle cx='230' cy='336' r='12' stroke-width='4'/%3E%3Cline x1='80' y1='352' x2='80' y2='390' stroke-width='8'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 420px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='600' viewBox='0 0 420 600'%3E%3Cg opacity='0.06' stroke='%23C9930A' fill='none' stroke-linecap='round'%3E%3Crect x='40' y='60' width='260' height='48' rx='24' stroke-width='10'/%3E%3Cline x1='40' y1='84' x2='0' y2='84' stroke-width='10'/%3E%3Ccircle cx='0' cy='84' r='20' stroke-width='6'/%3E%3Cline x1='300' y1='84' x2='360' y2='84' stroke-width='8'/%3E%3Crect x='348' y='66' width='30' height='36' rx='5' stroke-width='5'/%3E%3Crect x='40' y='180' width='260' height='48' rx='24' stroke-width='10'/%3E%3Cline x1='40' y1='204' x2='0' y2='204' stroke-width='10'/%3E%3Ccircle cx='0' cy='204' r='20' stroke-width='6'/%3E%3Cline x1='300' y1='204' x2='420' y2='204' stroke-width='8'/%3E%3Crect x='40' y='300' width='180' height='44' rx='22' stroke-width='10'/%3E%3Cline x1='220' y1='322' x2='300' y2='322' stroke-width='8'/%3E%3Ccircle cx='316' cy='322' r='18' stroke-width='5'/%3E%3Cline x1='170' y1='108' x2='170' y2='180' stroke-width='10'/%3E%3Cline x1='120' y1='228' x2='120' y2='300' stroke-width='10'/%3E%3Crect x='40' y='410' width='130' height='38' rx='19' stroke-width='8'/%3E%3Cline x1='170' y1='429' x2='260' y2='429' stroke-width='8'/%3E%3Ccircle cx='275' cy='429' r='16' stroke-width='5'/%3E%3Cline x1='90' y1='448' x2='90' y2='510' stroke-width='10'/%3E%3Crect x='40' y='510' width='260' height='44' rx='22' stroke-width='8'/%3E%3Cline x1='300' y1='532' x2='360' y2='532' stroke-width='7'/%3E%3Ccircle cx='374' cy='532' r='16' stroke-width='5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── LAYOUT ── */
+.container { max-width: 1100px; margin: 0 auto; width: 100%; padding: 0 2.5rem; }
+.section { padding: 4.5rem 2.5rem; }
+.section-alt { background: var(--navy-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+/* ── SECTION LABEL ── */
+.section-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.section-tag::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 180px; }
+
+/* ── GOLD BAR ── */
+.gold-bar {
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--gold), var(--gold-lt), var(--gold), transparent);
+  opacity: 0.55;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--gold); color: var(--navy);
+  padding: 0.75rem 2rem; border-radius: 4px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+.btn-ghost {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600; font-size: 0.95rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  border-bottom: 1px solid var(--border); padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--gold-lt); border-color: var(--gold); }
+
+/* ── TAG / BADGE ── */
+.tag {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--navy); background: var(--gold);
+  padding: 0.18rem 0.65rem; border-radius: 3px;
+}
+.tag-outline {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid var(--border-s);
+  padding: 0.18rem 0.65rem; border-radius: 3px;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+}
+.card {
+  background: var(--navy-2); padding: 2rem 1.8rem;
+  text-decoration: none; color: var(--white);
+  transition: background 0.2s; position: relative; overflow: hidden;
+}
+.card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--gold); transform: scaleX(0);
+  transform-origin: left; transition: transform 0.25s;
+}
+.card:hover { background: var(--navy-3); }
+.card:hover::after { transform: scaleX(1); }
+.card-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1.2rem;
+  color: var(--white); margin-bottom: 0.5rem; line-height: 1.2;
+}
+.card-text { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+.card-arrow {
+  display: block; margin-top: 1.2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); opacity: 0; transition: opacity 0.2s;
+}
+.card:hover .card-arrow { opacity: 1; }
+
+/* ── TIP CARD (listing) ── */
+.tip-list { display: flex; flex-direction: column; gap: 1px; }
+.tip-item {
+  display: grid; grid-template-columns: 4px 1fr;
+  gap: 1.6rem; align-items: start;
+  background: var(--navy-2); padding: 1.8rem 2rem;
+  text-decoration: none; color: var(--white);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s;
+}
+.tip-item:hover { background: var(--navy-3); }
+.tip-item-accent { background: var(--gold); border-radius: 2px; }
+.tip-item-accent.brownfield { background: #1D9E75; }
+.tip-item-accent.scan { background: #7F77DD; }
+.tip-item-accent.welding { background: #D85A30; }
+.tip-item-accent.layout { background: var(--gold); }
+.tip-meta-row {
+  display: flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+.tip-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase;
+}
+.tip-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1.25rem;
+  color: var(--white); line-height: 1.2; margin-bottom: 0.4rem;
+}
+.tip-excerpt { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+.tip-read {
+  display: inline-block; margin-top: 0.8rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); transition: color 0.2s;
+}
+.tip-item:hover .tip-read { color: var(--gold-lt); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  background: var(--navy-4);
+  padding: 2rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; color: var(--dim);
+}
+.footer-logo span { color: var(--gold); }
+.footer-copy { font-size: 0.78rem; color: var(--dim); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dim); text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+/* ── REVEAL ANIMATION ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── DIVIDER ── */
+.divider { width: 50px; height: 2px; background: rgba(201,147,10,0.4); margin: 1.5rem 0; }
+
+/* ── PROSE ── */
+.prose { max-width: 720px; }
+.prose h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.7rem; text-transform: uppercase;
+  color: var(--white); margin: 2rem 0 0.8rem; line-height: 1.1;
+}
+.prose h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1.2rem; text-transform: uppercase;
+  color: var(--gold-lt); margin: 1.5rem 0 0.5rem;
+}
+.prose p { color: #B0C4D8; margin-bottom: 1rem; }
+.prose ul { list-style: none; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.prose ul li {
+  color: #B0C4D8; padding-left: 1.2rem; position: relative; font-size: 0.95rem;
+}
+.prose ul li::before {
+  content: ''; position: absolute; left: 0; top: 0.65em;
+  width: 14px; height: 2px; background: var(--gold);
+}
+.prose blockquote {
+  border-left: 3px solid var(--gold); padding-left: 1.4rem;
+  margin: 1.5rem 0; font-style: italic; color: var(--muted);
+}
+
+/* ── TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.data-table th {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-s);
+  text-align: left; background: var(--navy-3);
+}
+.data-table td {
+  padding: 0.7rem 1rem; color: #B0C4D8;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Barlow', monospace; font-size: 0.85rem;
+}
+.data-table tr:hover td { background: var(--navy-3); }
+.data-table .col-name { color: var(--white); font-weight: 500; }
+
+/* ── BOOK PROMO BOX ── */
+.book-promo {
+  background: var(--navy-3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 2.5rem;
+  display: flex; gap: 2rem; align-items: center;
+}
+.book-promo-cover {
+  width: 110px; flex-shrink: 0;
+  border-radius: 4px; overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 3px 3px 0 rgba(201,147,10,0.2);
+}
+.book-promo-cover img { width: 100%; display: block; }
+.book-promo-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.25rem; text-transform: uppercase;
+  color: var(--white); margin-bottom: 0.4rem;
+}
+.book-promo-meta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+.book-promo-text { font-size: 0.88rem; color: var(--muted); margin-bottom: 1rem; }
+
+
+ }
+
+
+/* ── SIDE SKETCHES ── */
+.deco-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.deco-wrap img {
+  position: absolute; opacity: 0.11;
+  width: calc((100vw - 1100px) / 2 - 10px);
+  min-width: 100px; max-width: 220px;
+  top: 50%; transform: translateY(-50%);
+}
+.deco-wrap .sk-l { left: 10px; }
+.deco-wrap .sk-r { right: 10px; }
+@media (max-width: 1200px) { .deco-wrap { display: none; } }
+
+/* ── RESPONSIVE ── */
+
+/* ── HAMBURGER ── */
+.nav-toggle {
+  display: none; flex-direction: column; justify-content: center;
+  gap: 5px; cursor: pointer; background: none; border: none; padding: 4px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--gold); border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none; flex-direction: column; gap: 0;
+    position: absolute; top: 62px; left: 0; right: 0;
+    background: rgba(9,21,42,0.98); border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0; z-index: 200;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; padding: 0.85rem 2rem;
+    border-bottom: 1px solid var(--border); font-size: 0.9rem;
+  }
+  .nav-links .nav-cta {
+    margin: 0.5rem 2rem; border-radius: 4px;
+    text-align: center; border: 1px solid var(--border);
+  }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 1.2rem; }
+  .page-header { padding: 3rem 1.2rem 2rem; }
+  .section { padding: 3rem 1.2rem; }
+  .container { padding: 0 1.2rem; }
+  .book-promo { flex-direction: column; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+
+.gloss-search{width:100%;max-width:600px;background:var(--navy-3);border:1px solid var(--border-s);border-radius:4px;padding:.8rem 1.2rem;color:var(--white);font-family:'Barlow',sans-serif;font-size:.95rem;outline:none;margin-bottom:2rem;}
+.gloss-search:focus{border-color:var(--gold);}
+.alpha-nav{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:2rem;}
+.alpha-btn{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;background:none;border:1px solid var(--border);border-radius:3px;color:var(--muted);padding:.25rem .6rem;cursor:pointer;transition:all .18s;}
+.alpha-btn:hover,.alpha-btn.active{color:var(--navy);background:var(--gold);border-color:var(--gold);}
+.gloss-group{margin-bottom:2.5rem;}
+.gloss-letter{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;color:var(--gold);border-bottom:2px solid var(--border);padding-bottom:.5rem;margin-bottom:1.2rem;}
+.gloss-item{padding:1rem 0;border-bottom:1px solid var(--border);}
+.gloss-term{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:.3rem;}
+.gloss-def{font-size:.9rem;color:#B0C4D8;line-height:1.7;}
+.gloss-tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:.1rem .5rem;border-radius:2px;margin-left:.5rem;vertical-align:middle;}
+.hidden{display:none;}</style>
+</head>
+<body>
+<div class="deco-wrap"><img class="sk-l" src="../assets/sk-c.svg" alt=""><img class="sk-r" src="../assets/sk-f.svg" alt=""></div>
+<nav>
+  <a class="nav-logo" href="../index.html"><span>PIPING</span>PASSION</a>
+  <ul class="nav-links">
+    <li><a href="field-tips.html">Field Tips</a></li>
+    <li><a href="field-stories.html">Field Stories</a></li>
+    <li><a href="brownfield.html">Brownfield</a></li>
+    <li><a href="scan-to-model.html">Scan-to-Model</a></li>
+    <li><a href="codes-standards.html">Codes</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="career.html">Career</a></li>
+    <li><a href="reference.html">Reference</a></li>
+    <li><a href="common-mistakes.html">Mistakes</a></li>
+    <li><a href="pid-symbols.html">P&ID Symbols</a></li>
+    <li><a href="glossary.html">Glossary</a></li>
+    <li><a href="books.html">Books</a></li>
+    <li><a class="nav-cta" href="contact.html">Contact</a></li>
+  </ul>
+<button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">70+ terms defined</p>
+    <h1 class="page-title">Piping <span>Glossary</span></h1>
+    <p class="page-desc">Every term a piping designer needs to know &mdash; defined clearly, without academic padding. From NPS to weldolet, from MOC to water hammer.</p>
+  </div>
+</div>
+<div style="max-width:900px;margin:0 auto;padding:3.5rem 2.5rem;" class="reveal">
+  <input class="gloss-search" type="text" placeholder="Search terms..." oninput="searchGloss(this.value)">
+  <div class="alpha-nav"><button class="alpha-btn active" onclick="filterLetter('all')">All</button><button class="alpha-btn" onclick="filterLetter('A')">A</button><button class="alpha-btn" onclick="filterLetter('B')">B</button><button class="alpha-btn" onclick="filterLetter('C')">C</button><button class="alpha-btn" onclick="filterLetter('D')">D</button><button class="alpha-btn" onclick="filterLetter('E')">E</button><button class="alpha-btn" onclick="filterLetter('F')">F</button><button class="alpha-btn" onclick="filterLetter('G')">G</button><button class="alpha-btn" onclick="filterLetter('H')">H</button><button class="alpha-btn" onclick="filterLetter('I')">I</button><button class="alpha-btn" onclick="filterLetter('L')">L</button><button class="alpha-btn" onclick="filterLetter('M')">M</button><button class="alpha-btn" onclick="filterLetter('N')">N</button><button class="alpha-btn" onclick="filterLetter('O')">O</button><button class="alpha-btn" onclick="filterLetter('P')">P</button><button class="alpha-btn" onclick="filterLetter('R')">R</button><button class="alpha-btn" onclick="filterLetter('S')">S</button><button class="alpha-btn" onclick="filterLetter('T')">T</button><button class="alpha-btn" onclick="filterLetter('U')">U</button><button class="alpha-btn" onclick="filterLetter('V')">V</button><button class="alpha-btn" onclick="filterLetter('W')">W</button></div>
+  <div id="gloss-content"><div class="gloss-group" data-letter="A">
+<div class="gloss-letter">A</div>
+<div class="gloss-item" data-term="as-built drawing">
+  <div class="gloss-term">As-Built Drawing<span class="gloss-tag">Layout</span></div>
+  <div class="gloss-def">A drawing updated after construction to reflect the actual installed condition of piping and equipment. In practice, as-builts are often incomplete or outdated — treat them as a starting hypothesis, not a confirmed fact.</div>
+</div>
+<div class="gloss-item" data-term="asme b31.3">
+  <div class="gloss-term">ASME B31.3<span class="gloss-tag">Codes</span></div>
+  <div class="gloss-def">The primary piping code for process plants — refineries, chemical plants, petrochemical facilities. Covers design, materials, fabrication, examination, and testing of process piping.</div>
+</div>
+<div class="gloss-item" data-term="anchor (support)">
+  <div class="gloss-term">Anchor (Support)<span class="gloss-tag">Supports</span></div>
+  <div class="gloss-def">A pipe support that restrains all six degrees of freedom — three translational and three rotational. Transfers all thermal expansion forces and moments to the structure. Design the structure to accept these loads.</div>
+</div>
+<div class="gloss-item" data-term="api 610">
+  <div class="gloss-term">API 610<span class="gloss-tag">Standards</span></div>
+  <div class="gloss-def">American Petroleum Institute standard for centrifugal pumps for petroleum, petrochemical and natural gas industries. Defines allowable nozzle loads among other requirements.</div>
+</div>
+<div class="gloss-item" data-term="api 570">
+  <div class="gloss-term">API 570<span class="gloss-tag">Standards</span></div>
+  <div class="gloss-def">Piping inspection code covering in-service inspection, rating, repair and alteration of metallic piping systems. Critical knowledge for brownfield work.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="B">
+<div class="gloss-letter">B</div>
+<div class="gloss-item" data-term="battery limit">
+  <div class="gloss-term">Battery Limit<span class="gloss-tag">Layout</span></div>
+  <div class="gloss-def">The boundary of a process unit or plant area. Piping crossing a battery limit typically requires special documentation, isolation, and often a different piping class specification.</div>
+</div>
+<div class="gloss-item" data-term="bom / bill of materials">
+  <div class="gloss-term">BOM / Bill of Materials<span class="gloss-tag">Documentation</span></div>
+  <div class="gloss-def">A complete list of all piping components required to fabricate a spool or construct a line. Extracted from the 3D model or isometric and used for procurement.</div>
+</div>
+<div class="gloss-item" data-term="branch connection">
+  <div class="gloss-term">Branch Connection<span class="gloss-tag">Layout</span></div>
+  <div class="gloss-def">A connection from a smaller pipe (branch) into a larger pipe (header/run). Connection type (tee, weldolet, sockolet) depends on the branch-to-header size ratio and service requirements.</div>
+</div>
+<div class="gloss-item" data-term="butt weld (bw)">
+  <div class="gloss-term">Butt Weld (BW)<span class="gloss-tag">Welding</span></div>
+  <div class="gloss-def">A weld joining two pipe ends or fittings end-to-end. The standard connection for NPS 2 and above in most process piping. Requires bevelling, alignment, and full penetration weld.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="C">
+<div class="gloss-letter">C</div>
+<div class="gloss-item" data-term="caesar ii">
+  <div class="gloss-term">Caesar II<span class="gloss-tag">Software</span></div>
+  <div class="gloss-def">The industry-standard pipe stress analysis software by Hexagon. As a designer you do not run it yourself, but your routing decisions directly affect the results.</div>
+</div>
+<div class="gloss-item" data-term="cui (corrosion under insulation)">
+  <div class="gloss-term">CUI (Corrosion Under Insulation)<span class="gloss-tag">Materials</span></div>
+  <div class="gloss-def">Corrosion occurring under thermal or personnel-protection insulation, often invisible until severe. Common on carbon steel lines cycling between wet and dry conditions. A major cause of failures in ageing plants.</div>
+</div>
+<div class="gloss-item" data-term="corrosion allowance (ca)">
+  <div class="gloss-term">Corrosion Allowance (CA)<span class="gloss-tag">Materials</span></div>
+  <div class="gloss-def">Additional wall thickness added to the pressure design wall to allow for corrosion over the design life of the plant. Typically 1.5mm to 6mm depending on fluid and material.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="D">
+<div class="gloss-letter">D</div>
+<div class="gloss-item" data-term="design pressure">
+  <div class="gloss-term">Design Pressure<span class="gloss-tag">Design</span></div>
+  <div class="gloss-def">The maximum pressure at which the piping system is designed to operate continuously. Used for wall thickness calculation, flange class selection, and pressure relief sizing. Always add margin above operating pressure.</div>
+</div>
+<div class="gloss-item" data-term="dn (diameter nominal)">
+  <div class="gloss-term">DN (Diameter Nominal)<span class="gloss-tag">Dimensions</span></div>
+  <div class="gloss-def">The metric designation for pipe size. DN 100 = NPS 4. DN does not equal the actual OD — it is a nominal reference only. Used in European and international projects.</div>
+</div>
+<div class="gloss-item" data-term="drip leg">
+  <div class="gloss-term">Drip Leg<span class="gloss-tag">Layout</span></div>
+  <div class="gloss-def">A short vertical drop at a low point in a steam or gas line, fitted with a drain valve. Collects condensate or liquid and prevents water hammer. Missing drip legs are a leading cause of steam line failures.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="E">
+<div class="gloss-letter">E</div>
+<div class="gloss-item" data-term="eccentric reducer">
+  <div class="gloss-term">Eccentric Reducer<span class="gloss-tag">Fittings</span></div>
+  <div class="gloss-def">A reducer where the centreline of the two ends is offset. Used on pump suction to prevent gas pockets (flat side up) and on lines requiring drainage (flat side down). Do not substitute a concentric reducer without checking the hydraulic requirements.</div>
+</div>
+<div class="gloss-item" data-term="eiv (emergency isolation valve)">
+  <div class="gloss-term">EIV (Emergency Isolation Valve)<span class="gloss-tag">Safety</span></div>
+  <div class="gloss-def">A valve designed to be closed rapidly in an emergency to isolate a section of piping. Must be reachable within seconds from a safe position — this is a design requirement, not an afterthought.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="F">
+<div class="gloss-letter">F</div>
+<div class="gloss-item" data-term="fat (factory acceptance test)">
+  <div class="gloss-term">FAT (Factory Acceptance Test)<span class="gloss-tag">Testing</span></div>
+  <div class="gloss-def">Testing performed on equipment or valves at the manufacturer's facility before shipment. A chance to catch issues before the equipment reaches site.</div>
+</div>
+<div class="gloss-item" data-term="flange class">
+  <div class="gloss-term">Flange Class<span class="gloss-tag">Standards</span></div>
+  <div class="gloss-def">The pressure-temperature rating classification of flanges per ASME B16.5: 150, 300, 600, 900, 1500, 2500. Higher class = higher allowable pressure. Class selection depends on design pressure, temperature, and material.</div>
+</div>
+<div class="gloss-item" data-term="free span">
+  <div class="gloss-term">Free Span<span class="gloss-tag">Supports</span></div>
+  <div class="gloss-def">The unsupported length of pipe between two supports. Maximum free span is determined by allowable stress, pipe weight, and deflection limits. Exceeding it causes sag, vibration, and potential failure.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="G">
+<div class="gloss-letter">G</div>
+<div class="gloss-item" data-term="gasket">
+  <div class="gloss-term">Gasket<span class="gloss-tag">Components</span></div>
+  <div class="gloss-def">A sealing element compressed between two flange faces. Single-use — never reuse a gasket. Type depends on service: spiral-wound (general service), ring-type joint RTJ (high pressure/temp), full-face (low pressure, cast iron flanges).</div>
+</div>
+<div class="gloss-item" data-term="guide (support)">
+  <div class="gloss-term">Guide (Support)<span class="gloss-tag">Supports</span></div>
+  <div class="gloss-def">A pipe support that restrains lateral movement but allows axial movement (thermal expansion along the pipe axis). Used in combination with anchors and stops to control thermal expansion routing.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="H">
+<div class="gloss-letter">H</div>
+<div class="gloss-item" data-term="hot tap">
+  <div class="gloss-term">Hot Tap<span class="gloss-tag">Construction</span></div>
+  <div class="gloss-def">A branch connection made to a live pipe under pressure without shutting down the system. Requires specialized equipment, hot work permits, and careful engineering. High risk operation — design the branch to make it feasible.</div>
+</div>
+<div class="gloss-item" data-term="hydrotest">
+  <div class="gloss-term">Hydrotest<span class="gloss-tag">Testing</span></div>
+  <div class="gloss-def">Pressure test performed with water at typically 1.5× design pressure (ASME B31.3). Verifies integrity of welds and fittings before commissioning. Requires supports designed for water-filled weight.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="I">
+<div class="gloss-letter">I</div>
+<div class="gloss-item" data-term="isometric drawing">
+  <div class="gloss-term">Isometric Drawing<span class="gloss-tag">Documentation</span></div>
+  <div class="gloss-def">A 3D-view drawing of a single piping line showing all dimensions, fittings, supports, weld joints, and bill of materials. The primary fabrication document for piping spools.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="L">
+<div class="gloss-letter">L</div>
+<div class="gloss-item" data-term="line list">
+  <div class="gloss-term">Line List<span class="gloss-tag">Documentation</span></div>
+  <div class="gloss-def">A project database listing every piping line with its design pressure, temperature, fluid service, material, insulation requirements, and applicable code. The data companion to the P&ID. Cross-reference everything.</div>
+</div>
+<div class="gloss-item" data-term="lr elbow (long radius)">
+  <div class="gloss-term">LR Elbow (Long Radius)<span class="gloss-tag">Fittings</span></div>
+  <div class="gloss-def">A 90° elbow with a centreline radius of 1.5× the pipe nominal diameter. Standard for most process piping. Lower pressure drop and lower stress intensification factor than short-radius elbows. Default choice unless space is critical.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="M">
+<div class="gloss-letter">M</div>
+<div class="gloss-item" data-term="moc (management of change)">
+  <div class="gloss-term">MOC (Management of Change)<span class="gloss-tag">Process</span></div>
+  <div class="gloss-def">Formal procedure for documenting, reviewing, and approving any change to design, materials, or operating conditions. Bypassing MOC is how small changes become expensive disasters.</div>
+</div>
+<div class="gloss-item" data-term="mto (material take-off)">
+  <div class="gloss-term">MTO (Material Take-Off)<span class="gloss-tag">Documentation</span></div>
+  <div class="gloss-def">A quantified list of all piping materials required for a project or spool, used for procurement. Accuracy of MTO directly affects project cost and schedule.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="N">
+<div class="gloss-letter">N</div>
+<div class="gloss-item" data-term="nps (nominal pipe size)">
+  <div class="gloss-term">NPS (Nominal Pipe Size)<span class="gloss-tag">Dimensions</span></div>
+  <div class="gloss-def">The imperial designation for pipe size used in North America and internationally. NPS does not equal the actual OD for small bore pipe. Example: NPS 2 has OD of 60.3mm, not 50mm.</div>
+</div>
+<div class="gloss-item" data-term="nozzle">
+  <div class="gloss-term">Nozzle<span class="gloss-tag">Equipment</span></div>
+  <div class="gloss-def">The connecting point between a vessel, heat exchanger, pump or other piece of equipment and the piping system. Nozzles have allowable load limits (forces and moments) that piping stress analysis must satisfy.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="O">
+<div class="gloss-letter">O</div>
+<div class="gloss-item" data-term="olet (weldolet/sockolet/threadolet)">
+  <div class="gloss-term">Olet (Weldolet/Sockolet/Threadolet)<span class="gloss-tag">Fittings</span></div>
+  <div class="gloss-def">A branch fitting that combines reinforcement and the branch connection in one component. Weldolet for butt-weld branches, Sockolet for socket-weld, Threadolet for threaded. Use when branch is less than 50% of header size.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="P">
+<div class="gloss-letter">P</div>
+<div class="gloss-item" data-term="p&id (piping and instrumentation diagram)">
+  <div class="gloss-term">P&ID (Piping and Instrumentation Diagram)<span class="gloss-tag">Documentation</span></div>
+  <div class="gloss-def">The primary engineering document showing all process equipment, piping, instrumentation, and control systems. The designer's bible. Verify the revision every morning before starting work.</div>
+</div>
+<div class="gloss-item" data-term="piping class (piping spec)">
+  <div class="gloss-term">Piping Class (Piping Spec)<span class="gloss-tag">Standards</span></div>
+  <div class="gloss-def">A project-specific document defining all allowable materials, pressure ratings, and components for a given service and pressure class. Everything you model must comply with the applicable piping class.</div>
+</div>
+<div class="gloss-item" data-term="pms (piping material specification)">
+  <div class="gloss-term">PMS (Piping Material Specification)<span class="gloss-tag">Documentation</span></div>
+  <div class="gloss-def">Same as Piping Class. A document specifying exactly which pipes, fittings, flanges, valves, and gaskets are permitted for each service category.</div>
+</div>
+<div class="gloss-item" data-term="psv (pressure safety valve)">
+  <div class="gloss-term">PSV (Pressure Safety Valve)<span class="gloss-tag">Safety</span></div>
+  <div class="gloss-def">A spring-loaded valve that opens automatically when process pressure exceeds the set pressure, protecting the system from overpressure. Must be mounted vertically upright. Outlet piping must be designed for reaction forces.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="R">
+<div class="gloss-letter">R</div>
+<div class="gloss-item" data-term="rtj (ring-type joint)">
+  <div class="gloss-term">RTJ (Ring-Type Joint)<span class="gloss-tag">Flanges</span></div>
+  <div class="gloss-def">A flange facing type using a metallic ring gasket seated in a groove machined into the flange face. Used for high-pressure, high-temperature service. Higher integrity than raised-face flanges. Requires more precise alignment.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="S">
+<div class="gloss-letter">S</div>
+<div class="gloss-item" data-term="schedule (pipe)">
+  <div class="gloss-term">Schedule (Pipe)<span class="gloss-tag">Dimensions</span></div>
+  <div class="gloss-def">A wall thickness designation for pipe. Higher schedule = thicker wall = higher pressure rating and lower internal diameter. SCH 40 and SCH 80 are most common. Always verify the schedule in the piping class before routing.</div>
+</div>
+<div class="gloss-item" data-term="spool">
+  <div class="gloss-term">Spool<span class="gloss-tag">Fabrication</span></div>
+  <div class="gloss-def">A prefabricated section of piping assembled in a shop, transported to site, and installed. Good spool design minimizes field welds, maximizes shop fabrication, and accounts for installation access.</div>
+</div>
+<div class="gloss-item" data-term="sr elbow (short radius)">
+  <div class="gloss-term">SR Elbow (Short Radius)<span class="gloss-tag">Fittings</span></div>
+  <div class="gloss-def">A 90° elbow with centreline radius of 1.0× the nominal diameter. Saves space but has higher pressure drop and significantly higher stress intensification factor. Avoid unless space is critical and stress analysis confirms acceptability.</div>
+</div>
+<div class="gloss-item" data-term="stop (support)">
+  <div class="gloss-term">Stop (Support)<span class="gloss-tag">Supports</span></div>
+  <div class="gloss-def">A pipe support that restrains axial movement but allows lateral movement. Used to control thermal expansion direction. A guide without a coordinated stop is half a system.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="T">
+<div class="gloss-letter">T</div>
+<div class="gloss-item" data-term="tie-in">
+  <div class="gloss-term">Tie-In<span class="gloss-tag">Brownfield</span></div>
+  <div class="gloss-def">The connection point between new piping and existing in-service piping. Requires careful planning: isolation, drain, purge, weld procedure, inspection, and usually a shutdown window.</div>
+</div>
+<div class="gloss-item" data-term="tq (technical query)">
+  <div class="gloss-term">TQ (Technical Query)<span class="gloss-tag">Documentation</span></div>
+  <div class="gloss-def">A formal question raised to the client, process engineer, or engineering lead requesting clarification on a technical issue. Raise a TQ for every discrepancy — it creates a documented trail and protects you.</div>
+</div>
+<div class="gloss-item" data-term="trunnion">
+  <div class="gloss-term">Trunnion<span class="gloss-tag">Supports</span></div>
+  <div class="gloss-def">A cylindrical attachment welded to a pipe to carry vertical loads at a support point, especially on large-bore hot lines. Avoids point loading on the pipe wall.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="U">
+<div class="gloss-letter">U</div>
+<div class="gloss-item" data-term="ut (ultrasonic testing)">
+  <div class="gloss-term">UT (Ultrasonic Testing)<span class="gloss-tag">Inspection</span></div>
+  <div class="gloss-def">Non-destructive examination method using sound waves to detect flaws in welds and measure wall thickness. Essential tool for brownfield — use a UT gauge to measure existing pipe wall thickness before tying in.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="V">
+<div class="gloss-letter">V</div>
+<div class="gloss-item" data-term="valve actuator">
+  <div class="gloss-term">Valve Actuator<span class="gloss-tag">Valves</span></div>
+  <div class="gloss-def">A device for operating a valve remotely or automatically: handwheel (manual), gear operator (large valves), pneumatic actuator, electric motor operator. Specify based on torque requirement and operational urgency.</div>
+</div>
+<div class="gloss-item" data-term="vent">
+  <div class="gloss-term">Vent<span class="gloss-tag">Layout</span></div>
+  <div class="gloss-def">An opening at a high point in a piping system to release trapped gas or air during filling or draining. Every high point needs a vent. Missing vents cause air locks, incomplete draining, and hydrotest problems.</div>
+</div>
+</div>
+<div class="gloss-group" data-letter="W">
+<div class="gloss-letter">W</div>
+<div class="gloss-item" data-term="water hammer">
+  <div class="gloss-term">Water Hammer<span class="gloss-tag">Operations</span></div>
+  <div class="gloss-def">A hydraulic shock wave caused by sudden changes in fluid velocity — rapid valve closure, pump trip, or steam meeting trapped condensate. Devastating forces. Prevent with proper drainage, slow-closing valves, and surge analysis on long lines.</div>
+</div>
+<div class="gloss-item" data-term="weld map">
+  <div class="gloss-term">Weld Map<span class="gloss-tag">Documentation</span></div>
+  <div class="gloss-def">A drawing identifying all weld joints in a piping system, assigned weld numbers for tracking inspection records. Required for high-pressure and high-temperature service.</div>
+</div>
+</div>
+</div>
+</div>
+<footer>
+  <div class="footer-logo"><span>PIPING</span>PASSION</div>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="field-tips.html">Field Tips</a>
+    <a href="books.html">Books</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
+  </div>
+  <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
+</footer>
+<script>
+function searchGloss(q){
+  q=q.toLowerCase();
+  document.querySelectorAll('.gloss-item').forEach(i=>{
+    i.style.display=(!q||i.dataset.term.includes(q)||i.querySelector('.gloss-def').textContent.toLowerCase().includes(q))?'':'none';
+  });
+  document.querySelectorAll('.gloss-group').forEach(g=>{
+    const vis=[...g.querySelectorAll('.gloss-item')].some(i=>i.style.display!=='none');
+    g.style.display=vis?'':'none';
+  });
+}
+function filterLetter(l){
+  document.querySelectorAll('.alpha-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelector('.gloss-search').value='';
+  document.querySelectorAll('.gloss-group').forEach(g=>{g.style.display=(l==='all'||g.dataset.letter===l)?'':'none';});
+  document.querySelectorAll('.gloss-item').forEach(i=>i.style.display='');
+}
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.05});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
+</script>
+</body>
+</html>

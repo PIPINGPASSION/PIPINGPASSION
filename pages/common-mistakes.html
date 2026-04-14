@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tools &amp; Software &mdash; Piping Passion</title>
+<title>Common Mistakes &mdash; Piping Passion</title>
 <link rel="stylesheet" href="../css/style.css">
-<style>
-/* ═══════════════════════════════════════════
+<style>/* ═══════════════════════════════════════════
    PIPINGPASSION.COM — SHARED STYLESHEET
    Palette: Navy #09152A · Gold #C9930A · #F0B429
    ═══════════════════════════════════════════ */
@@ -449,32 +448,19 @@ footer {
   footer { flex-direction: column; align-items: flex-start; }
 }
 
-</style>
-<style>
-.tools-wrap { max-width: 1000px; margin: 0 auto; padding: 3.5rem 2.5rem; }
-.tools-category { margin-bottom: 3.5rem; }
-.tools-cat-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800; font-size: 1.4rem; text-transform: uppercase;
-  color: var(--white); margin-bottom: 1.5rem;
-  display: flex; align-items: center; gap: 1rem;
-}
-.tools-cat-title::after { content: ''; flex:1; height:1px; background: var(--border); }
-.tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
-.tool-card { background: var(--navy-2); padding: 1.8rem 1.6rem; border-right: 1px solid var(--border); }
-.tool-name { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; color:var(--white); margin-bottom:0.3rem; }
-.tool-maker { font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--gold); margin-bottom:0.6rem; }
-.tool-desc { font-size:0.85rem; color:var(--muted); line-height:1.6; }
-.tool-verdict { display:flex; align-items:center; gap:0.5rem; margin-top:0.8rem; font-size:0.78rem; color:var(--muted); }
-.verdict-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
-.verdict-green { background:#1D9E75; }
-.verdict-amber { background:var(--gold); }
-.verdict-muted { background:var(--dim); }
-</style>
+.mistake-list{display:flex;flex-direction:column;gap:2px;max-width:860px;margin:0 auto;}
+.mistake-item{background:var(--navy-2);border-left:4px solid var(--gold);padding:2rem 2.2rem;border-radius:0 6px 6px 0;}
+.mistake-item:nth-child(even){border-left-color:#D85A30;}
+.mistake-num{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem;}
+.mistake-item:nth-child(even) .mistake-num{color:#D85A30;}
+.mistake-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.3rem;color:var(--white);margin-bottom:.8rem;}
+.mistake-body{font-size:.95rem;color:#B0C4D8;line-height:1.8;margin-bottom:.8rem;}
+.mistake-lesson{background:var(--navy-3);border-left:2px solid var(--gold);padding:.8rem 1.2rem;border-radius:0 4px 4px 0;font-size:.88rem;color:var(--muted);font-style:italic;line-height:1.6;}
+.mistake-item:nth-child(even) .mistake-lesson{border-left-color:#D85A30;}
+.mistake-cost{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:#D85A30;padding:.15rem .6rem;border-radius:3px;margin-bottom:.6rem;}</style>
 </head>
 <body>
-<div class="deco-wrap"><img class="sk-l" src="../assets/sk-a.svg" alt=""><img class="sk-r" src="../assets/sk-d.svg" alt=""></div>
-
+<div class="deco-wrap"><img class="sk-l" src="../assets/sk-c.svg" alt=""><img class="sk-r" src="../assets/sk-f.svg" alt=""></div>
 <nav>
   <a class="nav-logo" href="../index.html"><span>PIPING</span>PASSION</a>
   <ul class="nav-links">
@@ -496,91 +482,89 @@ footer {
 </nav>
 <div class="page-header">
   <div class="page-header-inner">
-    <p class="page-eyebrow">3D Design &middot; Scanning &middot; Productivity</p>
-    <h1 class="page-title">Tools &amp; <span>Software</span></h1>
-    <p class="page-desc">Honest assessments from someone who uses these tools on real projects. Not marketing copy &mdash; field perspective.</p>
+    <p class="page-eyebrow">Learn from others&rsquo; mistakes</p>
+    <h1 class="page-title">Common <span>Mistakes</span></h1>
+    <p class="page-desc">The 10 most costly and most preventable mistakes in piping design &mdash; drawn from real projects, real rework, and real conversations with senior designers. Most of these cost weeks and hundreds of thousands of dollars. All were preventable.</p>
   </div>
 </div>
-<div class="tools-wrap reveal">
+<div style="padding:3.5rem 2.5rem;">
+  <div class="mistake-list">
+    <div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #01</div>
+  <span class="mistake-cost">Cost: High</span>
+  <h2 class="mistake-title">Working on a superseded P&ID revision</h2>
+  <p class="mistake-body">A designer works for two weeks on a P&ID that was superseded three days ago. Nobody told them. The document control system had a notification process that nobody had set up. Complete rework, schedule impact, damaged reputation.</p>
+  <div class="mistake-lesson">Verify the P&ID revision every morning before starting work. Set up notifications with document control. This is the most preventable and most common expensive mistake in piping design.</div>
+</div>
+<div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #02</div>
+  <span class="mistake-cost">Cost: Medium</span>
+  <h2 class="mistake-title">Not cross-referencing P&ID with the line list</h2>
+  <p class="mistake-body">A line appears on the P&ID but is missing from the line list — or vice versa. The designer models it anyway, assumes it will be added later, and routes other lines around it. Months later: the line does not exist. Three weeks of rerouting to recover the space.</p>
+  <div class="mistake-lesson">Never assume a missing data point will be filled in later. Raise a TQ immediately. Every discrepancy between P&ID and line list must be resolved before you model.</div>
+</div>
+<div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #03</div>
+  <span class="mistake-cost">Cost: High</span>
+  <h2 class="mistake-title">Ignoring as-built drawing inaccuracies on brownfield</h2>
+  <p class="mistake-body">A designer routes a new 6-inch line based on as-built drawings showing a clear corridor. On site: an 8-inch nitrogen line running exactly through the planned routing. Never documented. Added fifteen years ago. Discovered during construction, during the shutdown window.</p>
+  <div class="mistake-lesson">On brownfield projects, treat every as-built drawing as a hypothesis. Walk the corridor. Physically verify clearances. Ten minutes of field verification costs nothing compared to redesigning during a live shutdown.</div>
+</div>
+<div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #04</div>
+  <span class="mistake-cost">Cost: Medium</span>
+  <h2 class="mistake-title">Designing for operating weight only — forgetting hydrotest weight</h2>
+  <p class="mistake-body">A large gas line is routed and supported for operating conditions. Gas weight: 8 kg/m. Water weight for hydrotest: 95 kg/m. Support spacing designed for gas. During hydrotest, the pipe sags excessively, two supports deflect, one structural attachment yields.</p>
+  <div class="mistake-lesson">Always design supports for water-filled (hydrotest) weight. A gas line can weigh 10× more when water-filled. Verify your project specification — many require hydrotest weight as the governing case.</div>
+</div>
+<div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #05</div>
+  <span class="mistake-cost">Cost: Medium</span>
+  <h2 class="mistake-title">Placing a valve the operator cannot reach</h2>
+  <p class="mistake-body">An Emergency Isolation Valve is correctly specified on the P&ID and modelled at the correct elevation. It is located behind a bank of large-bore pipes. Access requires climbing over a 350°C line. The valve is relocated during a subsequent shutdown at enormous cost.</p>
+  <div class="mistake-lesson">Before finalising any valve placement, mentally operate it. Can the operator reach it in normal conditions? In an emergency, in full breathing apparatus, at 3am? If any answer is no, redesign. This takes five minutes in the model and avoids six-figure rework.</div>
+</div>
+<div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #06</div>
+  <span class="mistake-cost">Cost: Medium</span>
+  <h2 class="mistake-title">Wrong P&ID symbol interpretation</h2>
+  <p class="mistake-body">A designer models an entire system with globe valves where the P&ID specified gate valves. The symbols were slightly different from their previous project. Nobody checked. Three weeks of rework, plus replacement of already-ordered globe valves.</p>
+  <div class="mistake-lesson">Read the P&ID legend sheet on day one of every project. Never assume a symbol means the same thing as your last project. Every symbol has a precise meaning defined in that project's legend.</div>
+</div>
+<div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #07</div>
+  <span class="mistake-cost">Cost: Medium</span>
+  <h2 class="mistake-title">Insufficient welding clearance in congested areas</h2>
+  <p class="mistake-body">A new line is routed through a congested area with 150mm clearance around all welds. SMAW requires 200mm minimum. Construction discovers the clearance violation. The line has to be rerouted. Three spools to be refabricated.</p>
+  <div class="mistake-lesson">Design with welding access in mind. SMAW needs 200mm minimum clearance around every weld joint. In tight areas, consider specifying GTAW or orbital welding from the start — it is a design decision, not just a construction issue.</div>
+</div>
+<div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #08</div>
+  <span class="mistake-cost">Cost: High</span>
+  <h2 class="mistake-title">Missing drip legs on steam lines after a routing change</h2>
+  <p class="mistake-body">A steam line routing is changed late in the project. The drain relocated from the old low point is not reinstated at the new low point. During commissioning: water hammer, three supports ripped from the rack, a weld cracked.</p>
+  <div class="mistake-lesson">After every routing change, trace the line from end to end. At every high point: verify a vent. At every low point: verify a drain. This takes five minutes and has prevented catastrophic failures.</div>
+</div>
+<div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #09</div>
+  <span class="mistake-cost">Cost: High</span>
+  <h2 class="mistake-title">Exceeding pump nozzle loads</h2>
+  <p class="mistake-body">A suction line runs straight from the header to the pump with minimal offset. Thermal expansion loads on the nozzle are three times the API 610 allowable. Stress analysis fails. Complete reroute required after the model has been approved for construction.</p>
+  <div class="mistake-lesson">The number one cause of nozzle load failures: a straight line from the rack to the pump. Always include at least two direction changes near pump connections to absorb thermal expansion. Check nozzle loads early — not after issuing for construction.</div>
+</div>
+<div class="mistake-item reveal">
+  <div class="mistake-num">Mistake #10</div>
+  <span class="mistake-cost">Cost: Medium</span>
+  <h2 class="mistake-title">Making design changes without formal MOC</h2>
+  <p class="mistake-body">A process engineer verbally asks a junior designer to change a carbon steel line to stainless steel. The designer changes the model. No MOC. Three months later the stress engineer discovers it: different expansion coefficient, inadequate supports, two weeks of schedule delay.</p>
+  <div class="mistake-lesson">Never make a design change based on verbal instruction alone. Every change — no matter how small — requires written confirmation and, for significant changes, formal Management of Change. If someone cannot put it in writing, that is a red flag.</div>
+</div>
 
-  <div class="tools-category">
-    <h2 class="tools-cat-title">3D Piping Design</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-name">AVEVA E3D / PDMS</div>
-        <div class="tool-maker">AVEVA</div>
-        <div class="tool-desc">The industry standard for large EPC projects. Steep learning curve, powerful spec-driven workflow. Dominant in European and Middle Eastern petrochemical.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Industry standard for major EPCs</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">AutoCAD Plant 3D</div>
-        <div class="tool-maker">Autodesk</div>
-        <div class="tool-desc">More accessible entry point, widely used by smaller engineering firms. Good integration with AutoCAD ecosystem. Catalog-driven. Familiar if you come from a 2D AutoCAD background.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Strong for mid-size projects</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">SmartPlant 3D / S3D</div>
-        <div class="tool-maker">Hexagon / Intergraph</div>
-        <div class="tool-desc">Rule-driven design with strong integration to SmartPlant suite. Common on large US and Asian projects. Data-centric approach. Heavy infrastructure investment required.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>Large project / US market focus</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">Navisworks</div>
-        <div class="tool-maker">Autodesk</div>
-        <div class="tool-desc">The go-to for model review, clash detection and 4D scheduling. Not a design tool &mdash; an aggregation and review tool. Essential for multi-discipline coordination.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Essential for clash review</div>
-      </div>
-    </div>
   </div>
-
-  <div class="tools-category">
-    <h2 class="tools-cat-title">Scan-to-Model &amp; Point Cloud</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-name">Leica Cyclone</div>
-        <div class="tool-maker">Leica Geosystems</div>
-        <div class="tool-desc">Industry-leading point cloud registration and processing. The benchmark for accuracy. Pairs naturally with Leica RTC360 and BLK360 scanners.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Benchmark for accuracy</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">Autodesk ReCap</div>
-        <div class="tool-maker">Autodesk</div>
-        <div class="tool-desc">Point cloud management and preparation. Integrates directly with Plant 3D and Navisworks. Good for importing and cleaning scans before design work.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Seamless Autodesk integration</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">CloudCompare</div>
-        <div class="tool-maker">Open source</div>
-        <div class="tool-desc">Free, powerful, and surprisingly capable for point cloud analysis, comparison, and basic processing. Steep learning curve but excellent for verifying registration quality and change detection.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Free &mdash; no excuse not to learn it</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">Trimble RealWorks</div>
-        <div class="tool-maker">Trimble</div>
-        <div class="tool-desc">Strong alternative to Cyclone for registration and feature extraction. Paired with Trimble X7 scanners. Growing presence in construction and industrial markets.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>Strong Trimble ecosystem fit</div>
-      </div>
-    </div>
+  <div style="max-width:860px;margin:3rem auto 0;background:var(--navy-3);border:1px solid var(--border);border-radius:8px;padding:2rem 2.5rem;">
+    <p style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold-lt);margin-bottom:.8rem;">The pattern behind every mistake</p>
+    <p style="font-size:.95rem;color:#B0C4D8;line-height:1.8;">Every one of these mistakes shares the same root cause: something was assumed instead of verified. The P&ID revision, the as-built dimensions, the welding clearance, the operator access. Experienced designers are not smarter &mdash; they verify more, and they have learned which assumptions are dangerous.</p>
   </div>
-
-  <div class="tools-category">
-    <h2 class="tools-cat-title">Stress Analysis</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-name">CAESAR II</div>
-        <div class="tool-maker">Hexagon</div>
-        <div class="tool-desc">The global standard for pipe stress analysis. Every stress engineer knows it. As a piping designer, you don&rsquo;t run it yourself &mdash; but you need to understand what it&rsquo;s checking and how your routing decisions affect the results.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Global stress analysis standard</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">ROHR2</div>
-        <div class="tool-maker">SIGMA Ingenieurgesellschaft</div>
-        <div class="tool-desc">Widely used in European (especially German) engineering. Full-featured stress analysis with strong code coverage including EN 13480. Common on German and Dutch EPC projects.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>European market focus</div>
-      </div>
-    </div>
-  </div>
-
 </div>
 <footer>
   <div class="footer-logo"><span>PIPING</span>PASSION</div>
@@ -594,8 +578,8 @@ footer {
   <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
 </footer>
 <script>
-  const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.05});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 </script>
 </body>
 </html>
