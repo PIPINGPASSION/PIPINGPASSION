@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Field Stories &mdash; Piping Passion</title>
+<title>Story #06 &mdash; Piping Passion</title>
 <link rel="stylesheet" href="../css/style.css">
 <style>
 /* ═══════════════════════════════════════════
@@ -449,55 +449,31 @@ footer {
   footer { flex-direction: column; align-items: flex-start; }
 }
 
-</style>
-<style>
-.story-grid { max-width: 900px; margin: 0 auto; padding: 3.5rem 2.5rem; display: flex; flex-direction: column; gap: 2px; width: 100%; }
-.story-card {
-  background: var(--navy-2); padding: 2.2rem 2.4rem;
-  border-bottom: 1px solid var(--border);
-  text-decoration: none; color: var(--white);
-  display: block; transition: background 0.2s;
-  position: relative; overflow: hidden;
-}
-.story-card::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-  width: 3px; background: var(--gold);
-  transform: scaleY(0); transform-origin: top; transition: transform 0.25s;
-}
-.story-card:first-child { border-radius: 6px 6px 0 0; border-top: 1px solid var(--border); }
-.story-card:last-child { border-radius: 0 0 6px 6px; }
-.story-card:hover { background: var(--navy-3); }
-.story-card:hover::before { transform: scaleY(1); }
-.story-num {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.7rem; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.5rem;
-}
-.story-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800; font-size: 1.35rem;
-  color: var(--white); line-height: 1.2; margin-bottom: 0.5rem;
-}
-.story-excerpt { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
-.story-meta { display: flex; gap: 0.8rem; align-items: center; margin-top: 1rem; flex-wrap: wrap; }
-.story-read {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.75rem; font-weight: 700;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--muted); transition: color 0.2s;
-}
-.story-card:hover .story-read { color: var(--gold-lt); }
+.story-page{max-width:760px;margin:0 auto;padding:4rem 2.5rem}
+.story-num{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
+.story-num::before{content:'';width:22px;height:2px;background:var(--gold)}
+.story-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.6rem,3vw,2.6rem);line-height:1.1;color:var(--white);text-transform:uppercase;margin-bottom:1rem}
+.story-divider{width:60px;height:3px;background:var(--gold);margin:2rem 0;border-radius:2px}
+.story-text{font-size:1.05rem;color:#B0C4D8;line-height:1.85;margin-bottom:1.2rem}
+.story-text strong{color:var(--white);font-weight:600}
+.callout{background:var(--navy-3);border-left:3px solid var(--gold);padding:1.2rem 1.6rem;border-radius:0 6px 6px 0;margin:1.8rem 0}
+.callout-label{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
+.callout-text{font-size:.95rem;color:#B0C4D8;line-height:1.7;font-style:italic}
+.story-nav{display:flex;justify-content:space-between;align-items:center;padding:2rem 0;border-top:1px solid var(--border);margin-top:3rem}
+.story-nav a{font-family:'Barlow Condensed',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.story-nav a:hover{color:var(--gold-lt)}
+.back-link{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2rem;transition:color .2s}
+.back-link:hover{color:var(--gold)}
+.story-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
 </style>
 </head>
 <body>
-<div class="deco-wrap"><img class="sk-l" src="../assets/sk-e.svg" alt=""><img class="sk-r" src="../assets/sk-a.svg" alt=""></div>
 
 <nav>
   <a class="nav-logo" href="../index.html"><span>PIPING</span>PASSION</a>
   <ul class="nav-links">
     <li><a href="field-tips.html">Field Tips</a></li>
-    <li><a href="field-stories.html">Field Stories</a></li>
+    <li><a href="field-stories.html" >Field Stories</a></li>
     <li><a href="brownfield.html">Brownfield</a></li>
     <li><a href="scan-to-model.html">Scan-to-Model</a></li>
     <li><a href="codes-standards.html">Codes</a></li>
@@ -511,72 +487,42 @@ footer {
 <div class="page-header">
   <div class="page-header-inner">
     <p class="page-eyebrow">From the field</p>
-    <h1 class="page-title">Field <span>Stories</span></h1>
-    <p class="page-desc">14 stories from real projects. The moments that no classroom teaches and no standard covers &mdash; the kind you only get by being there.</p>
+    <h1 class="page-title"><span>The drawing the client approved but the plant couldn't build</span></h1>
   </div>
 </div>
-<div style="width:100%;display:flex;justify-content:center;"><div class="story-grid reveal">
-
-  <a class="story-card" href="story-02.html">
-    <div class="story-num">Story #01 &middot; Brownfield</div>
-    <h2 class="story-title">The pipe that wasn&rsquo;t on any drawing</h2>
-    <p class="story-excerpt">A fully routed 6&rdquo; line, three days of 3D modelling, and a discovery on site that changed everything. Sometimes the most important pipe in the plant is the one nobody documented.</p>
-    <div class="story-meta"><span class="tag">Brownfield</span><span class="story-read">Read story &rarr;</span></div>
-  </a>
-
-  <a class="story-card" href="story-03.html">
-    <div class="story-num">Story #02 &middot; Shutdown</div>
-    <h2 class="story-title">Twelve hours to get it right</h2>
-    <p class="story-excerpt">A shutdown window, a tie-in that didn&rsquo;t match the drawings, and a team of fitters waiting. What happens when the plan meets reality at 2am.</p>
-    <div class="story-meta"><span class="tag">Shutdown</span><span class="story-read">Read story &rarr;</span></div>
-  </a>
-
-  <a class="story-card" href="story-04.html">
-    <div class="story-num">Story #03 &middot; Layout</div>
-    <h2 class="story-title">When the valve was right but the operator couldn&rsquo;t reach it</h2>
-    <p class="story-excerpt">Technically compliant, operationally useless. A lesson in the difference between what the P&ID says and what a technician can actually do at 3am during an emergency.</p>
-    <div class="story-meta"><span class="tag">Layout</span><span class="story-read">Read story &rarr;</span></div>
-  </a>
-
-  <a class="story-card" href="story-05.html">
-    <div class="story-num">Story #04 &middot; Scan-to-Model</div>
-    <h2 class="story-title">The clash that the model didn&rsquo;t catch</h2>
-    <p class="story-excerpt">A point cloud, a new 4&rdquo; line, and a structural beam that everyone assumed was documented. Why small-bore pipes and scan density are a dangerous combination.</p>
-    <div class="story-meta"><span class="tag">Scan-to-Model</span><span class="story-read">Read story &rarr;</span></div>
-  </a>
-
-  <a class="story-card" href="story-06.html">
-    <div class="story-num">Story #05 &middot; Supports</div>
-    <h2 class="story-title">The support that had been carrying the wrong load for twenty years</h2>
-    <p class="story-excerpt">An existing shoe, a new line, and a structural engineer who asked one question nobody had thought to ask. What happens when you inherit somebody else&rsquo;s assumptions.</p>
-    <div class="story-meta"><span class="tag">Supports</span><span class="story-read">Read story &rarr;</span></div>
-  </a>
-
-  <a class="story-card" href="story-02.html">
-    <div class="story-num">Story #06 &middot; Client Relations</div>
-    <h2 class="story-title">The drawing the client approved but the plant couldn&rsquo;t build</h2>
-    <p class="story-excerpt">Stamped, approved, signed off. And then a site visit that revealed why document approval and constructability review are two completely different things.</p>
-    <div class="story-meta"><span class="tag">Revamp</span><span class="story-read">Read story &rarr;</span></div>
-  </a>
-
-</div></div>
-<div style="text-align:center;padding:1rem 0 4rem;color:var(--dim);font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;">
-  Stories 7&ndash;14 available in <a href="the-book.html" style="color:var(--gold);text-decoration:none;">The Piping Designer&rsquo;s Companion</a>
+<div class="story-page reveal">
+  <a class="back-link" href="field-stories.html">&larr; All field stories</a>
+  <p class="story-num">Story #06 &middot; Revamp</p>
+  <h1 class="story-title">The drawing the client approved but the plant couldn't build</h1>
+  <div class="story-tags"><span class="tag">Brownfield</span><span class="tag-outline">Shutdown</span></div>
+  <div class="story-divider"></div>
+  <p class="story-text">The most impressive brownfield execution I ever witnessed started six months before the shutdown. A refinery unit needed 23 new tie-in connections, all to be completed in a five-day window.</p>
+<p class="story-text">Every spool was pre-fabricated. Every support was pre-assembled. Every weld procedure had been rehearsed. The tie-in sequence was planned hour by hour. Trial fitting had been completed during a window when the unit was at reduced rates.</p>
+<div class="callout"><div class="callout-label">The result</div><div class="callout-text">Day one: isolation and draining completed on schedule. Day four: all 23 tie-ins welded, inspected, and accepted. Day five: hydrotest and restoration. Plant started up on time. A similar project the previous year had taken nine days.</div></div>
+<p class="story-text"><strong>Document approval and constructability are two completely different things.</strong> A drawing can be stamped and signed off while still being impossible to build within the available window. The difference between the nine-day project and the five-day project was not the engineering &mdash; it was the integration between design, construction planning, and operations from day one of the design phase. That knowledge does not come from a drawing office. It comes from being there.</p>
+  <div class="story-nav">
+    <a href="story-05.html">&larr; Story #05</a>
+    <a href="field-stories.html">All stories</a>
+    <a href="field-stories.html">All stories &rarr;</a>
+  </div>
+  <div class="book-promo" style="margin-top:3rem">
+    <div class="book-promo-cover"><img src="../assets/front-cover.jpg" alt="The Piping Designer&rsquo;s Companion"></div>
+    <div>
+      <p class="book-promo-meta">25 Chapters &middot; 66 Tips &middot; 14 Field Stories</p>
+      <p class="book-promo-title">The Piping Designer&rsquo;s Companion</p>
+      <p class="book-promo-text">One of 14 field stories in the book.</p>
+      <a class="btn-primary" href="https://mybook.to/pgMcn1" target="_blank">Get the book &rarr;</a>
+    </div>
+  </div>
 </div>
 <footer>
   <div class="footer-logo"><span>PIPING</span>PASSION</div>
-  <div class="footer-links">
-    <a href="../index.html">Home</a>
-    <a href="field-tips.html">Field Tips</a>
-    <a href="books.html">Books</a>
-    <a href="contact.html">Contact</a>
-    <a href="about.html">About</a>
-  </div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="field-tips.html">Field Tips</a><a href="books.html">Books</a><a href="contact.html">Contact</a><a href="about.html">About</a></div>
   <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
 </footer>
 <script>
-  const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), { threshold: 0.08 });
-  document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(function(r){obs.observe(r);});
 </script>
 </body>
 </html>
