@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Reference &mdash; Piping Passion</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   PIPINGPASSION.COM — SHARED STYLESHEET
+   Palette: Navy #09152A · Gold #C9930A · #F0B429
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+:root {
+  --navy:    #09152A;
+  --navy-2:  #0D1E38;
+  --navy-3:  #142645;
+  --navy-4:  #06101E;
+  --gold:    #C9930A;
+  --gold-lt: #F0B429;
+  --white:   #F5F0E8;
+  --muted:   #8EA3BE;
+  --dim:     #3D5A7A;
+  --border:  rgba(201,147,10,0.18);
+  --border-s: rgba(201,147,10,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(9,21,42,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.1rem; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-links .nav-cta {
+  color: var(--gold); border: 1px solid var(--border);
+  padding: 0.22rem 0.9rem; border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  padding: 5rem 2.5rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 60%);
+  z-index: 0;
+}
+.page-header-inner { position: relative; z-index: 1; max-width: 900px; }
+.page-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.page-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--gold); flex-shrink: 0; }
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: clamp(2.4rem, 5vw, 4rem);
+  line-height: 1.0; color: var(--white);
+  text-transform: uppercase; letter-spacing: -0.01em;
+  margin-bottom: 0.8rem;
+}
+.page-title span { color: var(--gold-lt); }
+.page-desc {
+  font-size: 1.05rem; color: var(--muted);
+  max-width: 620px; line-height: 1.75;
+}
+
+
+/* ── PIPE DECORATION ── */
+.page-header::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 340px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='340' height='400' viewBox='0 0 340 400'%3E%3Cg opacity='0.07' stroke='%23C9930A' fill='none' stroke-linecap='round'%3E%3Crect x='60' y='40' width='220' height='40' rx='20' stroke-width='8'/%3E%3Crect x='60' y='40' width='220' height='40' rx='20' stroke-width='2' opacity='0.5'/%3E%3Cline x1='60' y1='60' x2='20' y2='60' stroke-width='8'/%3E%3Ccircle cx='20' cy='60' r='16' stroke-width='5'/%3E%3Cline x1='280' y1='60' x2='320' y2='60' stroke-width='8'/%3E%3Crect x='308' y='44' width='24' height='32' rx='4' stroke-width='4'/%3E%3Crect x='60' y='140' width='220' height='40' rx='20' stroke-width='8'/%3E%3Cline x1='60' y1='160' x2='20' y2='160' stroke-width='8'/%3E%3Ccircle cx='20' cy='160' r='16' stroke-width='5'/%3E%3Cline x1='280' y1='160' x2='340' y2='160' stroke-width='6'/%3E%3Crect x='60' y='240' width='160' height='36' rx='18' stroke-width='8'/%3E%3Cline x1='220' y1='258' x2='280' y2='258' stroke-width='6'/%3E%3Ccircle cx='280' cy='258' r='14' stroke-width='4'/%3E%3Cline x1='170' y1='80' x2='170' y2='140' stroke-width='8'/%3E%3Cline x1='120' y1='180' x2='120' y2='240' stroke-width='8'/%3E%3Crect x='60' y='320' width='100' height='32' rx='16' stroke-width='6'/%3E%3Cline x1='160' y1='336' x2='220' y2='336' stroke-width='6'/%3E%3Ccircle cx='230' cy='336' r='12' stroke-width='4'/%3E%3Cline x1='80' y1='352' x2='80' y2='390' stroke-width='8'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 420px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='600' viewBox='0 0 420 600'%3E%3Cg opacity='0.06' stroke='%23C9930A' fill='none' stroke-linecap='round'%3E%3Crect x='40' y='60' width='260' height='48' rx='24' stroke-width='10'/%3E%3Cline x1='40' y1='84' x2='0' y2='84' stroke-width='10'/%3E%3Ccircle cx='0' cy='84' r='20' stroke-width='6'/%3E%3Cline x1='300' y1='84' x2='360' y2='84' stroke-width='8'/%3E%3Crect x='348' y='66' width='30' height='36' rx='5' stroke-width='5'/%3E%3Crect x='40' y='180' width='260' height='48' rx='24' stroke-width='10'/%3E%3Cline x1='40' y1='204' x2='0' y2='204' stroke-width='10'/%3E%3Ccircle cx='0' cy='204' r='20' stroke-width='6'/%3E%3Cline x1='300' y1='204' x2='420' y2='204' stroke-width='8'/%3E%3Crect x='40' y='300' width='180' height='44' rx='22' stroke-width='10'/%3E%3Cline x1='220' y1='322' x2='300' y2='322' stroke-width='8'/%3E%3Ccircle cx='316' cy='322' r='18' stroke-width='5'/%3E%3Cline x1='170' y1='108' x2='170' y2='180' stroke-width='10'/%3E%3Cline x1='120' y1='228' x2='120' y2='300' stroke-width='10'/%3E%3Crect x='40' y='410' width='130' height='38' rx='19' stroke-width='8'/%3E%3Cline x1='170' y1='429' x2='260' y2='429' stroke-width='8'/%3E%3Ccircle cx='275' cy='429' r='16' stroke-width='5'/%3E%3Cline x1='90' y1='448' x2='90' y2='510' stroke-width='10'/%3E%3Crect x='40' y='510' width='260' height='44' rx='22' stroke-width='8'/%3E%3Cline x1='300' y1='532' x2='360' y2='532' stroke-width='7'/%3E%3Ccircle cx='374' cy='532' r='16' stroke-width='5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-size: contain;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── LAYOUT ── */
+.container { max-width: 1100px; margin: 0 auto; width: 100%; padding: 0 2.5rem; }
+.section { padding: 4.5rem 2.5rem; }
+.section-alt { background: var(--navy-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+/* ── SECTION LABEL ── */
+.section-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 2rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.section-tag::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 180px; }
+
+/* ── GOLD BAR ── */
+.gold-bar {
+  height: 3px;
+  background: linear-gradient(to right, transparent, var(--gold), var(--gold-lt), var(--gold), transparent);
+  opacity: 0.55;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.95rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: var(--gold); color: var(--navy);
+  padding: 0.75rem 2rem; border-radius: 4px;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+.btn-ghost {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600; font-size: 0.95rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  border-bottom: 1px solid var(--border); padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-ghost:hover { color: var(--gold-lt); border-color: var(--gold); }
+
+/* ── TAG / BADGE ── */
+.tag {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--navy); background: var(--gold);
+  padding: 0.18rem 0.65rem; border-radius: 3px;
+}
+.tag-outline {
+  display: inline-block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold); border: 1px solid var(--border-s);
+  padding: 0.18rem 0.65rem; border-radius: 3px;
+}
+
+/* ── CARD GRID ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1px;
+  border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+}
+.card {
+  background: var(--navy-2); padding: 2rem 1.8rem;
+  text-decoration: none; color: var(--white);
+  transition: background 0.2s; position: relative; overflow: hidden;
+}
+.card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 2px;
+  background: var(--gold); transform: scaleX(0);
+  transform-origin: left; transition: transform 0.25s;
+}
+.card:hover { background: var(--navy-3); }
+.card:hover::after { transform: scaleX(1); }
+.card-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+.card-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1.2rem;
+  color: var(--white); margin-bottom: 0.5rem; line-height: 1.2;
+}
+.card-text { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+.card-arrow {
+  display: block; margin-top: 1.2rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); opacity: 0; transition: opacity 0.2s;
+}
+.card:hover .card-arrow { opacity: 1; }
+
+/* ── TIP CARD (listing) ── */
+.tip-list { display: flex; flex-direction: column; gap: 1px; }
+.tip-item {
+  display: grid; grid-template-columns: 4px 1fr;
+  gap: 1.6rem; align-items: start;
+  background: var(--navy-2); padding: 1.8rem 2rem;
+  text-decoration: none; color: var(--white);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.18s;
+}
+.tip-item:hover { background: var(--navy-3); }
+.tip-item-accent { background: var(--gold); border-radius: 2px; }
+.tip-item-accent.brownfield { background: #1D9E75; }
+.tip-item-accent.scan { background: #7F77DD; }
+.tip-item-accent.welding { background: #D85A30; }
+.tip-item-accent.layout { background: var(--gold); }
+.tip-meta-row {
+  display: flex; align-items: center; gap: 0.8rem;
+  margin-bottom: 0.4rem;
+}
+.tip-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase;
+}
+.tip-heading {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1.25rem;
+  color: var(--white); line-height: 1.2; margin-bottom: 0.4rem;
+}
+.tip-excerpt { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+.tip-read {
+  display: inline-block; margin-top: 0.8rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); transition: color 0.2s;
+}
+.tip-item:hover .tip-read { color: var(--gold-lt); }
+
+/* ── FOOTER ── */
+footer {
+  border-top: 1px solid var(--border);
+  background: var(--navy-4);
+  padding: 2rem 2.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; color: var(--dim);
+}
+.footer-logo span { color: var(--gold); }
+.footer-copy { font-size: 0.78rem; color: var(--dim); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--dim); text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--gold); }
+
+/* ── REVEAL ANIMATION ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── DIVIDER ── */
+.divider { width: 50px; height: 2px; background: rgba(201,147,10,0.4); margin: 1.5rem 0; }
+
+/* ── PROSE ── */
+.prose { max-width: 720px; }
+.prose h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.7rem; text-transform: uppercase;
+  color: var(--white); margin: 2rem 0 0.8rem; line-height: 1.1;
+}
+.prose h3 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1.2rem; text-transform: uppercase;
+  color: var(--gold-lt); margin: 1.5rem 0 0.5rem;
+}
+.prose p { color: #B0C4D8; margin-bottom: 1rem; }
+.prose ul { list-style: none; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.prose ul li {
+  color: #B0C4D8; padding-left: 1.2rem; position: relative; font-size: 0.95rem;
+}
+.prose ul li::before {
+  content: ''; position: absolute; left: 0; top: 0.65em;
+  width: 14px; height: 2px; background: var(--gold);
+}
+.prose blockquote {
+  border-left: 3px solid var(--gold); padding-left: 1.4rem;
+  margin: 1.5rem 0; font-style: italic; color: var(--muted);
+}
+
+/* ── TABLE ── */
+.data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+.data-table th {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-s);
+  text-align: left; background: var(--navy-3);
+}
+.data-table td {
+  padding: 0.7rem 1rem; color: #B0C4D8;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Barlow', monospace; font-size: 0.85rem;
+}
+.data-table tr:hover td { background: var(--navy-3); }
+.data-table .col-name { color: var(--white); font-weight: 500; }
+
+/* ── BOOK PROMO BOX ── */
+.book-promo {
+  background: var(--navy-3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 2.5rem;
+  display: flex; gap: 2rem; align-items: center;
+}
+.book-promo-cover {
+  width: 110px; flex-shrink: 0;
+  border-radius: 4px; overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 3px 3px 0 rgba(201,147,10,0.2);
+}
+.book-promo-cover img { width: 100%; display: block; }
+.book-promo-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.25rem; text-transform: uppercase;
+  color: var(--white); margin-bottom: 0.4rem;
+}
+.book-promo-meta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+}
+.book-promo-text { font-size: 0.88rem; color: var(--muted); margin-bottom: 1rem; }
+
+
+ }
+
+
+/* ── SIDE SKETCHES ── */
+.deco-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.deco-wrap img {
+  position: absolute; opacity: 0.11;
+  width: calc((100vw - 1100px) / 2 - 10px);
+  min-width: 100px; max-width: 220px;
+  top: 50%; transform: translateY(-50%);
+}
+.deco-wrap .sk-l { left: 10px; }
+.deco-wrap .sk-r { right: 10px; }
+@media (max-width: 1200px) { .deco-wrap { display: none; } }
+
+/* ── RESPONSIVE ── */
+
+/* ── HAMBURGER ── */
+.nav-toggle {
+  display: none; flex-direction: column; justify-content: center;
+  gap: 5px; cursor: pointer; background: none; border: none; padding: 4px;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--gold); border-radius: 2px;
+  transition: transform 0.25s, opacity 0.25s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav-toggle { display: flex; }
+  .nav-links {
+    display: none; flex-direction: column; gap: 0;
+    position: absolute; top: 62px; left: 0; right: 0;
+    background: rgba(9,21,42,0.98); border-bottom: 1px solid var(--border);
+    padding: 0.5rem 0; z-index: 200;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; padding: 0.85rem 2rem;
+    border-bottom: 1px solid var(--border); font-size: 0.9rem;
+  }
+  .nav-links .nav-cta {
+    margin: 0.5rem 2rem; border-radius: 4px;
+    text-align: center; border: 1px solid var(--border);
+  }
+}
+@media (max-width: 768px) {
+  nav { padding: 0 1.2rem; }
+  .page-header { padding: 3rem 1.2rem 2rem; }
+  .section { padding: 3rem 1.2rem; }
+  .container { padding: 0 1.2rem; }
+  .book-promo { flex-direction: column; }
+  footer { flex-direction: column; align-items: flex-start; }
+}
+
+.ref-nav {
+  background:var(--navy-3);border-bottom:1px solid var(--border);
+  padding:1.2rem 2.5rem;display:flex;gap:.8rem;flex-wrap:wrap;
+}
+.ref-nav-btn {
+  font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  background:none;border:1px solid var(--border);border-radius:3px;
+  padding:.35rem 1rem;cursor:pointer;transition:all .18s;
+}
+.ref-nav-btn.active,.ref-nav-btn:hover{color:var(--navy);background:var(--gold);border-color:var(--gold);}
+.ref-section{display:none;}
+.ref-section.active{display:block;}
+.ref-content{max-width:1200px;margin:0 auto;padding:3.5rem 2.5rem;}
+.table-wrap{overflow-x:auto;margin-bottom:3rem;}
+.table-title{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.4rem;text-transform:uppercase;color:var(--white);margin-bottom:.4rem;}
+.table-desc{font-size:.85rem;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;}
+.note{font-size:.78rem;color:var(--dim);margin-top:.8rem;font-style:italic;}
+.col-highlight{color:var(--gold-lt)!important;font-weight:600;}
+.sub-title{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;text-transform:uppercase;color:var(--gold);margin:2.5rem 0 .8rem;border-bottom:1px solid var(--border);padding-bottom:.5rem;}
+</style>
+</head>
+<body>
+<div class="deco-wrap"><img class="sk-l" src="../assets/sk-c.svg" alt=""><img class="sk-r" src="../assets/sk-f.svg" alt=""></div>
+<nav>
+  <a class="nav-logo" href="../index.html"><span>PIPING</span>PASSION</a>
+  <ul class="nav-links">
+    <li><a href="field-tips.html">Field Tips</a></li>
+    <li><a href="field-stories.html">Field Stories</a></li>
+    <li><a href="brownfield.html">Brownfield</a></li>
+    <li><a href="scan-to-model.html">Scan-to-Model</a></li>
+    <li><a href="codes-standards.html">Codes</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="career.html">Career</a></li>
+    <li><a href="reference.html">Reference</a></li>
+    <li><a href="books.html">Books</a></li>
+    <li><a class="nav-cta" href="contact.html">Contact</a></li>
+  </ul>
+<button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">ASME &middot; API &middot; MSS &middot; ASTM</p>
+    <h1 class="page-title">Technical <span>Reference</span></h1>
+    <p class="page-desc">The data you actually need on the job. Pipe schedules, flange ratings, fitting dimensions, bolt lengths, conversion tables &mdash; sourced from ASME B36.10, B16.5, B16.9, B16.11 and MSS SP-58.</p>
+  </div>
+</div>
+
+<div class="ref-nav">
+  <button class="ref-nav-btn active" data-tab="schedules">Pipe Schedules</button>
+  <button class="ref-nav-btn" data-tab="flanges">Flange Ratings</button>
+  <button class="ref-nav-btn" data-tab="bw">Butt-Weld Fittings</button>
+  <button class="ref-nav-btn" data-tab="sw">Socket-Weld Fittings</button>
+  <button class="ref-nav-btn" data-tab="bolts">Bolt Lengths</button>
+  <button class="ref-nav-btn" data-tab="weight">Pipe Weight</button>
+  <button class="ref-nav-btn" data-tab="convert">Conversions</button>
+  <button class="ref-nav-btn" data-tab="insulation">Insulation</button>
+</div>
+
+<div class="ref-content reveal">
+
+  <!-- PIPE SCHEDULES -->
+  <div class="ref-section active" id="tab-schedules">
+    <h2 class="table-title">Pipe Schedules &mdash; ASME B36.10M (Carbon Steel)</h2>
+    <p class="table-desc">Outside diameter (OD) and wall thickness (mm) for common NPS sizes. OD is fixed per NPS &mdash; schedule determines wall thickness and therefore internal diameter.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>OD (mm)</th><th>Sch 10</th><th>Sch 20</th><th>Sch 40 WT</th><th>Sch 40 ID</th><th>Sch 80 WT</th><th>Sch 80 ID</th><th>Sch 120</th><th>Sch 160 WT</th><th>Sch 160 ID</th><th>STD</th><th>XS</th><th>XXS</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">&frac12;&rdquo;</td><td>21.3</td><td>1.65</td><td>&mdash;</td><td>2.77</td><td>15.80</td><td>3.73</td><td>13.84</td><td>&mdash;</td><td>4.78</td><td>11.74</td><td>2.77</td><td>3.73</td><td>7.47</td></tr>
+          <tr><td class="col-name">&frac34;&rdquo;</td><td>26.7</td><td>1.65</td><td>&mdash;</td><td>2.87</td><td>20.93</td><td>3.91</td><td>18.85</td><td>&mdash;</td><td>5.56</td><td>15.58</td><td>2.87</td><td>3.91</td><td>7.82</td></tr>
+          <tr><td class="col-name">1&rdquo;</td><td>33.4</td><td>1.65</td><td>&mdash;</td><td>3.38</td><td>26.64</td><td>4.55</td><td>24.31</td><td>&mdash;</td><td>6.35</td><td>20.70</td><td>3.38</td><td>4.55</td><td>9.09</td></tr>
+          <tr><td class="col-name">1&frac14;&rdquo;</td><td>42.2</td><td>1.65</td><td>&mdash;</td><td>3.56</td><td>35.05</td><td>4.85</td><td>32.46</td><td>&mdash;</td><td>6.35</td><td>29.46</td><td>3.56</td><td>4.85</td><td>9.70</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;</td><td>48.3</td><td>1.65</td><td>&mdash;</td><td>3.68</td><td>40.89</td><td>5.08</td><td>38.10</td><td>&mdash;</td><td>7.14</td><td>34.02</td><td>3.68</td><td>5.08</td><td>10.15</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>60.3</td><td>1.65</td><td>&mdash;</td><td>3.91</td><td>52.50</td><td>5.54</td><td>49.22</td><td>&mdash;</td><td>8.74</td><td>42.82</td><td>3.91</td><td>5.54</td><td>11.07</td></tr>
+          <tr><td class="col-name">2&frac12;&rdquo;</td><td>73.0</td><td>2.11</td><td>&mdash;</td><td>5.16</td><td>62.71</td><td>7.01</td><td>59.00</td><td>&mdash;</td><td>9.53</td><td>54.00</td><td>5.16</td><td>7.01</td><td>14.02</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>88.9</td><td>2.11</td><td>&mdash;</td><td>5.49</td><td>77.93</td><td>7.62</td><td>73.66</td><td>&mdash;</td><td>11.13</td><td>66.65</td><td>5.49</td><td>7.62</td><td>15.24</td></tr>
+          <tr><td class="col-name">3&frac12;&rdquo;</td><td>101.6</td><td>2.11</td><td>&mdash;</td><td>5.74</td><td>90.12</td><td>8.08</td><td>85.44</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>5.74</td><td>8.08</td><td>&mdash;</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>114.3</td><td>2.11</td><td>&mdash;</td><td>6.02</td><td>102.26</td><td>8.56</td><td>97.18</td><td>11.13</td><td>13.49</td><td>87.32</td><td>6.02</td><td>8.56</td><td>17.12</td></tr>
+          <tr><td class="col-name">5&rdquo;</td><td>141.3</td><td>2.77</td><td>&mdash;</td><td>6.55</td><td>128.19</td><td>9.53</td><td>122.25</td><td>12.70</td><td>15.88</td><td>109.54</td><td>6.55</td><td>9.53</td><td>19.05</td></tr>
+          <tr><td class="col-name col-highlight">6&rdquo;</td><td>168.3</td><td>2.77</td><td>&mdash;</td><td>7.11</td><td>154.08</td><td>10.97</td><td>146.36</td><td>14.27</td><td>18.26</td><td>131.78</td><td>7.11</td><td>10.97</td><td>21.95</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>219.1</td><td>2.77</td><td>6.35</td><td>8.18</td><td>202.74</td><td>12.70</td><td>193.68</td><td>18.26</td><td>23.01</td><td>173.08</td><td>8.18</td><td>12.70</td><td>22.23</td></tr>
+          <tr><td class="col-name col-highlight">10&rdquo;</td><td>273.1</td><td>3.40</td><td>6.35</td><td>9.27</td><td>254.51</td><td>12.70</td><td>247.65</td><td>21.44</td><td>28.58</td><td>215.90</td><td>9.27</td><td>12.70</td><td>&mdash;</td></tr>
+          <tr><td class="col-name col-highlight">12&rdquo;</td><td>323.9</td><td>3.96</td><td>6.35</td><td>9.53</td><td>304.80</td><td>12.70</td><td>298.45</td><td>25.40</td><td>33.32</td><td>257.25</td><td>9.53</td><td>12.70</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">14&rdquo;</td><td>355.6</td><td>3.96</td><td>6.35</td><td>9.53</td><td>336.55</td><td>12.70</td><td>330.20</td><td>27.79</td><td>&mdash;</td><td>&mdash;</td><td>9.53</td><td>12.70</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">16&rdquo;</td><td>406.4</td><td>4.19</td><td>6.35</td><td>9.53</td><td>387.35</td><td>12.70</td><td>380.97</td><td>30.96</td><td>&mdash;</td><td>&mdash;</td><td>9.53</td><td>12.70</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">18&rdquo;</td><td>457.2</td><td>4.19</td><td>6.35</td><td>9.53</td><td>438.15</td><td>12.70</td><td>431.80</td><td>34.93</td><td>&mdash;</td><td>&mdash;</td><td>9.53</td><td>12.70</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">20&rdquo;</td><td>508.0</td><td>4.78</td><td>6.35</td><td>9.53</td><td>488.95</td><td>12.70</td><td>482.60</td><td>38.10</td><td>&mdash;</td><td>&mdash;</td><td>9.53</td><td>12.70</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">24&rdquo;</td><td>609.6</td><td>5.54</td><td>6.35</td><td>9.53</td><td>590.55</td><td>12.70</td><td>584.20</td><td>46.02</td><td>&mdash;</td><td>&mdash;</td><td>9.53</td><td>12.70</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">30&rdquo;</td><td>762.0</td><td>6.35</td><td>7.92</td><td>9.53</td><td>742.95</td><td>12.70</td><td>736.60</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>9.53</td><td>12.70</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">36&rdquo;</td><td>914.4</td><td>6.35</td><td>7.92</td><td>9.53</td><td>895.35</td><td>12.70</td><td>889.00</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>9.53</td><td>12.70</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: ASME B36.10M. WT = Wall Thickness (mm), ID = Internal Diameter (mm). Highlighted rows most commonly specified in process piping. For stainless steel schedules (10S, 40S, 80S), refer to ASME B36.19M.</p>
+
+    <h3 class="sub-title">ASME B36.19M &mdash; Stainless Steel Pipe</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>OD (mm)</th><th>Sch 5S WT</th><th>Sch 5S ID</th><th>Sch 10S WT</th><th>Sch 10S ID</th><th>Sch 40S WT</th><th>Sch 40S ID</th><th>Sch 80S WT</th><th>Sch 80S ID</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">&frac12;&rdquo;</td><td>21.3</td><td>1.65</td><td>18.00</td><td>2.11</td><td>17.12</td><td>2.77</td><td>15.80</td><td>3.73</td><td>13.84</td></tr>
+          <tr><td class="col-name">1&rdquo;</td><td>33.4</td><td>1.65</td><td>30.10</td><td>2.77</td><td>27.86</td><td>3.38</td><td>26.64</td><td>4.55</td><td>24.31</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>60.3</td><td>1.65</td><td>57.00</td><td>2.77</td><td>54.79</td><td>3.91</td><td>52.50</td><td>5.54</td><td>49.22</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>88.9</td><td>2.11</td><td>84.68</td><td>3.05</td><td>82.80</td><td>5.49</td><td>77.93</td><td>7.62</td><td>73.66</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>114.3</td><td>2.11</td><td>110.08</td><td>3.05</td><td>108.20</td><td>6.02</td><td>102.26</td><td>8.56</td><td>97.18</td></tr>
+          <tr><td class="col-name col-highlight">6&rdquo;</td><td>168.3</td><td>2.77</td><td>162.76</td><td>3.40</td><td>161.50</td><td>7.11</td><td>154.08</td><td>10.97</td><td>146.36</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>219.1</td><td>2.77</td><td>213.56</td><td>3.76</td><td>211.58</td><td>8.18</td><td>202.74</td><td>12.70</td><td>193.68</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>273.1</td><td>3.40</td><td>266.30</td><td>4.19</td><td>264.72</td><td>9.27</td><td>254.51</td><td>12.70</td><td>247.65</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>323.9</td><td>3.96</td><td>315.98</td><td>4.57</td><td>314.76</td><td>9.53</td><td>304.80</td><td>12.70</td><td>298.45</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: ASME B36.19M. 10S is the most common stainless schedule in process piping. 5S is thin-wall &mdash; verify minimum wall for pressure service before specifying.</p>
+  </div>
+
+  <!-- FLANGE RATINGS -->
+  <div class="ref-section" id="tab-flanges">
+    <h2 class="table-title">Flange P-T Ratings &mdash; ASME B16.5</h2>
+    <p class="table-desc">Maximum allowable working pressure (bar g) for raised-face flanges. Values vary by material group &mdash; Group 1.1 (A105, A181, A350 LF2) and Group 2.1 (A182 F316, F304) shown.</p>
+    
+    <h3 class="sub-title">Group 1.1 &mdash; Carbon Steel (A105, A350 LF2)</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Class</th><th>&minus;29 to 50&deg;C</th><th>100&deg;C</th><th>150&deg;C</th><th>200&deg;C</th><th>250&deg;C</th><th>300&deg;C</th><th>350&deg;C</th><th>400&deg;C</th><th>425&deg;C</th><th>450&deg;C</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">150</td><td>19.6</td><td>17.7</td><td>15.8</td><td>13.8</td><td>12.1</td><td>10.2</td><td>8.4</td><td>6.6</td><td>5.7</td><td>4.8</td></tr>
+          <tr><td class="col-name col-highlight">300</td><td>51.1</td><td>46.6</td><td>45.1</td><td>43.8</td><td>41.9</td><td>39.8</td><td>37.4</td><td>33.9</td><td>31.6</td><td>29.6</td></tr>
+          <tr><td class="col-name col-highlight">600</td><td>102.1</td><td>93.2</td><td>90.2</td><td>87.6</td><td>83.9</td><td>79.6</td><td>74.7</td><td>67.8</td><td>63.2</td><td>59.2</td></tr>
+          <tr><td class="col-name col-highlight">900</td><td>153.2</td><td>139.8</td><td>135.3</td><td>131.4</td><td>125.8</td><td>119.3</td><td>112.1</td><td>101.7</td><td>94.8</td><td>88.8</td></tr>
+          <tr><td class="col-name">1500</td><td>255.3</td><td>233.0</td><td>225.4</td><td>219.0</td><td>209.7</td><td>198.9</td><td>186.8</td><td>169.5</td><td>158.0</td><td>148.0</td></tr>
+          <tr><td class="col-name">2500</td><td>425.5</td><td>388.3</td><td>375.7</td><td>365.0</td><td>349.5</td><td>331.4</td><td>311.3</td><td>282.5</td><td>263.4</td><td>246.7</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-title">Group 2.1 &mdash; Austenitic Stainless (A182 F316, F304)</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>Class</th><th>&minus;29 to 50&deg;C</th><th>100&deg;C</th><th>150&deg;C</th><th>200&deg;C</th><th>250&deg;C</th><th>300&deg;C</th><th>350&deg;C</th><th>400&deg;C</th><th>450&deg;C</th><th>500&deg;C</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">150</td><td>19.8</td><td>17.3</td><td>15.9</td><td>14.9</td><td>14.1</td><td>13.5</td><td>13.0</td><td>12.6</td><td>12.2</td><td>11.7</td></tr>
+          <tr><td class="col-name col-highlight">300</td><td>51.7</td><td>45.1</td><td>41.4</td><td>38.8</td><td>36.8</td><td>35.3</td><td>33.9</td><td>32.9</td><td>31.8</td><td>30.6</td></tr>
+          <tr><td class="col-name col-highlight">600</td><td>103.4</td><td>90.2</td><td>82.7</td><td>77.6</td><td>73.6</td><td>70.5</td><td>67.8</td><td>65.8</td><td>63.6</td><td>61.2</td></tr>
+          <tr><td class="col-name">900</td><td>155.1</td><td>135.3</td><td>124.1</td><td>116.4</td><td>110.4</td><td>105.8</td><td>101.7</td><td>98.7</td><td>95.4</td><td>91.8</td></tr>
+          <tr><td class="col-name">1500</td><td>258.6</td><td>225.5</td><td>206.8</td><td>194.0</td><td>184.0</td><td>176.3</td><td>169.5</td><td>164.5</td><td>159.0</td><td>153.0</td></tr>
+          <tr><td class="col-name">2500</td><td>430.9</td><td>375.7</td><td>344.7</td><td>323.3</td><td>306.7</td><td>293.8</td><td>282.5</td><td>274.1</td><td>265.0</td><td>255.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: ASME B16.5-2017, Tables 2-1.1 and 2-3.1. Values in bar(g). For RTJ flanges, ratings are identical to RF. For full-face flanges mated with flat-face flanges, consult the standard for restrictions.</p>
+  </div>
+
+  <!-- BUTT-WELD FITTINGS -->
+  <div class="ref-section" id="tab-bw">
+    <h2 class="table-title">Butt-Weld Fittings &mdash; ASME B16.9</h2>
+    <p class="table-desc">Centre-to-face (C-F) and end-to-end dimensions (mm). LR = Long Radius (1.5D), SR = Short Radius (1.0D). Always default to LR elbows unless specifically required otherwise.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>OD (mm)</th><th>90&deg; LR A</th><th>90&deg; SR B</th><th>45&deg; LR C</th><th>180&deg; LR U</th><th>Equal Tee M</th><th>Conc Red E-E</th><th>Ecc Red E-E</th><th>Cap E</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">&frac12;&rdquo;</td><td>21.3</td><td>38</td><td>25</td><td>16</td><td>51</td><td>25</td><td>38</td><td>38</td><td>25</td></tr>
+          <tr><td class="col-name">&frac34;&rdquo;</td><td>26.7</td><td>48</td><td>32</td><td>19</td><td>64</td><td>29</td><td>38</td><td>38</td><td>25</td></tr>
+          <tr><td class="col-name">1&rdquo;</td><td>33.4</td><td>57</td><td>38</td><td>25</td><td>76</td><td>38</td><td>51</td><td>51</td><td>25</td></tr>
+          <tr><td class="col-name">1&frac14;&rdquo;</td><td>42.2</td><td>64</td><td>48</td><td>29</td><td>95</td><td>48</td><td>51</td><td>51</td><td>25</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;</td><td>48.3</td><td>76</td><td>51</td><td>32</td><td>114</td><td>48</td><td>64</td><td>64</td><td>38</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>60.3</td><td>91</td><td>64</td><td>38</td><td>152</td><td>57</td><td>76</td><td>76</td><td>38</td></tr>
+          <tr><td class="col-name">2&frac12;&rdquo;</td><td>73.0</td><td>114</td><td>76</td><td>48</td><td>178</td><td>64</td><td>89</td><td>89</td><td>38</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>88.9</td><td>114</td><td>76</td><td>48</td><td>229</td><td>76</td><td>89</td><td>89</td><td>51</td></tr>
+          <tr><td class="col-name">3&frac12;&rdquo;</td><td>101.6</td><td>133</td><td>89</td><td>57</td><td>267</td><td>86</td><td>102</td><td>102</td><td>64</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>114.3</td><td>152</td><td>102</td><td>64</td><td>305</td><td>95</td><td>102</td><td>102</td><td>64</td></tr>
+          <tr><td class="col-name">5&rdquo;</td><td>141.3</td><td>190</td><td>127</td><td>79</td><td>381</td><td>114</td><td>127</td><td>127</td><td>76</td></tr>
+          <tr><td class="col-name col-highlight">6&rdquo;</td><td>168.3</td><td>229</td><td>152</td><td>95</td><td>457</td><td>143</td><td>140</td><td>140</td><td>76</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>219.1</td><td>305</td><td>203</td><td>127</td><td>610</td><td>178</td><td>178</td><td>178</td><td>89</td></tr>
+          <tr><td class="col-name col-highlight">10&rdquo;</td><td>273.1</td><td>381</td><td>254</td><td>159</td><td>762</td><td>216</td><td>216</td><td>216</td><td>102</td></tr>
+          <tr><td class="col-name col-highlight">12&rdquo;</td><td>323.9</td><td>457</td><td>305</td><td>190</td><td>914</td><td>254</td><td>254</td><td>254</td><td>114</td></tr>
+          <tr><td class="col-name">14&rdquo;</td><td>355.6</td><td>533</td><td>356</td><td>222</td><td>1067</td><td>279</td><td>279</td><td>279</td><td>127</td></tr>
+          <tr><td class="col-name">16&rdquo;</td><td>406.4</td><td>610</td><td>406</td><td>254</td><td>1219</td><td>330</td><td>305</td><td>305</td><td>140</td></tr>
+          <tr><td class="col-name">18&rdquo;</td><td>457.2</td><td>686</td><td>457</td><td>286</td><td>1372</td><td>356</td><td>356</td><td>356</td><td>152</td></tr>
+          <tr><td class="col-name">20&rdquo;</td><td>508.0</td><td>762</td><td>508</td><td>318</td><td>1524</td><td>406</td><td>381</td><td>381</td><td>165</td></tr>
+          <tr><td class="col-name">24&rdquo;</td><td>609.6</td><td>914</td><td>610</td><td>381</td><td>1829</td><td>508</td><td>457</td><td>457</td><td>203</td></tr>
+          <tr><td class="col-name">30&rdquo;</td><td>762.0</td><td>1143</td><td>762</td><td>476</td><td>&mdash;</td><td>610</td><td>533</td><td>533</td><td>254</td></tr>
+          <tr><td class="col-name">36&rdquo;</td><td>914.4</td><td>1372</td><td>914</td><td>572</td><td>&mdash;</td><td>762</td><td>610</td><td>610</td><td>305</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: ASME B16.9-2018. All dimensions in mm. A = 90&deg; LR elbow C-F, B = 90&deg; SR elbow C-F, C = 45&deg; elbow C-F, U = 180&deg; return C-C, M = equal tee C-F, E-E = end-to-end (reducers and caps).</p>
+  </div>
+
+  <!-- SOCKET-WELD FITTINGS -->
+  <div class="ref-section" id="tab-sw">
+    <h2 class="table-title">Socket-Weld &amp; Threaded Fittings &mdash; ASME B16.11</h2>
+    <p class="table-desc">Centre-to-face (C-F) and end-to-end (E-E) dimensions (mm) for Class 3000 and Class 6000. Socket-weld fittings are limited to NPS 4 maximum per B16.11.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>90&deg; Elbow C-F (3000)</th><th>90&deg; Elbow C-F (6000)</th><th>45&deg; Elbow C-F (3000)</th><th>45&deg; Elbow C-F (6000)</th><th>Tee C-F (3000)</th><th>Tee C-F (6000)</th><th>Coupling E-E (3000)</th><th>Half Cplg E-E</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">&frac14;&rdquo;</td><td>21</td><td>24</td><td>14</td><td>16</td><td>21</td><td>24</td><td>32</td><td>19</td></tr>
+          <tr><td class="col-name">&frac38;&rdquo;</td><td>21</td><td>24</td><td>14</td><td>16</td><td>21</td><td>24</td><td>35</td><td>19</td></tr>
+          <tr><td class="col-name">&frac12;&rdquo;</td><td>25</td><td>29</td><td>17</td><td>19</td><td>25</td><td>29</td><td>38</td><td>22</td></tr>
+          <tr><td class="col-name">&frac34;&rdquo;</td><td>29</td><td>32</td><td>19</td><td>22</td><td>29</td><td>32</td><td>44</td><td>25</td></tr>
+          <tr><td class="col-name col-highlight">1&rdquo;</td><td>35</td><td>38</td><td>22</td><td>25</td><td>35</td><td>38</td><td>51</td><td>29</td></tr>
+          <tr><td class="col-name">1&frac14;&rdquo;</td><td>41</td><td>44</td><td>25</td><td>29</td><td>41</td><td>44</td><td>57</td><td>32</td></tr>
+          <tr><td class="col-name col-highlight">1&frac12;&rdquo;</td><td>44</td><td>51</td><td>29</td><td>32</td><td>44</td><td>51</td><td>64</td><td>35</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>51</td><td>57</td><td>32</td><td>38</td><td>51</td><td>57</td><td>76</td><td>41</td></tr>
+          <tr><td class="col-name">2&frac12;&rdquo;</td><td>57</td><td>67</td><td>38</td><td>44</td><td>57</td><td>67</td><td>86</td><td>44</td></tr>
+          <tr><td class="col-name">3&rdquo;</td><td>64</td><td>76</td><td>44</td><td>51</td><td>64</td><td>76</td><td>95</td><td>51</td></tr>
+          <tr><td class="col-name">4&rdquo;</td><td>76</td><td>95</td><td>51</td><td>64</td><td>76</td><td>95</td><td>114</td><td>64</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: ASME B16.11-2021. C-F = Centre-to-Face (mm). E-E = End-to-End (mm). Class 3000 SW = approx. Sch 80 bore. Class 6000 SW = approx. Sch 160 bore. Threaded fittings same dimensions, Class 2000/3000/6000.</p>
+  </div>
+
+  <!-- BOLT LENGTHS -->
+  <div class="ref-section" id="tab-bolts">
+    <h2 class="table-title">Stud Bolt Lengths &mdash; ASME B16.5 Raised Face</h2>
+    <p class="table-desc">Stud bolt lengths (mm) including two heavy hex nuts for raised-face flanges. Bolt diameter (&Oslash;) shown per class/size. Add ~3mm for RTJ flanges.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th># Bolts</th><th>Cl 150 L</th><th>&Oslash;</th><th>Cl 300 L</th><th>&Oslash;</th><th>Cl 600 L</th><th>&Oslash;</th><th>Cl 900 L</th><th>&Oslash;</th><th>Cl 1500 L</th><th>&Oslash;</th><th>Cl 2500 L</th><th>&Oslash;</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">&frac12;&rdquo;</td><td>4</td><td>76</td><td>&frac38;&rdquo;</td><td>76</td><td>&frac38;&rdquo;</td><td>102</td><td>&frac12;&rdquo;</td><td>121</td><td>&#x5B8;&rdquo;</td><td>152</td><td>&frac34;&rdquo;</td><td>178</td><td>&#x7B8;&rdquo;</td></tr>
+          <tr><td class="col-name">&frac34;&rdquo;</td><td>4</td><td>76</td><td>&frac38;&rdquo;</td><td>89</td><td>&frac12;&rdquo;</td><td>114</td><td>&#x5B8;&rdquo;</td><td>140</td><td>&frac34;&rdquo;</td><td>178</td><td>&#x7B8;&rdquo;</td><td>216</td><td>1&rdquo;</td></tr>
+          <tr><td class="col-name">1&rdquo;</td><td>4</td><td>89</td><td>&frac12;&rdquo;</td><td>102</td><td>&frac12;&rdquo;</td><td>121</td><td>&#x5B8;&rdquo;</td><td>152</td><td>&frac34;&rdquo;</td><td>178</td><td>&#x7B8;&rdquo;</td><td>229</td><td>1&rdquo;</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;</td><td>4</td><td>102</td><td>&frac12;&rdquo;</td><td>127</td><td>&#x5B8;&rdquo;</td><td>165</td><td>&frac34;&rdquo;</td><td>203</td><td>&#x7B8;&rdquo;</td><td>254</td><td>1&rdquo;</td><td>330</td><td>1&frac14;&rdquo;</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>4</td><td>114</td><td>&#x5B8;&rdquo;</td><td>140</td><td>&#x5B8;&rdquo;</td><td>178</td><td>&frac34;&rdquo;</td><td>203</td><td>&#x7B8;&rdquo;</td><td>254</td><td>1&rdquo;</td><td>368</td><td>1&frac14;&rdquo;</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>4</td><td>127</td><td>&#x5B8;&rdquo;</td><td>152</td><td>&frac34;&rdquo;</td><td>203</td><td>&#x7B8;&rdquo;</td><td>241</td><td>1&rdquo;</td><td>305</td><td>1&frac14;&rdquo;</td><td>445</td><td>1&frac12;&rdquo;</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>8</td><td>140</td><td>&#x5B8;&rdquo;</td><td>178</td><td>&frac34;&rdquo;</td><td>229</td><td>1&rdquo;</td><td>279</td><td>1&#x1B8;&rdquo;</td><td>368</td><td>1&frac14;&rdquo;</td><td>521</td><td>1&frac34;&rdquo;</td></tr>
+          <tr><td class="col-name col-highlight">6&rdquo;</td><td>8</td><td>152</td><td>&frac34;&rdquo;</td><td>191</td><td>&frac34;&rdquo;</td><td>267</td><td>1&#x1B8;&rdquo;</td><td>330</td><td>1&frac14;&rdquo;</td><td>445</td><td>1&frac12;&rdquo;</td><td>635</td><td>2&rdquo;</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>8</td><td>165</td><td>&frac34;&rdquo;</td><td>216</td><td>&frac34;&rdquo;</td><td>305</td><td>1&#x1B8;&rdquo;</td><td>394</td><td>1&#x3B8;&rdquo;</td><td>533</td><td>1&frac34;&rdquo;</td><td>749</td><td>2&frac14;&rdquo;</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>12</td><td>178</td><td>&#x7B8;&rdquo;</td><td>229</td><td>1&rdquo;</td><td>343</td><td>1&frac14;&rdquo;</td><td>457</td><td>1&#x5B8;&rdquo;</td><td>622</td><td>2&rdquo;</td><td>876</td><td>2&frac12;&rdquo;</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>12</td><td>191</td><td>&#x7B8;&rdquo;</td><td>254</td><td>1&rdquo;</td><td>381</td><td>1&frac14;&rdquo;</td><td>521</td><td>1&frac34;&rdquo;</td><td>698</td><td>2&frac14;&rdquo;</td><td>991</td><td>2&frac34;&rdquo;</td></tr>
+          <tr><td class="col-name">14&rdquo;</td><td>12</td><td>203</td><td>1&rdquo;</td><td>267</td><td>1&#x1B8;&rdquo;</td><td>419</td><td>1&#x3B8;&rdquo;</td><td>559</td><td>1&frac34;&rdquo;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">16&rdquo;</td><td>16</td><td>216</td><td>1&rdquo;</td><td>279</td><td>1&#x1B8;&rdquo;</td><td>457</td><td>1&frac12;&rdquo;</td><td>610</td><td>2&rdquo;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">18&rdquo;</td><td>16</td><td>229</td><td>1&#x1B8;&rdquo;</td><td>305</td><td>1&frac14;&rdquo;</td><td>495</td><td>1&frac12;&rdquo;</td><td>660</td><td>2&frac14;&rdquo;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">20&rdquo;</td><td>20</td><td>241</td><td>1&#x1B8;&rdquo;</td><td>330</td><td>1&frac14;&rdquo;</td><td>533</td><td>1&frac34;&rdquo;</td><td>711</td><td>2&frac14;&rdquo;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+          <tr><td class="col-name">24&rdquo;</td><td>20</td><td>267</td><td>1&frac14;&rdquo;</td><td>381</td><td>1&frac12;&rdquo;</td><td>610</td><td>2&rdquo;</td><td>813</td><td>2&frac34;&rdquo;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Source: ASME B16.5-2017, Appendix E. L = stud bolt length (mm) including 2 heavy hex nuts. &Oslash; = nominal bolt diameter. Add ~3mm for RTJ flanges. Class 1500 and 2500 not available for NPS 14 and above in B16.5 &mdash; refer to ASME B16.47 for large diameter flanges.</p>
+  </div>
+
+  <!-- PIPE WEIGHT -->
+  <div class="ref-section" id="tab-weight">
+    <h2 class="table-title">Pipe Weight &mdash; Carbon Steel (kg/m)</h2>
+    <p class="table-desc">Weight per metre for carbon steel pipe (density 7850 kg/m&sup3;). Useful for support design, hydrotest calculations, and structural loading. Water weight shown separately for hydrotest.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>OD (mm)</th><th>Sch 40 (kg/m)</th><th>Sch 80 (kg/m)</th><th>Sch 160 (kg/m)</th><th>Water (kg/m) Sch 40</th><th>Total Hydrotest Sch 40</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">1&rdquo;</td><td>33.4</td><td>2.50</td><td>3.24</td><td>4.24</td><td>0.56</td><td>3.06</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;</td><td>48.3</td><td>4.05</td><td>5.41</td><td>7.25</td><td>1.31</td><td>5.36</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>60.3</td><td>5.44</td><td>7.48</td><td>11.11</td><td>2.16</td><td>7.60</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>88.9</td><td>11.29</td><td>15.27</td><td>21.35</td><td>4.77</td><td>16.06</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>114.3</td><td>16.07</td><td>22.32</td><td>33.54</td><td>8.21</td><td>24.28</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>168.3</td><td>28.26</td><td>42.56</td><td>68.62</td><td>18.64</td><td>46.90</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>219.1</td><td>42.55</td><td>63.08</td><td>102.18</td><td>32.28</td><td>74.83</td></tr>
+          <tr><td class="col-name col-highlight">10&rdquo;</td><td>273.1</td><td>60.31</td><td>82.17</td><td>169.43</td><td>50.86</td><td>111.17</td></tr>
+          <tr><td class="col-name col-highlight">12&rdquo;</td><td>323.9</td><td>73.14</td><td>97.46</td><td>227.09</td><td>73.05</td><td>146.19</td></tr>
+          <tr><td class="col-name">14&rdquo;</td><td>355.6</td><td>80.13</td><td>106.69</td><td>&mdash;</td><td>88.75</td><td>168.88</td></tr>
+          <tr><td class="col-name">16&rdquo;</td><td>406.4</td><td>92.27</td><td>122.97</td><td>&mdash;</td><td>117.96</td><td>210.23</td></tr>
+          <tr><td class="col-name">18&rdquo;</td><td>457.2</td><td>104.40</td><td>139.17</td><td>&mdash;</td><td>149.76</td><td>254.16</td></tr>
+          <tr><td class="col-name">20&rdquo;</td><td>508.0</td><td>116.10</td><td>154.85</td><td>&mdash;</td><td>185.12</td><td>301.22</td></tr>
+          <tr><td class="col-name">24&rdquo;</td><td>609.6</td><td>139.87</td><td>186.85</td><td>&mdash;</td><td>266.65</td><td>406.52</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Steel density 7850 kg/m&sup3;. Water density 1000 kg/m&sup3;. Total hydrotest = pipe weight + water weight. For insulated lines, add insulation weight (typically 5&ndash;15 kg/m depending on thickness and material). Always verify with your stress engineer&rsquo;s model.</p>
+  </div>
+
+  <!-- CONVERSIONS -->
+  <div class="ref-section" id="tab-convert">
+    <h2 class="table-title">Conversion Tables</h2>
+    <p class="table-desc">Common unit conversions for piping design. Pressure, temperature, length, force and flow.</p>
+
+    <h3 class="sub-title">NPS to Metric (mm)</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>DN (mm)</th><th>OD (mm)</th><th>NPS</th><th>DN (mm)</th><th>OD (mm)</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">&frac12;&rdquo;</td><td>DN 15</td><td>21.3</td><td class="col-name col-highlight">6&rdquo;</td><td>DN 150</td><td>168.3</td></tr>
+          <tr><td class="col-name">&frac34;&rdquo;</td><td>DN 20</td><td>26.7</td><td class="col-name">8&rdquo;</td><td>DN 200</td><td>219.1</td></tr>
+          <tr><td class="col-name">1&rdquo;</td><td>DN 25</td><td>33.4</td><td class="col-name col-highlight">10&rdquo;</td><td>DN 250</td><td>273.1</td></tr>
+          <tr><td class="col-name">1&frac14;&rdquo;</td><td>DN 32</td><td>42.2</td><td class="col-name col-highlight">12&rdquo;</td><td>DN 300</td><td>323.9</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;</td><td>DN 40</td><td>48.3</td><td class="col-name">14&rdquo;</td><td>DN 350</td><td>355.6</td></tr>
+          <tr><td class="col-name col-highlight">2&rdquo;</td><td>DN 50</td><td>60.3</td><td class="col-name">16&rdquo;</td><td>DN 400</td><td>406.4</td></tr>
+          <tr><td class="col-name">2&frac12;&rdquo;</td><td>DN 65</td><td>73.0</td><td class="col-name">18&rdquo;</td><td>DN 450</td><td>457.2</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;</td><td>DN 80</td><td>88.9</td><td class="col-name">20&rdquo;</td><td>DN 500</td><td>508.0</td></tr>
+          <tr><td class="col-name">3&frac12;&rdquo;</td><td>DN 90</td><td>101.6</td><td class="col-name">24&rdquo;</td><td>DN 600</td><td>609.6</td></tr>
+          <tr><td class="col-name col-highlight">4&rdquo;</td><td>DN 100</td><td>114.3</td><td class="col-name">30&rdquo;</td><td>DN 750</td><td>762.0</td></tr>
+          <tr><td class="col-name">5&rdquo;</td><td>DN 125</td><td>141.3</td><td class="col-name">36&rdquo;</td><td>DN 900</td><td>914.4</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-title">Pressure Conversions</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>bar(g)</th><th>psi(g)</th><th>kPa(g)</th><th>MPa(g)</th><th>bar(g)</th><th>psi(g)</th><th>kPa(g)</th><th>MPa(g)</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">1</td><td>14.50</td><td>100</td><td>0.100</td><td class="col-name col-highlight">25</td><td>362.6</td><td>2500</td><td>2.500</td></tr>
+          <tr><td class="col-name">2</td><td>29.01</td><td>200</td><td>0.200</td><td class="col-name col-highlight">50</td><td>725.2</td><td>5000</td><td>5.000</td></tr>
+          <tr><td class="col-name">5</td><td>72.52</td><td>500</td><td>0.500</td><td class="col-name">75</td><td>1087.8</td><td>7500</td><td>7.500</td></tr>
+          <tr><td class="col-name">10</td><td>145.0</td><td>1000</td><td>1.000</td><td class="col-name">100</td><td>1450.4</td><td>10000</td><td>10.000</td></tr>
+          <tr><td class="col-name col-highlight">15</td><td>217.6</td><td>1500</td><td>1.500</td><td class="col-name">150</td><td>2175.6</td><td>15000</td><td>15.000</td></tr>
+          <tr><td class="col-name col-highlight">20</td><td>290.1</td><td>2000</td><td>2.000</td><td class="col-name">250</td><td>3625.9</td><td>25000</td><td>25.000</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub-title">Temperature Conversions (&deg;C &harr; &deg;F)</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>&deg;C</th><th>&deg;F</th><th>&deg;C</th><th>&deg;F</th><th>&deg;C</th><th>&deg;F</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">&minus;196</td><td>&minus;320.8</td><td class="col-name col-highlight">100</td><td>212.0</td><td class="col-name">400</td><td>752.0</td></tr>
+          <tr><td class="col-name">&minus;50</td><td>&minus;58.0</td><td class="col-name">150</td><td>302.0</td><td class="col-name">450</td><td>842.0</td></tr>
+          <tr><td class="col-name">&minus;29</td><td>&minus;20.2</td><td class="col-name col-highlight">200</td><td>392.0</td><td class="col-name">500</td><td>932.0</td></tr>
+          <tr><td class="col-name">0</td><td>32.0</td><td class="col-name">250</td><td>482.0</td><td class="col-name">538</td><td>1000.4</td></tr>
+          <tr><td class="col-name">20</td><td>68.0</td><td class="col-name col-highlight">300</td><td>572.0</td><td class="col-name">600</td><td>1112.0</td></tr>
+          <tr><td class="col-name col-highlight">50</td><td>122.0</td><td class="col-name">350</td><td>662.0</td><td class="col-name">650</td><td>1202.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Formula: &deg;F = (&deg;C &times; 9/5) + 32. Formula: &deg;C = (&deg;F &minus; 32) &times; 5/9. 1 bar = 100 kPa = 0.1 MPa = 14.5038 psi.</p>
+  </div>
+
+  <!-- INSULATION -->
+  <div class="ref-section" id="tab-insulation">
+    <h2 class="table-title">Insulation Thickness &mdash; Standard Reference</h2>
+    <p class="table-desc">Typical insulation thicknesses (mm) for process piping by service temperature and pipe size. Values are indicative &mdash; always verify against your project insulation specification.</p>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>50&ndash;100&deg;C</th><th>100&ndash;150&deg;C</th><th>150&ndash;200&deg;C</th><th>200&ndash;250&deg;C</th><th>250&ndash;300&deg;C</th><th>300&ndash;400&deg;C</th><th>400&ndash;500&deg;C</th><th>Cold (&lt;0&deg;C)</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">&frac12;&rdquo;&ndash;1&rdquo;</td><td>25</td><td>40</td><td>50</td><td>65</td><td>75</td><td>90</td><td>115</td><td>50</td></tr>
+          <tr><td class="col-name">1&frac12;&rdquo;&ndash;2&rdquo;</td><td>25</td><td>40</td><td>50</td><td>65</td><td>75</td><td>90</td><td>115</td><td>50</td></tr>
+          <tr><td class="col-name col-highlight">3&rdquo;&ndash;4&rdquo;</td><td>30</td><td>50</td><td>65</td><td>75</td><td>90</td><td>115</td><td>140</td><td>65</td></tr>
+          <tr><td class="col-name col-highlight">6&rdquo;&ndash;8&rdquo;</td><td>40</td><td>50</td><td>75</td><td>90</td><td>100</td><td>130</td><td>155</td><td>75</td></tr>
+          <tr><td class="col-name">10&rdquo;&ndash;12&rdquo;</td><td>40</td><td>65</td><td>75</td><td>90</td><td>115</td><td>140</td><td>165</td><td>90</td></tr>
+          <tr><td class="col-name">14&rdquo;&ndash;18&rdquo;</td><td>50</td><td>65</td><td>90</td><td>100</td><td>115</td><td>155</td><td>180</td><td>90</td></tr>
+          <tr><td class="col-name">20&rdquo;&ndash;24&rdquo;</td><td>50</td><td>75</td><td>90</td><td>115</td><td>130</td><td>165</td><td>195</td><td>100</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Typical values for mineral wool / calcium silicate insulation. Cold insulation typically cellular glass or elastomeric foam. <strong>Always verify against project insulation spec</strong> &mdash; owner specifications frequently override these standard values. Add insulation thickness to pipe OD when checking clearances in 3D model.</p>
+
+    <h3 class="sub-title">Insulation Impact on Clearances</h3>
+    <div class="table-wrap">
+      <table class="data-table">
+        <thead><tr><th>NPS</th><th>Bare OD (mm)</th><th>+ 50mm insul.</th><th>+ 75mm insul.</th><th>+ 100mm insul.</th><th>Min C-C (50mm)</th><th>Min C-C (100mm)</th></tr></thead>
+        <tbody>
+          <tr><td class="col-name">2&rdquo;</td><td>60.3</td><td>160</td><td>210</td><td>260</td><td>160</td><td>260</td></tr>
+          <tr><td class="col-name">4&rdquo;</td><td>114.3</td><td>214</td><td>264</td><td>314</td><td>187</td><td>287</td></tr>
+          <tr><td class="col-name">6&rdquo;</td><td>168.3</td><td>268</td><td>318</td><td>368</td><td>214</td><td>314</td></tr>
+          <tr><td class="col-name">8&rdquo;</td><td>219.1</td><td>319</td><td>369</td><td>419</td><td>240</td><td>340</td></tr>
+          <tr><td class="col-name">10&rdquo;</td><td>273.1</td><td>373</td><td>423</td><td>473</td><td>267</td><td>367</td></tr>
+          <tr><td class="col-name">12&rdquo;</td><td>323.9</td><td>424</td><td>474</td><td>524</td><td>292</td><td>392</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Min C-C = minimum centre-to-centre spacing between two pipes of equal size with equal insulation, with 25mm clearance between insulation surfaces. Always check insulation clearances in 3D model with insulation layer turned ON before issuing for construction.</p>
+  </div>
+
+</div>
+<footer>
+  <div class="footer-logo"><span>PIPING</span>PASSION</div>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="field-tips.html">Field Tips</a>
+    <a href="books.html">Books</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
+  </div>
+  <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
+</footer>
+<script>
+const btns = document.querySelectorAll('.ref-nav-btn');
+const sections = document.querySelectorAll('.ref-section');
+btns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    btns.forEach(b => b.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), {threshold:0.05});
+document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
