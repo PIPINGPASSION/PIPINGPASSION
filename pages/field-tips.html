@@ -482,13 +482,13 @@ footer {
 
 <div class="filter-bar">
     <span class="filter-label">Filter:</span>
-  <button class="filter-btn active" data-cat="all">All</button>
-  <button class="filter-btn" data-cat="layout">Layout</button>
-  <button class="filter-btn" data-cat="brownfield">Brownfield</button>
-  <button class="filter-btn" data-cat="welding">Welding</button>
-  <button class="filter-btn" data-cat="supports">Supports</button>
-  <button class="filter-btn" data-cat="valves">Valves</button>
-  <button class="filter-btn" data-cat="scan">Scan-to-Model</button>
+  <button type="button" class="filter-btn active" data-cat="all">All</button>
+  <button type="button" class="filter-btn" data-cat="layout">Layout</button>
+  <button type="button" class="filter-btn" data-cat="brownfield">Brownfield</button>
+  <button type="button" class="filter-btn" data-cat="welding">Welding</button>
+  <button type="button" class="filter-btn" data-cat="supports">Supports</button>
+  <button type="button" class="filter-btn" data-cat="valves">Valves</button>
+  <button type="button" class="filter-btn" data-cat="scan">Scan-to-Model</button>
 </div>
 
 <div class="tips-container">
@@ -642,17 +642,16 @@ footer {
   document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
 
   // Filter
-  document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const cat = btn.dataset.cat;
-      document.querySelectorAll('.tip-item').forEach(tip => {
-        if (cat === 'all' || tip.dataset.cat === cat) {
-          tip.style.display = '';
-        } else {
-          tip.style.display = 'none';
-        }
+  var filterBtns = document.querySelectorAll('.filter-btn');
+  var tipItems = document.querySelectorAll('.tip-item');
+  filterBtns.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      filterBtns.forEach(function(b){ b.classList.remove('active'); });
+      this.classList.add('active');
+      var cat = this.getAttribute('data-cat');
+      tipItems.forEach(function(tip) {
+        tip.style.display = (cat === 'all' || tip.getAttribute('data-cat') === cat) ? 'grid' : 'none';
       });
     });
   });
