@@ -470,6 +470,7 @@ footer {
     <li><a href="books.html">Books</a></li>
     <li><a class="nav-cta" href="contact.html">Contact</a></li>
   </ul>
+<button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <div class="page-header">
@@ -482,13 +483,14 @@ footer {
 
 <div class="filter-bar">
   <span class="filter-label">Filter:</span>
-  <button class="filter-btn active" data-cat="all"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-right:5px"><circle cx="6" cy="6" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="6" r="2" fill="currentColor"/></svg>All</button>
-  <button class="filter-btn" data-cat="layout"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-right:5px"><rect x="1" y="5" width="10" height="2" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="1" width="10" height="2" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="9" width="10" height="2" stroke="currentColor" stroke-width="1.5"/></svg>Layout</button>
-  <button class="filter-btn" data-cat="brownfield"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-right:5px"><path d="M1 10 L4 4 L7 7 L9 3 L11 10Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>Brownfield</button>
-  <button class="filter-btn" data-cat="welding"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-right:5px"><path d="M2 6 Q6 1 10 6" stroke="currentColor" stroke-width="1.5"/><line x1="6" y1="6" x2="6" y2="11" stroke="currentColor" stroke-width="1.5"/><circle cx="6" cy="11" r="1.5" fill="currentColor"/></svg>Welding</button>
-  <button class="filter-btn" data-cat="supports"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-right:5px"><line x1="6" y1="1" x2="6" y2="8" stroke="currentColor" stroke-width="1.5"/><line x1="2" y1="8" x2="10" y2="8" stroke="currentColor" stroke-width="1.5"/><line x1="3" y1="8" x2="2" y2="11" stroke="currentColor" stroke-width="1.5"/><line x1="9" y1="8" x2="10" y2="11" stroke="currentColor" stroke-width="1.5"/></svg>Supports</button>
-  <button class="filter-btn" data-cat="valves"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-right:5px"><line x1="1" y1="6" x2="4" y2="6" stroke="currentColor" stroke-width="1.5"/><line x1="8" y1="6" x2="11" y2="6" stroke="currentColor" stroke-width="1.5"/><polygon points="4,3 8,6 4,9" stroke="currentColor" stroke-width="1.2" fill="none"/><line x1="4" y1="3" x2="4" y2="9" stroke="currentColor" stroke-width="1.5"/><line x1="6" y1="6" x2="6" y2="3" stroke="currentColor" stroke-width="1.5"/></svg>Valves</button>
-  <button class="filter-btn" data-cat="scan"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="margin-right:5px"><rect x="1" y="1" width="4" height="4" stroke="currentColor" stroke-width="1.5"/><rect x="7" y="1" width="4" height="4" stroke="currentColor" stroke-width="1.5"/><rect x="1" y="7" width="4" height="4" stroke="currentColor" stroke-width="1.5"/><circle cx="9" cy="9" r="2" stroke="currentColor" stroke-width="1.5"/></svg>Scan-to-Model</button>
+    <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-cat="all">All</button>
+  <button class="filter-btn" data-cat="layout">Layout</button>
+  <button class="filter-btn" data-cat="brownfield">Brownfield</button>
+  <button class="filter-btn" data-cat="welding">Welding</button>
+  <button class="filter-btn" data-cat="supports">Supports</button>
+  <button class="filter-btn" data-cat="valves">Valves</button>
+  <button class="filter-btn" data-cat="scan">Scan-to-Model</button>
 </div>
 
 <div class="tips-container">
