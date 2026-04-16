@@ -484,7 +484,7 @@ footer {
   <div class="page-header-inner">
     <p class="page-eyebrow">Learn from others&rsquo; mistakes</p>
     <h1 class="page-title">Common <span>Mistakes</span></h1>
-    <p class="page-desc">The 10 most costly and most preventable mistakes in piping design &mdash; drawn from real projects, real rework, and real conversations with senior designers. Most of these cost weeks and hundreds of thousands of dollars. All were preventable.</p>
+    <p class="page-desc">Five of the most costly and preventable mistakes in piping design &mdash; drawn from real projects, real rework, and real conversations with senior designers. Five more, with full field context and deeper technical analysis, are reserved for <a href="the-book.html" style="color:var(--gold-lt);text-decoration:none;border-bottom:1px solid var(--border-s);">The Piping Designer&rsquo;s Companion</a>.</p>
   </div>
 </div>
 <div style="padding:3.5rem 2.5rem;">
@@ -498,62 +498,27 @@ footer {
 </div>
 <div class="mistake-item reveal">
   <div class="mistake-num">Mistake #02</div>
-  <span class="mistake-cost">Cost: Medium</span>
-  <h2 class="mistake-title">Not cross-referencing P&ID with the line list</h2>
-  <p class="mistake-body">A line appears on the P&ID but is missing from the line list — or vice versa. The designer models it anyway, assumes it will be added later, and routes other lines around it. Months later: the line does not exist. Three weeks of rerouting to recover the space.</p>
-  <div class="mistake-lesson">Never assume a missing data point will be filled in later. Raise a TQ immediately. Every discrepancy between P&ID and line list must be resolved before you model.</div>
-</div>
-<div class="mistake-item reveal">
-  <div class="mistake-num">Mistake #03</div>
   <span class="mistake-cost">Cost: High</span>
   <h2 class="mistake-title">Ignoring as-built drawing inaccuracies on brownfield</h2>
   <p class="mistake-body">A designer routes a new 6-inch line based on as-built drawings showing a clear corridor. On site: an 8-inch nitrogen line running exactly through the planned routing. Never documented. Added fifteen years ago. Discovered during construction, during the shutdown window.</p>
   <div class="mistake-lesson">On brownfield projects, treat every as-built drawing as a hypothesis. Walk the corridor. Physically verify clearances. Ten minutes of field verification costs nothing compared to redesigning during a live shutdown.</div>
 </div>
 <div class="mistake-item reveal">
-  <div class="mistake-num">Mistake #04</div>
-  <span class="mistake-cost">Cost: Medium</span>
-  <h2 class="mistake-title">Designing for operating weight only — forgetting hydrotest weight</h2>
-  <p class="mistake-body">A large gas line is routed and supported for operating conditions. Gas weight: 8 kg/m. Water weight for hydrotest: 95 kg/m. Support spacing designed for gas. During hydrotest, the pipe sags excessively, two supports deflect, one structural attachment yields.</p>
-  <div class="mistake-lesson">Always design supports for water-filled (hydrotest) weight. A gas line can weigh 10× more when water-filled. Verify your project specification — many require hydrotest weight as the governing case.</div>
-</div>
-<div class="mistake-item reveal">
-  <div class="mistake-num">Mistake #05</div>
+  <div class="mistake-num">Mistake #03</div>
   <span class="mistake-cost">Cost: Medium</span>
   <h2 class="mistake-title">Placing a valve the operator cannot reach</h2>
   <p class="mistake-body">An Emergency Isolation Valve is correctly specified on the P&ID and modelled at the correct elevation. It is located behind a bank of large-bore pipes. Access requires climbing over a 350°C line. The valve is relocated during a subsequent shutdown at enormous cost.</p>
   <div class="mistake-lesson">Before finalising any valve placement, mentally operate it. Can the operator reach it in normal conditions? In an emergency, in full breathing apparatus, at 3am? If any answer is no, redesign. This takes five minutes in the model and avoids six-figure rework.</div>
 </div>
 <div class="mistake-item reveal">
-  <div class="mistake-num">Mistake #06</div>
+  <div class="mistake-num">Mistake #04</div>
   <span class="mistake-cost">Cost: Medium</span>
   <h2 class="mistake-title">Wrong P&ID symbol interpretation</h2>
   <p class="mistake-body">A designer models an entire system with globe valves where the P&ID specified gate valves. The symbols were slightly different from their previous project. Nobody checked. Three weeks of rework, plus replacement of already-ordered globe valves.</p>
   <div class="mistake-lesson">Read the P&ID legend sheet on day one of every project. Never assume a symbol means the same thing as your last project. Every symbol has a precise meaning defined in that project's legend.</div>
 </div>
 <div class="mistake-item reveal">
-  <div class="mistake-num">Mistake #07</div>
-  <span class="mistake-cost">Cost: Medium</span>
-  <h2 class="mistake-title">Insufficient welding clearance in congested areas</h2>
-  <p class="mistake-body">A new line is routed through a congested area with 150mm clearance around all welds. SMAW requires 200mm minimum. Construction discovers the clearance violation. The line has to be rerouted. Three spools to be refabricated.</p>
-  <div class="mistake-lesson">Design with welding access in mind. SMAW needs 200mm minimum clearance around every weld joint. In tight areas, consider specifying GTAW or orbital welding from the start — it is a design decision, not just a construction issue.</div>
-</div>
-<div class="mistake-item reveal">
-  <div class="mistake-num">Mistake #08</div>
-  <span class="mistake-cost">Cost: High</span>
-  <h2 class="mistake-title">Missing drip legs on steam lines after a routing change</h2>
-  <p class="mistake-body">A steam line routing is changed late in the project. The drain relocated from the old low point is not reinstated at the new low point. During commissioning: water hammer, three supports ripped from the rack, a weld cracked.</p>
-  <div class="mistake-lesson">After every routing change, trace the line from end to end. At every high point: verify a vent. At every low point: verify a drain. This takes five minutes and has prevented catastrophic failures.</div>
-</div>
-<div class="mistake-item reveal">
-  <div class="mistake-num">Mistake #09</div>
-  <span class="mistake-cost">Cost: High</span>
-  <h2 class="mistake-title">Exceeding pump nozzle loads</h2>
-  <p class="mistake-body">A suction line runs straight from the header to the pump with minimal offset. Thermal expansion loads on the nozzle are three times the API 610 allowable. Stress analysis fails. Complete reroute required after the model has been approved for construction.</p>
-  <div class="mistake-lesson">The number one cause of nozzle load failures: a straight line from the rack to the pump. Always include at least two direction changes near pump connections to absorb thermal expansion. Check nozzle loads early — not after issuing for construction.</div>
-</div>
-<div class="mistake-item reveal">
-  <div class="mistake-num">Mistake #10</div>
+  <div class="mistake-num">Mistake #05</div>
   <span class="mistake-cost">Cost: Medium</span>
   <h2 class="mistake-title">Making design changes without formal MOC</h2>
   <p class="mistake-body">A process engineer verbally asks a junior designer to change a carbon steel line to stainless steel. The designer changes the model. No MOC. Three months later the stress engineer discovers it: different expansion coefficient, inadequate supports, two weeks of schedule delay.</p>
@@ -565,6 +530,9 @@ footer {
     <p style="font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700;color:var(--gold-lt);margin-bottom:.8rem;">The pattern behind every mistake</p>
     <p style="font-size:.95rem;color:#B0C4D8;line-height:1.8;">Every one of these mistakes shares the same root cause: something was assumed instead of verified. The P&ID revision, the as-built dimensions, the welding clearance, the operator access. Experienced designers are not smarter &mdash; they verify more, and they have learned which assumptions are dangerous.</p>
   </div>
+</div>
+<div style="text-align:center;padding:1rem 0 4rem;color:var(--dim);font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.14em;text-transform:uppercase;">
+  Mistakes 6&ndash;10 available in <a href="the-book.html" style="color:var(--gold);text-decoration:none;">The Piping Designer&rsquo;s Companion</a>
 </div>
 <footer>
   <div class="footer-logo"><span>PIPING</span>PASSION</div>
