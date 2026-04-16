@@ -448,18 +448,33 @@ footer {
   footer { flex-direction: column; align-items: flex-start; }
 }
 
-.gloss-search{width:100%;max-width:600px;background:var(--navy-3);border:1px solid var(--border-s);border-radius:4px;padding:.8rem 1.2rem;color:var(--white);font-family:'Barlow',sans-serif;font-size:.95rem;outline:none;margin-bottom:2rem;}
+
+.gloss-search{width:100%;max-width:600px;background:var(--navy-3);border:1px solid var(--border-s,rgba(255,255,255,0.08));
+  border-radius:4px;padding:.8rem 1.2rem;color:var(--white);font-family:"Barlow",sans-serif;
+  font-size:.95rem;outline:none;margin-bottom:1.5rem;}
 .gloss-search:focus{border-color:var(--gold);}
 .alpha-nav{display:flex;flex-wrap:wrap;gap:.3rem;margin-bottom:2rem;}
-.alpha-btn{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.1em;background:none;border:1px solid var(--border);border-radius:3px;color:var(--muted);padding:.25rem .6rem;cursor:pointer;transition:all .18s;}
+.alpha-btn{font-family:"Barlow Condensed",sans-serif;font-size:.8rem;font-weight:700;
+  letter-spacing:.1em;background:none;border:1px solid var(--border);border-radius:3px;
+  color:var(--muted);padding:.25rem .6rem;cursor:pointer;transition:all .18s;}
 .alpha-btn:hover,.alpha-btn.active{color:var(--navy);background:var(--gold);border-color:var(--gold);}
 .gloss-group{margin-bottom:2.5rem;}
-.gloss-letter{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:2rem;color:var(--gold);border-bottom:2px solid var(--border);padding-bottom:.5rem;margin-bottom:1.2rem;}
-.gloss-item{padding:1rem 0;border-bottom:1px solid var(--border);}
-.gloss-term{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1rem;color:var(--white);margin-bottom:.3rem;}
-.gloss-def{font-size:.9rem;color:#B0C4D8;line-height:1.7;}
-.gloss-tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:.1rem .5rem;border-radius:2px;margin-left:.5rem;vertical-align:middle;}
-.hidden{display:none;}</style>
+.gloss-letter{font-family:"Barlow Condensed",sans-serif;font-weight:900;font-size:2rem;
+  color:var(--gold);border-bottom:2px solid var(--border);padding-bottom:.5rem;margin-bottom:1.2rem;}
+.gloss-item{padding:.9rem 0;border-bottom:1px solid var(--border);}
+.gloss-item:last-child{border-bottom:none;}
+.gloss-term{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:1.1rem;
+  color:var(--white);margin-bottom:.3rem;}
+.gloss-def{font-size:.88rem;color:#B0C4D8;line-height:1.7;}
+.gloss-tag{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-size:.63rem;
+  font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--navy);
+  background:var(--gold);padding:.1rem .5rem;border-radius:2px;margin-left:.5rem;vertical-align:middle;}
+.gloss-tag.blue{background:#4A9EDB;}
+.gloss-tag.red{background:#D85A30;}
+.gloss-tag.green{background:#1D9E75;}
+.gloss-tag.purple{background:#7F77DD;}
+.gloss-count{font-family:"Barlow Condensed",sans-serif;font-size:.8rem;color:var(--muted);margin-bottom:2rem;}
+</style>
 </head>
 <body>
 <div class="deco-wrap"><img class="sk-l" src="../assets/sk-c.svg" alt=""><img class="sk-r" src="../assets/sk-f.svg" alt=""></div>
@@ -475,278 +490,279 @@ footer {
     <li><a href="career.html">Career</a></li>
     <li><a href="reference.html">Reference</a></li>
     <li><a href="common-mistakes.html">Mistakes</a></li>
-    <li><a href="pid-symbols.html">P&ID Symbols</a></li>
-    <li><a href="glossary.html">Glossary</a></li>
+    <li><a href="glossary.html" class="active">Glossary</a></li>
     <li><a href="books.html">Books</a></li>
+    <li><a href="downloads.html" style="color:#E03030;font-weight:700">Downloads</a></li>
     <li><a class="nav-cta" href="contact.html">Contact</a></li>
   </ul>
 <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <div class="page-header">
   <div class="page-header-inner">
-    <p class="page-eyebrow">70+ terms defined</p>
+    <p class="page-eyebrow">184+ terms defined</p>
     <h1 class="page-title">Piping <span>Glossary</span></h1>
-    <p class="page-desc">Every term a piping designer needs to know &mdash; defined clearly, without academic padding. From NPS to weldolet, from MOC to water hammer.</p>
+    <p class="page-desc">Every term a piping designer needs to know &mdash; defined clearly, without academic padding. Materials, codes, stress, equipment, brownfield, welding, instruments, HSE. Search or filter by letter.</p>
   </div>
 </div>
-<div style="max-width:900px;margin:0 auto;padding:3.5rem 2.5rem;" class="reveal">
-  <input class="gloss-search" type="text" placeholder="Search terms..." oninput="searchGloss(this.value)">
-  <div class="alpha-nav"><button class="alpha-btn active" onclick="filterLetter('all')">All</button><button class="alpha-btn" onclick="filterLetter('A')">A</button><button class="alpha-btn" onclick="filterLetter('B')">B</button><button class="alpha-btn" onclick="filterLetter('C')">C</button><button class="alpha-btn" onclick="filterLetter('D')">D</button><button class="alpha-btn" onclick="filterLetter('E')">E</button><button class="alpha-btn" onclick="filterLetter('F')">F</button><button class="alpha-btn" onclick="filterLetter('G')">G</button><button class="alpha-btn" onclick="filterLetter('H')">H</button><button class="alpha-btn" onclick="filterLetter('I')">I</button><button class="alpha-btn" onclick="filterLetter('L')">L</button><button class="alpha-btn" onclick="filterLetter('M')">M</button><button class="alpha-btn" onclick="filterLetter('N')">N</button><button class="alpha-btn" onclick="filterLetter('O')">O</button><button class="alpha-btn" onclick="filterLetter('P')">P</button><button class="alpha-btn" onclick="filterLetter('R')">R</button><button class="alpha-btn" onclick="filterLetter('S')">S</button><button class="alpha-btn" onclick="filterLetter('T')">T</button><button class="alpha-btn" onclick="filterLetter('U')">U</button><button class="alpha-btn" onclick="filterLetter('V')">V</button><button class="alpha-btn" onclick="filterLetter('W')">W</button></div>
+<div style="max-width:920px;margin:0 auto;padding:3.5rem 2.5rem;">
+  <input class="gloss-search" type="text" id="gloss-input" placeholder="Search 184+ terms..." oninput="searchGloss(this.value)">
+  <div class="alpha-nav"><button class="alpha-btn active" onclick="filterLetter('all')" data-letter="all">All</button><button class="alpha-btn" onclick="filterLetter('A')" data-letter="A">A</button><button class="alpha-btn" onclick="filterLetter('B')" data-letter="B">B</button><button class="alpha-btn" onclick="filterLetter('C')" data-letter="C">C</button><button class="alpha-btn" onclick="filterLetter('D')" data-letter="D">D</button><button class="alpha-btn" onclick="filterLetter('E')" data-letter="E">E</button><button class="alpha-btn" onclick="filterLetter('F')" data-letter="F">F</button><button class="alpha-btn" onclick="filterLetter('G')" data-letter="G">G</button><button class="alpha-btn" onclick="filterLetter('H')" data-letter="H">H</button><button class="alpha-btn" onclick="filterLetter('I')" data-letter="I">I</button><button class="alpha-btn" onclick="filterLetter('J')" data-letter="J">J</button><button class="alpha-btn" onclick="filterLetter('K')" data-letter="K">K</button><button class="alpha-btn" onclick="filterLetter('L')" data-letter="L">L</button><button class="alpha-btn" onclick="filterLetter('M')" data-letter="M">M</button><button class="alpha-btn" onclick="filterLetter('N')" data-letter="N">N</button><button class="alpha-btn" onclick="filterLetter('O')" data-letter="O">O</button><button class="alpha-btn" onclick="filterLetter('P')" data-letter="P">P</button><button class="alpha-btn" onclick="filterLetter('R')" data-letter="R">R</button><button class="alpha-btn" onclick="filterLetter('S')" data-letter="S">S</button><button class="alpha-btn" onclick="filterLetter('T')" data-letter="T">T</button><button class="alpha-btn" onclick="filterLetter('U')" data-letter="U">U</button><button class="alpha-btn" onclick="filterLetter('V')" data-letter="V">V</button><button class="alpha-btn" onclick="filterLetter('W')" data-letter="W">W</button><button class="alpha-btn" onclick="filterLetter('X')" data-letter="X">X</button><button class="alpha-btn" onclick="filterLetter('Z')" data-letter="Z">Z</button></div>
+  <p class="gloss-count" id="gloss-count">184 terms across 24 letters</p>
   <div id="gloss-content"><div class="gloss-group" data-letter="A">
 <div class="gloss-letter">A</div>
-<div class="gloss-item" data-term="as-built drawing">
-  <div class="gloss-term">As-Built Drawing<span class="gloss-tag">Layout</span></div>
-  <div class="gloss-def">A drawing updated after construction to reflect the actual installed condition of piping and equipment. In practice, as-builts are often incomplete or outdated — treat them as a starting hypothesis, not a confirmed fact.</div>
-</div>
-<div class="gloss-item" data-term="asme b31.3">
-  <div class="gloss-term">ASME B31.3<span class="gloss-tag">Codes</span></div>
-  <div class="gloss-def">The primary piping code for process plants — refineries, chemical plants, petrochemical facilities. Covers design, materials, fabrication, examination, and testing of process piping.</div>
-</div>
-<div class="gloss-item" data-term="anchor (support)">
-  <div class="gloss-term">Anchor (Support)<span class="gloss-tag">Supports</span></div>
-  <div class="gloss-def">A pipe support that restrains all six degrees of freedom — three translational and three rotational. Transfers all thermal expansion forces and moments to the structure. Design the structure to accept these loads.</div>
-</div>
-<div class="gloss-item" data-term="api 610">
-  <div class="gloss-term">API 610<span class="gloss-tag">Standards</span></div>
-  <div class="gloss-def">American Petroleum Institute standard for centrifugal pumps for petroleum, petrochemical and natural gas industries. Defines allowable nozzle loads among other requirements.</div>
-</div>
-<div class="gloss-item" data-term="api 570">
-  <div class="gloss-term">API 570<span class="gloss-tag">Standards</span></div>
-  <div class="gloss-def">Piping inspection code covering in-service inspection, rating, repair and alteration of metallic piping systems. Critical knowledge for brownfield work.</div>
-</div>
+<div class="gloss-item" data-term="accelerated corrosion"><div class="gloss-term">Accelerated Corrosion<span class="gloss-tag red">Materials</span></div><div class="gloss-def">Corrosion progressing faster than the assumed rate used in design. Often caused by process changes, contamination, or incorrect material selection. Trigger for engineering review and potential re-rating.</div></div>
+<div class="gloss-item" data-term="actuator"><div class="gloss-term">Actuator<span class="gloss-tag">Valves</span></div><div class="gloss-def">Device that operates a valve using an external power source: pneumatic, electric, or hydraulic. Specified when manual operation is impractical due to torque, frequency, or remote operation requirements.</div></div>
+<div class="gloss-item" data-term="aisi"><div class="gloss-term">AISI<span class="gloss-tag blue">Materials</span></div><div class="gloss-def">American Iron and Steel Institute. Provides standard designations for stainless and alloy steels. AISI 304, 316, 410 are common piping material grades.</div></div>
+<div class="gloss-item" data-term="allowable stress"><div class="gloss-term">Allowable Stress<span class="gloss-tag blue">Stress</span></div><div class="gloss-def">Maximum stress permitted in a pipe wall under design conditions, per the applicable code. For B31.3, defined in Appendix A for each material and temperature. Basis of wall thickness calculation.</div></div>
+<div class="gloss-item" data-term="anchor"><div class="gloss-term">Anchor<span class="gloss-tag">Supports</span></div><div class="gloss-def">Pipe support that restrains all six degrees of freedom: three translational and three rotational. Transfers all thermal expansion forces to structure. Structural must confirm capacity before specifying.</div></div>
+<div class="gloss-item" data-term="annubar"><div class="gloss-term">Annubar<span class="gloss-tag">Instruments</span></div><div class="gloss-def">Multi-port averaging pitot tube for flow measurement. Better velocity profile averaging than single-point pitot. Used on large-bore lines where orifice plate pressure drop is unacceptable.</div></div>
+<div class="gloss-item" data-term="api"><div class="gloss-term">API<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">American Petroleum Institute. Issues standards for equipment and piping in petroleum and petrochemical industries: API 610 (pumps), API 617 (compressors), API 570 (inspection), API 650 (tanks).</div></div>
+<div class="gloss-item" data-term="api 570"><div class="gloss-term">API 570<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Piping Inspection Code: In-service inspection, rating, repair, and alteration of metallic piping systems. Essential knowledge for brownfield work. Defines inspection intervals, corrosion monitoring, and fitness-for-service.</div></div>
+<div class="gloss-item" data-term="api 610"><div class="gloss-term">API 610<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Centrifugal pumps for petroleum, petrochemical and natural gas industries. Defines allowable nozzle loads (Table 4), materials, testing, and documentation. Governs pump specification on most process projects.</div></div>
+<div class="gloss-item" data-term="api 617"><div class="gloss-term">API 617<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Axial and centrifugal compressors for petroleum, chemical and gas industry services. Higher nozzle load sensitivity than pumps. Dynamic analysis required on large machines.</div></div>
+<div class="gloss-item" data-term="api 650"><div class="gloss-term">API 650<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Welded tanks for oil storage. Governs atmospheric storage tank design, materials, and fabrication. Foundation requirements, settlement monitoring, and inspection intervals specified.</div></div>
+<div class="gloss-item" data-term="area classification"><div class="gloss-term">Area Classification<span class="gloss-tag red">HSE</span></div><div class="gloss-def">Designation of plant areas by the likelihood and consequence of a flammable atmosphere being present. Zone 0/1/2 (IEC) or Division 1/2 (NEC). Governs selection of electrical equipment. Affects routing of instrument cables.</div></div>
+<div class="gloss-item" data-term="as-built drawing"><div class="gloss-term">As-Built Drawing<span class="gloss-tag">Documentation</span></div><div class="gloss-def">Drawing updated after construction to reflect the actual installed condition. In brownfield work, treat as-builts as a starting hypothesis — always verify physically. Discrepancies are the norm, not the exception.</div></div>
+<div class="gloss-item" data-term="asme"><div class="gloss-term">ASME<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">American Society of Mechanical Engineers. Issues the most widely referenced piping codes: B31.1 (power piping), B31.3 (process piping), B31.4 (pipeline transport), B31.8 (gas transmission), and the ASME Boiler and Pressure Vessel Code (Section VIII for vessels).</div></div>
+<div class="gloss-item" data-term="asme b16.5"><div class="gloss-term">ASME B16.5<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Standard for pipe flanges and flanged fittings NPS ½ through NPS 24. Defines pressure-temperature ratings by material group and flange class (150 through 2500). The reference for every flanged joint in process piping.</div></div>
+<div class="gloss-item" data-term="asme b16.9"><div class="gloss-term">ASME B16.9<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Factory-made wrought butt-welding fittings. Defines face-to-face, centre-to-face, and end-to-end dimensions for elbows, tees, reducers, and caps. The dimension source for all BW fitting isos.</div></div>
+<div class="gloss-item" data-term="asme b16.11"><div class="gloss-term">ASME B16.11<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Forged fittings — socket-welding and threaded. Covers Classes 2000, 3000, and 6000. Limits maximum NPS to 4 for socket-weld fittings.</div></div>
+<div class="gloss-item" data-term="asme b31.3"><div class="gloss-term">ASME B31.3<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Process Piping code. The primary design, fabrication, examination, and testing code for process plant piping. Defines wall thickness, material selection, flexibility analysis, NDE requirements, and fluid service categories.</div></div>
+<div class="gloss-item" data-term="asme b36.10m"><div class="gloss-term">ASME B36.10M<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Welded and seamless wrought steel pipe. Defines OD and wall thickness (schedules) for carbon and alloy steel pipe. OD is fixed per NPS; schedule determines wall thickness.</div></div>
+<div class="gloss-item" data-term="asme b36.19m"><div class="gloss-term">ASME B36.19M<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Stainless steel pipe. Schedules 5S, 10S, 40S, 80S. OD identical to B36.10M for same NPS. Most process stainless is 10S or 40S.</div></div>
 </div>
 <div class="gloss-group" data-letter="B">
 <div class="gloss-letter">B</div>
-<div class="gloss-item" data-term="battery limit">
-  <div class="gloss-term">Battery Limit<span class="gloss-tag">Layout</span></div>
-  <div class="gloss-def">The boundary of a process unit or plant area. Piping crossing a battery limit typically requires special documentation, isolation, and often a different piping class specification.</div>
-</div>
-<div class="gloss-item" data-term="bom / bill of materials">
-  <div class="gloss-term">BOM / Bill of Materials<span class="gloss-tag">Documentation</span></div>
-  <div class="gloss-def">A complete list of all piping components required to fabricate a spool or construct a line. Extracted from the 3D model or isometric and used for procurement.</div>
-</div>
-<div class="gloss-item" data-term="branch connection">
-  <div class="gloss-term">Branch Connection<span class="gloss-tag">Layout</span></div>
-  <div class="gloss-def">A connection from a smaller pipe (branch) into a larger pipe (header/run). Connection type (tee, weldolet, sockolet) depends on the branch-to-header size ratio and service requirements.</div>
-</div>
-<div class="gloss-item" data-term="butt weld (bw)">
-  <div class="gloss-term">Butt Weld (BW)<span class="gloss-tag">Welding</span></div>
-  <div class="gloss-def">A weld joining two pipe ends or fittings end-to-end. The standard connection for NPS 2 and above in most process piping. Requires bevelling, alignment, and full penetration weld.</div>
-</div>
+<div class="gloss-item" data-term="b/l (battery limit)"><div class="gloss-term">B/L (Battery Limit)<span class="gloss-tag">Layout</span></div><div class="gloss-def">Boundary separating process units, or separating plant from external areas. Different design basis, codes, and operating responsibility on each side. All B/L crossings require special documentation and typically isolation valves.</div></div>
+<div class="gloss-item" data-term="backflow"><div class="gloss-term">Backflow<span class="gloss-tag">Operations</span></div><div class="gloss-def">Reverse flow in a piping system. Prevented by check valves. Backflow at pump discharge can cause reverse rotation, mechanical seal damage, and equipment damage.</div></div>
+<div class="gloss-item" data-term="barrel (pig)"><div class="gloss-term">Barrel (Pig)<span class="gloss-tag">Piping</span></div><div class="gloss-def">Tubular vessel housing a pig launcher or receiver. Includes quick-opening closure, kicker line, drain, vent, and bypass connections.</div></div>
+<div class="gloss-item" data-term="battery limit valve"><div class="gloss-term">Battery Limit Valve<span class="gloss-tag">Piping</span></div><div class="gloss-def">Isolation valve at the unit battery limit. Typically a full-bore ball valve with chain and padlock. Allows unit isolation for maintenance or emergency without affecting adjacent units.</div></div>
+<div class="gloss-item" data-term="bend"><div class="gloss-term">Bend<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A pipe change of direction formed by cold bending or hot bending the pipe itself, without a separate fitting. Minimum bend radius typically 5D. Used to reduce weld count on large-bore lines.</div></div>
+<div class="gloss-item" data-term="bom (bill of materials)"><div class="gloss-term">BOM (Bill of Materials)<span class="gloss-tag">Documentation</span></div><div class="gloss-def">Complete list of all piping components required for a spool or line: pipe lengths, fittings, flanges, gaskets, bolts, instruments, supports. Extracted from model or manually from isometric. Basis for procurement.</div></div>
+<div class="gloss-item" data-term="branch connection"><div class="gloss-term">Branch Connection<span class="gloss-tag">Piping</span></div><div class="gloss-def">Connection of a smaller pipe (branch) into a larger pipe (header/run). Connection type depends on branch/header ratio: tee for >50%, weldolet/sockolet for <50%. Reinforcement may be required per B31.3 Para 304.3.</div></div>
+<div class="gloss-item" data-term="break flange"><div class="gloss-term">Break Flange<span class="gloss-tag">Piping</span></div><div class="gloss-def">Flanged joint inserted in a piping run specifically to allow the line to be separated for maintenance — equipment removal, valve replacement, or inspection access. Always specify in pipe rack take-offs to allow maintenance disassembly.</div></div>
+<div class="gloss-item" data-term="brownfield"><div class="gloss-term">Brownfield<span class="gloss-tag">Project</span></div><div class="gloss-def">A project involving modification, revamp, or extension of existing operating plant. Higher risk than greenfield due to undocumented modifications, as-built inaccuracies, hazardous area constraints, and shutdown window limitations. Requires site verification before design.</div></div>
+<div class="gloss-item" data-term="buckling pin relief valve"><div class="gloss-term">Buckling Pin Relief Valve<span class="gloss-tag">Valves</span></div><div class="gloss-def">Pressure relief device where a precision-engineered pin buckles at a specific set pressure. More accurate set point than spring-loaded PSV. Good for clean, non-fouling services. Non-reclosing — pin must be replaced after actuation.</div></div>
+<div class="gloss-item" data-term="bundle pull"><div class="gloss-term">Bundle Pull<span class="gloss-tag">Equipment</span></div><div class="gloss-def">The removal of a heat exchanger tube bundle from its shell for cleaning or replacement. Requires a clear space at the fixed head end equal to the full bundle length plus minimum 1000mm. Never route piping in the bundle pull zone.</div></div>
+<div class="gloss-item" data-term="butt weld (bw)"><div class="gloss-term">Butt Weld (BW)<span class="gloss-tag">Welding</span></div><div class="gloss-def">A welded joint joining two pipe ends or fittings end-to-end after bevelling. Standard joint for NPS 2 and above in most process piping. Requires full penetration weld. NDE requirements per piping class.</div></div>
 </div>
 <div class="gloss-group" data-letter="C">
 <div class="gloss-letter">C</div>
-<div class="gloss-item" data-term="caesar ii">
-  <div class="gloss-term">Caesar II<span class="gloss-tag">Software</span></div>
-  <div class="gloss-def">The industry-standard pipe stress analysis software by Hexagon. As a designer you do not run it yourself, but your routing decisions directly affect the results.</div>
-</div>
-<div class="gloss-item" data-term="cui (corrosion under insulation)">
-  <div class="gloss-term">CUI (Corrosion Under Insulation)<span class="gloss-tag">Materials</span></div>
-  <div class="gloss-def">Corrosion occurring under thermal or personnel-protection insulation, often invisible until severe. Common on carbon steel lines cycling between wet and dry conditions. A major cause of failures in ageing plants.</div>
-</div>
-<div class="gloss-item" data-term="corrosion allowance (ca)">
-  <div class="gloss-term">Corrosion Allowance (CA)<span class="gloss-tag">Materials</span></div>
-  <div class="gloss-def">Additional wall thickness added to the pressure design wall to allow for corrosion over the design life of the plant. Typically 1.5mm to 6mm depending on fluid and material.</div>
-</div>
+<div class="gloss-item" data-term="ca (corrosion allowance)"><div class="gloss-term">CA (Corrosion Allowance)<span class="gloss-tag">Materials</span></div><div class="gloss-def">Additional wall thickness above the pressure design minimum, added to allow for wall thinning over the design life. Typically 1.5mm to 6mm. Specified in piping class. Affects wall thickness selection and inspection intervals.</div></div>
+<div class="gloss-item" data-term="caesar ii"><div class="gloss-term">Caesar II<span class="gloss-tag purple">Software</span></div><div class="gloss-def">Industry-standard pipe stress analysis software (Hexagon). Accepts piping geometry, material properties, and loads; calculates stresses and nozzle loads. Your routing decisions directly determine whether Caesar II passes or fails.</div></div>
+<div class="gloss-item" data-term="carbon steel"><div class="gloss-term">Carbon Steel<span class="gloss-tag">Materials</span></div><div class="gloss-def">The most common piping material in process plants. ASTM A106 Grade B (seamless pipe), A234 WPB (fittings), A105 (flanges and forgings). Suitable for most services up to approximately 425°C. Subject to H2S and amine cracking in specific services.</div></div>
+<div class="gloss-item" data-term="cavitation"><div class="gloss-term">Cavitation<span class="gloss-tag red">Operations</span></div><div class="gloss-def">Formation and collapse of vapour bubbles in a liquid pump, caused by local pressure dropping below vapour pressure. Causes noise, vibration, erosion of impeller and casing, and eventual pump failure. Primary cause: insufficient NPSH available.</div></div>
+<div class="gloss-item" data-term="cml (condition monitoring location)"><div class="gloss-term">CML (Condition Monitoring Location)<span class="gloss-tag">Inspection</span></div><div class="gloss-def">Specific location on a piping system where wall thickness is measured periodically. Position, method (UT), and frequency defined by inspection engineer per API 570. Locations selected at areas of highest expected corrosion rate.</div></div>
+<div class="gloss-item" data-term="cold spring"><div class="gloss-term">Cold Spring<span class="gloss-tag blue">Stress</span></div><div class="gloss-def">Deliberate under-cutting of pipe length during fabrication to pre-stress the system, reducing operating loads on nozzles or supports. Requires specific assembly instructions and stress analysis verification. Controversial — many projects prohibit it.</div></div>
+<div class="gloss-item" data-term="concentric reducer"><div class="gloss-term">Concentric Reducer<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A reducer where the centreline of inlet and outlet are coaxial. Used for size changes on horizontal lines. NOT used on pump suction — eccentric reducer required to prevent gas pockets.</div></div>
+<div class="gloss-item" data-term="control valve"><div class="gloss-term">Control Valve<span class="gloss-tag">Valves</span></div><div class="gloss-def">Automatically throttles flow based on a process signal (flow, pressure, temperature, level). Consists of valve body, trim, and actuator. Requires upstream and downstream straight runs. Always include isolation valves and bypass for maintenance.</div></div>
+<div class="gloss-item" data-term="corrosion coupon"><div class="gloss-term">Corrosion Coupon<span class="gloss-tag">Inspection</span></div><div class="gloss-def">A metal sample installed in a pipe or vessel and removed periodically to measure corrosion rate by weight loss. Low-cost, direct measurement of actual corrosion in service conditions.</div></div>
+<div class="gloss-item" data-term="creep"><div class="gloss-term">Creep<span class="gloss-tag red">Materials</span></div><div class="gloss-def">Time-dependent deformation of metal under sustained stress at elevated temperature. Significant above approximately 370°C for carbon steel, 600°C for austenitic stainless. Determines maximum allowable stress at high temperature.</div></div>
+<div class="gloss-item" data-term="cui (corrosion under insulation)"><div class="gloss-term">CUI (Corrosion Under Insulation)<span class="gloss-tag red">Materials</span></div><div class="gloss-def">Corrosion occurring on the external surface of insulated pipe, driven by water ingress and oxygen. Often invisible until severe. Major failure cause in ageing plants. Carbon steel lines cycling between wet and dry conditions most susceptible. Risk mitigated by proper cladding and sealant.</div></div>
+<div class="gloss-item" data-term="cut-in (hot tap)"><div class="gloss-term">Cut-in (Hot Tap)<span class="gloss-tag red">Brownfield</span></div><div class="gloss-def">Connection made to a live pressurised pipe without shutdown, using specialised equipment. Requires engineering approval, hot work permit, and experienced contractor. Design the branch to be mechanically sound for the live operation.</div></div>
 </div>
 <div class="gloss-group" data-letter="D">
 <div class="gloss-letter">D</div>
-<div class="gloss-item" data-term="design pressure">
-  <div class="gloss-term">Design Pressure<span class="gloss-tag">Design</span></div>
-  <div class="gloss-def">The maximum pressure at which the piping system is designed to operate continuously. Used for wall thickness calculation, flange class selection, and pressure relief sizing. Always add margin above operating pressure.</div>
-</div>
-<div class="gloss-item" data-term="dn (diameter nominal)">
-  <div class="gloss-term">DN (Diameter Nominal)<span class="gloss-tag">Dimensions</span></div>
-  <div class="gloss-def">The metric designation for pipe size. DN 100 = NPS 4. DN does not equal the actual OD — it is a nominal reference only. Used in European and international projects.</div>
-</div>
-<div class="gloss-item" data-term="drip leg">
-  <div class="gloss-term">Drip Leg<span class="gloss-tag">Layout</span></div>
-  <div class="gloss-def">A short vertical drop at a low point in a steam or gas line, fitted with a drain valve. Collects condensate or liquid and prevents water hammer. Missing drip legs are a leading cause of steam line failures.</div>
-</div>
+<div class="gloss-item" data-term="dead leg"><div class="gloss-term">Dead Leg<span class="gloss-tag red">Piping</span></div><div class="gloss-def">A section of pipe that is normally stagnant — blocked at one end with no through-flow. Creates risk of corrosion, microbiological growth, and pressure rating uncertainty. Minimise dead leg length. Flag all dead legs in design review.</div></div>
+<div class="gloss-item" data-term="design pressure"><div class="gloss-term">Design Pressure<span class="gloss-tag">Design</span></div><div class="gloss-def">Maximum pressure at which a piping system is designed to operate. Used for wall thickness calculation and flange class selection. Typically set 10% above maximum operating pressure or the PSV set pressure, whichever is lower.</div></div>
+<div class="gloss-item" data-term="design temperature"><div class="gloss-term">Design Temperature<span class="gloss-tag">Design</span></div><div class="gloss-def">Maximum and minimum temperature used for material selection, wall thickness calculation, and flange rating selection. Maximum determines allowable stress; minimum determines impact test requirements.</div></div>
+<div class="gloss-item" data-term="dn (diameter nominal)"><div class="gloss-term">DN (Diameter Nominal)<span class="gloss-tag">Dimensions</span></div><div class="gloss-def">Metric designation for pipe size used in European and international projects. DN 100 = NPS 4. DN does not equal actual OD — it is a nominal reference. Conversion: DN = NPS × 25 (approximately).</div></div>
+<div class="gloss-item" data-term="double block and bleed"><div class="gloss-term">Double Block and Bleed<span class="gloss-tag">Piping</span></div><div class="gloss-def">Two block valves with a bleed valve between them. Provides positive isolation confirmation: both blocks closed, bleed opened — if bleed shows flow, upstream block is leaking. Required for instrument isolation in many piping classes.</div></div>
+<div class="gloss-item" data-term="drain"><div class="gloss-term">Drain<span class="gloss-tag">Piping</span></div><div class="gloss-def">Connection at a low point in a piping system for removing liquid during shutdown, maintenance, or commissioning. Every low point needs a drain. Size minimum DN 25 (1 inch). Connect to closed drain unless service permits open drain.</div></div>
+<div class="gloss-item" data-term="drip leg"><div class="gloss-term">Drip Leg<span class="gloss-tag red">Piping</span></div><div class="gloss-def">A short vertical drop at a low point in a steam or condensate line, fitted with a steam trap or drain valve. Collects condensate and prevents water hammer. Missing drip legs are a leading cause of catastrophic steam line failures.</div></div>
+<div class="gloss-item" data-term="ductile iron"><div class="gloss-term">Ductile Iron<span class="gloss-tag">Materials</span></div><div class="gloss-def">Cast iron with spheroidal graphite morphology. Higher strength and toughness than grey cast iron. Used for water and low-pressure services. Not suitable for hydrocarbon service at elevated temperature or pressure.</div></div>
 </div>
 <div class="gloss-group" data-letter="E">
 <div class="gloss-letter">E</div>
-<div class="gloss-item" data-term="eccentric reducer">
-  <div class="gloss-term">Eccentric Reducer<span class="gloss-tag">Fittings</span></div>
-  <div class="gloss-def">A reducer where the centreline of the two ends is offset. Used on pump suction to prevent gas pockets (flat side up) and on lines requiring drainage (flat side down). Do not substitute a concentric reducer without checking the hydraulic requirements.</div>
-</div>
-<div class="gloss-item" data-term="eiv (emergency isolation valve)">
-  <div class="gloss-term">EIV (Emergency Isolation Valve)<span class="gloss-tag">Safety</span></div>
-  <div class="gloss-def">A valve designed to be closed rapidly in an emergency to isolate a section of piping. Must be reachable within seconds from a safe position — this is a design requirement, not an afterthought.</div>
-</div>
+<div class="gloss-item" data-term="eccentric reducer"><div class="gloss-term">Eccentric Reducer<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A reducer with offset centrelines — one side flat, one side tapered. Flat On Top (FOT) on horizontal pump suction prevents gas pockets. Flat On Bottom (FOB) on vertical drop maintains pipe centreline alignment.</div></div>
+<div class="gloss-item" data-term="eiv (emergency isolation valve)"><div class="gloss-term">EIV (Emergency Isolation Valve)<span class="gloss-tag red">Valves</span></div><div class="gloss-def">Valve closed rapidly to isolate a section in an emergency. Must be reachable within seconds from a safe position. Access route must be clear in normal operation and when wearing full PPE including breathing apparatus.</div></div>
+<div class="gloss-item" data-term="elbow, long radius (lr)"><div class="gloss-term">Elbow, Long Radius (LR)<span class="gloss-tag">Fittings</span></div><div class="gloss-def">90° elbow with centreline radius of 1.5 × pipe nominal diameter. Standard for all process piping. Lower pressure drop and stress intensification factor than SR elbow. Default choice unless space is specifically identified as critical.</div></div>
+<div class="gloss-item" data-term="elbow, short radius (sr)"><div class="gloss-term">Elbow, Short Radius (SR)<span class="gloss-tag">Fittings</span></div><div class="gloss-def">90° elbow with centreline radius of 1.0 × pipe nominal diameter. Higher stress intensification factor than LR. Avoid unless space is critically constrained and stress analysis confirms acceptability.</div></div>
+<div class="gloss-item" data-term="else (equipment list)"><div class="gloss-term">ELSE (Equipment List)<span class="gloss-tag">Documentation</span></div><div class="gloss-def">A project document listing all equipment items with tag numbers, descriptions, sizes, design conditions, and vendor information. The designer uses it to confirm equipment dimensions and nozzle schedules before routing.</div></div>
+<div class="gloss-item" data-term="epoxy lining"><div class="gloss-term">Epoxy Lining<span class="gloss-tag">Materials</span></div><div class="gloss-def">Internal pipe coating applied to inhibit corrosion or contamination. Used in water service, food-grade, and some chemical services. Limits available bore and must be considered in velocity calculations.</div></div>
+<div class="gloss-item" data-term="esd (emergency shutdown)"><div class="gloss-term">ESD (Emergency Shutdown)<span class="gloss-tag red">HSE</span></div><div class="gloss-def">System that automatically shuts down a process unit or equipment on detection of a dangerous condition. ESD valves are actuated valves that fail-close (or fail-open) on ESD signal. Design routing to ensure all ESD valves are accessible.</div></div>
+<div class="gloss-item" data-term="expansion loop"><div class="gloss-term">Expansion Loop<span class="gloss-tag">Stress</span></div><div class="gloss-def">A U-shaped section of pipe inserted in a long straight run to absorb thermal expansion. The loop acts as a flexible element. Size and geometry determined by stress engineer. Coordinate early — loops need significant space.</div></div>
 </div>
 <div class="gloss-group" data-letter="F">
 <div class="gloss-letter">F</div>
-<div class="gloss-item" data-term="fat (factory acceptance test)">
-  <div class="gloss-term">FAT (Factory Acceptance Test)<span class="gloss-tag">Testing</span></div>
-  <div class="gloss-def">Testing performed on equipment or valves at the manufacturer's facility before shipment. A chance to catch issues before the equipment reaches site.</div>
-</div>
-<div class="gloss-item" data-term="flange class">
-  <div class="gloss-term">Flange Class<span class="gloss-tag">Standards</span></div>
-  <div class="gloss-def">The pressure-temperature rating classification of flanges per ASME B16.5: 150, 300, 600, 900, 1500, 2500. Higher class = higher allowable pressure. Class selection depends on design pressure, temperature, and material.</div>
-</div>
-<div class="gloss-item" data-term="free span">
-  <div class="gloss-term">Free Span<span class="gloss-tag">Supports</span></div>
-  <div class="gloss-def">The unsupported length of pipe between two supports. Maximum free span is determined by allowable stress, pipe weight, and deflection limits. Exceeding it causes sag, vibration, and potential failure.</div>
-</div>
+<div class="gloss-item" data-term="face-to-face (f-f)"><div class="gloss-term">Face-to-Face (F-F)<span class="gloss-tag">Dimensions</span></div><div class="gloss-def">The dimension between the two sealing faces of a valve or fitting. Per ASME B16.10 for valves. Critical for isometric dimensioning and spool fabrication. Control valve F-F varies by manufacturer — always request vendor data sheet.</div></div>
+<div class="gloss-item" data-term="fat (factory acceptance test)"><div class="gloss-term">FAT (Factory Acceptance Test)<span class="gloss-tag">Project</span></div><div class="gloss-def">Testing performed on equipment or valves at the manufacturer's facility before shipment. Opportunity to identify defects before equipment reaches site. Witness tests defined in procurement specification.</div></div>
+<div class="gloss-item" data-term="fel (front end loading)"><div class="gloss-term">FEL (Front End Loading)<span class="gloss-tag">Project</span></div><div class="gloss-def">Early project phase focused on defining scope, selecting process design, and establishing the basis for detailed engineering. Piping input: plot plan, equipment list, preliminary P&IDs, and sizing studies. Quality of FEL determines project outcome.</div></div>
+<div class="gloss-item" data-term="field weld"><div class="gloss-term">Field Weld<span class="gloss-tag">Welding</span></div><div class="gloss-def">A weld made on-site during construction, as opposed to in the fabrication shop. Higher cost, slower, and more difficult to quality-control than shop welds. Design routing to minimise field welds — maximise shop fabrication.</div></div>
+<div class="gloss-item" data-term="fitness for service (ffs)"><div class="gloss-term">Fitness for Service (FFS)<span class="gloss-tag">Inspection</span></div><div class="gloss-def">Assessment of whether a degraded or damaged piping component can continue to operate safely. Performed per API 579/ASME FFS-1. Considers actual measured condition versus original design.</div></div>
+<div class="gloss-item" data-term="flange"><div class="gloss-term">Flange<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A projecting rim with bolt holes, used to connect pipes, valves, and equipment. Types: weld neck, slip-on, blind, socket weld, threaded, lap joint. Class rating (150 to 2500) determines pressure-temperature capability.</div></div>
+<div class="gloss-item" data-term="flange class"><div class="gloss-term">Flange Class<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Pressure rating classification for flanges per ASME B16.5: 150, 300, 600, 900, 1500, 2500. Higher class = higher allowable pressure at the same temperature. Class selection depends on design pressure, temperature, and material group.</div></div>
+<div class="gloss-item" data-term="flexibility analysis"><div class="gloss-term">Flexibility Analysis<span class="gloss-tag blue">Stress</span></div><div class="gloss-def">Calculation of thermal expansion stresses and nozzle loads in a piping system. Required by B31.3 for all but the simplest systems. Performed using Caesar II or equivalent. Result determines support types, anchor locations, and loop sizes.</div></div>
+<div class="gloss-item" data-term="flow-induced vibration"><div class="gloss-term">Flow-Induced Vibration<span class="gloss-tag red">Stress</span></div><div class="gloss-def">Vibration caused by fluid flow — turbulence, vortex shedding, or acoustic resonance. Common in high-velocity gas lines, compressor discharge, and lines with control valves. Requires dynamic analysis for critical applications.</div></div>
+<div class="gloss-item" data-term="flue gas"><div class="gloss-term">Flue Gas<span class="gloss-tag">Process</span></div><div class="gloss-def">Combustion exhaust from fired heaters, boilers, or incinerators. High temperature, potentially corrosive. Routing of flue gas piping must account for high thermal expansion and corrosion allowance.</div></div>
+<div class="gloss-item" data-term="free span"><div class="gloss-term">Free Span<span class="gloss-tag">Supports</span></div><div class="gloss-def">The unsupported length of pipe between two supports. Maximum span governed by allowable sag, stress, and natural frequency. Exceeding maximum span causes excessive deflection, vibration, and potential fatigue failure.</div></div>
+<div class="gloss-item" data-term="fw (field weld)"><div class="gloss-term">FW (Field Weld)<span class="gloss-tag">Welding</span></div><div class="gloss-def">Designation on an isometric drawing indicating a weld to be made in the field, not in the fabrication shop. Shown as a circle around the weld symbol on the iso. Minimise FW count — each one adds time, cost, and quality risk.</div></div>
 </div>
 <div class="gloss-group" data-letter="G">
 <div class="gloss-letter">G</div>
-<div class="gloss-item" data-term="gasket">
-  <div class="gloss-term">Gasket<span class="gloss-tag">Components</span></div>
-  <div class="gloss-def">A sealing element compressed between two flange faces. Single-use — never reuse a gasket. Type depends on service: spiral-wound (general service), ring-type joint RTJ (high pressure/temp), full-face (low pressure, cast iron flanges).</div>
-</div>
-<div class="gloss-item" data-term="guide (support)">
-  <div class="gloss-term">Guide (Support)<span class="gloss-tag">Supports</span></div>
-  <div class="gloss-def">A pipe support that restrains lateral movement but allows axial movement (thermal expansion along the pipe axis). Used in combination with anchors and stops to control thermal expansion routing.</div>
-</div>
+<div class="gloss-item" data-term="ga (general arrangement)"><div class="gloss-term">GA (General Arrangement)<span class="gloss-tag">Documentation</span></div><div class="gloss-def">In European/process plant practice: the detailed piping plan drawing showing routing, dimensions, and elevations at a specific level. Multiple GAs cover a unit at different elevations. Source document from which isos are extracted.</div></div>
+<div class="gloss-item" data-term="galvanic corrosion"><div class="gloss-term">Galvanic Corrosion<span class="gloss-tag red">Materials</span></div><div class="gloss-def">Electrochemical corrosion occurring when two dissimilar metals are in electrical contact in the presence of an electrolyte. The more anodic metal corrodes preferentially. Prevent with isolation flanges, dielectric unions, or compatible material selection.</div></div>
+<div class="gloss-item" data-term="gasket"><div class="gloss-term">Gasket<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A sealing element compressed between two flange faces. Single-use — never reuse. Type depends on service: spiral-wound (general process), ring-type joint RTJ (high pressure/temperature), full-face (cast iron flanges, low pressure).</div></div>
+<div class="gloss-item" data-term="gate valve"><div class="gloss-term">Gate Valve<span class="gloss-tag">Valves</span></div><div class="gloss-def">Full-bore, bidirectional isolation valve. Wedge disc moves perpendicular to flow. Not for throttling — disc will vibrate and damage seat. Standard isolation valve for most process services.</div></div>
+<div class="gloss-item" data-term="globe valve"><div class="gloss-term">Globe Valve<span class="gloss-tag">Valves</span></div><div class="gloss-def">Throttling or isolation valve with a disc moving perpendicular to a seat. Higher pressure drop than gate valve. Used for throttling, flow control, and applications requiring frequent operation. Higher Cv loss than ball valve.</div></div>
+<div class="gloss-item" data-term="gravity drain"><div class="gloss-term">Gravity Drain<span class="gloss-tag">Piping</span></div><div class="gloss-def">Drain system relying on gravity flow to a collection point. Minimum slope typically 1:100. Pipe sizing must ensure self-cleaning velocity. Never route gravity drains upward — a trap of liquid defeats the purpose.</div></div>
+<div class="gloss-item" data-term="grid reference"><div class="gloss-term">Grid Reference<span class="gloss-tag">Documentation</span></div><div class="gloss-def">Alphanumeric coordinate system on plant drawings (A1, B3, C4...). Used to locate equipment and piping in communications, TQs, and punch lists. Always use grid references when describing locations.</div></div>
+<div class="gloss-item" data-term="guide"><div class="gloss-term">Guide<span class="gloss-tag">Supports</span></div><div class="gloss-def">Pipe support that restrains lateral movement while allowing free axial movement (thermal expansion along the pipe axis). Used in coordination with anchors and stops to direct thermal expansion along a planned path.</div></div>
 </div>
 <div class="gloss-group" data-letter="H">
 <div class="gloss-letter">H</div>
-<div class="gloss-item" data-term="hot tap">
-  <div class="gloss-term">Hot Tap<span class="gloss-tag">Construction</span></div>
-  <div class="gloss-def">A branch connection made to a live pipe under pressure without shutting down the system. Requires specialized equipment, hot work permits, and careful engineering. High risk operation — design the branch to make it feasible.</div>
-</div>
-<div class="gloss-item" data-term="hydrotest">
-  <div class="gloss-term">Hydrotest<span class="gloss-tag">Testing</span></div>
-  <div class="gloss-def">Pressure test performed with water at typically 1.5× design pressure (ASME B31.3). Verifies integrity of welds and fittings before commissioning. Requires supports designed for water-filled weight.</div>
-</div>
+<div class="gloss-item" data-term="h2s (hydrogen sulphide)"><div class="gloss-term">H2S (Hydrogen Sulphide)<span class="gloss-tag red">Materials</span></div><div class="gloss-def">Highly toxic and corrosive gas present in many hydrocarbon streams. Above threshold concentrations, requires NACE MR0175/ISO 15156 material selection — hardness limits on all pressure-containing components. Standard carbon steel is often not acceptable.</div></div>
+<div class="gloss-item" data-term="hazop (hazard and operability study)"><div class="gloss-term">HAZOP (Hazard and Operability Study)<span class="gloss-tag red">HSE</span></div><div class="gloss-def">Systematic technique for identifying hazards in a process design by examining deviations from design intent. Each node reviewed for what happens if flow, temperature, or pressure is too high, too low, reversed, or absent. P&ID must be HAZOP-reviewed before IFC.</div></div>
+<div class="gloss-item" data-term="heat trace"><div class="gloss-term">Heat Trace<span class="gloss-tag">Piping</span></div><div class="gloss-def">Electrical or steam trace applied to a pipe to maintain minimum temperature — freeze protection or viscosity control. Shown on P&ID with HT designation inside insulation symbol. Electrical trace requires area classification check.</div></div>
+<div class="gloss-item" data-term="hic (hydrogen-induced cracking)"><div class="gloss-term">HIC (Hydrogen-Induced Cracking)<span class="gloss-tag red">Materials</span></div><div class="gloss-def">Cracking in carbon steel caused by atomic hydrogen absorption from wet H2S environments. Occurs at inclusions in the steel microstructure. Prevented by specifying HIC-resistant steel (NACE MR0103, low sulphur content).</div></div>
+<div class="gloss-item" data-term="high point vent"><div class="gloss-term">High Point Vent<span class="gloss-tag">Piping</span></div><div class="gloss-def">Connection at the highest point in a piping system for releasing trapped gas or air during filling or draining. Every high point needs a vent. Missing vents cause air locks, incomplete draining, and hydrotest failure.</div></div>
+<div class="gloss-item" data-term="hold"><div class="gloss-term">Hold<span class="gloss-tag">Documentation</span></div><div class="gloss-def">A design issue that cannot be resolved at the time of drawing issue. Area enclosed in a cloud on the drawing, marked HOLD with a description. Never issue For Construction with open holds on safety-critical items.</div></div>
+<div class="gloss-item" data-term="hot tapping"><div class="gloss-term">Hot Tapping<span class="gloss-tag red">Brownfield</span></div><div class="gloss-def">Making a branch connection on a pressurised, in-service line without shutdown. Requires a full-encirclement saddle, valve, and specialist hot-tap machine. Engineering approval mandatory. Design branch to be mechanically suitable for hot-tap execution.</div></div>
+<div class="gloss-item" data-term="hvf (high-velocity flushing)"><div class="gloss-term">HVF (High-Velocity Flushing)<span class="gloss-tag">Commissioning</span></div><div class="gloss-def">High-flow water or gas flushing of new piping prior to commissioning to remove construction debris. Velocity typically 1.5× operating velocity. Requires temporary strainer, disposal connection, and flush acceptance criteria.</div></div>
+<div class="gloss-item" data-term="hydrotest"><div class="gloss-term">Hydrotest<span class="gloss-tag">Testing</span></div><div class="gloss-def">Pressure test using water at 1.5× design pressure (B31.3) to verify integrity of welds and fittings. Pipe and supports must be designed for water-filled weight. Minimum test temperature must be at least 17°C above nil-ductility transition temperature.</div></div>
 </div>
 <div class="gloss-group" data-letter="I">
 <div class="gloss-letter">I</div>
-<div class="gloss-item" data-term="isometric drawing">
-  <div class="gloss-term">Isometric Drawing<span class="gloss-tag">Documentation</span></div>
-  <div class="gloss-def">A 3D-view drawing of a single piping line showing all dimensions, fittings, supports, weld joints, and bill of materials. The primary fabrication document for piping spools.</div>
+<div class="gloss-item" data-term="ifc (issue for construction)"><div class="gloss-term">IFC (Issue for Construction)<span class="gloss-tag">Documentation</span></div><div class="gloss-def">The formal drawing issue status authorising field construction. All engineering is complete, all holds closed, all approvals obtained. Changes after IFC require formal engineering change procedure.</div></div>
+<div class="gloss-item" data-term="ifr (issue for review)"><div class="gloss-term">IFR (Issue for Review)<span class="gloss-tag">Documentation</span></div><div class="gloss-def">Drawing issue status for client or discipline review. Not authorised for construction. Comments received and incorporated before IFC.</div></div>
+<div class="gloss-item" data-term="impact test"><div class="gloss-term">Impact Test<span class="gloss-tag blue">Materials</span></div><div class="gloss-def">Charpy V-notch impact test measuring fracture toughness at specified low temperature. Required by B31.3 for materials used below their listed minimum temperature. Ensures ductile behaviour during upset conditions.</div></div>
+<div class="gloss-item" data-term="inspection class"><div class="gloss-term">Inspection Class<span class="gloss-tag blue">Inspection</span></div><div class="gloss-def">B31.3 classification defining NDE requirements: Normal (visual + spot RT/UT), Category D (visual only for low-hazard services), Category M (more stringent for lethal service). Higher inspection class = more welds examined.</div></div>
+<div class="gloss-item" data-term="instrumentation"><div class="gloss-term">Instrumentation<span class="gloss-tag">Instruments</span></div><div class="gloss-def">All measurement and control devices in a process system: transmitters, indicators, controllers, switches, valves. As a piping designer, you model the connections but the instrument engineer specifies the devices and their locations.</div></div>
+<div class="gloss-item" data-term="insulation"><div class="gloss-term">Insulation<span class="gloss-tag">Piping</span></div><div class="gloss-def">Thermal insulation applied to pipe for heat conservation, personnel protection, or freeze protection. Types: mineral wool, calcium silicate, cellular glass (cold service), elastomeric foam. Add insulation thickness to OD when checking clearances.</div></div>
+<div class="gloss-item" data-term="isometric drawing"><div class="gloss-term">Isometric Drawing<span class="gloss-tag">Documentation</span></div><div class="gloss-def">A 3D-view drawing of a single piping line showing all dimensions, fittings, welds, supports, and bill of materials. The primary fabrication document for pipe spools. Extracted from the 3D model or drawn manually.</div></div>
 </div>
+<div class="gloss-group" data-letter="J">
+<div class="gloss-letter">J</div>
+<div class="gloss-item" data-term="jacketed pipe"><div class="gloss-term">Jacketed Pipe<span class="gloss-tag">Piping</span></div><div class="gloss-def">A pipe within a pipe, with the annular space carrying a heat transfer medium (steam, hot oil, coolant). Used for highly viscous materials, temperature-sensitive products, or reactive chemicals. Complex to design and maintain.</div></div>
+<div class="gloss-item" data-term="joint efficiency"><div class="gloss-term">Joint Efficiency<span class="gloss-tag blue">Design</span></div><div class="gloss-def">A factor (E) reducing allowable stress to account for the quality of a longitudinal weld seam in pipe. E = 1.0 for seamless pipe, 0.85 for ERW pipe (depending on NDE performed). Affects wall thickness calculation.</div></div>
+</div>
+<div class="gloss-group" data-letter="K">
+<div class="gloss-letter">K</div>
+<div class="gloss-item" data-term="ko drum (knock-out drum)"><div class="gloss-term">KO Drum (Knock-Out Drum)<span class="gloss-tag">Equipment</span></div><div class="gloss-def">A horizontal or vertical vessel upstream of a compressor or flare system that separates entrained liquid from a gas stream. Critical for compressor protection and flare system integrity. Inlet nozzle often tangential to promote centrifugal separation.</div></div>
 </div>
 <div class="gloss-group" data-letter="L">
 <div class="gloss-letter">L</div>
-<div class="gloss-item" data-term="line list">
-  <div class="gloss-term">Line List<span class="gloss-tag">Documentation</span></div>
-  <div class="gloss-def">A project database listing every piping line with its design pressure, temperature, fluid service, material, insulation requirements, and applicable code. The data companion to the P&ID. Cross-reference everything.</div>
-</div>
-<div class="gloss-item" data-term="lr elbow (long radius)">
-  <div class="gloss-term">LR Elbow (Long Radius)<span class="gloss-tag">Fittings</span></div>
-  <div class="gloss-def">A 90° elbow with a centreline radius of 1.5× the pipe nominal diameter. Standard for most process piping. Lower pressure drop and lower stress intensification factor than short-radius elbows. Default choice unless space is critical.</div>
-</div>
+<div class="gloss-item" data-term="laser scanning"><div class="gloss-term">Laser Scanning<span class="gloss-tag">Brownfield</span></div><div class="gloss-def">3D survey technique using laser pulses to capture a point cloud of existing plant. The primary tool for brownfield modelling. A point cloud is ground truth — it captures undocumented modifications that drawings miss. Cost is a fraction of one field reroute.</div></div>
+<div class="gloss-item" data-term="ldar (leak detection and repair)"><div class="gloss-term">LDAR (Leak Detection and Repair)<span class="gloss-tag">HSE</span></div><div class="gloss-def">Regulatory programme requiring periodic inspection and repair of fugitive emission sources — valves, flanges, connectors. Drives selection of low-emission valve packing and flange connection types in new design.</div></div>
+<div class="gloss-item" data-term="legend sheet"><div class="gloss-term">Legend Sheet<span class="gloss-tag">Documentation</span></div><div class="gloss-def">P&ID sheet defining all symbols, abbreviations, and line types used in the drawing set. Read on day one of every project. Never assume a symbol means the same as your previous project.</div></div>
+<div class="gloss-item" data-term="line list"><div class="gloss-term">Line List<span class="gloss-tag">Documentation</span></div><div class="gloss-def">Project database listing every piping line: tag, P&ID reference, design pressure, design temperature, fluid, material, insulation, and pipe spec. The numerical companion to the P&ID. Cross-reference before routing any line.</div></div>
+<div class="gloss-item" data-term="lined pipe"><div class="gloss-term">Lined Pipe<span class="gloss-tag">Materials</span></div><div class="gloss-def">Pipe with an internal lining of different material — rubber, PTFE, glass, cement, or epoxy. Used when the base pipe material cannot resist the process fluid. Full-bore fittings required to avoid lining damage at connections.</div></div>
+<div class="gloss-item" data-term="lng (liquefied natural gas)"><div class="gloss-term">LNG (Liquefied Natural Gas)<span class="gloss-tag">Process</span></div><div class="gloss-def">Natural gas cooled to -162°C, liquefying it for storage and transport. Requires cryogenic materials (austenitic stainless or 9% nickel steel), impact testing, and special design for thermal shock.</div></div>
+<div class="gloss-item" data-term="low-point drain"><div class="gloss-term">Low-Point Drain<span class="gloss-tag">Piping</span></div><div class="gloss-def">Drain connection at the lowest accessible point in a piping run. Drain valve size minimum DN 25 (1"). Must allow complete drainage of the line for maintenance or hydrotest water removal.</div></div>
 </div>
 <div class="gloss-group" data-letter="M">
 <div class="gloss-letter">M</div>
-<div class="gloss-item" data-term="moc (management of change)">
-  <div class="gloss-term">MOC (Management of Change)<span class="gloss-tag">Process</span></div>
-  <div class="gloss-def">Formal procedure for documenting, reviewing, and approving any change to design, materials, or operating conditions. Bypassing MOC is how small changes become expensive disasters.</div>
-</div>
-<div class="gloss-item" data-term="mto (material take-off)">
-  <div class="gloss-term">MTO (Material Take-Off)<span class="gloss-tag">Documentation</span></div>
-  <div class="gloss-def">A quantified list of all piping materials required for a project or spool, used for procurement. Accuracy of MTO directly affects project cost and schedule.</div>
-</div>
+<div class="gloss-item" data-term="manway"><div class="gloss-term">Manway<span class="gloss-tag">Equipment</span></div><div class="gloss-def">A pressure-tight access opening in a vessel or column, typically NPS 18 to 24, for personnel entry. Requires minimum 1000mm clear swing space for the door. Never route piping that blocks manway access.</div></div>
+<div class="gloss-item" data-term="match line"><div class="gloss-term">Match Line<span class="gloss-tag">Documentation</span></div><div class="gloss-def">A line on a drawing showing where it is cut and continued on another drawing. Always quotes the reference drawing number. Essential navigation tool when a unit spans multiple drawing sheets.</div></div>
+<div class="gloss-item" data-term="maximum allowable operating pressure (maop)"><div class="gloss-term">Maximum Allowable Operating Pressure (MAOP)<span class="gloss-tag">Design</span></div><div class="gloss-def">The maximum pressure at which a piping system or pipeline may be operated on a sustained basis. Determined by the weakest component in the system. For pipelines, calculated per B31.8 or B31.4 based on actual wall thickness and location class.</div></div>
+<div class="gloss-item" data-term="mawp (maximum allowable working pressure)"><div class="gloss-term">MAWP (Maximum Allowable Working Pressure)<span class="gloss-tag">Design</span></div><div class="gloss-def">Maximum gauge pressure at which a pressure vessel or piping component is rated at a specific temperature. Calculated from actual thickness minus mill tolerance, corrosion allowance, and mechanical allowances.</div></div>
+<div class="gloss-item" data-term="mechanical seal"><div class="gloss-term">Mechanical Seal<span class="gloss-tag">Equipment</span></div><div class="gloss-def">A device preventing fluid leakage along a rotating shaft in a pump or compressor. API 682 defines seal arrangements (Plan 11, 21, 53...). Seal flush plans shown on P&ID. Piping connections must be accessible for maintenance.</div></div>
+<div class="gloss-item" data-term="mill tolerance"><div class="gloss-term">Mill Tolerance<span class="gloss-tag">Materials</span></div><div class="gloss-def">Manufacturing dimensional tolerance on pipe wall thickness, typically ±12.5% of nominal. Wall thickness calculation must use minimum wall (nominal minus mill tolerance) when checking pressure containment.</div></div>
+<div class="gloss-item" data-term="moc (management of change)"><div class="gloss-term">MOC (Management of Change)<span class="gloss-tag red">Project</span></div><div class="gloss-def">Formal process for documenting, reviewing, and approving any design change after the design basis is set. Bypassing MOC is how small changes become expensive disasters. Every change — however minor — requires written confirmation and MOC if it affects safety, environment, or operability.</div></div>
+<div class="gloss-item" data-term="mss sp-58"><div class="gloss-term">MSS SP-58<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Pipe hangers and supports — materials, design, and manufacture. Defines MSS support types 1 through 59 referenced in stress reports and piping specifications. Know types 24 (shoe), 38 (guide), 51 (constant spring), 52 (variable spring), 54 (anchor).</div></div>
+<div class="gloss-item" data-term="mto (material take-off)"><div class="gloss-term">MTO (Material Take-Off)<span class="gloss-tag">Documentation</span></div><div class="gloss-def">Quantified list of all piping materials: pipe lengths, fittings, flanges, gaskets, bolts. Extracted from model or manually counted from drawings. Accuracy of MTO directly impacts project cost and schedule.</div></div>
 </div>
 <div class="gloss-group" data-letter="N">
 <div class="gloss-letter">N</div>
-<div class="gloss-item" data-term="nps (nominal pipe size)">
-  <div class="gloss-term">NPS (Nominal Pipe Size)<span class="gloss-tag">Dimensions</span></div>
-  <div class="gloss-def">The imperial designation for pipe size used in North America and internationally. NPS does not equal the actual OD for small bore pipe. Example: NPS 2 has OD of 60.3mm, not 50mm.</div>
-</div>
-<div class="gloss-item" data-term="nozzle">
-  <div class="gloss-term">Nozzle<span class="gloss-tag">Equipment</span></div>
-  <div class="gloss-def">The connecting point between a vessel, heat exchanger, pump or other piece of equipment and the piping system. Nozzles have allowable load limits (forces and moments) that piping stress analysis must satisfy.</div>
-</div>
+<div class="gloss-item" data-term="nace"><div class="gloss-term">NACE<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">National Association of Corrosion Engineers. NACE MR0175/ISO 15156 governs material selection for sour (H2S) service. Defines hardness limits for all pressure-containing components in wet H2S environments.</div></div>
+<div class="gloss-item" data-term="nde / ndt (non-destructive examination)"><div class="gloss-term">NDE / NDT (Non-Destructive Examination)<span class="gloss-tag">Welding</span></div><div class="gloss-def">Examination of welds and materials without destruction. Methods: RT (radiographic), UT (ultrasonic), MT (magnetic particle), PT (liquid penetrant), VT (visual). Type and percentage required by piping class and B31.3 inspection class.</div></div>
+<div class="gloss-item" data-term="nema sm23"><div class="gloss-term">NEMA SM23<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Mechanical and electrical standards for steam turbines. NEMA SM23 Table 1 defines minimum allowable nozzle forces and moments for steam turbine inlet and exhaust connections. Most vendors provide more specific allowables — always request.</div></div>
+<div class="gloss-item" data-term="nil-ductility transition temperature (ndtt)"><div class="gloss-term">Nil-Ductility Transition Temperature (NDTT)<span class="gloss-tag red">Materials</span></div><div class="gloss-def">Temperature below which a steel transitions from ductile to brittle fracture behaviour. The minimum design metal temperature (MDMT) must be above the NDTT to prevent brittle fracture. Determined by Charpy impact testing.</div></div>
+<div class="gloss-item" data-term="normal fluid service"><div class="gloss-term">Normal Fluid Service<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">B31.3 service classification for most process piping: not lethal, not high-pressure, and within standard material temperature limits. Defines required NDE percentage (random examination).</div></div>
+<div class="gloss-item" data-term="nps (nominal pipe size)"><div class="gloss-term">NPS (Nominal Pipe Size)<span class="gloss-tag">Dimensions</span></div><div class="gloss-def">Imperial designation for pipe size, used in North America and internationally. NPS does not equal actual OD for small bore. NPS 2 has OD 60.3mm, not 50mm. For NPS 14 and above, OD in inches equals NPS number.</div></div>
+<div class="gloss-item" data-term="npsh (net positive suction head)"><div class="gloss-term">NPSH (Net Positive Suction Head)<span class="gloss-tag red">Equipment</span></div><div class="gloss-def">Measure of the energy available at pump suction to prevent cavitation. NPSH available (NPSHa) must exceed NPSH required (NPSHr) by the vendor-specified margin. Suction piping routing directly affects NPSHa.</div></div>
+<div class="gloss-item" data-term="nozzle"><div class="gloss-term">Nozzle<span class="gloss-tag">Equipment</span></div><div class="gloss-def">The connecting point between a vessel, exchanger, pump, or other equipment and the piping system. Has allowable load limits (forces and moments) that stress analysis must satisfy. Nozzle orientation from vendor drawing.</div></div>
+<div class="gloss-item" data-term="nozzle load"><div class="gloss-term">Nozzle Load<span class="gloss-tag">Stress</span></div><div class="gloss-def">Forces and moments imposed by the piping system on equipment nozzles from dead weight, thermal expansion, and dynamic loads. Must not exceed vendor-specified allowables. Excessive loads cause casing distortion, seal failure, or misalignment.</div></div>
 </div>
 <div class="gloss-group" data-letter="O">
 <div class="gloss-letter">O</div>
-<div class="gloss-item" data-term="olet (weldolet/sockolet/threadolet)">
-  <div class="gloss-term">Olet (Weldolet/Sockolet/Threadolet)<span class="gloss-tag">Fittings</span></div>
-  <div class="gloss-def">A branch fitting that combines reinforcement and the branch connection in one component. Weldolet for butt-weld branches, Sockolet for socket-weld, Threadolet for threaded. Use when branch is less than 50% of header size.</div>
-</div>
+<div class="gloss-item" data-term="olet (weldolet / sockolet / threadolet)"><div class="gloss-term">Olet (Weldolet / Sockolet / Threadolet)<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A self-reinforced branch fitting. Weldolet for butt-weld branches, Sockolet for socket-weld, Threadolet for threaded. Use when branch size is less than 50% of header size. Inherently reinforced — typically no additional reinforcing pad required.</div></div>
+<div class="gloss-item" data-term="operating pressure"><div class="gloss-term">Operating Pressure<span class="gloss-tag">Design</span></div><div class="gloss-def">The normal, expected pressure during routine operation. Design pressure is set above operating pressure to accommodate pressure surges and upset conditions, typically by 10% or the PSV set pressure.</div></div>
+<div class="gloss-item" data-term="orifice plate"><div class="gloss-term">Orifice Plate<span class="gloss-tag">Instruments</span></div><div class="gloss-def">A flat plate with a precision-bored hole installed in a pipe between orifice flanges. Creates a measurable pressure drop proportional to flow rate. The simplest, most reliable flow measurement element for clean liquids and gases.</div></div>
 </div>
 <div class="gloss-group" data-letter="P">
 <div class="gloss-letter">P</div>
-<div class="gloss-item" data-term="p&id (piping and instrumentation diagram)">
-  <div class="gloss-term">P&ID (Piping and Instrumentation Diagram)<span class="gloss-tag">Documentation</span></div>
-  <div class="gloss-def">The primary engineering document showing all process equipment, piping, instrumentation, and control systems. The designer's bible. Verify the revision every morning before starting work.</div>
-</div>
-<div class="gloss-item" data-term="piping class (piping spec)">
-  <div class="gloss-term">Piping Class (Piping Spec)<span class="gloss-tag">Standards</span></div>
-  <div class="gloss-def">A project-specific document defining all allowable materials, pressure ratings, and components for a given service and pressure class. Everything you model must comply with the applicable piping class.</div>
-</div>
-<div class="gloss-item" data-term="pms (piping material specification)">
-  <div class="gloss-term">PMS (Piping Material Specification)<span class="gloss-tag">Documentation</span></div>
-  <div class="gloss-def">Same as Piping Class. A document specifying exactly which pipes, fittings, flanges, valves, and gaskets are permitted for each service category.</div>
-</div>
-<div class="gloss-item" data-term="psv (pressure safety valve)">
-  <div class="gloss-term">PSV (Pressure Safety Valve)<span class="gloss-tag">Safety</span></div>
-  <div class="gloss-def">A spring-loaded valve that opens automatically when process pressure exceeds the set pressure, protecting the system from overpressure. Must be mounted vertically upright. Outlet piping must be designed for reaction forces.</div>
-</div>
+<div class="gloss-item" data-term="p&id (piping and instrumentation diagram)"><div class="gloss-term">P&ID (Piping and Instrumentation Diagram)<span class="gloss-tag">Documentation</span></div><div class="gloss-def">The primary engineering document defining all process equipment, piping, instruments, and controls. Produced by process engineering. Piping designer models exactly what the P&ID shows. Check revision every morning before opening the model.</div></div>
+<div class="gloss-item" data-term="pad (reinforcing pad)"><div class="gloss-term">Pad (Reinforcing Pad)<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A ring of plate welded around a branch connection opening to restore the pressure-containing cross-sectional area removed by the opening. Required when the header wall is insufficient to self-reinforce the branch per B31.3 Para 304.3.</div></div>
+<div class="gloss-item" data-term="pipeaway"><div class="gloss-term">Pipeaway<span class="gloss-tag">Piping</span></div><div class="gloss-def">The piping connected directly to equipment nozzles. Routing of pipeaway is critical — it governs nozzle loads, maintenance access, and support locations. Always route pipeaway before the rest of the line.</div></div>
+<div class="gloss-item" data-term="pipe rack"><div class="gloss-term">Pipe Rack<span class="gloss-tag">Layout</span></div><div class="gloss-def">A structural steel frame carrying multiple pipes from one area of a plant to another. The main highway of a process unit. Pipes allocated to levels by service type: process lines on main level, utilities above, cable trays on separate level.</div></div>
+<div class="gloss-item" data-term="piping class (spec)"><div class="gloss-term">Piping Class (Spec)<span class="gloss-tag">Standards</span></div><div class="gloss-def">Project-specific document defining all allowable materials, ratings, and components for a given service and pressure class. Every pipe, fitting, flange, valve, gasket, and bolt must comply with the applicable piping class.</div></div>
+<div class="gloss-item" data-term="plot plan"><div class="gloss-term">Plot Plan<span class="gloss-tag">Documentation</span></div><div class="gloss-def">Overall plant layout drawing showing equipment positions, buildings, roads, pipe racks, battery limits, and safe distances. Scale 1:200 to 1:500. First document to read on any new project.</div></div>
+<div class="gloss-item" data-term="pmi (positive material identification)"><div class="gloss-term">PMI (Positive Material Identification)<span class="gloss-tag">Inspection</span></div><div class="gloss-def">Field verification of alloy material composition using X-ray fluorescence (XRF) or optical emission spectrometry. Required for all alloy components in critical services to confirm correct material was installed.</div></div>
+<div class="gloss-item" data-term="point cloud"><div class="gloss-term">Point Cloud<span class="gloss-tag">Brownfield</span></div><div class="gloss-def">The raw output of a laser scan: millions of measured points representing the surfaces of existing plant. Processed into a 3D model or used directly in design software as a reference. Ground truth for brownfield design.</div></div>
+<div class="gloss-item" data-term="pressure relief valve (prv)"><div class="gloss-term">Pressure Relief Valve (PRV)<span class="gloss-tag">Valves</span></div><div class="gloss-def">A spring-loaded valve that opens proportionally to overpressure. Used for liquid service. Closes when pressure returns to below set point. Must be mounted vertically. Outlet piping designed for reaction forces.</div></div>
+<div class="gloss-item" data-term="psv (pressure safety valve)"><div class="gloss-term">PSV (Pressure Safety Valve)<span class="gloss-tag red">Valves</span></div><div class="gloss-def">A spring-loaded valve that opens rapidly at set pressure to protect against overpressure. Used for gas and vapour service. Must be mounted vertically upright. Outlet to closed relief header or atmosphere per area classification.</div></div>
+<div class="gloss-item" data-term="ptfe (polytetrafluoroethylene)"><div class="gloss-term">PTFE (Polytetrafluoroethylene)<span class="gloss-tag">Materials</span></div><div class="gloss-def">Fluoropolymer with excellent chemical resistance, used for valve seats, gaskets, lining, and instrument tubing. Temperature limit approximately 230°C. Not suitable for fluorine, molten alkali metals.</div></div>
+<div class="gloss-item" data-term="purge"><div class="gloss-term">Purge<span class="gloss-tag">Commissioning</span></div><div class="gloss-def">Displacement of air (inert gas purge) or process fluid (steam purge) from a piping system before introducing process. Required before commissioning hydrocarbon lines. Design must provide purge connections at high and low points.</div></div>
 </div>
 <div class="gloss-group" data-letter="R">
 <div class="gloss-letter">R</div>
-<div class="gloss-item" data-term="rtj (ring-type joint)">
-  <div class="gloss-term">RTJ (Ring-Type Joint)<span class="gloss-tag">Flanges</span></div>
-  <div class="gloss-def">A flange facing type using a metallic ring gasket seated in a groove machined into the flange face. Used for high-pressure, high-temperature service. Higher integrity than raised-face flanges. Requires more precise alignment.</div>
-</div>
+<div class="gloss-item" data-term="radiography (rt)"><div class="gloss-term">Radiography (RT)<span class="gloss-tag">Welding</span></div><div class="gloss-def">Non-destructive examination using X-rays or gamma rays to detect internal weld defects. The standard NDE method for butt welds in process piping. Percentage required varies by piping class and B31.3 inspection class.</div></div>
+<div class="gloss-item" data-term="reducer"><div class="gloss-term">Reducer<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A fitting that changes pipe size. Concentric = same centreline. Eccentric = offset centreline. See Eccentric Reducer for pump suction rule.</div></div>
+<div class="gloss-item" data-term="reinforcing pad"><div class="gloss-term">Reinforcing Pad<span class="gloss-tag">Fittings</span></div><div class="gloss-def">See Pad. A ring of plate around a branch opening to restore removed pressure-containing area.</div></div>
+<div class="gloss-item" data-term="relief system"><div class="gloss-term">Relief System<span class="gloss-tag red">HSE</span></div><div class="gloss-def">The collection of PSVs, PRVs, rupture discs, and the associated collection header and flare or vent system. Design of relief headers requires careful hydraulic analysis — back-pressure on PSV must not prevent it from opening at set pressure.</div></div>
+<div class="gloss-item" data-term="revamp"><div class="gloss-term">Revamp<span class="gloss-tag">Brownfield</span></div><div class="gloss-def">A significant modification to an existing process unit to change capacity, product quality, or operating conditions. Involves tying new equipment into existing piping. High-risk activity requiring careful as-built verification and shutdown planning.</div></div>
+<div class="gloss-item" data-term="riser"><div class="gloss-term">Riser<span class="gloss-tag">Piping</span></div><div class="gloss-def">A pipe that changes elevation — typically from underground to above-grade, or from one pipe rack level to another. Requires careful support design at grade and at the rack to manage vertical thermal movement.</div></div>
+<div class="gloss-item" data-term="rtj (ring-type joint)"><div class="gloss-term">RTJ (Ring-Type Joint)<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A flange facing type using a metallic ring gasket seated in a groove machined into the flange face. Used for high-pressure, high-temperature service where RF spiral-wound gaskets are not suitable. Requires precise alignment.</div></div>
+<div class="gloss-item" data-term="rupture disc"><div class="gloss-term">Rupture Disc<span class="gloss-tag red">Valves</span></div><div class="gloss-def">A non-reclosing pressure relief device that bursts at a precise set pressure. Single use — replaced after actuation. Often used in series upstream of a PSV to protect the PSV from corrosion or fouling.</div></div>
 </div>
 <div class="gloss-group" data-letter="S">
 <div class="gloss-letter">S</div>
-<div class="gloss-item" data-term="schedule (pipe)">
-  <div class="gloss-term">Schedule (Pipe)<span class="gloss-tag">Dimensions</span></div>
-  <div class="gloss-def">A wall thickness designation for pipe. Higher schedule = thicker wall = higher pressure rating and lower internal diameter. SCH 40 and SCH 80 are most common. Always verify the schedule in the piping class before routing.</div>
-</div>
-<div class="gloss-item" data-term="spool">
-  <div class="gloss-term">Spool<span class="gloss-tag">Fabrication</span></div>
-  <div class="gloss-def">A prefabricated section of piping assembled in a shop, transported to site, and installed. Good spool design minimizes field welds, maximizes shop fabrication, and accounts for installation access.</div>
-</div>
-<div class="gloss-item" data-term="sr elbow (short radius)">
-  <div class="gloss-term">SR Elbow (Short Radius)<span class="gloss-tag">Fittings</span></div>
-  <div class="gloss-def">A 90° elbow with centreline radius of 1.0× the nominal diameter. Saves space but has higher pressure drop and significantly higher stress intensification factor. Avoid unless space is critical and stress analysis confirms acceptability.</div>
-</div>
-<div class="gloss-item" data-term="stop (support)">
-  <div class="gloss-term">Stop (Support)<span class="gloss-tag">Supports</span></div>
-  <div class="gloss-def">A pipe support that restrains axial movement but allows lateral movement. Used to control thermal expansion direction. A guide without a coordinated stop is half a system.</div>
-</div>
+<div class="gloss-item" data-term="safety instrumented system (sis)"><div class="gloss-term">Safety Instrumented System (SIS)<span class="gloss-tag red">HSE</span></div><div class="gloss-def">A control system dedicated to returning a process to a safe state on detection of a dangerous condition. Independent of the basic process control system (BPCS). SIS components shown with diamond bubble on P&ID.</div></div>
+<div class="gloss-item" data-term="sample point"><div class="gloss-term">Sample Point<span class="gloss-tag">Piping</span></div><div class="gloss-def">A connection for withdrawing a representative fluid sample for analysis. Needle valve preferred. Sample cooler often required for hot service. Closed-loop sample system preferred to minimise exposure.</div></div>
+<div class="gloss-item" data-term="schedule (pipe)"><div class="gloss-term">Schedule (Pipe)<span class="gloss-tag">Dimensions</span></div><div class="gloss-def">A designation for pipe wall thickness. SCH 40 and SCH 80 most common. Higher number = thicker wall = higher pressure rating = smaller bore. Always confirm schedule from piping class before routing.</div></div>
+<div class="gloss-item" data-term="scr (stress corrosion cracking)"><div class="gloss-term">SCR (Stress Corrosion Cracking)<span class="gloss-tag red">Materials</span></div><div class="gloss-def">Cracking caused by the combined effect of tensile stress, a corrosive environment, and a susceptible material. Austenitic stainless in chloride environments (SCC), carbon steel in amine service (amine cracking), CS in caustic (caustic cracking).</div></div>
+<div class="gloss-item" data-term="seamless pipe"><div class="gloss-term">Seamless Pipe<span class="gloss-tag">Materials</span></div><div class="gloss-def">Pipe manufactured without a longitudinal weld seam, formed by piercing a billet. Higher integrity than welded pipe. Joint efficiency E = 1.0. Standard for high-pressure, high-temperature, and critical services.</div></div>
+<div class="gloss-item" data-term="sil (safety integrity level)"><div class="gloss-term">SIL (Safety Integrity Level)<span class="gloss-tag red">HSE</span></div><div class="gloss-def">Classification of safety function reliability: SIL 1 (lowest) to SIL 4 (highest). Determines redundancy, testing frequency, and component quality. Defined by risk analysis. Piping isolation valves may have SIL requirements.</div></div>
+<div class="gloss-item" data-term="slip-on flange"><div class="gloss-term">Slip-On Flange<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A flange that slides over the pipe end and is fillet-welded front and back. Lower structural integrity than weld neck flange. Not permitted in severe cyclic service or lethal service per B31.3.</div></div>
+<div class="gloss-item" data-term="snubber"><div class="gloss-term">Snubber<span class="gloss-tag">Supports</span></div><div class="gloss-def">A dynamic restraint that is rigid under fast loads (seismic, water hammer, PSV reaction) but free under slow thermal loads. Allows thermal expansion while restraining dynamic loads. Requires dynamic load input from analysis.</div></div>
+<div class="gloss-item" data-term="socket weld (sw)"><div class="gloss-term">Socket Weld (SW)<span class="gloss-tag">Welding</span></div><div class="gloss-def">A joint where the pipe inserts into a socket in a fitting or flange, and a fillet weld is applied at the outside. Used for NPS 2 and below in most applications. Not permitted in high-purity, crevice-corrosion-sensitive, or radiographically examined services.</div></div>
+<div class="gloss-item" data-term="sour service"><div class="gloss-term">Sour Service<span class="gloss-tag red">Materials</span></div><div class="gloss-def">Piping systems handling fluids containing H2S above threshold concentration (per NACE MR0175). Requires hardness-controlled materials throughout. Special documentation requirements — Material Test Reports (MTRs) retained for life of plant.</div></div>
+<div class="gloss-item" data-term="spectacle blind"><div class="gloss-term">Spectacle Blind<span class="gloss-tag">Piping</span></div><div class="gloss-def">A two-position blind fabricated as two discs connected by a bar. One disc solid (blind), one disc with a hole (open/spade). Flipped to change from flow to isolated. Position clearly indicated on P&ID.</div></div>
+<div class="gloss-item" data-term="spool"><div class="gloss-term">Spool<span class="gloss-tag">Fabrication</span></div><div class="gloss-def">A prefabricated section of piping assembled in a fabrication shop, transported to site, and installed. Good spool design minimises field welds, maximises shop quality, and accounts for site access and lifting constraints.</div></div>
+<div class="gloss-item" data-term="stainless steel"><div class="gloss-term">Stainless Steel<span class="gloss-tag">Materials</span></div><div class="gloss-def">Iron-chromium alloys with minimum 10.5% chromium. Types in piping: 304/304L (general), 316/316L (better chloride resistance), 321/347 (stabilised for high-temperature), duplex 2205 (high strength, good corrosion resistance).</div></div>
+<div class="gloss-item" data-term="stop"><div class="gloss-term">Stop<span class="gloss-tag">Supports</span></div><div class="gloss-def">A pipe support that restrains axial movement while allowing free lateral movement. Used to direct thermal expansion and prevent pipe from moving axially beyond the designed range. Complement to a guide.</div></div>
+<div class="gloss-item" data-term="stress corrosion cracking"><div class="gloss-term">Stress Corrosion Cracking<span class="gloss-tag red">Materials</span></div><div class="gloss-def">See SCR. Cracking driven by the combination of stress and specific corrosive environment.</div></div>
+<div class="gloss-item" data-term="strainer"><div class="gloss-term">Strainer<span class="gloss-tag">Piping</span></div><div class="gloss-def">A device for removing solid particles from a fluid stream. Types: Y-strainer (permanent, small bore), basket strainer (large bore, top-access), duplex strainer (online maintenance). Temporary conical strainer always installed at commissioning.</div></div>
 </div>
 <div class="gloss-group" data-letter="T">
 <div class="gloss-letter">T</div>
-<div class="gloss-item" data-term="tie-in">
-  <div class="gloss-term">Tie-In<span class="gloss-tag">Brownfield</span></div>
-  <div class="gloss-def">The connection point between new piping and existing in-service piping. Requires careful planning: isolation, drain, purge, weld procedure, inspection, and usually a shutdown window.</div>
-</div>
-<div class="gloss-item" data-term="tq (technical query)">
-  <div class="gloss-term">TQ (Technical Query)<span class="gloss-tag">Documentation</span></div>
-  <div class="gloss-def">A formal question raised to the client, process engineer, or engineering lead requesting clarification on a technical issue. Raise a TQ for every discrepancy — it creates a documented trail and protects you.</div>
-</div>
-<div class="gloss-item" data-term="trunnion">
-  <div class="gloss-term">Trunnion<span class="gloss-tag">Supports</span></div>
-  <div class="gloss-def">A cylindrical attachment welded to a pipe to carry vertical loads at a support point, especially on large-bore hot lines. Avoids point loading on the pipe wall.</div>
-</div>
+<div class="gloss-item" data-term="tema"><div class="gloss-term">TEMA<span class="gloss-tag blue">Standards</span></div><div class="gloss-def">Tubular Exchanger Manufacturers Association. Defines heat exchanger types by shell, front head, and rear head configuration (e.g. BEM, AEL, NEN). Specifies design, materials, and fabrication tolerances. Required reference for HX specification.</div></div>
+<div class="gloss-item" data-term="thermal expansion"><div class="gloss-term">Thermal Expansion<span class="gloss-tag">Stress</span></div><div class="gloss-def">The increase in pipe length and diameter when temperature rises. Carbon steel expands approximately 12mm per 100°C per 10m of pipe. Must be absorbed by flexibility loops, expansion joints, or guided routing to prevent excessive stresses and nozzle loads.</div></div>
+<div class="gloss-item" data-term="thermowell"><div class="gloss-term">Thermowell<span class="gloss-tag">Instruments</span></div><div class="gloss-def">A pressure-tight well installed in a pipe or vessel allowing a temperature sensor to be inserted and removed without depressurising. Must be sized for the pipe bore. Insertion length must reach at least one-third of pipe diameter into the flow.</div></div>
+<div class="gloss-item" data-term="threaded connection"><div class="gloss-term">Threaded Connection<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A mechanical joint using tapered or parallel threads. Used for small bore connections (NPS 2 and below) in non-critical services. Avoid in vibrating services, hydrogen service, and where regular disassembly is required.</div></div>
+<div class="gloss-item" data-term="tie-in"><div class="gloss-term">Tie-In<span class="gloss-tag">Brownfield</span></div><div class="gloss-def">The connection of new piping to existing in-service piping. Requires careful planning: isolation procedure, drain, purge sequence, weld procedure, inspection hold points, and construction sequence within the available shutdown window.</div></div>
+<div class="gloss-item" data-term="tos (top of steel)"><div class="gloss-term">TOS (Top of Steel)<span class="gloss-tag">Structural</span></div><div class="gloss-def">The reference elevation for structural steel surfaces. Pipe support base plates sit on TOS. Used for setting pipe elevation above structure. Always confirm TOS datum with structural engineer at project start.</div></div>
+<div class="gloss-item" data-term="tq (technical query)"><div class="gloss-term">TQ (Technical Query)<span class="gloss-tag">Documentation</span></div><div class="gloss-def">A formal question raised to the client, process engineer, or engineering lead requesting clarification of a technical issue. Raise a TQ for every P&ID/line list discrepancy. Document the question and the response. Never assume — always confirm in writing.</div></div>
+<div class="gloss-item" data-term="trunnion"><div class="gloss-term">Trunnion<span class="gloss-tag">Supports</span></div><div class="gloss-def">A cylindrical stub welded to a pipe to carry vertical loads at a support point, especially on large-bore high-temperature lines. Avoids point loading on the pipe wall. Same material and welding procedure as parent pipe.</div></div>
 </div>
 <div class="gloss-group" data-letter="U">
 <div class="gloss-letter">U</div>
-<div class="gloss-item" data-term="ut (ultrasonic testing)">
-  <div class="gloss-term">UT (Ultrasonic Testing)<span class="gloss-tag">Inspection</span></div>
-  <div class="gloss-def">Non-destructive examination method using sound waves to detect flaws in welds and measure wall thickness. Essential tool for brownfield — use a UT gauge to measure existing pipe wall thickness before tying in.</div>
-</div>
+<div class="gloss-item" data-term="ultrasonic testing (ut)"><div class="gloss-term">Ultrasonic Testing (UT)<span class="gloss-tag">Inspection</span></div><div class="gloss-def">Non-destructive examination using sound waves. Detects internal flaws in welds (phased array UT) and measures wall thickness. Preferred over RT in many applications as it detects planar defects better. No radiation hazard.</div></div>
+<div class="gloss-item" data-term="union"><div class="gloss-term">Union<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A three-piece threaded fitting allowing pipe disassembly without unthreading the pipe itself. Used in small bore instrument and utility connections for easy maintenance access. Not suitable for high-pressure or high-temperature service.</div></div>
+<div class="gloss-item" data-term="utility station"><div class="gloss-term">Utility Station<span class="gloss-tag">Piping</span></div><div class="gloss-def">A point in the plant providing access to utilities: water, steam, nitrogen, instrument air, plant air. Used for purging, cleaning, and emergency cooling. Coverage requirements typically specified in project layout philosophy.</div></div>
 </div>
 <div class="gloss-group" data-letter="V">
 <div class="gloss-letter">V</div>
-<div class="gloss-item" data-term="valve actuator">
-  <div class="gloss-term">Valve Actuator<span class="gloss-tag">Valves</span></div>
-  <div class="gloss-def">A device for operating a valve remotely or automatically: handwheel (manual), gear operator (large valves), pneumatic actuator, electric motor operator. Specify based on torque requirement and operational urgency.</div>
-</div>
-<div class="gloss-item" data-term="vent">
-  <div class="gloss-term">Vent<span class="gloss-tag">Layout</span></div>
-  <div class="gloss-def">An opening at a high point in a piping system to release trapped gas or air during filling or draining. Every high point needs a vent. Missing vents cause air locks, incomplete draining, and hydrotest problems.</div>
-</div>
+<div class="gloss-item" data-term="valve actuator"><div class="gloss-term">Valve Actuator<span class="gloss-tag">Valves</span></div><div class="gloss-def">A mechanism for operating a valve using power other than manual force. Types: pneumatic diaphragm (most common for control), pneumatic cylinder (higher force), electric motor (MOV, for remote isolation), hydraulic (large bore high-force).</div></div>
+<div class="gloss-item" data-term="valve body"><div class="gloss-term">Valve Body<span class="gloss-tag">Valves</span></div><div class="gloss-def">The pressure-containing housing of a valve. Material must match the piping class. End connections (RF flanged, BW, SW, threaded) and face-to-face dimension per applicable standard.</div></div>
+<div class="gloss-item" data-term="vent"><div class="gloss-term">Vent<span class="gloss-tag">Piping</span></div><div class="gloss-def">An opening at the highest point in a piping system to release trapped gas or air. Required at every high point. Vent valve required for pressurised systems. Connect to closed system for hazardous fluids.</div></div>
+<div class="gloss-item" data-term="vibration"><div class="gloss-term">Vibration<span class="gloss-tag red">Stress</span></div><div class="gloss-def">Dynamic loading on piping from machinery, fluid pulsation, or vortex shedding. Major cause of small-bore connection failures. Special small-bore bracing required near compressors, reciprocating pumps, and high-velocity gas lines.</div></div>
 </div>
 <div class="gloss-group" data-letter="W">
 <div class="gloss-letter">W</div>
-<div class="gloss-item" data-term="water hammer">
-  <div class="gloss-term">Water Hammer<span class="gloss-tag">Operations</span></div>
-  <div class="gloss-def">A hydraulic shock wave caused by sudden changes in fluid velocity — rapid valve closure, pump trip, or steam meeting trapped condensate. Devastating forces. Prevent with proper drainage, slow-closing valves, and surge analysis on long lines.</div>
+<div class="gloss-item" data-term="water hammer"><div class="gloss-term">Water Hammer<span class="gloss-tag red">Operations</span></div><div class="gloss-def">A hydraulic pressure surge caused by sudden velocity change — rapid valve closure, pump trip, or steam meeting trapped condensate. Can generate forces many times operating pressure. Prevented by slow-closing valves, proper drainage, and surge analysis.</div></div>
+<div class="gloss-item" data-term="weld neck flange"><div class="gloss-term">Weld Neck Flange<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A flange with a tapered hub butt-welded to the pipe. Highest integrity flange type. Required for severe cyclic service, high-temperature/pressure, and lethal service. More expensive than slip-on but superior structural performance.</div></div>
+<div class="gloss-item" data-term="weld map"><div class="gloss-term">Weld Map<span class="gloss-tag">Documentation</span></div><div class="gloss-def">A drawing or table identifying all weld joints in a system with unique weld numbers, tracking NDE results and inspection records. Required for high-pressure and alloy piping. Maintained through fabrication and construction.</div></div>
+<div class="gloss-item" data-term="weldolet"><div class="gloss-term">Weldolet<span class="gloss-tag">Fittings</span></div><div class="gloss-def">A self-reinforced butt-weld branch fitting. Installed by cutting a hole in the header pipe and welding the weldolet in place. Used for branch sizes less than 50% of header. Inherently reinforced.</div></div>
 </div>
-<div class="gloss-item" data-term="weld map">
-  <div class="gloss-term">Weld Map<span class="gloss-tag">Documentation</span></div>
-  <div class="gloss-def">A drawing identifying all weld joints in a piping system, assigned weld numbers for tracking inspection records. Required for high-pressure and high-temperature service.</div>
+<div class="gloss-group" data-letter="X">
+<div class="gloss-letter">X</div>
+<div class="gloss-item" data-term="x-ray (rt)"><div class="gloss-term">X-Ray (RT)<span class="gloss-tag">Welding</span></div><div class="gloss-def">See Radiography (RT). Common field term for radiographic testing of welds.</div></div>
 </div>
+<div class="gloss-group" data-letter="Z">
+<div class="gloss-letter">Z</div>
+<div class="gloss-item" data-term="zone classification"><div class="gloss-term">Zone Classification<span class="gloss-tag red">HSE</span></div><div class="gloss-def">See Area Classification. The designation of hazardous zones around equipment handling flammable materials. Determines electrical equipment specification and cable routing requirements.</div></div>
 </div>
 </div>
 </div>
@@ -763,23 +779,35 @@ footer {
 </footer>
 <script>
 function searchGloss(q){
-  q=q.toLowerCase();
+  q=q.toLowerCase().trim();
+  var count=0;
+  document.querySelectorAll('.alpha-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelector('[data-letter="all"]').classList.add('active');
   document.querySelectorAll('.gloss-item').forEach(i=>{
-    i.style.display=(!q||i.dataset.term.includes(q)||i.querySelector('.gloss-def').textContent.toLowerCase().includes(q))?'':'none';
+    var show=(!q||i.dataset.term.includes(q)||i.querySelector('.gloss-def').textContent.toLowerCase().includes(q));
+    i.style.display=show?'':'none';
+    if(show)count++;
   });
   document.querySelectorAll('.gloss-group').forEach(g=>{
-    const vis=[...g.querySelectorAll('.gloss-item')].some(i=>i.style.display!=='none');
+    var vis=[...g.querySelectorAll('.gloss-item')].some(i=>i.style.display!=='none');
     g.style.display=vis?'':'none';
   });
+  document.getElementById('gloss-count').textContent=q?count+' terms found':'184 terms across 24 letters';
 }
 function filterLetter(l){
   document.querySelectorAll('.alpha-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-  document.querySelector('.gloss-search').value='';
-  document.querySelectorAll('.gloss-group').forEach(g=>{g.style.display=(l==='all'||g.dataset.letter===l)?'':'none';});
+  document.querySelector('[data-letter="'+l+'"]').classList.add('active');
+  document.getElementById('gloss-input').value='';
+  var count=0;
+  document.querySelectorAll('.gloss-group').forEach(g=>{
+    var show=(l==='all'||g.dataset.letter===l);
+    g.style.display=show?'':'none';
+    if(show)count+=[...g.querySelectorAll('.gloss-item')].length;
+  });
   document.querySelectorAll('.gloss-item').forEach(i=>i.style.display='');
+  document.getElementById('gloss-count').textContent=count+' terms'+(l==='all'?' across 24 letters':' starting with '+l);
 }
-const obs=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('visible')),{threshold:0.05});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.05});
 document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 </script>
 </body>

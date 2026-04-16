@@ -3,10 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tip #02 &mdash; Piping Passion</title>
+<title>Downloads &mdash; Piping Passion</title>
 <link rel="stylesheet" href="../css/style.css">
-<style>
-/* ═══════════════════════════════════════════
+<style>/* ═══════════════════════════════════════════
    PIPINGPASSION.COM — SHARED STYLESHEET
    Palette: Navy #09152A · Gold #C9930A · #F0B429
    ═══════════════════════════════════════════ */
@@ -449,31 +448,56 @@ footer {
   footer { flex-direction: column; align-items: flex-start; }
 }
 
-.tip-page{max-width:760px;margin:0 auto;padding:4rem 2.5rem}
-.tip-page-num{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:.8rem;display:flex;align-items:center;gap:.6rem}
-.tip-page-num::before{content:'';width:22px;height:2px;background:var(--gold)}
-.tip-page-title{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(1.4rem,3vw,2.2rem);line-height:1.15;color:var(--white);margin-bottom:1rem}
-.tip-divider{width:60px;height:3px;background:var(--gold);margin:2rem 0;border-radius:2px}
-.tip-body{font-size:1.05rem;color:#B0C4D8;line-height:1.85;margin-bottom:1.2rem}
-.tip-body strong{color:var(--white);font-weight:600}
-.callout{background:var(--navy-3);border-left:3px solid var(--gold);padding:1.2rem 1.6rem;border-radius:0 6px 6px 0;margin:1.8rem 0}
-.callout-label{font-family:'Barlow Condensed',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem}
-.callout-text{font-size:.95rem;color:#B0C4D8;line-height:1.7;font-style:italic}
-.tip-nav{display:flex;justify-content:space-between;align-items:center;padding:2rem 0;border-top:1px solid var(--border);margin-top:3rem}
-.tip-nav a{font-family:'Barlow Condensed',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
-.tip-nav a:hover{color:var(--gold-lt)}
-.back-link{font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;margin-bottom:2rem;transition:color .2s}
-.back-link:hover{color:var(--gold)}
-.tip-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.5rem}
+
+.dl-hero{text-align:center;padding:2rem 0 3rem;}
+.dl-badge{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-weight:700;
+  font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:#fff;
+  background:#E03030;padding:.3rem .9rem;border-radius:3px;margin-bottom:1.2rem;}
+.dl-section{max-width:900px;margin:0 auto;padding:0 2.5rem 4rem;}
+.dl-cat-title{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.2rem;
+  text-transform:uppercase;color:var(--white);margin:3rem 0 1rem;display:flex;
+  align-items:center;gap:1rem;letter-spacing:.08em;}
+.dl-cat-title::after{content:"";flex:1;height:1px;background:var(--border);}
+.dl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1px;
+  border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.dl-card{background:var(--navy-2);padding:1.4rem 1.6rem;position:relative;}
+.dl-card:hover{background:var(--navy-3);}
+.dl-card-icon{font-size:1.8rem;margin-bottom:.8rem;opacity:.7;}
+.dl-card-title{font-family:"Barlow Condensed",sans-serif;font-weight:700;font-size:1.05rem;
+  color:var(--white);margin-bottom:.4rem;}
+.dl-card-desc{font-size:.8rem;color:var(--muted);line-height:1.5;margin-bottom:.9rem;}
+.dl-card-format{font-family:monospace;font-size:.7rem;color:var(--gold);letter-spacing:.1em;}
+.dl-tag-free{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-size:.65rem;
+  font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--navy);
+  background:#1D9E75;padding:.12rem .5rem;border-radius:2px;margin-right:.4rem;}
+.dl-tag-paid{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-size:.65rem;
+  font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#fff;
+  background:#D85A30;padding:.12rem .5rem;border-radius:2px;margin-right:.4rem;}
+.dl-tag-soon{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-size:.65rem;
+  font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);
+  background:var(--navy-3);border:1px solid var(--border);padding:.12rem .5rem;border-radius:2px;}
+.dl-btn{display:inline-block;font-family:"Barlow Condensed",sans-serif;font-weight:700;
+  font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem 1rem;
+  border-radius:3px;text-decoration:none;margin-top:.6rem;cursor:not-allowed;
+  background:var(--navy-3);color:var(--muted);border:1px solid var(--border);}
+.dl-coming{text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;
+  font-style:italic;grid-column:1/-1;}
+.dl-notify{background:var(--navy-3);border:1px solid var(--border);border-radius:8px;
+  padding:2rem 2.5rem;margin-top:3rem;display:flex;align-items:center;
+  gap:2rem;flex-wrap:wrap;}
+.dl-notify-text{flex:1;min-width:200px;}
+.dl-notify-title{font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:1.1rem;
+  color:var(--white);margin-bottom:.3rem;}
+.dl-notify-desc{font-size:.82rem;color:var(--muted);line-height:1.6;}
 </style>
 </head>
 <body>
-
+<div class="deco-wrap"><img class="sk-l" src="../assets/sk-c.svg" alt=""><img class="sk-r" src="../assets/sk-f.svg" alt=""></div>
 <nav>
   <a class="nav-logo" href="../index.html"><span>PIPING</span>PASSION</a>
   <ul class="nav-links">
-    <li><a href="field-tips.html" class="active">Field Tips</a></li>
-    <li><a href="field-stories.html" >Field Stories</a></li>
+    <li><a href="field-tips.html">Field Tips</a></li>
+    <li><a href="field-stories.html">Field Stories</a></li>
     <li><a href="brownfield.html">Brownfield</a></li>
     <li><a href="scan-to-model.html">Scan-to-Model</a></li>
     <li><a href="codes-standards.html">Codes</a></li>
@@ -490,43 +514,135 @@ footer {
 </nav>
 <div class="page-header">
   <div class="page-header-inner">
-    <p class="page-eyebrow">Field tip</p>
-    <h1 class="page-title"><span>Tip #02</span></h1>
+    <p class="page-eyebrow">AutoCAD Blocks &middot; Checklists &middot; Legends</p>
+    <h1 class="page-title">Down<span>loads</span></h1>
+    <p class="page-desc">Ready-to-use files for piping designers &mdash; AutoCAD blocks, P&amp;ID legends, model review checklists, and brownfield tools. Built from real project experience, not textbooks.</p>
   </div>
 </div>
-<div class="tip-page reveal">
-  <a class="back-link" href="field-tips.html">&larr; All field tips</a>
-  <p class="tip-page-num">Tip #02 &middot; Layout</p>
-  <h1 class="tip-page-title">Route for maintenance access first, aesthetics never.</h1>
-  <div class="tip-tags"><span class="tag">Layout</span></div>
-  <div class="tip-divider"></div>
-  <p class="tip-body">Always verify the revision of the P&amp;ID before starting any work. Check it every morning. Set up a notification system with document control for new revisions.</p>
-<p class="tip-body">The best layout is the one a fitter can work on at 3 AM during an emergency shutdown. Every valve needs a body to stand in front of it. Every instrument needs a face someone can read. Every flange needs enough clearance around it that a technician in winter gear can get a wrench on every bolt.</p>
-<div class="callout"><div class="callout-label">From the book</div><div class="callout-text">I have seen designers work for two weeks on a superseded P&ID revision, resulting in complete rework costing tens of thousands of dollars and damaged professional reputations. This is the most preventable mistake in piping design.</div></div>
-<p class="tip-body"><strong>The takeaway:</strong> Maintenance access is not a secondary consideration &mdash; it is the primary one. A pipe that nobody can maintain safely is not a good design, regardless of how clean it looks in the model.</p>
-  <div class="tip-nav">
-    <a href="tip-01.html">&larr; Previous tip</a>
-    <a href="field-tips.html">All tips</a>
-    <a href="tip-03.html">Next tip &rarr;</a>
+
+<div class="dl-section reveal">
+
+  <div style="text-align:center;margin-bottom:2.5rem;">
+    <span class="dl-badge">&#9679; In progress &mdash; launching soon</span>
+    <p style="font-size:.9rem;color:var(--muted);margin-top:.8rem;max-width:600px;margin-left:auto;margin-right:auto;line-height:1.7;">
+      Files are currently being prepared and tested on real projects before release. 
+      Quality over speed &mdash; every block and checklist will be field-verified before it goes up.
+    </p>
   </div>
-  <div class="book-promo" style="margin-top:3rem">
-    <div class="book-promo-cover"><img src="../assets/front-cover.jpg" alt="The Piping Designer&rsquo;s Companion"></div>
-    <div>
-      <p class="book-promo-meta">25 Chapters &middot; 66 Tips &middot; Complete Brownfield Guide</p>
-      <p class="book-promo-title">The Piping Designer&rsquo;s Companion</p>
-      <p class="book-promo-text">This tip is one of 66 in the book.</p>
-      <a class="btn-primary" href="https://mybook.to/pgMcn1" target="_blank">Get the book &rarr;</a>
+
+  <h2 class="dl-cat-title">AutoCAD Blocks</h2>
+  <div class="dl-grid"><div class="dl-card">
+  <div class="dl-card-icon">⚙️</div>
+  <div class="dl-card-title">P&ID Valve Block Library</div>
+  <div class="dl-card-desc">Gate, globe, ball, butterfly, check, PSV, control valves — all standard ISA 5.1 symbols, clean and consistent.</div>
+  <div class="dl-card-format">.DWG + .PDF</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">🏭</div>
+  <div class="dl-card-title">Equipment Symbol Library</div>
+  <div class="dl-card-desc">Pumps, vessels, exchangers, columns, compressors — plan view and elevation blocks for GAs.</div>
+  <div class="dl-card-format">.DWG</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">🔧</div>
+  <div class="dl-card-title">Pipe Support Block Library</div>
+  <div class="dl-card-desc">Shoes, hangers, guides, anchors, spring hangers — standard MSS SP-58 types ready to insert.</div>
+  <div class="dl-card-format">.DWG</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">📐</div>
+  <div class="dl-card-title">Isometric Template Block</div>
+  <div class="dl-card-desc">North arrow, elevation markers, weld symbols, support triangles — ready-to-use iso drawing blocks.</div>
+  <div class="dl-card-format">.DWG</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">🔩</div>
+  <div class="dl-card-title">Piping Fittings Library</div>
+  <div class="dl-card-desc">Elbows, tees, reducers, caps, olets — plan and isometric view blocks for all common fittings.</div>
+  <div class="dl-card-format">.DWG</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">🏗️</div>
+  <div class="dl-card-title">Pipe Rack Cross-Section Template</div>
+  <div class="dl-card-desc">Standard pipe rack elevation with levels, spacing notation, and column details.</div>
+  <div class="dl-card-format">.DWG</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div></div>
+
+  <h2 class="dl-cat-title">Checklists &amp; Field Tools</h2>
+  <div class="dl-grid"><div class="dl-card">
+  <div class="dl-card-icon">✅</div>
+  <div class="dl-card-title">Model Review Checklist</div>
+  <div class="dl-card-desc">Everything a senior checks before signing off a 3D model: routing, supports, access, nozzle orientations, clashes.</div>
+  <div class="dl-card-format">.PDF</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">✅</div>
+  <div class="dl-card-title">Brownfield Walkdown Form</div>
+  <div class="dl-card-desc">Field verification form to take on site: dimensions, elevations, tie-in conditions, as-built discrepancies.</div>
+  <div class="dl-card-format">.PDF</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">✅</div>
+  <div class="dl-card-title">Isometric Check List</div>
+  <div class="dl-card-desc">Line-by-line iso verification before IFC: dimensions, BOM, weld count, NDE requirements, hold status.</div>
+  <div class="dl-card-format">.PDF</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">✅</div>
+  <div class="dl-card-title">P&ID Reading Checklist</div>
+  <div class="dl-card-desc">Structured checklist for reviewing a new P&ID: revision verification, line list cross-check, instrument tags.</div>
+  <div class="dl-card-format">.PDF</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div></div>
+
+  <h2 class="dl-cat-title">Legend Sheets</h2>
+  <div class="dl-grid"><div class="dl-card">
+  <div class="dl-card-icon">📋</div>
+  <div class="dl-card-title">P&ID Legend Sheet — ISA 5.1</div>
+  <div class="dl-card-desc">Complete P&ID legend with all valve, instrument, equipment, and signal line symbols. Ready to attach to any P&ID drawing set.</div>
+  <div class="dl-card-format">.DWG + .PDF</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">📋</div>
+  <div class="dl-card-title">Piping Isometric Legend</div>
+  <div class="dl-card-desc">Standard iso legend: weld symbols, support notation, flange types, dimension conventions.</div>
+  <div class="dl-card-format">.DWG + .PDF</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div><div class="dl-card">
+  <div class="dl-card-icon">📋</div>
+  <div class="dl-card-title">Support Drawing Legend</div>
+  <div class="dl-card-desc">Support type reference with MSS SP-58 type numbers, load direction symbols, and annotation conventions.</div>
+  <div class="dl-card-format">.DWG + .PDF</div>
+  <div style="margin-top:.6rem"><span class="dl-tag-soon">Coming soon</span><a class="dl-btn">Coming soon</a></div>
+</div></div>
+
+  <div class="dl-notify">
+    <div style="font-size:2rem">📬</div>
+    <div class="dl-notify-text">
+      <div class="dl-notify-title">Get notified when downloads launch</div>
+      <div class="dl-notify-desc">First files will be free. Premium packs follow. 
+        Leave your email on the <a href="books.html" style="color:var(--gold-lt)">Books page</a> 
+        to be notified when the first download goes live.</div>
     </div>
   </div>
+
 </div>
+
 <footer>
   <div class="footer-logo"><span>PIPING</span>PASSION</div>
-  <div class="footer-links"><a href="../index.html">Home</a><a href="field-tips.html">Field Tips</a><a href="books.html">Books</a><a href="contact.html">Contact</a><a href="about.html">About</a></div>
+  <div class="footer-links">
+    <a href="../index.html">Home</a>
+    <a href="field-tips.html">Field Tips</a>
+    <a href="books.html">Books</a>
+    <a href="contact.html">Contact</a>
+    <a href="about.html">About</a>
+  </div>
   <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
 </footer>
 <script>
-var obs=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting)x.target.classList.add('visible');});},{threshold:.08});
-document.querySelectorAll('.reveal').forEach(function(r){obs.observe(r);});
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible');}),{threshold:0.05});
+document.querySelectorAll('.reveal').forEach(r=>obs.observe(r));
 </script>
 </body>
 </html>
