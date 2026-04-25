@@ -558,22 +558,65 @@ footer {
     </div>
   </div>
 
-    <!-- BOOK 2: PIPING LAYOUT -->
-  <div class="book-row reveal">
+    <!-- BOOK 2: PIPING LAYOUT VOLUME 1 -->
+  <div class="book-row reveal upcoming">
     <div class="book-img-wrap">
-      <img src="../assets/layout-cover.jpg" alt="Piping Layout: The Complete Guide">
+      <img src="../assets/layout-vol1-cover.jpg" alt="Piping Layout Volume 1: Fundamentals & Rotating Equipment">
     </div>
     <div>
       <div class="book-status status-upcoming">&#9679; Coming soon</div>
-      <h2 class="book-title">Piping Layout: <span>The Complete Guide</span></h2>
-      <div class="book-meta">38 Chapters &middot; 200+ Field Tips &middot; All Major Equipment</div>
-      <p class="book-desc">A comprehensive, chapter-by-chapter guide to equipment piping and routing &mdash; from pump and vessel connections to pipe rack layout &mdash; giving designers the practical rules and real-world logic behind every routing decision.</p>
-      <div class="book-cta-row"><a class="btn-primary" style="opacity:0.5;cursor:default;pointer-events:none">Available soon on Amazon</a></div>
+      <h2 class="book-title">Piping Layout <span>Volume 1</span></h2>
+      <div class="book-meta">Fundamentals &amp; Rotating Equipment &middot; 13 Chapters &middot; 50+ Figures</div>
+      <p class="book-desc">Pipe racks, pumps, compressors and turbines &mdash; the foundations every designer must master. Volume 1 of the Piping Layout trilogy, written for the junior-to-mid designer who wants to understand the WHY behind every routing decision around rotating equipment.</p>
+      <div class="book-cta-row">
+        <form class="notify-form" onsubmit="event.preventDefault();notifyMe(this.querySelector('button'));">
+          <input type="email" class="notify-input" placeholder="your@email.com" required>
+          <button type="submit" class="btn-primary">Notify me</button>
+        </form>
+      </div>
     </div>
   </div>
 
-  <!-- BOOK 3: PIPING STRESS -->
-  <div class="book-row reveal">
+    <!-- BOOK 3: PIPING LAYOUT VOLUME 2 -->
+  <div class="book-row reveal upcoming">
+    <div class="book-img-wrap">
+      <img src="../assets/layout-vol2-cover.jpg" alt="Piping Layout Volume 2: Static, Thermal & Utility Equipment">
+    </div>
+    <div>
+      <div class="book-status status-upcoming">&#9679; Coming soon</div>
+      <h2 class="book-title">Piping Layout <span>Volume 2</span></h2>
+      <div class="book-meta">Static, Thermal &amp; Utility Equipment &middot; 14 Chapters &middot; 70+ Figures</div>
+      <p class="book-desc">Vessels, exchangers, fired heaters and utility systems &mdash; the process backbone of every plant. Volume 2 dives into static and thermal equipment, where most piping volume is concentrated and where good layout makes the difference between a smooth turnaround and a nightmare.</p>
+      <div class="book-cta-row">
+        <form class="notify-form" onsubmit="event.preventDefault();notifyMe(this.querySelector('button'));">
+          <input type="email" class="notify-input" placeholder="your@email.com" required>
+          <button type="submit" class="btn-primary">Notify me</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+    <!-- BOOK 4: PIPING LAYOUT VOLUME 3 -->
+  <div class="book-row reveal upcoming">
+    <div class="book-img-wrap">
+      <img src="../assets/layout-vol3-cover.jpg" alt="Piping Layout Volume 3: Execution, Specialization & Reference">
+    </div>
+    <div>
+      <div class="book-status status-upcoming">&#9679; Coming soon</div>
+      <h2 class="book-title">Piping Layout <span>Volume 3</span></h2>
+      <div class="book-meta">Execution, Specialization &amp; Reference &middot; 11 Chapters &middot; 6 Appendices &middot; 60+ Figures</div>
+      <p class="book-desc">Supports, stress, 3D modeling and industry-specific practices &mdash; the senior designer&rsquo;s toolkit. Volume 3 covers everything that separates a competent designer from a senior one, plus reference appendices you&rsquo;ll keep coming back to throughout your career.</p>
+      <div class="book-cta-row">
+        <form class="notify-form" onsubmit="event.preventDefault();notifyMe(this.querySelector('button'));">
+          <input type="email" class="notify-input" placeholder="your@email.com" required>
+          <button type="submit" class="btn-primary">Notify me</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- BOOK 5: PIPING STRESS -->
+  <div class="book-row reveal upcoming">
     <div class="book-img-wrap">
       <img src="../assets/stress-cover.jpg" alt="Piping Stress for Designers">
     </div>
@@ -582,7 +625,12 @@ footer {
       <h2 class="book-title">Piping Stress <span>for Designers</span></h2>
       <div class="book-meta">Designer-Focused &middot; Flexibility &middot; Supports &middot; Nozzle Loads</div>
       <p class="book-desc">A designer-friendly introduction to flexibility, supports, and nozzle loads &mdash; bridging the gap between stress engineering theory and what piping designers actually need to know on the job.</p>
-      <div class="book-cta-row"><a class="btn-primary" style="opacity:0.5;cursor:default;pointer-events:none">Available soon on Amazon</a></div>
+      <div class="book-cta-row">
+        <form class="notify-form" onsubmit="event.preventDefault();notifyMe(this.querySelector('button'));">
+          <input type="email" class="notify-input" placeholder="your@email.com" required>
+          <button type="submit" class="btn-primary">Notify me</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -596,17 +644,28 @@ footer {
     <a href="contact.html">Contact</a>
     <a href="about.html">About</a>
   </div>
-  <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
+  <p class="footer-copy">&copy; 2026 Geoffroy Falot &middot; pipingpassion.com</p>
 </footer>
 <script>
 function notifyMe(btn) {
   const input = btn.previousElementSibling;
-  if (input.value && input.value.includes('@')) {
-    btn.textContent = 'Noted!';
-    btn.style.background = '#1D9E75';
-    input.disabled = true;
-    btn.disabled = true;
+  const email = input.value.trim();
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    input.style.borderColor = '#E03030';
+    input.focus();
+    return;
   }
+  // Identify which book this is for
+  const bookRow = btn.closest('.book-row');
+  const bookTitle = bookRow ? bookRow.querySelector('.book-title').innerText.trim() : 'Unknown';
+  // TODO: replace this with ConvertKit/Kit form action when account is set up
+  // For now, log locally and show confirmation
+  console.log('Notify request:', { email: email, book: bookTitle });
+  btn.textContent = 'Noted!';
+  btn.style.background = '#1D9E75';
+  btn.style.color = '#fff';
+  input.disabled = true;
+  btn.disabled = true;
 }
 const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), { threshold: 0.08 });
 document.querySelectorAll('.reveal').forEach(r => obs.observe(r));
