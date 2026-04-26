@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pressure Drop Calculator (Darcy-Weisbach) &mdash; Piping Passion</title>
+<meta name="description" content="Free pressure drop calculator using Darcy-Weisbach equation with Colebrook-White friction factor. Liquid and gas single-phase flow. ASME B36.10M dimensions. SI and Imperial.">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   PIPINGPASSION.COM — SHARED STYLESHEET
+   Palette: Navy #09152A · Gold #C9930A · #F0B429
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --navy:    #09152A;
+  --navy-2:  #0D1E38;
+  --navy-3:  #142645;
+  --navy-4:  #06101E;
+  --gold:    #C9930A;
+  --gold-lt: #F0B429;
+  --white:   #F5F0E8;
+  --muted:   #8EA3BE;
+  --dim:     #3D5A7A;
+  --border:  rgba(201,147,10,0.18);
+  --border-s: rgba(201,147,10,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(9,21,42,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.1rem; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-links .nav-cta {
+  color: var(--gold); border: 1px solid var(--border);
+  padding: 0.22rem 0.9rem; border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  padding: 5rem 2.5rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 60%);
+  z-index: 0;
+}
+.page-header-inner { position: relative; z-index: 1; max-width: 900px; }
+.page-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800; letter-spacing: -0.01em;
+  line-height: 1; margin-bottom: 1.2rem;
+}
+.page-title span { color: var(--gold-lt); }
+.page-desc {
+  font-size: 1.08rem; color: #C8D2DE; max-width: 700px;
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 5rem; padding: 3rem 2.5rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--navy-4);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; letter-spacing: 0.08em;
+  font-size: 1.05rem; color: var(--white); margin-bottom: 1rem;
+}
+.footer-logo span { color: var(--gold); }
+.footer-links {
+  display: flex; gap: 2rem; justify-content: center;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none;
+}
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-copy {
+  font-size: 0.78rem; color: var(--dim); letter-spacing: 0.04em;
+}
+
+/* ── MOBILE NAV TOGGLE ── */
+.nav-toggle {
+  display: none;
+  background: transparent; border: 0; cursor: pointer;
+  padding: 0.4rem;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--gold-lt); margin: 4px 0;
+  transition: transform 0.25s, opacity 0.2s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.25rem; }
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 62px; right: 0;
+    background: rgba(9,21,42,0.98); backdrop-filter: blur(14px);
+    border: 1px solid var(--border); border-right: 0;
+    border-bottom-left-radius: 8px;
+    flex-direction: column; gap: 0;
+    padding: 1rem 0; min-width: 220px;
+    transform: translateX(120%); transition: transform 0.25s;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; padding: 0.7rem 1.5rem;
+  }
+  .nav-links .nav-cta {
+    margin: 0.4rem 1.5rem; padding: 0.4rem 0.9rem;
+    text-align: center;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CALCULATOR PAGE SPECIFIC STYLES
+   ═══════════════════════════════════════════ */
+
+.calc-wrap {
+  max-width: 1100px; margin: 0 auto;
+  padding: 3rem 2.5rem 0;
+  position: relative; z-index: 1;
+}
+
+/* Units toggle */
+.unit-toggle {
+  display: flex; align-items: center;
+  gap: 0.8rem; margin-bottom: 2rem;
+  justify-content: flex-end;
+}
+.unit-toggle-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.unit-toggle-btn {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem; display: inline-flex;
+}
+.unit-toggle-btn button {
+  background: transparent; border: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  padding: 0.45rem 1.2rem; border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+.unit-toggle-btn button.active {
+  background: var(--gold); color: var(--navy);
+}
+
+/* Main calc grid */
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Inputs panel */
+.calc-panel {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+}
+.calc-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.calc-field {
+  margin-bottom: 1.3rem;
+}
+.calc-field:last-child { margin-bottom: 0; }
+.calc-label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white); font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.calc-input, .calc-select {
+  width: 100%;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.98rem;
+  padding: 0.7rem 0.9rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.calc-input:focus, .calc-select:focus {
+  outline: 0;
+  border-color: var(--gold-lt);
+  background: var(--navy-4);
+}
+.calc-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='%23F0B429'%3E%3Cpath d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 10px;
+  padding-right: 2.3rem;
+}
+.calc-field-inline {
+  display: flex; gap: 0.6rem; align-items: stretch;
+}
+.calc-field-inline .calc-input { flex: 1; }
+.calc-field-inline .calc-select { flex: 0 0 auto; width: auto; min-width: 90px; }
+
+.calc-hint {
+  font-size: 0.8rem; color: var(--muted);
+  margin-top: 0.35rem; font-style: italic;
+}
+
+/* Result panel */
+.calc-result-panel {
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy-2) 100%);
+  border: 1px solid var(--border-s);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+  position: sticky; top: 80px;
+}
+.calc-result-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold-lt);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border-s);
+}
+.result-block {
+  padding: 1.2rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.result-block:last-of-type { border-bottom: 0; padding-bottom: 0.4rem; }
+.result-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.result-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem; font-weight: 700;
+  color: var(--gold-lt); line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.result-value.small { font-size: 1.4rem; color: var(--white); }
+.result-unit {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem; color: var(--muted);
+  font-weight: 600; margin-left: 0.35rem;
+  letter-spacing: 0.04em;
+}
+.result-sub {
+  font-size: 0.82rem; color: var(--muted);
+  margin-top: 0.3rem;
+}
+.result-error {
+  color: #E08888;
+  font-size: 0.92rem;
+  padding: 0.8rem 0;
+}
+
+/* Formula section */
+.calc-formula {
+  margin-top: 2.5rem;
+  background: var(--navy-4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem 2rem;
+}
+.calc-formula-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.calc-formula code {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--white);
+  background: var(--navy);
+  padding: 0.9rem 1.1rem;
+  border-radius: 5px;
+  border-left: 3px solid var(--gold);
+  margin-bottom: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.calc-formula-notes {
+  font-size: 0.9rem;
+  color: #B0C4D8;
+  line-height: 1.75;
+}
+.calc-formula-notes strong { color: var(--gold-lt); font-weight: 600; }
+
+/* Disclaimer */
+.calc-disclaimer {
+  margin: 2.5rem auto 0;
+  max-width: 1100px;
+  padding: 1.4rem 1.8rem;
+  background: rgba(224,48,48,0.06);
+  border: 1px solid rgba(224,48,48,0.25);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: #D8C0C0;
+  line-height: 1.7;
+}
+.calc-disclaimer strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #E87070;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+/* Related calculators section */
+.related-calcs {
+  max-width: 1100px; margin: 3.5rem auto 0;
+  padding: 0 2.5rem;
+}
+.related-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.related-card {
+  display: block;
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.1rem 1.3rem;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.related-card:hover {
+  border-color: var(--gold-lt);
+  transform: translateY(-2px);
+}
+.related-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  color: var(--white); letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+.related-card-desc {
+  font-size: 0.82rem; color: var(--muted);
+  line-height: 1.5;
+}
+.related-card.disabled {
+  opacity: 0.5; pointer-events: none;
+}
+.related-card.disabled .related-card-name::after {
+  content: ' · soon';
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .calc-wrap { padding: 2rem 1.25rem 0; }
+  .calc-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .calc-result-panel { position: static; }
+  .result-value { font-size: 1.7rem; }
+  .related-calcs { padding: 0 1.25rem; }
+  .calc-disclaimer { margin-left: 1.25rem; margin-right: 1.25rem; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../../index.html"><span>PIPING</span>PASSION</a>
+  <ul class="nav-links">
+    <li><a href="../field-tips.html">Field Tips</a></li>
+    <li><a href="../field-stories.html">Field Stories</a></li>
+    <li><a href="../brownfield.html">Brownfield</a></li>
+    <li><a href="../scan-to-model.html">Scan-to-Model</a></li>
+    <li><a href="../codes-standards.html">Codes</a></li>
+    <li><a href="../tools.html" class="active">Tools</a></li>
+    <li><a href="../career.html">Career</a></li>
+    <li><a href="../reference.html">Reference</a></li>
+    <li><a href="../common-mistakes.html">Mistakes</a></li>
+    <li><a href="../glossary.html">Glossary</a></li>
+    <li><a href="../books.html">Books</a></li>
+    <li><a href="../downloads.html" style="color:#E03030;font-weight:700">Downloads</a></li>
+    <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">Engineering Calculator</p>
+    <h1 class="page-title">Pressure Drop <span>Calculator</span></h1>
+    <p class="page-desc">Single-phase pressure drop by Darcy-Weisbach with iterative Colebrook-White friction factor. Pick a fluid preset, enter Q, NPS and length, and get &Delta;P, velocity, Reynolds and friction factor in one shot.</p>
+  </div>
+</div>
+
+<div class="calc-wrap">
+
+  <div class="unit-toggle">
+    <span class="unit-toggle-label">Units</span>
+    <div class="unit-toggle-btn">
+      <button id="btn-si" class="active" onclick="setUnits('SI')">SI</button>
+      <button id="btn-imp" onclick="setUnits('IMP')">Imperial</button>
+    </div>
+  </div>
+
+  <div class="calc-grid">
+
+    <!-- INPUTS -->
+    <div class="calc-panel">
+      <div class="calc-panel-title">Inputs</div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="fluid">Fluid Preset</label>
+        <select id="fluid" class="calc-select" onchange="applyPreset()">
+          <option value="custom">Custom (enter &rho; and &mu;)</option>
+          <option value="water20" selected>Water @ 20&deg;C (998 / 1.003 cP)</option>
+          <option value="water60">Water @ 60&deg;C (983 / 0.466 cP)</option>
+          <option value="lightoil">Light hydrocarbon (850 / 3 cP)</option>
+          <option value="heavyoil">Heavy crude (920 / 50 cP)</option>
+          <option value="airSTP">Air @ STP (1.204 / 0.018 cP)</option>
+          <option value="naturalgas">Natural gas @ 50 bar (45 / 0.012 cP)</option>
+        </select>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="rho">Fluid density (&rho;)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="rho" class="calc-input" value="998" min="0" step="0.1" oninput="onCustomInput()">
+          <select id="rho-unit" class="calc-select" onchange="calculate()">
+            <option value="kgm3">kg/m&sup3;</option>
+            <option value="lbft3">lb/ft&sup3;</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="mu">Dynamic viscosity (&mu;)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="mu" class="calc-input" value="1.003" min="0" step="0.001" oninput="onCustomInput()">
+          <select id="mu-unit" class="calc-select" onchange="calculate()">
+            <option value="cP">cP</option>
+            <option value="Pas">Pa&middot;s</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="Q">Flow rate (Q)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="Q" class="calc-input" value="100" min="0" step="0.1" oninput="calculate()">
+          <select id="Q-unit" class="calc-select" onchange="calculate()">
+            <option value="m3h">m&sup3;/h</option>
+            <option value="m3s">m&sup3;/s</option>
+            <option value="lps">L/s</option>
+            <option value="gpm">US GPM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="nps">NPS</label>
+        <select id="nps" class="calc-select" onchange="onNpsChange()"></select>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="schedule">Schedule</label>
+        <select id="schedule" class="calc-select" onchange="calculate()"></select>
+        <p class="calc-hint" id="id-hint">ID will show below.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="L">Pipe length (L)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="L" class="calc-input" value="100" min="0" step="1" oninput="calculate()">
+          <select id="L-unit" class="calc-select" onchange="calculate()">
+            <option value="m">m</option>
+            <option value="ft">ft</option>
+          </select>
+        </div>
+        <p class="calc-hint">Equivalent length: add 30&times;ID per gate valve, 60&times;ID per elbow as a quick add.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="eps">Pipe roughness (&epsilon;)</label>
+        <select id="eps" class="calc-select" onchange="calculate()">
+          <option value="0.0015">Drawn tubing / new (0.0015 mm)</option>
+          <option value="0.046" selected>Commercial steel (0.046 mm)</option>
+          <option value="0.15">Galvanized steel (0.15 mm)</option>
+          <option value="0.26">Cast iron (0.26 mm)</option>
+          <option value="0.5">Riveted / corroded steel (0.5 mm)</option>
+          <option value="2.0">Concrete / heavily fouled (2.0 mm)</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- RESULTS -->
+    <div class="calc-result-panel">
+      <div class="calc-result-title">Result</div>
+
+      <div class="result-block">
+        <div class="result-label">Pressure drop &Delta;P</div>
+        <div class="result-value"><span id="r-dP">&mdash;</span><span class="result-unit" id="u-dP">bar</span></div>
+        <div class="result-sub" id="r-dP-sub"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Velocity</div>
+        <div class="result-value small"><span id="r-V">&mdash;</span><span class="result-unit" id="u-V">m/s</span></div>
+        <div class="result-sub" id="r-V-sub"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Reynolds number &amp; regime</div>
+        <div class="result-value small"><span id="r-Re">&mdash;</span></div>
+        <div class="result-sub" id="r-regime" style="margin-top:.4rem;"></div>
+      </div>
+
+      <div class="result-block" style="border-bottom:0;padding-bottom:0;">
+        <div class="result-label">Friction factor (Darcy)</div>
+        <div id="r-f" style="font-family:'JetBrains Mono',monospace;color:#B0C4D8;margin-top:.5rem;line-height:1.7;font-size:0.92rem;">&mdash;</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Formula explanation -->
+  <div class="calc-formula">
+    <div class="calc-formula-title">Formula &amp; Method</div>
+
+    <code>&Delta;P = f &times; (L / D) &times; (&rho; V&sup2; / 2)</code>
+    <code>Turbulent f &mdash; Colebrook-White (iterative):</code>
+    <code>1/&radic;f = &minus;2 &middot; log&#8321;&#8320;[&epsilon;/(3.7 D) + 2.51/(Re &middot; &radic;f)]</code>
+    <code>Laminar f = 64 / Re &nbsp;&nbsp;(Re &lt; 2300)</code>
+    <div class="calc-formula-notes">
+      <strong>Method:</strong> Darcy-Weisbach with Colebrook-White friction factor. Industry reference for clean single-phase flow. Initial guess from Swamee-Jain explicit equation, then iterated to convergence (typically &lt; 6 iterations).<br><br>
+      <strong>Variables:</strong>
+      <ul style="margin:.5rem 0 0 1.5rem;color:#B0C4D8;">
+        <li><strong>f</strong> = Darcy friction factor (dimensionless)</li>
+        <li><strong>L / D</strong> = length-to-diameter ratio</li>
+        <li><strong>&rho;</strong> = fluid density</li>
+        <li><strong>V</strong> = mean velocity = Q/A</li>
+        <li><strong>&epsilon;</strong> = absolute pipe roughness (commercial steel: 0.046 mm)</li>
+      </ul>
+      <strong>Limitations:</strong> straight-pipe friction loss only. For full system &Delta;P, add minor losses from fittings, valves, expansions and contractions (use the equivalent-length or K-factor method). Two-phase flow needs Lockhart-Martinelli or Beggs-Brill, not this calculator.<br><br>
+      <strong>Brownfield tip:</strong> measured pressure drop on an old line is often 2&ndash;4 times the calculated value because internal roughness has increased from corrosion, scale and wax. If the line is &gt; 15 years old in dirty service, double your &epsilon; from new-pipe value.
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Disclaimer -->
+<div class="calc-disclaimer">
+  <strong>⚠ For preliminary sizing only</strong>
+  Results are based on nominal ASME dimensions and typical material densities. They do not account for manufacturing tolerances, coatings, supports, flanges, fittings, corrosion allowance, or actual site conditions. All final designs must be verified by a qualified engineer and validated against the applicable code edition. Piping Passion accepts no liability for decisions made using this tool.
+</div>
+
+<!-- Related calculators -->
+<div class="related-calcs">
+  <div class="related-title">Other Calculators</div>
+  <div class="related-grid">
+    <a class="related-card" href="velocity.html">
+      <div class="related-card-name">Velocity & Erosive</div>
+      <div class="related-card-desc">Check V vs API 14E.</div>
+    </a>
+    <a class="related-card" href="reynolds-number.html">
+      <div class="related-card-name">Reynolds Number</div>
+      <div class="related-card-desc">Flow regime classification.</div>
+    </a>
+    <a class="related-card" href="unit-converter.html">
+      <div class="related-card-name">Unit Converter</div>
+      <div class="related-card-desc">Flow, pressure, viscosity.</div>
+    </a>
+    <a class="related-card" href="control-valve-cv.html">
+      <div class="related-card-name">Control Valve Cv</div>
+      <div class="related-card-desc">ISA S75.01 liquid sizing.</div>
+    </a>
+    <a class="related-card" href="orifice-plate.html">
+      <div class="related-card-name">Orifice Plate (ISO 5167)</div>
+      <div class="related-card-desc">Sizing flow measurement.</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><span>PIPING</span>PASSION</div>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../field-tips.html">Field Tips</a>
+    <a href="../books.html">Books</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../about.html">About</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Geoffroy Falot &middot; pipingpassion.com</p>
+</footer>
+
+<script>
+
+const PIPE_DATA = {
+  '1/2"':   { od: 21.3,  sch: { '10S': 2.11, '40/STD': 2.77, '80/XS': 3.73, '160': 4.78, 'XXS': 7.47 } },
+  '3/4"':   { od: 26.7,  sch: { '10S': 2.11, '40/STD': 2.87, '80/XS': 3.91, '160': 5.56, 'XXS': 7.82 } },
+  '1"':     { od: 33.4,  sch: { '10S': 2.77, '40/STD': 3.38, '80/XS': 4.55, '160': 6.35, 'XXS': 9.09 } },
+  '1-1/2"': { od: 48.3,  sch: { '10S': 2.77, '40/STD': 3.68, '80/XS': 5.08, '160': 7.14, 'XXS': 10.15 } },
+  '2"':     { od: 60.3,  sch: { '10S': 2.77, '40/STD': 3.91, '80/XS': 5.54, '160': 8.74, 'XXS': 11.07 } },
+  '3"':     { od: 88.9,  sch: { '10S': 3.05, '40/STD': 5.49, '80/XS': 7.62, '160': 11.13, 'XXS': 15.24 } },
+  '4"':     { od: 114.3, sch: { '10S': 3.05, '40/STD': 6.02, '80/XS': 8.56, '120': 11.13, '160': 13.49, 'XXS': 17.12 } },
+  '6"':     { od: 168.3, sch: { '10S': 3.40, '40/STD': 7.11, '80/XS': 10.97, '120': 14.27, '160': 18.26, 'XXS': 21.95 } },
+  '8"':     { od: 219.1, sch: { '10S': 3.76, '20': 6.35, '40/STD': 8.18, '60': 10.31, '80/XS': 12.70, '100': 15.09, '120': 18.26, '140': 20.62, '160': 23.01, 'XXS': 22.23 } },
+  '10"':    { od: 273.0, sch: { '10S': 4.19, '20': 6.35, '40/STD': 9.27, '60/XS': 12.70, '80': 15.09, '100': 18.26, '120': 21.44, '140': 25.40, '160': 28.58 } },
+  '12"':    { od: 323.8, sch: { '10S': 4.57, '20': 6.35, '30': 8.38, 'STD': 9.53, '40': 10.31, 'XS': 12.70, '60': 14.27, '80': 17.48, '100': 21.44, '120': 25.40, '140': 28.58, '160': 33.32 } },
+  '14"':    { od: 355.6, sch: { '10': 6.35, '20': 7.92, '30/STD': 9.53, '40': 11.13, 'XS': 12.70, '60': 15.09, '80': 19.05, '100': 23.83, '120': 27.79, '140': 31.75, '160': 35.71 } },
+  '16"':    { od: 406.4, sch: { '10': 6.35, '20': 7.92, '30/STD': 9.53, '40': 12.70, 'XS': 12.70, '60': 16.66, '80': 21.44, '100': 26.19, '120': 30.96, '140': 36.53, '160': 40.49 } },
+  '18"':    { od: 457.0, sch: { '10': 6.35, '20': 7.92, 'STD': 9.53, '30': 11.13, 'XS': 12.70, '40': 14.27, '60': 19.05, '80': 23.83, '100': 29.36, '120': 34.93, '140': 39.67, '160': 45.24 } },
+  '20"':    { od: 508.0, sch: { '10': 6.35, '20/STD': 9.53, '30/XS': 12.70, '40': 15.09, '60': 20.62, '80': 26.19, '100': 32.54, '120': 38.10, '140': 44.45, '160': 50.01 } },
+  '24"':    { od: 610.0, sch: { '10': 6.35, '20/STD': 9.53, 'XS': 12.70, '30': 14.27, '40': 17.48, '60': 24.61, '80': 30.96, '100': 38.89, '120': 46.02, '140': 52.37, '160': 59.54 } },
+  '30"':    { od: 762.0, sch: { '10': 7.92, 'STD': 9.53, '20/XS': 12.70, '30': 15.88 } },
+  '36"':    { od: 914.0, sch: { 'STD': 9.53, 'XS': 12.70, '20': 15.88, '30': 19.05, '40': 22.23 } },
+  '42"':    { od: 1067.0, sch: { 'STD': 9.53, 'XS': 12.70 } },
+  '48"':    { od: 1219.0, sch: { 'STD': 9.53, 'XS': 12.70 } },
+};
+
+
+const FLUID_PRESETS = {
+  water20:    { rho: 998,   mu_cP: 1.003 },
+  water60:    { rho: 983,   mu_cP: 0.466 },
+  lightoil:   { rho: 850,   mu_cP: 3.0 },
+  heavyoil:   { rho: 920,   mu_cP: 50 },
+  airSTP:     { rho: 1.204, mu_cP: 0.01825 },
+  naturalgas: { rho: 45,    mu_cP: 0.012 }
+};
+
+const CONV = {
+  m3h_to_m3s: 1/3600,
+  lps_to_m3s: 0.001,
+  gpm_to_m3s: 6.30902e-5,
+  ft_to_m: 0.3048, m_to_ft: 3.28084,
+  mps_to_fps: 3.28084,
+  Pa_to_bar: 1e-5, Pa_to_psi: 0.000145038, Pa_to_kPa: 0.001,
+  kgm3_to_lbft3: 0.0624280, lbft3_to_kgm3: 16.0185,
+  mm_to_in: 0.0393701
+};
+
+let currentUnits = 'SI';
+
+function setUnits(u) {
+  currentUnits = u;
+  document.getElementById('btn-si').classList.toggle('active', u === 'SI');
+  document.getElementById('btn-imp').classList.toggle('active', u === 'IMP');
+  // density
+  const rU = document.getElementById('rho-unit');
+  const rV = parseFloat(document.getElementById('rho').value);
+  if (u === 'IMP' && rU.value === 'kgm3') {
+    document.getElementById('rho').value = (rV * CONV.kgm3_to_lbft3).toFixed(2);
+    rU.value = 'lbft3';
+  }
+  if (u === 'SI' && rU.value === 'lbft3') {
+    document.getElementById('rho').value = (rV * CONV.lbft3_to_kgm3).toFixed(2);
+    rU.value = 'kgm3';
+  }
+  // length
+  const lU = document.getElementById('L-unit');
+  const lV = parseFloat(document.getElementById('L').value);
+  if (u === 'IMP' && lU.value === 'm') {
+    document.getElementById('L').value = (lV * CONV.m_to_ft).toFixed(1);
+    lU.value = 'ft';
+  }
+  if (u === 'SI' && lU.value === 'ft') {
+    document.getElementById('L').value = (lV * CONV.ft_to_m).toFixed(2);
+    lU.value = 'm';
+  }
+  // flow default
+  const qU = document.getElementById('Q-unit');
+  if (u === 'IMP' && qU.value === 'm3h') qU.value = 'gpm';
+  if (u === 'SI'  && qU.value === 'gpm') qU.value = 'm3h';
+  // result labels
+  document.getElementById('u-dP').textContent = u === 'SI' ? 'bar' : 'psi';
+  document.getElementById('u-V').textContent  = u === 'SI' ? 'm/s' : 'ft/s';
+  calculate();
+}
+
+function applyPreset() {
+  const k = document.getElementById('fluid').value;
+  if (k === 'custom') { calculate(); return; }
+  const p = FLUID_PRESETS[k];
+  const rU = document.getElementById('rho-unit').value;
+  document.getElementById('rho').value = (rU === 'lbft3' ? p.rho * CONV.kgm3_to_lbft3 : p.rho).toFixed(2);
+  const muU = document.getElementById('mu-unit').value;
+  document.getElementById('mu').value = (muU === 'Pas' ? (p.mu_cP/1000).toExponential(4) : p.mu_cP).toString();
+  calculate();
+}
+
+function onCustomInput() {
+  document.getElementById('fluid').value = 'custom';
+  calculate();
+}
+
+function populateNps() {
+  const sel = document.getElementById('nps');
+  Object.keys(PIPE_DATA).forEach(n => {
+    const o = document.createElement('option'); o.value = n; o.textContent = 'NPS ' + n; sel.appendChild(o);
+  });
+  sel.value = '4"';
+  populateSchedule();
+}
+
+function populateSchedule() {
+  const nps = document.getElementById('nps').value;
+  const sel = document.getElementById('schedule');
+  sel.innerHTML = '';
+  Object.keys(PIPE_DATA[nps].sch).forEach(s => {
+    const o = document.createElement('option');
+    o.value = s; o.textContent = 'Sch ' + s + ' (' + PIPE_DATA[nps].sch[s].toFixed(2) + ' mm)';
+    sel.appendChild(o);
+  });
+  const pref = ['40/STD','STD','40','10S'];
+  for (const p of pref) if (PIPE_DATA[nps].sch[p] !== undefined) { sel.value = p; break; }
+}
+
+function onNpsChange() { populateSchedule(); calculate(); }
+
+function swameeJain(eps_m, D_m, Re) {
+  return 0.25 / Math.pow(Math.log10(eps_m/(3.7*D_m) + 5.74/Math.pow(Re, 0.9)), 2);
+}
+
+function colebrook(eps_m, D_m, Re) {
+  let f = swameeJain(eps_m, D_m, Re);
+  for (let i = 0; i < 30; i++) {
+    const lhs = -2 * Math.log10(eps_m/(3.7*D_m) + 2.51/(Re*Math.sqrt(f)));
+    const fn = 1/(lhs*lhs);
+    if (Math.abs(fn - f) < 1e-9) return fn;
+    f = fn;
+  }
+  return f;
+}
+
+function calculate() {
+  const nps = document.getElementById('nps').value;
+  if (!PIPE_DATA[nps]) return;
+  const od_mm = PIPE_DATA[nps].od;
+  const sched = document.getElementById('schedule').value;
+  const wall_mm = PIPE_DATA[nps].sch[sched];
+  if (wall_mm === undefined) return;
+  const id_mm = od_mm - 2 * wall_mm;
+  const D_m = id_mm / 1000;
+
+  // Density / viscosity
+  const rhoVal = parseFloat(document.getElementById('rho').value) || 0;
+  const rhoU = document.getElementById('rho-unit').value;
+  const rho_kgm3 = (rhoU === 'lbft3') ? rhoVal * CONV.lbft3_to_kgm3 : rhoVal;
+
+  const muVal = parseFloat(document.getElementById('mu').value) || 0;
+  const muU = document.getElementById('mu-unit').value;
+  const mu_Pas = (muU === 'cP') ? muVal/1000 : muVal;
+
+  // Flow
+  const qVal = parseFloat(document.getElementById('Q').value) || 0;
+  const qU = document.getElementById('Q-unit').value;
+  let Q_m3s = 0;
+  switch(qU) {
+    case 'm3s': Q_m3s = qVal; break;
+    case 'm3h': Q_m3s = qVal * CONV.m3h_to_m3s; break;
+    case 'lps': Q_m3s = qVal * CONV.lps_to_m3s; break;
+    case 'gpm': Q_m3s = qVal * CONV.gpm_to_m3s; break;
+  }
+
+  // Length
+  const lVal = parseFloat(document.getElementById('L').value) || 0;
+  const lU = document.getElementById('L-unit').value;
+  const L_m = (lU === 'ft') ? lVal * CONV.ft_to_m : lVal;
+
+  // Roughness
+  const eps_mm = parseFloat(document.getElementById('eps').value);
+  const eps_m = eps_mm / 1000;
+
+  // Compute
+  const A = Math.PI/4 * D_m * D_m;
+  const V = A > 0 ? Q_m3s / A : 0;
+  const Re = (mu_Pas > 0 && D_m > 0) ? rho_kgm3 * V * D_m / mu_Pas : 0;
+
+  let f = 0, regime = '—', regimeColor = '#B0C4D8';
+  if (Re > 0 && Re < 2300) { f = 64/Re; regime = 'Laminar'; regimeColor = '#7AC8FF'; }
+  else if (Re >= 2300 && Re <= 4000) {
+    // Smooth blend in transition (Cheng 2008 style); for simplicity use Swamee-Jain limit
+    f = swameeJain(eps_m, D_m, Re);
+    regime = 'Transition'; regimeColor = '#F0B429';
+  }
+  else if (Re > 4000) { f = colebrook(eps_m, D_m, Re); regime = 'Turbulent'; regimeColor = '#7CD4A4'; }
+
+  const dP_Pa = f * L_m/D_m * rho_kgm3 * V*V / 2;
+
+  // Display
+  let dPdisp, dPunit, Vdisp, Vunit;
+  if (currentUnits === 'SI') {
+    dPdisp = dP_Pa * CONV.Pa_to_bar;
+    if (dPdisp >= 1) dPdisp = dPdisp.toFixed(3);
+    else if (dPdisp >= 0.01) dPdisp = dPdisp.toFixed(4);
+    else if (dPdisp > 0)  dPdisp = (dP_Pa).toFixed(0) + ' Pa equiv.';
+    else dPdisp = '0.000';
+    Vdisp = V.toFixed(3);
+    Vunit = 'm/s';
+    dPunit = 'bar';
+  } else {
+    dPdisp = (dP_Pa * CONV.Pa_to_psi).toFixed(3);
+    Vdisp = (V * CONV.mps_to_fps).toFixed(2);
+    Vunit = 'ft/s';
+    dPunit = 'psi';
+  }
+
+  document.getElementById('r-dP').textContent = dPdisp;
+  document.getElementById('u-dP').textContent = dPunit;
+  document.getElementById('r-dP-sub').innerHTML = (dP_Pa > 0)
+    ? '= ' + (dP_Pa/1000).toFixed(2) + ' kPa = ' + (dP_Pa*CONV.Pa_to_psi).toFixed(2) + ' psi for ' + (currentUnits === 'SI' ? L_m.toFixed(1) + ' m' : (L_m*CONV.m_to_ft).toFixed(1) + ' ft')
+    : 'Enter all values to compute.';
+
+  document.getElementById('r-V').textContent  = Vdisp;
+  document.getElementById('u-V').textContent  = Vunit;
+  document.getElementById('r-V-sub').textContent = (V > 0) ? 'V = Q / A. Check vs erosive limit calculator if high.' : '';
+
+  let ReDisp = '—';
+  if (Re > 0) {
+    if (Re >= 1e6) ReDisp = (Re/1e6).toFixed(2) + ' × 10⁶';
+    else if (Re >= 1000) ReDisp = Math.round(Re).toLocaleString('en-US');
+    else ReDisp = Re.toFixed(1);
+  }
+  document.getElementById('r-Re').textContent = ReDisp;
+  document.getElementById('r-regime').innerHTML = (Re > 0)
+    ? '<span style="color:' + regimeColor + ';font-weight:600;">' + regime + '</span>'
+    : '';
+
+  document.getElementById('r-f').innerHTML = (f > 0)
+    ? 'f = ' + f.toFixed(5) + (Re > 4000 ? ' &nbsp; (Colebrook iterative)' : Re < 2300 ? ' &nbsp; (laminar 64/Re)' : ' &nbsp; (Swamee-Jain transition)')
+    : '—';
+
+  // ID hint
+  const idH = document.getElementById('id-hint');
+  if (currentUnits === 'SI') idH.textContent = 'ID = ' + id_mm.toFixed(2) + ' mm';
+  else idH.textContent = 'ID = ' + (id_mm * CONV.mm_to_in).toFixed(3) + ' in';
+}
+
+populateNps();
+applyPreset();
+calculate();
+
+</script>
+
+</body>
+</html>

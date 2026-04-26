@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Branch Reinforcement Calculator (ASME B31.3 §304.3.3) &mdash; Piping Passion</title>
+<meta name="description" content="Verify branch connection reinforcement per ASME B31.3 §304.3.3 area replacement method. Computes required and available areas, suggests pad size when needed.">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   PIPINGPASSION.COM — SHARED STYLESHEET
+   Palette: Navy #09152A · Gold #C9930A · #F0B429
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --navy:    #09152A;
+  --navy-2:  #0D1E38;
+  --navy-3:  #142645;
+  --navy-4:  #06101E;
+  --gold:    #C9930A;
+  --gold-lt: #F0B429;
+  --white:   #F5F0E8;
+  --muted:   #8EA3BE;
+  --dim:     #3D5A7A;
+  --border:  rgba(201,147,10,0.18);
+  --border-s: rgba(201,147,10,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(9,21,42,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.1rem; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-links .nav-cta {
+  color: var(--gold); border: 1px solid var(--border);
+  padding: 0.22rem 0.9rem; border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  padding: 5rem 2.5rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 60%);
+  z-index: 0;
+}
+.page-header-inner { position: relative; z-index: 1; max-width: 900px; }
+.page-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800; letter-spacing: -0.01em;
+  line-height: 1; margin-bottom: 1.2rem;
+}
+.page-title span { color: var(--gold-lt); }
+.page-desc {
+  font-size: 1.08rem; color: #C8D2DE; max-width: 700px;
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 5rem; padding: 3rem 2.5rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--navy-4);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; letter-spacing: 0.08em;
+  font-size: 1.05rem; color: var(--white); margin-bottom: 1rem;
+}
+.footer-logo span { color: var(--gold); }
+.footer-links {
+  display: flex; gap: 2rem; justify-content: center;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none;
+}
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-copy {
+  font-size: 0.78rem; color: var(--dim); letter-spacing: 0.04em;
+}
+
+/* ── MOBILE NAV TOGGLE ── */
+.nav-toggle {
+  display: none;
+  background: transparent; border: 0; cursor: pointer;
+  padding: 0.4rem;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--gold-lt); margin: 4px 0;
+  transition: transform 0.25s, opacity 0.2s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.25rem; }
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 62px; right: 0;
+    background: rgba(9,21,42,0.98); backdrop-filter: blur(14px);
+    border: 1px solid var(--border); border-right: 0;
+    border-bottom-left-radius: 8px;
+    flex-direction: column; gap: 0;
+    padding: 1rem 0; min-width: 220px;
+    transform: translateX(120%); transition: transform 0.25s;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; padding: 0.7rem 1.5rem;
+  }
+  .nav-links .nav-cta {
+    margin: 0.4rem 1.5rem; padding: 0.4rem 0.9rem;
+    text-align: center;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CALCULATOR PAGE SPECIFIC STYLES
+   ═══════════════════════════════════════════ */
+
+.calc-wrap {
+  max-width: 1100px; margin: 0 auto;
+  padding: 3rem 2.5rem 0;
+  position: relative; z-index: 1;
+}
+
+/* Units toggle */
+.unit-toggle {
+  display: flex; align-items: center;
+  gap: 0.8rem; margin-bottom: 2rem;
+  justify-content: flex-end;
+}
+.unit-toggle-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.unit-toggle-btn {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem; display: inline-flex;
+}
+.unit-toggle-btn button {
+  background: transparent; border: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  padding: 0.45rem 1.2rem; border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+.unit-toggle-btn button.active {
+  background: var(--gold); color: var(--navy);
+}
+
+/* Main calc grid */
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Inputs panel */
+.calc-panel {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+}
+.calc-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.calc-field {
+  margin-bottom: 1.3rem;
+}
+.calc-field:last-child { margin-bottom: 0; }
+.calc-label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white); font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.calc-input, .calc-select {
+  width: 100%;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.98rem;
+  padding: 0.7rem 0.9rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.calc-input:focus, .calc-select:focus {
+  outline: 0;
+  border-color: var(--gold-lt);
+  background: var(--navy-4);
+}
+.calc-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='%23F0B429'%3E%3Cpath d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 10px;
+  padding-right: 2.3rem;
+}
+.calc-field-inline {
+  display: flex; gap: 0.6rem; align-items: stretch;
+}
+.calc-field-inline .calc-input { flex: 1; }
+.calc-field-inline .calc-select { flex: 0 0 auto; width: auto; min-width: 90px; }
+
+.calc-hint {
+  font-size: 0.8rem; color: var(--muted);
+  margin-top: 0.35rem; font-style: italic;
+}
+
+/* Result panel */
+.calc-result-panel {
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy-2) 100%);
+  border: 1px solid var(--border-s);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+  position: sticky; top: 80px;
+}
+.calc-result-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold-lt);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border-s);
+}
+.result-block {
+  padding: 1.2rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.result-block:last-of-type { border-bottom: 0; padding-bottom: 0.4rem; }
+.result-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.result-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem; font-weight: 700;
+  color: var(--gold-lt); line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.result-value.small { font-size: 1.4rem; color: var(--white); }
+.result-unit {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem; color: var(--muted);
+  font-weight: 600; margin-left: 0.35rem;
+  letter-spacing: 0.04em;
+}
+.result-sub {
+  font-size: 0.82rem; color: var(--muted);
+  margin-top: 0.3rem;
+}
+.result-error {
+  color: #E08888;
+  font-size: 0.92rem;
+  padding: 0.8rem 0;
+}
+
+/* Formula section */
+.calc-formula {
+  margin-top: 2.5rem;
+  background: var(--navy-4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem 2rem;
+}
+.calc-formula-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.calc-formula code {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--white);
+  background: var(--navy);
+  padding: 0.9rem 1.1rem;
+  border-radius: 5px;
+  border-left: 3px solid var(--gold);
+  margin-bottom: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.calc-formula-notes {
+  font-size: 0.9rem;
+  color: #B0C4D8;
+  line-height: 1.75;
+}
+.calc-formula-notes strong { color: var(--gold-lt); font-weight: 600; }
+
+/* Disclaimer */
+.calc-disclaimer {
+  margin: 2.5rem auto 0;
+  max-width: 1100px;
+  padding: 1.4rem 1.8rem;
+  background: rgba(224,48,48,0.06);
+  border: 1px solid rgba(224,48,48,0.25);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: #D8C0C0;
+  line-height: 1.7;
+}
+.calc-disclaimer strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #E87070;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+/* Related calculators section */
+.related-calcs {
+  max-width: 1100px; margin: 3.5rem auto 0;
+  padding: 0 2.5rem;
+}
+.related-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.related-card {
+  display: block;
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.1rem 1.3rem;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.related-card:hover {
+  border-color: var(--gold-lt);
+  transform: translateY(-2px);
+}
+.related-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  color: var(--white); letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+.related-card-desc {
+  font-size: 0.82rem; color: var(--muted);
+  line-height: 1.5;
+}
+.related-card.disabled {
+  opacity: 0.5; pointer-events: none;
+}
+.related-card.disabled .related-card-name::after {
+  content: ' · soon';
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .calc-wrap { padding: 2rem 1.25rem 0; }
+  .calc-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .calc-result-panel { position: static; }
+  .result-value { font-size: 1.7rem; }
+  .related-calcs { padding: 0 1.25rem; }
+  .calc-disclaimer { margin-left: 1.25rem; margin-right: 1.25rem; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../../index.html"><span>PIPING</span>PASSION</a>
+  <ul class="nav-links">
+    <li><a href="../field-tips.html">Field Tips</a></li>
+    <li><a href="../field-stories.html">Field Stories</a></li>
+    <li><a href="../brownfield.html">Brownfield</a></li>
+    <li><a href="../scan-to-model.html">Scan-to-Model</a></li>
+    <li><a href="../codes-standards.html">Codes</a></li>
+    <li><a href="../tools.html" class="active">Tools</a></li>
+    <li><a href="../career.html">Career</a></li>
+    <li><a href="../reference.html">Reference</a></li>
+    <li><a href="../common-mistakes.html">Mistakes</a></li>
+    <li><a href="../glossary.html">Glossary</a></li>
+    <li><a href="../books.html">Books</a></li>
+    <li><a href="../downloads.html" style="color:#E03030;font-weight:700">Downloads</a></li>
+    <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">Engineering Calculator</p>
+    <h1 class="page-title">Branch Reinforcement <span>(B31.3 &sect;304.3.3)</span></h1>
+    <p class="page-desc">Run the area-replacement check for any welded branch connection per ASME B31.3 &sect;304.3.3. Confirms whether the branch passes unreinforced, and if not, sizes the reinforcing pad. The calc that decides whether you can stub-on or need a fitting.</p>
+  </div>
+</div>
+
+<div class="calc-wrap">
+
+  <div class="unit-toggle">
+    <span class="unit-toggle-label">Units</span>
+    <div class="unit-toggle-btn">
+      <button id="btn-si" class="active" onclick="setUnits('SI')">SI</button>
+      <button id="btn-imp" onclick="setUnits('IMP')">Imperial</button>
+    </div>
+  </div>
+
+  <div class="calc-grid">
+
+    <!-- INPUTS -->
+    <div class="calc-panel">
+      <div class="calc-panel-title">Inputs</div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="hnps">Header NPS</label>
+        <select id="hnps" class="calc-select" onchange="onHnpsChange()"></select>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="hsch">Header schedule</label>
+        <select id="hsch" class="calc-select" onchange="calculate()"></select>
+        <p class="calc-hint" id="h-info">Header dimensions will show below.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="bnps">Branch NPS</label>
+        <select id="bnps" class="calc-select" onchange="onBnpsChange()"></select>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="bsch">Branch schedule</label>
+        <select id="bsch" class="calc-select" onchange="calculate()"></select>
+        <p class="calc-hint" id="b-info">Branch dimensions will show below.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="P">Design pressure (P)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="P" class="calc-input" value="2.0" min="0" step="0.01" oninput="calculate()">
+          <select id="P-unit" class="calc-select" onchange="calculate()">
+            <option value="mpa">MPa</option>
+            <option value="bar">bar</option>
+            <option value="psi">psi</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="S">Material allowable stress (S)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="S" class="calc-input" value="110" min="0" step="1" oninput="calculate()">
+          <select id="S-unit" class="calc-select" onchange="calculate()">
+            <option value="mpa">MPa</option>
+            <option value="psi">psi</option>
+          </select>
+        </div>
+        <p class="calc-hint">From B31.3 Table A-1 at design temperature. A106-B at 200&deg;C ~ 138 MPa &middot; 350&deg;C ~ 110 MPa.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="E">Joint efficiency E</label>
+        <input type="number" id="E" class="calc-input" value="1.0" min="0.5" max="1.0" step="0.01" oninput="calculate()">
+        <p class="calc-hint">1.0 seamless &middot; 0.85 ERW &middot; 0.60 furnace-butt-welded.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="Y">Y coefficient (B31.3 Table 304.1.1)</label>
+        <input type="number" id="Y" class="calc-input" value="0.4" min="0" max="1" step="0.05" oninput="calculate()">
+        <p class="calc-hint">0.4 ferritic &le; 482&deg;C &middot; 0.4 austenitic &le; 566&deg;C &middot; rises to 0.7 above 600&deg;C.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="ca">Mechanical/corrosion allowance (c)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="ca" class="calc-input" value="1.6" min="0" step="0.1" oninput="calculate()">
+          <select id="ca-unit" class="calc-select" onchange="calculate()">
+            <option value="mm">mm</option>
+            <option value="in">in</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="beta">Branch angle (&beta;) &mdash; from header axis</label>
+        <input type="number" id="beta" class="calc-input" value="90" min="45" max="90" step="1" oninput="calculate()">
+        <p class="calc-hint">90&deg; = right-angle tee (most common). B31.3 limits oblique branches to &ge; 45&deg;.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label">Reinforcement pad (optional)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="W" class="calc-input" value="0" min="0" step="1" oninput="calculate()" placeholder="Width W">
+          <input type="number" id="Tr" class="calc-input" value="0" min="0" step="0.5" oninput="calculate()" placeholder="Thickness Tr">
+          <select id="pad-unit" class="calc-select" onchange="calculate()">
+            <option value="mm">mm</option>
+            <option value="in">in</option>
+          </select>
+        </div>
+        <p class="calc-hint">Width W = added pad width on each side (total OD = D_b + 2W) &middot; Tr = pad thickness. Set both to 0 for unreinforced check.</p>
+      </div>
+
+    </div>
+
+    <!-- RESULTS -->
+    <div class="calc-result-panel">
+      <div class="calc-result-title">Result</div>
+
+      <div class="result-block">
+        <div class="result-label">Compliance check</div>
+        <div id="r-status" style="margin-top:.4rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem;letter-spacing:.04em;text-transform:uppercase;">&mdash;</div>
+        <div class="result-sub" id="r-status-sub" style="margin-top:.5rem;"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Required reinforcement A&#8321;</div>
+        <div class="result-value"><span id="r-A1">&mdash;</span><span class="result-unit" id="u-A">mm&sup2;</span></div>
+        <div class="result-sub">A&#8321; = t_h &middot; d&#8321; &middot; (2 - sin &beta;)</div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Available A&#8322; + A&#8323; + A&#8324;</div>
+        <div class="result-value small"><span id="r-Aav">&mdash;</span><span class="result-unit" id="u-A2">mm&sup2;</span></div>
+        <div class="result-sub" id="r-Aav-sub"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Suggested pad (if needed)</div>
+        <div id="r-pad" style="margin-top:.4rem;font-family:'JetBrains Mono',monospace;color:#B0C4D8;line-height:1.7;font-size:0.9rem;">&mdash;</div>
+      </div>
+
+      <div class="result-block" style="border-bottom:0;padding-bottom:0;">
+        <div class="result-label">Calculation detail</div>
+        <div id="r-detail" style="font-family:'JetBrains Mono',monospace;color:#B0C4D8;margin-top:.5rem;line-height:1.6;font-size:0.82rem;">&mdash;</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Formula explanation -->
+  <div class="calc-formula">
+    <div class="calc-formula-title">Formula &amp; Method</div>
+
+    <code>t_h = P &middot; D_h / (2 (S &middot; E + P &middot; Y))   (header pressure design thickness, B31.3 &sect;304.1.2)</code>
+    <code>d&#8321; = (D_b - 2 (T_b - c)) / sin &beta;</code>
+    <code>A&#8321; = t_h &middot; d&#8321; &middot; (2 - sin &beta;)   (required reinforcement)</code>
+    <code>d&#8322; = max[ d&#8321;, (T_b - c) + (T_h - c) + d&#8321; / 2 ]   (zone half-width on run)</code>
+    <code>L&#8324; = min[ 2.5 (T_h - c), 2.5 (T_b - c) + T_r ]   (zone height on branch)</code>
+    <code>A&#8322; = (2 d&#8322; - d&#8321;) &middot; (T_h - t_h - c)         (excess in run)</code>
+    <code>A&#8323; = 2 L&#8324; &middot; (T_b - t_b - c) / sin &beta;          (excess in branch)</code>
+    <code>A&#8324; = 2 W &middot; T_r                                  (added pad)</code>
+    <code>Compliance:&nbsp; A&#8322; + A&#8323; + A&#8324; &ge; A&#8321;</code>
+    <div class="calc-formula-notes">
+      <strong>What this is:</strong> ASME B31.3 paragraph 304.3.3 area-replacement method for welded branch connections. The integrity check ensures that material removed from the run pipe (to install the branch) is replaced by excess thickness available within a defined zone &mdash; in the run, in the branch, or via an added pad.
+      <strong>Reinforcement zone:</strong> a finite region around the branch where excess material counts toward A&#8322;, A&#8323;, A&#8324;. Anything outside the zone is irrelevant. The half-width d&#8322; on the run and the height L&#8324; on the branch define the zone boundaries.
+      <strong>When to use which fitting:</strong>
+      <ul style="margin:.5rem 0 0 1.5rem;color:#B0C4D8;">
+        <li><strong>Standard B16.9 tee</strong> &mdash; meets reinforcement automatically (no calc needed). Use whenever line size accommodates.</li>
+        <li><strong>Reducing tee</strong> &mdash; same, when branch &lt; run size by &ge; 2 sizes.</li>
+        <li><strong>Welded contour insert</strong> (Bonney Forge SST or equivalent) &mdash; when standard tee unavailable but extra-heavy fitting fits the design code.</li>
+        <li><strong>Stub-on / set-on with pad</strong> &mdash; field-welded reinforcement when fitting cost or schedule rules out pre-fab.</li>
+      </ul>
+      <strong>Brownfield tip:</strong> when adding a new tap to an existing 20-year-old line, do not assume the original wall is intact. Subtract <em>actual measured thickness</em> from UT readings, not nominal sch from the iso. A line that originally passed §304.3.3 with sch 40 (T_h = 6.02 mm for NPS 4) and a 1.6 mm allowance has only 4.4 mm to play with &mdash; if UT shows 4.0 mm remaining, you have <strong>negative</strong> A&#8322; available and the new branch needs a pad even if the original tap did not. This is the single most common reason brownfield tie-ins crack at the toe of weld within 5 years of revamp.
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Disclaimer -->
+<div class="calc-disclaimer">
+  <strong>⚠ For preliminary sizing only</strong>
+  Results are based on nominal ASME dimensions and typical material densities. They do not account for manufacturing tolerances, coatings, supports, flanges, fittings, corrosion allowance, or actual site conditions. All final designs must be verified by a qualified engineer and validated against the applicable code edition. Piping Passion accepts no liability for decisions made using this tool.
+</div>
+
+<!-- Related calculators -->
+<div class="related-calcs">
+  <div class="related-title">Other Calculators</div>
+  <div class="related-grid">
+    <a class="related-card" href="wall-thickness.html">
+      <div class="related-card-name">Wall Thickness</div>
+      <div class="related-card-desc">B31.3 pressure design thickness.</div>
+    </a>
+    <a class="related-card" href="hydrotest-pressure.html">
+      <div class="related-card-name">Hydrotest Pressure</div>
+      <div class="related-card-desc">B31.3 / B31.1 test pressure.</div>
+    </a>
+    <a class="related-card" href="pipe-weight.html">
+      <div class="related-card-name">Pipe Weight</div>
+      <div class="related-card-desc">Empty + content + insulation.</div>
+    </a>
+    <a class="related-card" href="support-span.html">
+      <div class="related-card-name">Pipe Support Span</div>
+      <div class="related-card-desc">Max span between supports.</div>
+    </a>
+    <a class="related-card" href="expansion-loop.html">
+      <div class="related-card-name">Expansion Loop</div>
+      <div class="related-card-desc">Loop sizing for &Delta;L.</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><span>PIPING</span>PASSION</div>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../field-tips.html">Field Tips</a>
+    <a href="../books.html">Books</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../about.html">About</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Geoffroy Falot &middot; pipingpassion.com</p>
+</footer>
+
+<script>
+
+const PIPE_DATA = {
+  '1/2"':   { od: 21.3,  sch: { '10S': 2.11, '40/STD': 2.77, '80/XS': 3.73, '160': 4.78, 'XXS': 7.47 } },
+  '3/4"':   { od: 26.7,  sch: { '10S': 2.11, '40/STD': 2.87, '80/XS': 3.91, '160': 5.56, 'XXS': 7.82 } },
+  '1"':     { od: 33.4,  sch: { '10S': 2.77, '40/STD': 3.38, '80/XS': 4.55, '160': 6.35, 'XXS': 9.09 } },
+  '1-1/2"': { od: 48.3,  sch: { '10S': 2.77, '40/STD': 3.68, '80/XS': 5.08, '160': 7.14, 'XXS': 10.15 } },
+  '2"':     { od: 60.3,  sch: { '10S': 2.77, '40/STD': 3.91, '80/XS': 5.54, '160': 8.74, 'XXS': 11.07 } },
+  '3"':     { od: 88.9,  sch: { '10S': 3.05, '40/STD': 5.49, '80/XS': 7.62, '160': 11.13, 'XXS': 15.24 } },
+  '4"':     { od: 114.3, sch: { '10S': 3.05, '40/STD': 6.02, '80/XS': 8.56, '120': 11.13, '160': 13.49, 'XXS': 17.12 } },
+  '6"':     { od: 168.3, sch: { '10S': 3.40, '40/STD': 7.11, '80/XS': 10.97, '120': 14.27, '160': 18.26, 'XXS': 21.95 } },
+  '8"':     { od: 219.1, sch: { '10S': 3.76, '20': 6.35, '40/STD': 8.18, '60': 10.31, '80/XS': 12.70, '100': 15.09, '120': 18.26, '140': 20.62, '160': 23.01, 'XXS': 22.23 } },
+  '10"':    { od: 273.0, sch: { '10S': 4.19, '20': 6.35, '40/STD': 9.27, '60/XS': 12.70, '80': 15.09, '100': 18.26, '120': 21.44, '140': 25.40, '160': 28.58 } },
+  '12"':    { od: 323.8, sch: { '10S': 4.57, '20': 6.35, '30': 8.38, 'STD': 9.53, '40': 10.31, 'XS': 12.70, '60': 14.27, '80': 17.48, '100': 21.44, '120': 25.40, '140': 28.58, '160': 33.32 } },
+  '14"':    { od: 355.6, sch: { '10': 6.35, '20': 7.92, '30/STD': 9.53, '40': 11.13, 'XS': 12.70, '60': 15.09, '80': 19.05, '100': 23.83, '120': 27.79, '140': 31.75, '160': 35.71 } },
+  '16"':    { od: 406.4, sch: { '10': 6.35, '20': 7.92, '30/STD': 9.53, '40': 12.70, 'XS': 12.70, '60': 16.66, '80': 21.44, '100': 26.19, '120': 30.96, '140': 36.53, '160': 40.49 } },
+  '18"':    { od: 457.0, sch: { '10': 6.35, '20': 7.92, 'STD': 9.53, '30': 11.13, 'XS': 12.70, '40': 14.27, '60': 19.05, '80': 23.83, '100': 29.36, '120': 34.93, '140': 39.67, '160': 45.24 } },
+  '20"':    { od: 508.0, sch: { '10': 6.35, '20/STD': 9.53, '30/XS': 12.70, '40': 15.09, '60': 20.62, '80': 26.19, '100': 32.54, '120': 38.10, '140': 44.45, '160': 50.01 } },
+  '24"':    { od: 610.0, sch: { '10': 6.35, '20/STD': 9.53, 'XS': 12.70, '30': 14.27, '40': 17.48, '60': 24.61, '80': 30.96, '100': 38.89, '120': 46.02, '140': 52.37, '160': 59.54 } },
+  '30"':    { od: 762.0, sch: { '10': 7.92, 'STD': 9.53, '20/XS': 12.70, '30': 15.88 } },
+  '36"':    { od: 914.0, sch: { 'STD': 9.53, 'XS': 12.70, '20': 15.88, '30': 19.05, '40': 22.23 } },
+  '42"':    { od: 1067.0, sch: { 'STD': 9.53, 'XS': 12.70 } },
+  '48"':    { od: 1219.0, sch: { 'STD': 9.53, 'XS': 12.70 } },
+};
+
+
+const CONV = {
+  bar_to_mpa: 0.1, psi_to_mpa: 0.00689476,
+  mm_to_in: 0.0393701, in_to_mm: 25.4,
+  mm2_to_in2: 0.00155
+};
+
+let currentUnits = 'SI';
+
+function setUnits(u) {
+  currentUnits = u;
+  document.getElementById('btn-si').classList.toggle('active', u === 'SI');
+  document.getElementById('btn-imp').classList.toggle('active', u === 'IMP');
+  // Toggle pressure
+  const pU = document.getElementById('P-unit');
+  if (u === 'IMP' && (pU.value === 'mpa' || pU.value === 'bar')) pU.value = 'psi';
+  if (u === 'SI'  && pU.value === 'psi') pU.value = 'mpa';
+  // Stress unit
+  const sU = document.getElementById('S-unit');
+  if (u === 'IMP' && sU.value === 'mpa') {
+    document.getElementById('S').value = (parseFloat(document.getElementById('S').value)*145.038).toFixed(0);
+    sU.value = 'psi';
+  }
+  if (u === 'SI' && sU.value === 'psi') {
+    document.getElementById('S').value = (parseFloat(document.getElementById('S').value)/145.038).toFixed(1);
+    sU.value = 'mpa';
+  }
+  // CA unit
+  const cU = document.getElementById('ca-unit');
+  if (u === 'IMP' && cU.value === 'mm') {
+    document.getElementById('ca').value = (parseFloat(document.getElementById('ca').value)*CONV.mm_to_in).toFixed(3);
+    cU.value = 'in';
+  }
+  if (u === 'SI' && cU.value === 'in') {
+    document.getElementById('ca').value = (parseFloat(document.getElementById('ca').value)*CONV.in_to_mm).toFixed(2);
+    cU.value = 'mm';
+  }
+  // Pad unit
+  const pdU = document.getElementById('pad-unit');
+  if (u === 'IMP' && pdU.value === 'mm') {
+    document.getElementById('W').value  = (parseFloat(document.getElementById('W').value)*CONV.mm_to_in).toFixed(3);
+    document.getElementById('Tr').value = (parseFloat(document.getElementById('Tr').value)*CONV.mm_to_in).toFixed(3);
+    pdU.value = 'in';
+  }
+  if (u === 'SI' && pdU.value === 'in') {
+    document.getElementById('W').value  = (parseFloat(document.getElementById('W').value)*CONV.in_to_mm).toFixed(1);
+    document.getElementById('Tr').value = (parseFloat(document.getElementById('Tr').value)*CONV.in_to_mm).toFixed(1);
+    pdU.value = 'mm';
+  }
+  // Result area unit
+  document.getElementById('u-A').textContent = (u==='SI') ? 'mm²' : 'in²';
+  document.getElementById('u-A2').textContent = (u==='SI') ? 'mm²' : 'in²';
+  calculate();
+}
+
+function populateNps(prefix) {
+  const sel = document.getElementById(prefix + 'nps');
+  Object.keys(PIPE_DATA).forEach(n => {
+    const o = document.createElement('option'); o.value = n; o.textContent = 'NPS ' + n;
+    sel.appendChild(o);
+  });
+  sel.value = (prefix === 'h') ? '8"' : '4"';
+  populateSch(prefix);
+}
+function populateSch(prefix) {
+  const nps = document.getElementById(prefix + 'nps').value;
+  const sel = document.getElementById(prefix + 'sch'); sel.innerHTML = '';
+  Object.keys(PIPE_DATA[nps].sch).forEach(s => {
+    const o = document.createElement('option');
+    o.value = s; o.textContent = 'Sch ' + s + ' (' + PIPE_DATA[nps].sch[s].toFixed(2) + ' mm)';
+    sel.appendChild(o);
+  });
+  const pref = ['40/STD','STD','40','40S'];
+  for (const p of pref) if (PIPE_DATA[nps].sch[p] !== undefined) { sel.value = p; break; }
+}
+function onHnpsChange() { populateSch('h'); calculate(); }
+function onBnpsChange() { populateSch('b'); calculate(); }
+
+function calculate() {
+  const hnps = document.getElementById('hnps').value;
+  const bnps = document.getElementById('bnps').value;
+  if (!PIPE_DATA[hnps] || !PIPE_DATA[bnps]) return;
+  const Dh = PIPE_DATA[hnps].od;
+  const Th = PIPE_DATA[hnps].sch[document.getElementById('hsch').value];
+  const Db = PIPE_DATA[bnps].od;
+  const Tb = PIPE_DATA[bnps].sch[document.getElementById('bsch').value];
+  if (Th === undefined || Tb === undefined) return;
+
+  // P -> MPa
+  const pVal = parseFloat(document.getElementById('P').value) || 0;
+  const pU = document.getElementById('P-unit').value;
+  let P_mpa;
+  switch (pU) {
+    case 'mpa': P_mpa = pVal; break;
+    case 'bar': P_mpa = pVal * CONV.bar_to_mpa; break;
+    case 'psi': P_mpa = pVal * CONV.psi_to_mpa; break;
+  }
+
+  // S -> MPa
+  const sVal = parseFloat(document.getElementById('S').value) || 0;
+  const sU = document.getElementById('S-unit').value;
+  const S_mpa = (sU === 'psi') ? sVal * CONV.psi_to_mpa : sVal;
+
+  const E = parseFloat(document.getElementById('E').value) || 1.0;
+  const Y = parseFloat(document.getElementById('Y').value) || 0.4;
+
+  // c -> mm
+  const cVal = parseFloat(document.getElementById('ca').value) || 0;
+  const cU = document.getElementById('ca-unit').value;
+  const c = (cU === 'in') ? cVal * CONV.in_to_mm : cVal;
+
+  const beta = parseFloat(document.getElementById('beta').value) || 90;
+  const sb = Math.sin(beta * Math.PI / 180);
+
+  // Pad -> mm
+  const padU = document.getElementById('pad-unit').value;
+  const Wval = parseFloat(document.getElementById('W').value) || 0;
+  const Trval = parseFloat(document.getElementById('Tr').value) || 0;
+  const W  = (padU === 'in') ? Wval * CONV.in_to_mm : Wval;
+  const Tr = (padU === 'in') ? Trval * CONV.in_to_mm : Trval;
+
+  // Pressure design thickness (B31.3 §304.1.2)
+  const denom = 2*(S_mpa*E + P_mpa*Y);
+  const th = (denom > 0) ? P_mpa * Dh / denom : 0;
+  const tb = (denom > 0) ? P_mpa * Db / denom : 0;
+
+  // Areas (all mm)
+  const d1 = (Db - 2*(Tb - c)) / sb;
+  const A1 = th * d1 * (2 - sb);
+  const d2 = Math.max(d1, (Tb - c) + (Th - c) + d1/2);
+  const L4 = Math.min(2.5*(Th - c), 2.5*(Tb - c) + Tr);
+  const A2 = Math.max(0, (2*d2 - d1) * (Th - th - c));
+  const A3 = Math.max(0, 2 * L4 * (Tb - tb - c) / sb);
+  const A4 = 2 * W * Tr;
+  const Aav = A2 + A3 + A4;
+  const ratio = A1 > 0 ? Aav / A1 : 0;
+  const pass = Aav >= A1;
+
+  const f = (currentUnits === 'SI') ? 1 : CONV.mm2_to_in2;
+  document.getElementById('r-A1').textContent  = (A1*f).toFixed( currentUnits==='SI' ? 1 : 4 );
+  document.getElementById('r-Aav').textContent = (Aav*f).toFixed( currentUnits==='SI' ? 1 : 4 );
+
+  const statusEl = document.getElementById('r-status');
+  const subEl = document.getElementById('r-status-sub');
+  if (A1 === 0) {
+    statusEl.textContent = '—';
+    statusEl.style.color = '#B0C4D8';
+    subEl.textContent = 'Enter design data.';
+  } else if (pass) {
+    statusEl.textContent = '✓ Compliant';
+    statusEl.style.color = '#7CD4A4';
+    subEl.innerHTML = 'Available reinforcement is <strong>' + ratio.toFixed(2) + '×</strong> required. Branch passes B31.3 §304.3.3.';
+  } else {
+    statusEl.textContent = '⚠ Insufficient';
+    statusEl.style.color = '#E87070';
+    subEl.innerHTML = 'Available reinforcement is only <strong>' + ratio.toFixed(2) + '×</strong> required. Add a reinforcing pad or use a thicker schedule.';
+  }
+  document.getElementById('r-Aav-sub').innerHTML = 'A₂ = ' + (A2*f).toFixed(currentUnits==='SI'?1:4) + ' &middot; A₃ = ' + (A3*f).toFixed(currentUnits==='SI'?1:4) + ' &middot; A₄ = ' + (A4*f).toFixed(currentUnits==='SI'?1:4);
+
+  // Suggested pad if not passing
+  const padEl = document.getElementById('r-pad');
+  if (!pass && A1 > 0) {
+    const deficit = A1 - (A2 + A3); // assume no pad currently
+    // Suggest pad with practical Tr equal to T_h, then compute W
+    const Tr_sug = Th;
+    const W_sug = deficit / (2 * Tr_sug);
+    // Round W up to nearest 5 mm
+    const W_round = Math.ceil(W_sug / 5) * 5;
+    if (currentUnits === 'SI') {
+      padEl.innerHTML = 'Suggested pad: <strong>W &asymp; ' + W_round.toFixed(0) + ' mm</strong> &times; T_r = ' + Tr_sug.toFixed(2) + ' mm<br>Total pad area &asymp; ' + (2*W_round*Tr_sug).toFixed(0) + ' mm²';
+    } else {
+      padEl.innerHTML = 'Suggested pad: <strong>W &asymp; ' + (W_round*CONV.mm_to_in).toFixed(2) + ' in</strong> &times; T_r = ' + (Tr_sug*CONV.mm_to_in).toFixed(3) + ' in';
+    }
+  } else if (pass) {
+    padEl.textContent = 'Not required — unreinforced or current pad already adequate.';
+  } else {
+    padEl.textContent = '—';
+  }
+
+  // Detail
+  const u = (currentUnits === 'SI') ? 'mm' : 'in';
+  const k = (currentUnits === 'SI') ? 1 : CONV.mm_to_in;
+  let detail = '';
+  detail += 'Header: D = ' + (Dh*k).toFixed(2) + u + ' &middot; T = ' + (Th*k).toFixed(currentUnits==='SI'?2:3) + u + '<br>';
+  detail += 'Branch: D = ' + (Db*k).toFixed(2) + u + ' &middot; T = ' + (Tb*k).toFixed(currentUnits==='SI'?2:3) + u + '<br>';
+  detail += 't_h = ' + (th*k).toFixed(currentUnits==='SI'?3:4) + u + ' &middot; t_b = ' + (tb*k).toFixed(currentUnits==='SI'?3:4) + u + '<br>';
+  detail += 'd₁ = ' + (d1*k).toFixed(2) + u + ' &middot; d₂ = ' + (d2*k).toFixed(2) + u + ' &middot; L₄ = ' + (L4*k).toFixed(2) + u + '<br>';
+  detail += '&beta; = ' + beta.toFixed(0) + '° &middot; sin &beta; = ' + sb.toFixed(3);
+  document.getElementById('r-detail').innerHTML = detail;
+}
+
+populateNps('h');
+populateNps('b');
+calculate();
+
+</script>
+
+</body>
+</html>

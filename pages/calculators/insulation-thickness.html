@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Insulation Thickness Calculator &mdash; Piping Passion</title>
+<meta name="description" content="Find pipe insulation thickness for personnel protection, anti-condensation or heat loss control. Hot or cold service, multiple insulation materials. Per ASTM C680 cylindrical formulation.">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   PIPINGPASSION.COM — SHARED STYLESHEET
+   Palette: Navy #09152A · Gold #C9930A · #F0B429
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --navy:    #09152A;
+  --navy-2:  #0D1E38;
+  --navy-3:  #142645;
+  --navy-4:  #06101E;
+  --gold:    #C9930A;
+  --gold-lt: #F0B429;
+  --white:   #F5F0E8;
+  --muted:   #8EA3BE;
+  --dim:     #3D5A7A;
+  --border:  rgba(201,147,10,0.18);
+  --border-s: rgba(201,147,10,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(9,21,42,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.1rem; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-links .nav-cta {
+  color: var(--gold); border: 1px solid var(--border);
+  padding: 0.22rem 0.9rem; border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  padding: 5rem 2.5rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 60%);
+  z-index: 0;
+}
+.page-header-inner { position: relative; z-index: 1; max-width: 900px; }
+.page-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800; letter-spacing: -0.01em;
+  line-height: 1; margin-bottom: 1.2rem;
+}
+.page-title span { color: var(--gold-lt); }
+.page-desc {
+  font-size: 1.08rem; color: #C8D2DE; max-width: 700px;
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 5rem; padding: 3rem 2.5rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--navy-4);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; letter-spacing: 0.08em;
+  font-size: 1.05rem; color: var(--white); margin-bottom: 1rem;
+}
+.footer-logo span { color: var(--gold); }
+.footer-links {
+  display: flex; gap: 2rem; justify-content: center;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none;
+}
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-copy {
+  font-size: 0.78rem; color: var(--dim); letter-spacing: 0.04em;
+}
+
+/* ── MOBILE NAV TOGGLE ── */
+.nav-toggle {
+  display: none;
+  background: transparent; border: 0; cursor: pointer;
+  padding: 0.4rem;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--gold-lt); margin: 4px 0;
+  transition: transform 0.25s, opacity 0.2s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.25rem; }
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 62px; right: 0;
+    background: rgba(9,21,42,0.98); backdrop-filter: blur(14px);
+    border: 1px solid var(--border); border-right: 0;
+    border-bottom-left-radius: 8px;
+    flex-direction: column; gap: 0;
+    padding: 1rem 0; min-width: 220px;
+    transform: translateX(120%); transition: transform 0.25s;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; padding: 0.7rem 1.5rem;
+  }
+  .nav-links .nav-cta {
+    margin: 0.4rem 1.5rem; padding: 0.4rem 0.9rem;
+    text-align: center;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CALCULATOR PAGE SPECIFIC STYLES
+   ═══════════════════════════════════════════ */
+
+.calc-wrap {
+  max-width: 1100px; margin: 0 auto;
+  padding: 3rem 2.5rem 0;
+  position: relative; z-index: 1;
+}
+
+/* Units toggle */
+.unit-toggle {
+  display: flex; align-items: center;
+  gap: 0.8rem; margin-bottom: 2rem;
+  justify-content: flex-end;
+}
+.unit-toggle-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.unit-toggle-btn {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem; display: inline-flex;
+}
+.unit-toggle-btn button {
+  background: transparent; border: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  padding: 0.45rem 1.2rem; border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+.unit-toggle-btn button.active {
+  background: var(--gold); color: var(--navy);
+}
+
+/* Main calc grid */
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Inputs panel */
+.calc-panel {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+}
+.calc-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.calc-field {
+  margin-bottom: 1.3rem;
+}
+.calc-field:last-child { margin-bottom: 0; }
+.calc-label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white); font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.calc-input, .calc-select {
+  width: 100%;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.98rem;
+  padding: 0.7rem 0.9rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.calc-input:focus, .calc-select:focus {
+  outline: 0;
+  border-color: var(--gold-lt);
+  background: var(--navy-4);
+}
+.calc-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='%23F0B429'%3E%3Cpath d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 10px;
+  padding-right: 2.3rem;
+}
+.calc-field-inline {
+  display: flex; gap: 0.6rem; align-items: stretch;
+}
+.calc-field-inline .calc-input { flex: 1; }
+.calc-field-inline .calc-select { flex: 0 0 auto; width: auto; min-width: 90px; }
+
+.calc-hint {
+  font-size: 0.8rem; color: var(--muted);
+  margin-top: 0.35rem; font-style: italic;
+}
+
+/* Result panel */
+.calc-result-panel {
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy-2) 100%);
+  border: 1px solid var(--border-s);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+  position: sticky; top: 80px;
+}
+.calc-result-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold-lt);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border-s);
+}
+.result-block {
+  padding: 1.2rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.result-block:last-of-type { border-bottom: 0; padding-bottom: 0.4rem; }
+.result-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.result-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem; font-weight: 700;
+  color: var(--gold-lt); line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.result-value.small { font-size: 1.4rem; color: var(--white); }
+.result-unit {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem; color: var(--muted);
+  font-weight: 600; margin-left: 0.35rem;
+  letter-spacing: 0.04em;
+}
+.result-sub {
+  font-size: 0.82rem; color: var(--muted);
+  margin-top: 0.3rem;
+}
+.result-error {
+  color: #E08888;
+  font-size: 0.92rem;
+  padding: 0.8rem 0;
+}
+
+/* Formula section */
+.calc-formula {
+  margin-top: 2.5rem;
+  background: var(--navy-4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem 2rem;
+}
+.calc-formula-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.calc-formula code {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--white);
+  background: var(--navy);
+  padding: 0.9rem 1.1rem;
+  border-radius: 5px;
+  border-left: 3px solid var(--gold);
+  margin-bottom: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.calc-formula-notes {
+  font-size: 0.9rem;
+  color: #B0C4D8;
+  line-height: 1.75;
+}
+.calc-formula-notes strong { color: var(--gold-lt); font-weight: 600; }
+
+/* Disclaimer */
+.calc-disclaimer {
+  margin: 2.5rem auto 0;
+  max-width: 1100px;
+  padding: 1.4rem 1.8rem;
+  background: rgba(224,48,48,0.06);
+  border: 1px solid rgba(224,48,48,0.25);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: #D8C0C0;
+  line-height: 1.7;
+}
+.calc-disclaimer strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #E87070;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+/* Related calculators section */
+.related-calcs {
+  max-width: 1100px; margin: 3.5rem auto 0;
+  padding: 0 2.5rem;
+}
+.related-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.related-card {
+  display: block;
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.1rem 1.3rem;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.related-card:hover {
+  border-color: var(--gold-lt);
+  transform: translateY(-2px);
+}
+.related-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  color: var(--white); letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+.related-card-desc {
+  font-size: 0.82rem; color: var(--muted);
+  line-height: 1.5;
+}
+.related-card.disabled {
+  opacity: 0.5; pointer-events: none;
+}
+.related-card.disabled .related-card-name::after {
+  content: ' · soon';
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .calc-wrap { padding: 2rem 1.25rem 0; }
+  .calc-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .calc-result-panel { position: static; }
+  .result-value { font-size: 1.7rem; }
+  .related-calcs { padding: 0 1.25rem; }
+  .calc-disclaimer { margin-left: 1.25rem; margin-right: 1.25rem; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../../index.html"><span>PIPING</span>PASSION</a>
+  <ul class="nav-links">
+    <li><a href="../field-tips.html">Field Tips</a></li>
+    <li><a href="../field-stories.html">Field Stories</a></li>
+    <li><a href="../brownfield.html">Brownfield</a></li>
+    <li><a href="../scan-to-model.html">Scan-to-Model</a></li>
+    <li><a href="../codes-standards.html">Codes</a></li>
+    <li><a href="../tools.html" class="active">Tools</a></li>
+    <li><a href="../career.html">Career</a></li>
+    <li><a href="../reference.html">Reference</a></li>
+    <li><a href="../common-mistakes.html">Mistakes</a></li>
+    <li><a href="../glossary.html">Glossary</a></li>
+    <li><a href="../books.html">Books</a></li>
+    <li><a href="../downloads.html" style="color:#E03030;font-weight:700">Downloads</a></li>
+    <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">Engineering Calculator</p>
+    <h1 class="page-title">Insulation Thickness <span>Calculator</span></h1>
+    <p class="page-desc">Compute the insulation thickness required to keep the outer surface at a target temperature &mdash; personnel protection, anti-condensation on cold service, or heat-loss control. Iterative cylindrical heat balance per ASTM C680 method.</p>
+  </div>
+</div>
+
+<div class="calc-wrap">
+
+  <div class="unit-toggle">
+    <span class="unit-toggle-label">Units</span>
+    <div class="unit-toggle-btn">
+      <button id="btn-si" class="active" onclick="setUnits('SI')">SI</button>
+      <button id="btn-imp" onclick="setUnits('IMP')">Imperial</button>
+    </div>
+  </div>
+
+  <div class="calc-grid">
+
+    <!-- INPUTS -->
+    <div class="calc-panel">
+      <div class="calc-panel-title">Inputs</div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="nps">NPS (pipe size)</label>
+        <select id="nps" class="calc-select" onchange="onNpsChange()"></select>
+        <p class="calc-hint" id="od-hint">OD will show below.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="Tp">Process temperature (T<sub>process</sub>)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="Tp" class="calc-input" value="200" step="1" oninput="calculate()">
+          <select id="Tp-unit" class="calc-select" onchange="calculate()">
+            <option value="C">&deg;C</option>
+            <option value="F">&deg;F</option>
+          </select>
+        </div>
+        <p class="calc-hint">Use a negative value for cold / cryogenic service.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="Ta">Ambient temperature (T<sub>amb</sub>)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="Ta" class="calc-input" value="25" step="1" oninput="calculate()">
+          <select id="Ta-unit" class="calc-select" onchange="calculate()">
+            <option value="C">&deg;C</option>
+            <option value="F">&deg;F</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="Ts">Target surface temperature (T<sub>surf</sub>)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="Ts" class="calc-input" value="50" step="1" oninput="calculate()">
+          <select id="Ts-unit" class="calc-select" onchange="calculate()">
+            <option value="C">&deg;C</option>
+            <option value="F">&deg;F</option>
+          </select>
+        </div>
+        <p class="calc-hint">Personnel protection: 60&deg;C. Cold service (anti-condensation): &gt; ambient dew point.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="kIns">Insulation material (k)</label>
+        <select id="kIns" class="calc-select" onchange="calculate()">
+          <option value="0.040">Mineral wool (k = 0.040 W/m&middot;K)</option>
+          <option value="0.045" selected>Mineral wool, hot service (k = 0.045)</option>
+          <option value="0.060">Calcium silicate (k = 0.060)</option>
+          <option value="0.070">Calcium silicate, high T (k = 0.070)</option>
+          <option value="0.038">Glass wool (k = 0.038)</option>
+          <option value="0.045">Cellular glass &mdash; Foamglas (k = 0.045)</option>
+          <option value="0.025">Polyurethane foam &mdash; PUR (k = 0.025)</option>
+          <option value="0.022">Polyisocyanurate &mdash; PIR (k = 0.022)</option>
+          <option value="0.035">Aerogel (k = 0.035)</option>
+        </select>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="ho">Outer surface heat transfer coefficient (h<sub>o</sub>)</label>
+        <select id="ho" class="calc-select" onchange="calculate()">
+          <option value="5">Still air, sheltered (h = 5 W/m&sup2;&middot;K)</option>
+          <option value="8" selected>Still air, indoors (h = 8)</option>
+          <option value="10">Light wind / outdoors (h = 10)</option>
+          <option value="15">Wind 5 m/s (h = 15)</option>
+          <option value="25">Wind 10 m/s (h = 25)</option>
+        </select>
+        <p class="calc-hint">h<sub>o</sub> combines convection + radiation. Use 8&ndash;10 for typical indoor / sheltered outdoor service.</p>
+      </div>
+
+    </div>
+
+    <!-- RESULTS -->
+    <div class="calc-result-panel">
+      <div class="calc-result-title">Result</div>
+
+      <div class="result-block">
+        <div class="result-label">Required insulation thickness</div>
+        <div class="result-value"><span id="r-t">&mdash;</span><span class="result-unit" id="u-t">mm</span></div>
+        <div class="result-sub" id="r-t-sub"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Resulting outer dimensions</div>
+        <div id="r-dims" style="font-family:'JetBrains Mono',monospace;color:#B0C4D8;margin-top:.5rem;line-height:1.8;font-size:0.92rem;">&mdash;</div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Heat loss / gain at this thickness</div>
+        <div class="result-value small"><span id="r-q">&mdash;</span><span class="result-unit" id="u-q">W/m</span></div>
+        <div class="result-sub" id="r-q-sub"></div>
+      </div>
+
+      <div class="result-block" style="border-bottom:0;padding-bottom:0;">
+        <div class="result-label">Verification &mdash; surface temp at this thickness</div>
+        <div id="r-verify" style="font-family:'JetBrains Mono',monospace;color:#B0C4D8;margin-top:.5rem;font-size:0.92rem;">&mdash;</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Formula explanation -->
+  <div class="calc-formula">
+    <div class="calc-formula-title">Formula &amp; Method</div>
+
+    <code>Steady-state heat balance:</code>
+    <code>q&#8260;L = 2&pi;k(T<sub>p</sub> &minus; T<sub>s</sub>) / ln(r<sub>o</sub>/r<sub>i</sub>) &nbsp;=&nbsp; h<sub>o</sub> &middot; 2&pi;r<sub>o</sub> &middot; (T<sub>s</sub> &minus; T<sub>amb</sub>)</code>
+    <code>Solve iteratively for r<sub>o</sub>; insulation thickness = r<sub>o</sub> &minus; r<sub>i</sub>.</code>
+    <div class="calc-formula-notes">
+      <strong>Method:</strong> conduction through cylindrical insulation balanced against combined convection + radiation at the outer surface. Steel pipe wall resistance is negligible compared to insulation and is neglected, consistent with ASTM C680 Annex A.<br><br>
+      <strong>Variables:</strong>
+      <ul style="margin:.5rem 0 0 1.5rem;color:#B0C4D8;">
+        <li><strong>k</strong> = insulation thermal conductivity (W/m&middot;K)</li>
+        <li><strong>r<sub>i</sub></strong> = pipe outer radius = OD/2 (insulation inner radius)</li>
+        <li><strong>r<sub>o</sub></strong> = insulation outer radius (what we solve for)</li>
+        <li><strong>h<sub>o</sub></strong> = outer surface heat transfer coefficient (convection + radiation lumped)</li>
+        <li><strong>T<sub>p</sub>, T<sub>amb</sub>, T<sub>s</sub></strong> = process / ambient / target surface temperatures</li>
+      </ul>
+      <strong>Common targets:</strong>
+      <ul style="margin:.5rem 0 0 1.5rem;color:#B0C4D8;">
+        <li><strong>Personnel protection</strong> (hot service): T<sub>surf</sub> &le; 60&deg;C (ASTM C1055)</li>
+        <li><strong>Anti-condensation</strong> (cold service): T<sub>surf</sub> &ge; ambient dew point (typ. +5&deg;C margin)</li>
+        <li><strong>Energy / heat-loss</strong>: economic thickness from ASTM C680 / ISO 12241</li>
+        <li><strong>Process control</strong>: keep fluid above pour point or below decomposition temperature</li>
+      </ul>
+      <strong>Conservatism:</strong> result is for bare straight pipe. Add 10&ndash;15 mm for fittings, valves and supports where heat-loss is concentrated. Field thickness is also stepped to standard insulation pre-formed sizes (25, 38, 50, 63, 75, 100, 125&hellip; mm).<br><br>
+      <strong>Brownfield tip:</strong> retrofit insulation almost always finds CUI (Corrosion Under Insulation) underneath. Budget for surface prep, primer and sometimes new pipe before quoting just the insulation. Carbon steel between 60&deg;C and 175&deg;C is the worst CUI risk window &mdash; specify CUI-grade vapor stops at every penetration.
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Disclaimer -->
+<div class="calc-disclaimer">
+  <strong>⚠ For preliminary sizing only</strong>
+  Results are based on nominal ASME dimensions and typical material densities. They do not account for manufacturing tolerances, coatings, supports, flanges, fittings, corrosion allowance, or actual site conditions. All final designs must be verified by a qualified engineer and validated against the applicable code edition. Piping Passion accepts no liability for decisions made using this tool.
+</div>
+
+<!-- Related calculators -->
+<div class="related-calcs">
+  <div class="related-title">Other Calculators</div>
+  <div class="related-grid">
+    <a class="related-card" href="pipe-weight.html">
+      <div class="related-card-name">Pipe Weight</div>
+      <div class="related-card-desc">Add insulation density to total weight.</div>
+    </a>
+    <a class="related-card" href="thermal-expansion.html">
+      <div class="related-card-name">Thermal Expansion</div>
+      <div class="related-card-desc">&Delta;L for any pipe material.</div>
+    </a>
+    <a class="related-card" href="support-span.html">
+      <div class="related-card-name">Support Span</div>
+      <div class="related-card-desc">Insulated lines need closer supports.</div>
+    </a>
+    <a class="related-card" href="wall-thickness.html">
+      <div class="related-card-name">Wall Thickness (B31.3)</div>
+      <div class="related-card-desc">Minimum pipe wall.</div>
+    </a>
+    <a class="related-card" href="hydrotest-pressure.html">
+      <div class="related-card-name">Hydrotest Pressure</div>
+      <div class="related-card-desc">Per ASME B31 codes.</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><span>PIPING</span>PASSION</div>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../field-tips.html">Field Tips</a>
+    <a href="../books.html">Books</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../about.html">About</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Geoffroy Falot &middot; pipingpassion.com</p>
+</footer>
+
+<script>
+
+const PIPE_DATA = {
+  '1/2"':   { od: 21.3,  sch: { '10S': 2.11, '40/STD': 2.77, '80/XS': 3.73, '160': 4.78, 'XXS': 7.47 } },
+  '3/4"':   { od: 26.7,  sch: { '10S': 2.11, '40/STD': 2.87, '80/XS': 3.91, '160': 5.56, 'XXS': 7.82 } },
+  '1"':     { od: 33.4,  sch: { '10S': 2.77, '40/STD': 3.38, '80/XS': 4.55, '160': 6.35, 'XXS': 9.09 } },
+  '1-1/2"': { od: 48.3,  sch: { '10S': 2.77, '40/STD': 3.68, '80/XS': 5.08, '160': 7.14, 'XXS': 10.15 } },
+  '2"':     { od: 60.3,  sch: { '10S': 2.77, '40/STD': 3.91, '80/XS': 5.54, '160': 8.74, 'XXS': 11.07 } },
+  '3"':     { od: 88.9,  sch: { '10S': 3.05, '40/STD': 5.49, '80/XS': 7.62, '160': 11.13, 'XXS': 15.24 } },
+  '4"':     { od: 114.3, sch: { '10S': 3.05, '40/STD': 6.02, '80/XS': 8.56, '120': 11.13, '160': 13.49, 'XXS': 17.12 } },
+  '6"':     { od: 168.3, sch: { '10S': 3.40, '40/STD': 7.11, '80/XS': 10.97, '120': 14.27, '160': 18.26, 'XXS': 21.95 } },
+  '8"':     { od: 219.1, sch: { '10S': 3.76, '20': 6.35, '40/STD': 8.18, '60': 10.31, '80/XS': 12.70, '100': 15.09, '120': 18.26, '140': 20.62, '160': 23.01, 'XXS': 22.23 } },
+  '10"':    { od: 273.0, sch: { '10S': 4.19, '20': 6.35, '40/STD': 9.27, '60/XS': 12.70, '80': 15.09, '100': 18.26, '120': 21.44, '140': 25.40, '160': 28.58 } },
+  '12"':    { od: 323.8, sch: { '10S': 4.57, '20': 6.35, '30': 8.38, 'STD': 9.53, '40': 10.31, 'XS': 12.70, '60': 14.27, '80': 17.48, '100': 21.44, '120': 25.40, '140': 28.58, '160': 33.32 } },
+  '14"':    { od: 355.6, sch: { '10': 6.35, '20': 7.92, '30/STD': 9.53, '40': 11.13, 'XS': 12.70, '60': 15.09, '80': 19.05, '100': 23.83, '120': 27.79, '140': 31.75, '160': 35.71 } },
+  '16"':    { od: 406.4, sch: { '10': 6.35, '20': 7.92, '30/STD': 9.53, '40': 12.70, 'XS': 12.70, '60': 16.66, '80': 21.44, '100': 26.19, '120': 30.96, '140': 36.53, '160': 40.49 } },
+  '18"':    { od: 457.0, sch: { '10': 6.35, '20': 7.92, 'STD': 9.53, '30': 11.13, 'XS': 12.70, '40': 14.27, '60': 19.05, '80': 23.83, '100': 29.36, '120': 34.93, '140': 39.67, '160': 45.24 } },
+  '20"':    { od: 508.0, sch: { '10': 6.35, '20/STD': 9.53, '30/XS': 12.70, '40': 15.09, '60': 20.62, '80': 26.19, '100': 32.54, '120': 38.10, '140': 44.45, '160': 50.01 } },
+  '24"':    { od: 610.0, sch: { '10': 6.35, '20/STD': 9.53, 'XS': 12.70, '30': 14.27, '40': 17.48, '60': 24.61, '80': 30.96, '100': 38.89, '120': 46.02, '140': 52.37, '160': 59.54 } },
+  '30"':    { od: 762.0, sch: { '10': 7.92, 'STD': 9.53, '20/XS': 12.70, '30': 15.88 } },
+  '36"':    { od: 914.0, sch: { 'STD': 9.53, 'XS': 12.70, '20': 15.88, '30': 19.05, '40': 22.23 } },
+  '42"':    { od: 1067.0, sch: { 'STD': 9.53, 'XS': 12.70 } },
+  '48"':    { od: 1219.0, sch: { 'STD': 9.53, 'XS': 12.70 } },
+};
+
+
+const CONV = {
+  mm_to_in: 0.0393701, in_to_mm: 25.4, mm_to_m: 0.001,
+  C_to_F: c => c*9/5+32, F_to_C: f => (f-32)*5/9,
+  Wm_to_BTUhrft: 1.04076,   // 1 W/m = 1.04076 BTU/(hr.ft)
+  Wm2K_to_BTUhrft2F: 0.176110
+};
+
+let currentUnits = 'SI';
+
+function setUnits(u) {
+  currentUnits = u;
+  document.getElementById('btn-si').classList.toggle('active', u === 'SI');
+  document.getElementById('btn-imp').classList.toggle('active', u === 'IMP');
+  ['Tp','Ta','Ts'].forEach(id => {
+    const inp = document.getElementById(id);
+    const sel = document.getElementById(id + '-unit');
+    const v = parseFloat(inp.value);
+    if (u === 'IMP' && sel.value === 'C') {
+      inp.value = CONV.C_to_F(v).toFixed(1);
+      sel.value = 'F';
+    }
+    if (u === 'SI' && sel.value === 'F') {
+      inp.value = CONV.F_to_C(v).toFixed(1);
+      sel.value = 'C';
+    }
+  });
+  document.getElementById('u-t').textContent = u === 'SI' ? 'mm' : 'in';
+  document.getElementById('u-q').textContent = u === 'SI' ? 'W/m' : 'BTU/hr&middot;ft';
+  calculate();
+}
+
+function populateNps() {
+  const sel = document.getElementById('nps');
+  Object.keys(PIPE_DATA).forEach(n => {
+    const o = document.createElement('option'); o.value = n; o.textContent = 'NPS ' + n; sel.appendChild(o);
+  });
+  sel.value = '6"';
+}
+
+function onNpsChange() { calculate(); }
+
+function readT(id) {
+  const v = parseFloat(document.getElementById(id).value);
+  const u = document.getElementById(id + '-unit').value;
+  return u === 'F' ? CONV.F_to_C(v) : v;
+}
+
+function tSurf(ri, ro, Tp, Ta, k, h) {
+  const A = k / Math.log(ro/ri);
+  const B = h * ro;
+  return (A*Tp + B*Ta)/(A + B);
+}
+
+function findROuter(ri, Tp, Ta, Ttarget, k, h) {
+  const isHot = Tp > Ta;
+  if (isHot && (Ttarget >= Tp || Ttarget <= Ta)) return null;
+  if (!isHot && (Ttarget <= Tp || Ttarget >= Ta)) return null;
+  let lo = ri * 1.0001, hi = ri * 100;
+  for (let i = 0; i < 200; i++) {
+    const mid = (lo + hi)/2;
+    const ts = tSurf(ri, mid, Tp, Ta, k, h);
+    const needsMore = isHot ? (ts > Ttarget) : (ts < Ttarget);
+    if (needsMore) lo = mid; else hi = mid;
+    if ((hi - lo) < 1e-9) break;
+  }
+  return (lo + hi)/2;
+}
+
+function calculate() {
+  const nps = document.getElementById('nps').value;
+  if (!PIPE_DATA[nps]) return;
+  const od_mm = PIPE_DATA[nps].od;
+  const ri_m = od_mm / 2 / 1000;
+
+  const Tp_C = readT('Tp');
+  const Ta_C = readT('Ta');
+  const Ts_C = readT('Ts');
+
+  const k  = parseFloat(document.getElementById('kIns').value);
+  const ho = parseFloat(document.getElementById('ho').value);
+
+  // Validate target between Tp and Ta
+  const isHot = Tp_C > Ta_C;
+  const validTarget = isHot ? (Ts_C > Ta_C && Ts_C < Tp_C) : (Ts_C < Ta_C && Ts_C > Tp_C);
+
+  // OD hint
+  document.getElementById('od-hint').textContent =
+    currentUnits === 'SI' ? 'Pipe OD = ' + od_mm.toFixed(2) + ' mm'
+                          : 'Pipe OD = ' + (od_mm * CONV.mm_to_in).toFixed(3) + ' in';
+
+  if (!validTarget) {
+    document.getElementById('r-t').textContent = '⚠';
+    document.getElementById('r-t-sub').textContent = 'Target T must be strictly between process and ambient.';
+    document.getElementById('r-dims').textContent = '—';
+    document.getElementById('r-q').textContent = '—';
+    document.getElementById('r-q-sub').textContent = '';
+    document.getElementById('r-verify').textContent = '—';
+    return;
+  }
+
+  const ro_m = findROuter(ri_m, Tp_C, Ta_C, Ts_C, k, ho);
+  if (ro_m === null || !isFinite(ro_m)) {
+    document.getElementById('r-t').textContent = '⚠';
+    return;
+  }
+  const t_mm = (ro_m - ri_m) * 1000;
+
+  // Heat loss/gain at this thickness
+  // q/L = 2 * pi * k * (Tp - Ts) / ln(ro/ri)  -- in W/m
+  // Use the ACHIEVED Ts (==target) for reporting
+  const q_Wm = 2 * Math.PI * k * (Tp_C - Ts_C) / Math.log(ro_m / ri_m);
+
+  // Verification: actual Ts at this ro
+  const tsActual = tSurf(ri_m, ro_m, Tp_C, Ta_C, k, ho);
+
+  // Display
+  let tDisp, qDisp;
+  if (currentUnits === 'SI') {
+    tDisp = t_mm.toFixed(1);
+    qDisp = Math.abs(q_Wm).toFixed(1);
+  } else {
+    tDisp = (t_mm * CONV.mm_to_in).toFixed(2);
+    qDisp = (Math.abs(q_Wm) * CONV.Wm_to_BTUhrft).toFixed(1);
+  }
+
+  document.getElementById('r-t').textContent = tDisp;
+  // Round to nearest stocked thickness
+  const stocked = [13,19,25,32,38,50,63,75,90,100,115,125,150,175,200];
+  const next = stocked.find(s => s >= t_mm) || (Math.ceil(t_mm/25)*25);
+  document.getElementById('r-t-sub').innerHTML = 'Stocked size to specify: <strong style="color:var(--gold-lt);">' + next + ' mm</strong> (' + (next * CONV.mm_to_in).toFixed(2) + ' in) &middot; rounded up to standard pre-formed.';
+
+  let dimStr;
+  if (currentUnits === 'SI') {
+    dimStr = 'Pipe OD = ' + od_mm.toFixed(2) + ' mm<br>Insulation OD = <strong>' + (ro_m*2*1000).toFixed(1) + ' mm</strong><br>Add jacketing thickness if used.';
+  } else {
+    dimStr = 'Pipe OD = ' + (od_mm * CONV.mm_to_in).toFixed(3) + ' in<br>Insulation OD = <strong>' + (ro_m*2*1000*CONV.mm_to_in).toFixed(2) + ' in</strong><br>Add jacketing thickness if used.';
+  }
+  document.getElementById('r-dims').innerHTML = dimStr;
+
+  document.getElementById('r-q').textContent = qDisp;
+  document.getElementById('r-q-sub').textContent = (q_Wm >= 0)
+    ? 'Heat lost outward through insulation per metre of pipe.'
+    : 'Heat gained inward (cold service / refrigerated line).';
+
+  document.getElementById('r-verify').innerHTML = 'T<sub>surf</sub> = ' + (currentUnits === 'SI' ? tsActual.toFixed(2) + ' °C' : CONV.C_to_F(tsActual).toFixed(2) + ' °F') + ' &nbsp;(target met &check;)';
+}
+
+populateNps();
+calculate();
+
+</script>
+
+</body>
+</html>

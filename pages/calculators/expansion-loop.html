@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expansion Loop Sizing Calculator &mdash; Piping Passion</title>
+<meta name="description" content="Free expansion loop sizing calculator using guided cantilever method. Calculate the L-leg length for U-loops to absorb thermal expansion. SI and Imperial units.">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   PIPINGPASSION.COM — SHARED STYLESHEET
+   Palette: Navy #09152A · Gold #C9930A · #F0B429
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --navy:    #09152A;
+  --navy-2:  #0D1E38;
+  --navy-3:  #142645;
+  --navy-4:  #06101E;
+  --gold:    #C9930A;
+  --gold-lt: #F0B429;
+  --white:   #F5F0E8;
+  --muted:   #8EA3BE;
+  --dim:     #3D5A7A;
+  --border:  rgba(201,147,10,0.18);
+  --border-s: rgba(201,147,10,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(9,21,42,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.1rem; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-links .nav-cta {
+  color: var(--gold); border: 1px solid var(--border);
+  padding: 0.22rem 0.9rem; border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  padding: 5rem 2.5rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 60%);
+  z-index: 0;
+}
+.page-header-inner { position: relative; z-index: 1; max-width: 900px; }
+.page-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800; letter-spacing: -0.01em;
+  line-height: 1; margin-bottom: 1.2rem;
+}
+.page-title span { color: var(--gold-lt); }
+.page-desc {
+  font-size: 1.08rem; color: #C8D2DE; max-width: 700px;
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 5rem; padding: 3rem 2.5rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--navy-4);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; letter-spacing: 0.08em;
+  font-size: 1.05rem; color: var(--white); margin-bottom: 1rem;
+}
+.footer-logo span { color: var(--gold); }
+.footer-links {
+  display: flex; gap: 2rem; justify-content: center;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none;
+}
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-copy {
+  font-size: 0.78rem; color: var(--dim); letter-spacing: 0.04em;
+}
+
+/* ── MOBILE NAV TOGGLE ── */
+.nav-toggle {
+  display: none;
+  background: transparent; border: 0; cursor: pointer;
+  padding: 0.4rem;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--gold-lt); margin: 4px 0;
+  transition: transform 0.25s, opacity 0.2s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.25rem; }
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 62px; right: 0;
+    background: rgba(9,21,42,0.98); backdrop-filter: blur(14px);
+    border: 1px solid var(--border); border-right: 0;
+    border-bottom-left-radius: 8px;
+    flex-direction: column; gap: 0;
+    padding: 1rem 0; min-width: 220px;
+    transform: translateX(120%); transition: transform 0.25s;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; padding: 0.7rem 1.5rem;
+  }
+  .nav-links .nav-cta {
+    margin: 0.4rem 1.5rem; padding: 0.4rem 0.9rem;
+    text-align: center;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CALCULATOR PAGE SPECIFIC STYLES
+   ═══════════════════════════════════════════ */
+
+.calc-wrap {
+  max-width: 1100px; margin: 0 auto;
+  padding: 3rem 2.5rem 0;
+  position: relative; z-index: 1;
+}
+
+/* Units toggle */
+.unit-toggle {
+  display: flex; align-items: center;
+  gap: 0.8rem; margin-bottom: 2rem;
+  justify-content: flex-end;
+}
+.unit-toggle-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.unit-toggle-btn {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem; display: inline-flex;
+}
+.unit-toggle-btn button {
+  background: transparent; border: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  padding: 0.45rem 1.2rem; border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+.unit-toggle-btn button.active {
+  background: var(--gold); color: var(--navy);
+}
+
+/* Main calc grid */
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Inputs panel */
+.calc-panel {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+}
+.calc-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.calc-field {
+  margin-bottom: 1.3rem;
+}
+.calc-field:last-child { margin-bottom: 0; }
+.calc-label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white); font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.calc-input, .calc-select {
+  width: 100%;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.98rem;
+  padding: 0.7rem 0.9rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.calc-input:focus, .calc-select:focus {
+  outline: 0;
+  border-color: var(--gold-lt);
+  background: var(--navy-4);
+}
+.calc-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='%23F0B429'%3E%3Cpath d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 10px;
+  padding-right: 2.3rem;
+}
+.calc-field-inline {
+  display: flex; gap: 0.6rem; align-items: stretch;
+}
+.calc-field-inline .calc-input { flex: 1; }
+.calc-field-inline .calc-select { flex: 0 0 auto; width: auto; min-width: 90px; }
+
+.calc-hint {
+  font-size: 0.8rem; color: var(--muted);
+  margin-top: 0.35rem; font-style: italic;
+}
+
+/* Result panel */
+.calc-result-panel {
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy-2) 100%);
+  border: 1px solid var(--border-s);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+  position: sticky; top: 80px;
+}
+.calc-result-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold-lt);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border-s);
+}
+.result-block {
+  padding: 1.2rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.result-block:last-of-type { border-bottom: 0; padding-bottom: 0.4rem; }
+.result-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.result-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem; font-weight: 700;
+  color: var(--gold-lt); line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.result-value.small { font-size: 1.4rem; color: var(--white); }
+.result-unit {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem; color: var(--muted);
+  font-weight: 600; margin-left: 0.35rem;
+  letter-spacing: 0.04em;
+}
+.result-sub {
+  font-size: 0.82rem; color: var(--muted);
+  margin-top: 0.3rem;
+}
+.result-error {
+  color: #E08888;
+  font-size: 0.92rem;
+  padding: 0.8rem 0;
+}
+
+/* Formula section */
+.calc-formula {
+  margin-top: 2.5rem;
+  background: var(--navy-4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem 2rem;
+}
+.calc-formula-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.calc-formula code {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--white);
+  background: var(--navy);
+  padding: 0.9rem 1.1rem;
+  border-radius: 5px;
+  border-left: 3px solid var(--gold);
+  margin-bottom: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.calc-formula-notes {
+  font-size: 0.9rem;
+  color: #B0C4D8;
+  line-height: 1.75;
+}
+.calc-formula-notes strong { color: var(--gold-lt); font-weight: 600; }
+
+/* Disclaimer */
+.calc-disclaimer {
+  margin: 2.5rem auto 0;
+  max-width: 1100px;
+  padding: 1.4rem 1.8rem;
+  background: rgba(224,48,48,0.06);
+  border: 1px solid rgba(224,48,48,0.25);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: #D8C0C0;
+  line-height: 1.7;
+}
+.calc-disclaimer strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #E87070;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+/* Related calculators section */
+.related-calcs {
+  max-width: 1100px; margin: 3.5rem auto 0;
+  padding: 0 2.5rem;
+}
+.related-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.related-card {
+  display: block;
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.1rem 1.3rem;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.related-card:hover {
+  border-color: var(--gold-lt);
+  transform: translateY(-2px);
+}
+.related-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  color: var(--white); letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+.related-card-desc {
+  font-size: 0.82rem; color: var(--muted);
+  line-height: 1.5;
+}
+.related-card.disabled {
+  opacity: 0.5; pointer-events: none;
+}
+.related-card.disabled .related-card-name::after {
+  content: ' · soon';
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .calc-wrap { padding: 2rem 1.25rem 0; }
+  .calc-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .calc-result-panel { position: static; }
+  .result-value { font-size: 1.7rem; }
+  .related-calcs { padding: 0 1.25rem; }
+  .calc-disclaimer { margin-left: 1.25rem; margin-right: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../../index.html"><span>PIPING</span>PASSION</a>
+  <ul class="nav-links">
+    <li><a href="../field-tips.html">Field Tips</a></li>
+    <li><a href="../field-stories.html">Field Stories</a></li>
+    <li><a href="../brownfield.html">Brownfield</a></li>
+    <li><a href="../scan-to-model.html">Scan-to-Model</a></li>
+    <li><a href="../codes-standards.html">Codes</a></li>
+    <li><a href="../tools.html" class="active">Tools</a></li>
+    <li><a href="../career.html">Career</a></li>
+    <li><a href="../reference.html">Reference</a></li>
+    <li><a href="../common-mistakes.html">Mistakes</a></li>
+    <li><a href="../glossary.html">Glossary</a></li>
+    <li><a href="../books.html">Books</a></li>
+    <li><a href="../downloads.html" style="color:#E03030;font-weight:700">Downloads</a></li>
+    <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">Engineering Calculator</p>
+    <h1 class="page-title">Expansion Loop <span>Sizing</span></h1>
+    <p class="page-desc">Quick-sizing of U-loop legs using the guided-cantilever method. Pair with the Thermal Expansion calculator to get your &Delta;L first, then come here to size the loop. Includes a live diagram so you can see what you&rsquo;re building.</p>
+  </div>
+</div>
+
+<div class="calc-wrap">
+
+  <div class="unit-toggle">
+    <span class="unit-toggle-label">Units</span>
+    <div class="unit-toggle-btn">
+      <button id="btn-si" class="active" onclick="setUnits('SI')">SI</button>
+      <button id="btn-imp" onclick="setUnits('IMP')">Imperial</button>
+    </div>
+  </div>
+
+  <div class="calc-grid">
+
+    <!-- INPUTS -->
+    <div class="calc-panel">
+      <div class="calc-panel-title">Inputs</div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="nps">Nominal Pipe Size (NPS)</label>
+        <select id="nps" class="calc-select" onchange="calculate()"></select>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="dL">Thermal Expansion (&Delta;L)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="dL" class="calc-input" value="50" min="0" step="0.1" oninput="calculate()">
+          <select id="dL-unit" class="calc-select" onchange="calculate()">
+            <option value="mm">mm</option>
+            <option value="in">in</option>
+          </select>
+        </div>
+        <p class="calc-hint">Get this from the <a href="thermal-expansion.html" style="color:var(--gold-lt);">Thermal Expansion calculator</a>.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="material">Pipe Material (E modulus)</label>
+        <select id="material" class="calc-select" onchange="calculate()">
+          <option value="200000" selected>Carbon Steel (E = 200,000 MPa)</option>
+          <option value="193000">Stainless Steel 304/316 (E = 193,000 MPa)</option>
+          <option value="200000">Duplex Stainless (E = 200,000 MPa)</option>
+          <option value="207000">Nickel Alloys / Inconel (E = 207,000 MPa)</option>
+          <option value="69000">Aluminum (E = 69,000 MPa)</option>
+          <option value="117000">Copper (E = 117,000 MPa)</option>
+        </select>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="Sa">Allowable Stress Range (Sa)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="Sa" class="calc-input" value="155" min="0" step="1" oninput="calculate()">
+          <select id="Sa-unit" class="calc-select" onchange="calculate()">
+            <option value="MPa">MPa</option>
+            <option value="ksi">ksi</option>
+          </select>
+        </div>
+        <p class="calc-hint">Per ASME B31.3 §302.3.5: Sa = f(1.25Sc + 0.25Sh). Typical CS: 155 MPa (22.5 ksi).</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="config">Loop Configuration</label>
+        <select id="config" class="calc-select" onchange="calculate()">
+          <option value="U" selected>U-Loop (symmetric)</option>
+          <option value="L">L-Bend (90&deg; offset)</option>
+          <option value="Z">Z-Bend (offset both sides)</option>
+        </select>
+      </div>
+
+    </div>
+
+    <!-- RESULTS WITH DIAGRAM -->
+    <div class="calc-result-panel">
+      <div class="calc-result-title">Result</div>
+
+      <div class="result-block">
+        <div class="result-label">Required leg length (L)</div>
+        <div class="result-value"><span id="r-L">&mdash;</span><span class="result-unit" id="u-L">m</span></div>
+        <div class="result-sub" id="r-L-sub"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Loop dimensions</div>
+        <div id="r-dims" style="font-family:'JetBrains Mono',monospace;color:#B0C4D8;margin-top:.5rem;line-height:1.8;font-size:0.92rem;">&mdash;</div>
+      </div>
+
+      <div class="result-block" style="border-bottom:0;padding-bottom:0;">
+        <div class="result-label" style="margin-bottom:1rem;">Loop diagram</div>
+        <div id="loop-diagram" style="background:var(--navy-4);border:1px solid var(--border);border-radius:6px;padding:1rem;text-align:center;"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Formula explanation -->
+  <div class="calc-formula">
+    <div class="calc-formula-title">Formula &amp; Method</div>
+    <code>L = &radic;(3 &times; E &times; D_o &times; &Delta;L / Sa)</code>
+    <div class="calc-formula-notes">
+      <strong>Method:</strong> guided cantilever &mdash; the most widely used preliminary sizing method for expansion loops. Treats one leg of the loop as a cantilever beam absorbing the thermal displacement &Delta;L imposed at its free end.<br><br>
+      <strong>Variables:</strong>
+      <ul style="margin:.5rem 0 0 1.5rem;color:#B0C4D8;">
+        <li><strong>L</strong> = required length of the perpendicular leg of the loop</li>
+        <li><strong>E</strong> = Young&rsquo;s modulus of pipe material at design temperature</li>
+        <li><strong>D_o</strong> = outside diameter of the pipe</li>
+        <li><strong>&Delta;L</strong> = thermal expansion to absorb (mm or in)</li>
+        <li><strong>Sa</strong> = allowable displacement stress range per ASME B31.3 §302.3.5</li>
+      </ul>
+      <strong>Sa calculation:</strong> Sa = f &times; (1.25 Sc + 0.25 Sh), where Sc and Sh are allowable stresses at cold and hot temperatures. f is a cycle factor (1.0 for &lt; 7000 cycles).<br><br>
+      <strong>Conservatism:</strong> guided cantilever is conservative (over-sizes by 15-25% vs detailed FEA). Good for layout / quick design. For final design, run a stress analysis in Caesar II or equivalent.<br><br>
+      <strong>Brownfield tip:</strong> when adding a loop in a revamp, double-check that the available space accounts for: (1) physical loop dimensions, (2) supporting structure, (3) maintenance access, (4) insulation thickness if applicable. The L value is just the centerline of the pipe.
+    </div>
+  </div>
+
+</div>
+
+<!-- Disclaimer -->
+<div class="calc-disclaimer">
+  <strong>⚠ For preliminary sizing only</strong>
+  Results are based on nominal ASME dimensions and typical material densities. They do not account for manufacturing tolerances, coatings, supports, flanges, fittings, corrosion allowance, or actual site conditions. All final designs must be verified by a qualified engineer and validated against the applicable code edition. Piping Passion accepts no liability for decisions made using this tool.
+</div>
+
+<!-- Related calculators -->
+<div class="related-calcs">
+  <div class="related-title">Other Calculators</div>
+  <div class="related-grid">
+    <a class="related-card" href="thermal-expansion.html">
+      <div class="related-card-name">Thermal Expansion</div>
+      <div class="related-card-desc">Get your &Delta;L first.</div>
+    </a>
+    <a class="related-card" href="pipe-weight.html">
+      <div class="related-card-name">Pipe Weight</div>
+      <div class="related-card-desc">Empty, water-filled and insulated weight.</div>
+    </a>
+    <a class="related-card" href="hydrotest-pressure.html">
+      <div class="related-card-name">Hydrotest Pressure</div>
+      <div class="related-card-desc">Per ASME B31.3, B31.1, B31.4 and B31.8.</div>
+    </a>
+    <a class="related-card" href="support-span.html">
+      <div class="related-card-name">Support Span</div>
+      <div class="related-card-desc">Max distance between supports.</div>
+    </a>
+    <a class="related-card" href="wall-thickness.html">
+      <div class="related-card-name">Wall Thickness (B31.3)</div>
+      <div class="related-card-desc">Minimum pipe wall per ASME B31.3.</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><span>PIPING</span>PASSION</div>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../field-tips.html">Field Tips</a>
+    <a href="../books.html">Books</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../about.html">About</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Geoffroy Falot &middot; pipingpassion.com</p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   EXPANSION LOOP SIZING — Guided Cantilever
+   L = sqrt(3 * E * D_o * dL / Sa)
+   ═══════════════════════════════════════════════════════════════════ */
+
+const PIPE_OD = {
+  '1/2"': 21.3, '3/4"': 26.7, '1"': 33.4, '1-1/2"': 48.3, '2"': 60.3,
+  '3"': 88.9, '4"': 114.3, '6"': 168.3, '8"': 219.1, '10"': 273.0,
+  '12"': 323.8, '14"': 355.6, '16"': 406.4, '18"': 457.0,
+  '20"': 508.0, '24"': 610.0
+};
+
+const CONV = {
+  mm_to_in: 0.0393701, in_to_mm: 25.4, mm_to_m: 0.001, in_to_ft: 1/12,
+  m_to_ft: 3.28084,
+  MPa_to_ksi: 0.145038, ksi_to_MPa: 6.89476
+};
+
+let currentUnits = 'SI';
+
+function setUnits(u) {
+  currentUnits = u;
+  document.getElementById('btn-si').classList.toggle('active', u === 'SI');
+  document.getElementById('btn-imp').classList.toggle('active', u === 'IMP');
+  // dL unit
+  const dLUnit = document.getElementById('dL-unit');
+  const dLVal = parseFloat(document.getElementById('dL').value);
+  if (u === 'IMP' && dLUnit.value === 'mm') {
+    document.getElementById('dL').value = (dLVal * CONV.mm_to_in).toFixed(3);
+    dLUnit.value = 'in';
+  }
+  if (u === 'SI' && dLUnit.value === 'in') {
+    document.getElementById('dL').value = (dLVal * CONV.in_to_mm).toFixed(1);
+    dLUnit.value = 'mm';
+  }
+  // Sa unit
+  const SaUnit = document.getElementById('Sa-unit');
+  const SaVal = parseFloat(document.getElementById('Sa').value);
+  if (u === 'IMP' && SaUnit.value === 'MPa') {
+    document.getElementById('Sa').value = (SaVal * CONV.MPa_to_ksi).toFixed(1);
+    SaUnit.value = 'ksi';
+  }
+  if (u === 'SI' && SaUnit.value === 'ksi') {
+    document.getElementById('Sa').value = (SaVal * CONV.ksi_to_MPa).toFixed(0);
+    SaUnit.value = 'MPa';
+  }
+  // Result unit
+  document.getElementById('u-L').textContent = u === 'SI' ? 'm' : 'ft';
+  calculate();
+}
+
+function populateNps() {
+  const sel = document.getElementById('nps');
+  Object.keys(PIPE_OD).forEach(n => {
+    const opt = document.createElement('option');
+    opt.value = n; opt.textContent = 'NPS ' + n;
+    sel.appendChild(opt);
+  });
+  sel.value = '6"';
+}
+
+function calculate() {
+  const nps = document.getElementById('nps').value;
+  if (!PIPE_OD[nps]) return;
+  const D_mm = PIPE_OD[nps];
+
+  // dL to mm
+  const dLVal = parseFloat(document.getElementById('dL').value) || 0;
+  const dLUnit = document.getElementById('dL-unit').value;
+  const dL_mm = (dLUnit === 'in') ? dLVal * CONV.in_to_mm : dLVal;
+
+  // E in MPa
+  const E_MPa = parseFloat(document.getElementById('material').value) || 0;
+
+  // Sa to MPa
+  const SaVal = parseFloat(document.getElementById('Sa').value) || 0;
+  const SaUnit = document.getElementById('Sa-unit').value;
+  const Sa_MPa = (SaUnit === 'ksi') ? SaVal * CONV.ksi_to_MPa : SaVal;
+
+  // L = sqrt(3 * E * D * dL / Sa) in mm
+  let L_mm = 0;
+  if (Sa_MPa > 0 && dL_mm > 0) {
+    L_mm = Math.sqrt(3 * E_MPa * D_mm * dL_mm / Sa_MPa);
+  }
+
+  const config = document.getElementById('config').value;
+
+  // Display
+  let L_display, L_unit, dim_display;
+  if (currentUnits === 'SI') {
+    L_display = (L_mm / 1000).toFixed(2);
+    L_unit = 'm';
+    if (config === 'U') {
+      dim_display = 'Each leg: <strong style="color:var(--gold-lt);">' + (L_mm/1000).toFixed(2) + ' m</strong><br>' +
+                    'Loop width (between bends): typically L/2 = <strong>' + (L_mm/2000).toFixed(2) + ' m</strong><br>' +
+                    'Total footprint perpendicular to run: <strong>~' + (L_mm/1000).toFixed(2) + ' m</strong>';
+    } else if (config === 'L') {
+      dim_display = 'L-bend perpendicular leg: <strong style="color:var(--gold-lt);">' + (L_mm/1000).toFixed(2) + ' m</strong><br>' +
+                    'Use this when only an L-shaped offset fits.';
+    } else {
+      dim_display = 'Each leg of Z-bend: <strong style="color:var(--gold-lt);">' + (L_mm/1000).toFixed(2) + ' m</strong><br>' +
+                    'Two parallel offsets of length L absorbing &Delta;L.';
+    }
+  } else {
+    const L_ft = L_mm / 1000 * CONV.m_to_ft;
+    L_display = L_ft.toFixed(2);
+    L_unit = 'ft';
+    if (config === 'U') {
+      dim_display = 'Each leg: <strong style="color:var(--gold-lt);">' + L_ft.toFixed(2) + ' ft</strong><br>' +
+                    'Loop width: ~ <strong>' + (L_ft/2).toFixed(2) + ' ft</strong><br>' +
+                    'Total footprint: <strong>~' + L_ft.toFixed(2) + ' ft</strong>';
+    } else if (config === 'L') {
+      dim_display = 'L-bend leg: <strong style="color:var(--gold-lt);">' + L_ft.toFixed(2) + ' ft</strong>';
+    } else {
+      dim_display = 'Each leg of Z-bend: <strong style="color:var(--gold-lt);">' + L_ft.toFixed(2) + ' ft</strong>';
+    }
+  }
+
+  document.getElementById('r-L').textContent = L_display;
+  document.getElementById('r-L-sub').textContent = 'Per guided cantilever method.';
+  document.getElementById('r-dims').innerHTML = dim_display;
+
+  // Generate SVG diagram
+  drawDiagram(config, L_display, L_unit);
+}
+
+function drawDiagram(config, Lval, Lunit) {
+  const W = 320, H = 200;
+  let svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:380px;height:auto;">';
+  // Styles
+  const pipeStroke = '#F0B429';  // gold
+  const pipeWidth = 4;
+  const dimColor = '#8EA3BE';
+  const labelColor = '#F0B429';
+
+  if (config === 'U') {
+    // U-loop: horizontal main pipe with U going up
+    // Anchor1 left, riser up, top horizontal, riser down, anchor2 right
+    const anchorY = 150;
+    const topY = 50;
+    const x1 = 50, x2 = W - 50;
+    const cx = (x1 + x2) / 2;
+    const halfWidth = (x2 - x1) / 4;
+    const upX1 = cx - halfWidth;
+    const upX2 = cx + halfWidth;
+    // Main horizontal pipe (anchor to anchor, with break for loop)
+    svg += '<line x1="' + x1 + '" y1="' + anchorY + '" x2="' + upX1 + '" y2="' + anchorY + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    svg += '<line x1="' + upX2 + '" y1="' + anchorY + '" x2="' + x2 + '" y2="' + anchorY + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    // Risers
+    svg += '<line x1="' + upX1 + '" y1="' + anchorY + '" x2="' + upX1 + '" y2="' + topY + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    svg += '<line x1="' + upX2 + '" y1="' + anchorY + '" x2="' + upX2 + '" y2="' + topY + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    // Top of U
+    svg += '<line x1="' + upX1 + '" y1="' + topY + '" x2="' + upX2 + '" y2="' + topY + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    // Anchors (squares)
+    svg += '<rect x="' + (x1-10) + '" y="' + (anchorY-7) + '" width="14" height="14" fill="#444" stroke="#888" stroke-width="1"/>';
+    svg += '<rect x="' + (x2-4) + '" y="' + (anchorY-7) + '" width="14" height="14" fill="#444" stroke="#888" stroke-width="1"/>';
+    // Dimension L (leg height)
+    const dimX = upX1 - 18;
+    svg += '<line x1="' + dimX + '" y1="' + topY + '" x2="' + dimX + '" y2="' + anchorY + '" stroke="' + dimColor + '" stroke-width="1"/>';
+    svg += '<line x1="' + (dimX-3) + '" y1="' + topY + '" x2="' + (dimX+3) + '" y2="' + topY + '" stroke="' + dimColor + '" stroke-width="1"/>';
+    svg += '<line x1="' + (dimX-3) + '" y1="' + anchorY + '" x2="' + (dimX+3) + '" y2="' + anchorY + '" stroke="' + dimColor + '" stroke-width="1"/>';
+    svg += '<text x="' + (dimX-8) + '" y="' + ((topY+anchorY)/2 + 4) + '" fill="' + labelColor + '" font-family="monospace" font-size="13" text-anchor="end">L</text>';
+    svg += '<text x="' + (dimX-8) + '" y="' + ((topY+anchorY)/2 + 18) + '" fill="' + dimColor + '" font-family="monospace" font-size="10" text-anchor="end">' + Lval + ' ' + Lunit + '</text>';
+    // Flow arrows
+    svg += '<text x="' + (x1+10) + '" y="' + (anchorY-8) + '" fill="' + dimColor + '" font-family="monospace" font-size="10">flow &rarr;</text>';
+    // Anchor labels
+    svg += '<text x="' + (x1-10) + '" y="' + (anchorY+22) + '" fill="' + dimColor + '" font-family="monospace" font-size="9">anchor</text>';
+    svg += '<text x="' + (x2-4) + '" y="' + (anchorY+22) + '" fill="' + dimColor + '" font-family="monospace" font-size="9">anchor</text>';
+    // Title
+    svg += '<text x="' + (W/2) + '" y="' + 20 + '" fill="' + dimColor + '" font-family="monospace" font-size="11" text-anchor="middle">U-LOOP CONFIGURATION</text>';
+  } else if (config === 'L') {
+    // L-bend: horizontal then up
+    const anchorY = 150;
+    const topY = 50;
+    const x1 = 50, xCorner = W - 80;
+    svg += '<line x1="' + x1 + '" y1="' + anchorY + '" x2="' + xCorner + '" y2="' + anchorY + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    svg += '<line x1="' + xCorner + '" y1="' + anchorY + '" x2="' + xCorner + '" y2="' + topY + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    // Anchor at bottom
+    svg += '<rect x="' + (x1-10) + '" y="' + (anchorY-7) + '" width="14" height="14" fill="#444" stroke="#888" stroke-width="1"/>';
+    // Anchor at top
+    svg += '<rect x="' + (xCorner-7) + '" y="' + (topY-10) + '" width="14" height="14" fill="#444" stroke="#888" stroke-width="1"/>';
+    // Dim
+    const dimX = xCorner + 18;
+    svg += '<line x1="' + dimX + '" y1="' + topY + '" x2="' + dimX + '" y2="' + anchorY + '" stroke="' + dimColor + '" stroke-width="1"/>';
+    svg += '<line x1="' + (dimX-3) + '" y1="' + topY + '" x2="' + (dimX+3) + '" y2="' + topY + '" stroke="' + dimColor + '" stroke-width="1"/>';
+    svg += '<line x1="' + (dimX-3) + '" y1="' + anchorY + '" x2="' + (dimX+3) + '" y2="' + anchorY + '" stroke="' + dimColor + '" stroke-width="1"/>';
+    svg += '<text x="' + (dimX+8) + '" y="' + ((topY+anchorY)/2 + 4) + '" fill="' + labelColor + '" font-family="monospace" font-size="13">L</text>';
+    svg += '<text x="' + (dimX+8) + '" y="' + ((topY+anchorY)/2 + 18) + '" fill="' + dimColor + '" font-family="monospace" font-size="10">' + Lval + ' ' + Lunit + '</text>';
+    svg += '<text x="' + (W/2) + '" y="20" fill="' + dimColor + '" font-family="monospace" font-size="11" text-anchor="middle">L-BEND CONFIGURATION</text>';
+  } else { // Z
+    const yMid1 = 80, yMid2 = 150;
+    const x1 = 40, xJog = 130, xJog2 = 200, x2 = W - 40;
+    svg += '<line x1="' + x1 + '" y1="' + yMid1 + '" x2="' + xJog + '" y2="' + yMid1 + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    svg += '<line x1="' + xJog + '" y1="' + yMid1 + '" x2="' + xJog2 + '" y2="' + yMid2 + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    svg += '<line x1="' + xJog2 + '" y1="' + yMid2 + '" x2="' + x2 + '" y2="' + yMid2 + '" stroke="' + pipeStroke + '" stroke-width="' + pipeWidth + '" stroke-linecap="round"/>';
+    svg += '<rect x="' + (x1-10) + '" y="' + (yMid1-7) + '" width="14" height="14" fill="#444" stroke="#888" stroke-width="1"/>';
+    svg += '<rect x="' + (x2-4) + '" y="' + (yMid2-7) + '" width="14" height="14" fill="#444" stroke="#888" stroke-width="1"/>';
+    svg += '<text x="' + ((xJog+xJog2)/2) + '" y="' + ((yMid1+yMid2)/2 - 8) + '" fill="' + labelColor + '" font-family="monospace" font-size="13" text-anchor="middle">L</text>';
+    svg += '<text x="' + ((xJog+xJog2)/2) + '" y="' + ((yMid1+yMid2)/2 + 6) + '" fill="' + dimColor + '" font-family="monospace" font-size="10" text-anchor="middle">' + Lval + ' ' + Lunit + '</text>';
+    svg += '<text x="' + (W/2) + '" y="20" fill="' + dimColor + '" font-family="monospace" font-size="11" text-anchor="middle">Z-BEND CONFIGURATION</text>';
+  }
+
+  svg += '</svg>';
+  document.getElementById('loop-diagram').innerHTML = svg;
+}
+
+populateNps();
+calculate();
+</script>
+
+</body>
+</html>

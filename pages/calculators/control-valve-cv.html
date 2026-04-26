@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Control Valve Cv / Kv Calculator (ISA S75.01) &mdash; Piping Passion</title>
+<meta name="description" content="Size a control valve for liquid service per ISA S75.01 / IEC 60534-2-1. Cv and Kv with choked-flow check using FL recovery factor. SI and Imperial units.">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   PIPINGPASSION.COM — SHARED STYLESHEET
+   Palette: Navy #09152A · Gold #C9930A · #F0B429
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --navy:    #09152A;
+  --navy-2:  #0D1E38;
+  --navy-3:  #142645;
+  --navy-4:  #06101E;
+  --gold:    #C9930A;
+  --gold-lt: #F0B429;
+  --white:   #F5F0E8;
+  --muted:   #8EA3BE;
+  --dim:     #3D5A7A;
+  --border:  rgba(201,147,10,0.18);
+  --border-s: rgba(201,147,10,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(9,21,42,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.1rem; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-links .nav-cta {
+  color: var(--gold); border: 1px solid var(--border);
+  padding: 0.22rem 0.9rem; border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  padding: 5rem 2.5rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 60%);
+  z-index: 0;
+}
+.page-header-inner { position: relative; z-index: 1; max-width: 900px; }
+.page-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800; letter-spacing: -0.01em;
+  line-height: 1; margin-bottom: 1.2rem;
+}
+.page-title span { color: var(--gold-lt); }
+.page-desc {
+  font-size: 1.08rem; color: #C8D2DE; max-width: 700px;
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 5rem; padding: 3rem 2.5rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--navy-4);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; letter-spacing: 0.08em;
+  font-size: 1.05rem; color: var(--white); margin-bottom: 1rem;
+}
+.footer-logo span { color: var(--gold); }
+.footer-links {
+  display: flex; gap: 2rem; justify-content: center;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none;
+}
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-copy {
+  font-size: 0.78rem; color: var(--dim); letter-spacing: 0.04em;
+}
+
+/* ── MOBILE NAV TOGGLE ── */
+.nav-toggle {
+  display: none;
+  background: transparent; border: 0; cursor: pointer;
+  padding: 0.4rem;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--gold-lt); margin: 4px 0;
+  transition: transform 0.25s, opacity 0.2s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.25rem; }
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 62px; right: 0;
+    background: rgba(9,21,42,0.98); backdrop-filter: blur(14px);
+    border: 1px solid var(--border); border-right: 0;
+    border-bottom-left-radius: 8px;
+    flex-direction: column; gap: 0;
+    padding: 1rem 0; min-width: 220px;
+    transform: translateX(120%); transition: transform 0.25s;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; padding: 0.7rem 1.5rem;
+  }
+  .nav-links .nav-cta {
+    margin: 0.4rem 1.5rem; padding: 0.4rem 0.9rem;
+    text-align: center;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CALCULATOR PAGE SPECIFIC STYLES
+   ═══════════════════════════════════════════ */
+
+.calc-wrap {
+  max-width: 1100px; margin: 0 auto;
+  padding: 3rem 2.5rem 0;
+  position: relative; z-index: 1;
+}
+
+/* Units toggle */
+.unit-toggle {
+  display: flex; align-items: center;
+  gap: 0.8rem; margin-bottom: 2rem;
+  justify-content: flex-end;
+}
+.unit-toggle-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.unit-toggle-btn {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem; display: inline-flex;
+}
+.unit-toggle-btn button {
+  background: transparent; border: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  padding: 0.45rem 1.2rem; border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+.unit-toggle-btn button.active {
+  background: var(--gold); color: var(--navy);
+}
+
+/* Main calc grid */
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Inputs panel */
+.calc-panel {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+}
+.calc-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.calc-field {
+  margin-bottom: 1.3rem;
+}
+.calc-field:last-child { margin-bottom: 0; }
+.calc-label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white); font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.calc-input, .calc-select {
+  width: 100%;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.98rem;
+  padding: 0.7rem 0.9rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.calc-input:focus, .calc-select:focus {
+  outline: 0;
+  border-color: var(--gold-lt);
+  background: var(--navy-4);
+}
+.calc-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='%23F0B429'%3E%3Cpath d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 10px;
+  padding-right: 2.3rem;
+}
+.calc-field-inline {
+  display: flex; gap: 0.6rem; align-items: stretch;
+}
+.calc-field-inline .calc-input { flex: 1; }
+.calc-field-inline .calc-select { flex: 0 0 auto; width: auto; min-width: 90px; }
+
+.calc-hint {
+  font-size: 0.8rem; color: var(--muted);
+  margin-top: 0.35rem; font-style: italic;
+}
+
+/* Result panel */
+.calc-result-panel {
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy-2) 100%);
+  border: 1px solid var(--border-s);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+  position: sticky; top: 80px;
+}
+.calc-result-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold-lt);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border-s);
+}
+.result-block {
+  padding: 1.2rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.result-block:last-of-type { border-bottom: 0; padding-bottom: 0.4rem; }
+.result-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.result-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem; font-weight: 700;
+  color: var(--gold-lt); line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.result-value.small { font-size: 1.4rem; color: var(--white); }
+.result-unit {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem; color: var(--muted);
+  font-weight: 600; margin-left: 0.35rem;
+  letter-spacing: 0.04em;
+}
+.result-sub {
+  font-size: 0.82rem; color: var(--muted);
+  margin-top: 0.3rem;
+}
+.result-error {
+  color: #E08888;
+  font-size: 0.92rem;
+  padding: 0.8rem 0;
+}
+
+/* Formula section */
+.calc-formula {
+  margin-top: 2.5rem;
+  background: var(--navy-4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem 2rem;
+}
+.calc-formula-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.calc-formula code {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--white);
+  background: var(--navy);
+  padding: 0.9rem 1.1rem;
+  border-radius: 5px;
+  border-left: 3px solid var(--gold);
+  margin-bottom: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.calc-formula-notes {
+  font-size: 0.9rem;
+  color: #B0C4D8;
+  line-height: 1.75;
+}
+.calc-formula-notes strong { color: var(--gold-lt); font-weight: 600; }
+
+/* Disclaimer */
+.calc-disclaimer {
+  margin: 2.5rem auto 0;
+  max-width: 1100px;
+  padding: 1.4rem 1.8rem;
+  background: rgba(224,48,48,0.06);
+  border: 1px solid rgba(224,48,48,0.25);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: #D8C0C0;
+  line-height: 1.7;
+}
+.calc-disclaimer strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #E87070;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+/* Related calculators section */
+.related-calcs {
+  max-width: 1100px; margin: 3.5rem auto 0;
+  padding: 0 2.5rem;
+}
+.related-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.related-card {
+  display: block;
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.1rem 1.3rem;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.related-card:hover {
+  border-color: var(--gold-lt);
+  transform: translateY(-2px);
+}
+.related-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  color: var(--white); letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+.related-card-desc {
+  font-size: 0.82rem; color: var(--muted);
+  line-height: 1.5;
+}
+.related-card.disabled {
+  opacity: 0.5; pointer-events: none;
+}
+.related-card.disabled .related-card-name::after {
+  content: ' · soon';
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .calc-wrap { padding: 2rem 1.25rem 0; }
+  .calc-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .calc-result-panel { position: static; }
+  .result-value { font-size: 1.7rem; }
+  .related-calcs { padding: 0 1.25rem; }
+  .calc-disclaimer { margin-left: 1.25rem; margin-right: 1.25rem; }
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../../index.html"><span>PIPING</span>PASSION</a>
+  <ul class="nav-links">
+    <li><a href="../field-tips.html">Field Tips</a></li>
+    <li><a href="../field-stories.html">Field Stories</a></li>
+    <li><a href="../brownfield.html">Brownfield</a></li>
+    <li><a href="../scan-to-model.html">Scan-to-Model</a></li>
+    <li><a href="../codes-standards.html">Codes</a></li>
+    <li><a href="../tools.html" class="active">Tools</a></li>
+    <li><a href="../career.html">Career</a></li>
+    <li><a href="../reference.html">Reference</a></li>
+    <li><a href="../common-mistakes.html">Mistakes</a></li>
+    <li><a href="../glossary.html">Glossary</a></li>
+    <li><a href="../books.html">Books</a></li>
+    <li><a href="../downloads.html" style="color:#E03030;font-weight:700">Downloads</a></li>
+    <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">Engineering Calculator</p>
+    <h1 class="page-title">Control Valve <span>C&#7515; / K&#7515;</span> (ISA S75.01)</h1>
+    <p class="page-desc">Size a control valve for incompressible liquid flow. Get the required Cv (US) and Kv (metric), then check whether your operating &Delta;P exceeds the choked-flow limit set by the valve's F&#7480; recovery factor. Catches cavitating valves before they show up as trim damage at turnaround.</p>
+  </div>
+</div>
+
+<div class="calc-wrap">
+
+  <div class="unit-toggle">
+    <span class="unit-toggle-label">Units</span>
+    <div class="unit-toggle-btn">
+      <button id="btn-si" class="active" onclick="setUnits('SI')">SI</button>
+      <button id="btn-imp" onclick="setUnits('IMP')">Imperial</button>
+    </div>
+  </div>
+
+  <div class="calc-grid">
+
+    <!-- INPUTS -->
+    <div class="calc-panel">
+      <div class="calc-panel-title">Inputs</div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="Q">Volumetric flow rate (Q)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="Q" class="calc-input" value="100" min="0" step="0.1" oninput="calculate()">
+          <select id="Q-unit" class="calc-select" onchange="calculate()">
+            <option value="m3h">m&sup3;/h</option>
+            <option value="lps">L/s</option>
+            <option value="gpm">US GPM</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="fluid">Fluid preset (sets density)</label>
+        <select id="fluid" class="calc-select" onchange="onFluidChange()">
+          <option value="water20" selected>Water at 20&deg;C (&rho; = 998)</option>
+          <option value="water80">Water at 80&deg;C (&rho; = 972)</option>
+          <option value="lighthc">Light hydrocarbon (&rho; = 720)</option>
+          <option value="heavyhc">Heavy oil (&rho; = 920)</option>
+          <option value="brine">Brine 10% NaCl (&rho; = 1071)</option>
+          <option value="meg">MEG/water 50% (&rho; = 1067)</option>
+          <option value="custom">Custom &mdash; enter density</option>
+        </select>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="rho">Density (&rho;)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="rho" class="calc-input" value="998" min="0" step="0.1" oninput="onRhoEdit()">
+          <select id="rho-unit" class="calc-select" onchange="calculate()">
+            <option value="kgm3">kg/m&sup3;</option>
+            <option value="lbft3">lb/ft&sup3;</option>
+          </select>
+        </div>
+        <p class="calc-hint">Specific gravity SG = &rho;/1000 (water reference).</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="P1">Inlet pressure P&#8321;</label>
+        <div class="calc-field-inline">
+          <input type="number" id="P1" class="calc-input" value="6" min="0" step="0.1" oninput="calculate()">
+          <select id="P1-unit" class="calc-select" onchange="calculate()">
+            <option value="bara">bar a</option>
+            <option value="barg">bar g</option>
+            <option value="psia">psi a</option>
+            <option value="psig">psi g</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="dP">Pressure drop across valve &Delta;P</label>
+        <div class="calc-field-inline">
+          <input type="number" id="dP" class="calc-input" value="2" min="0" step="0.1" oninput="calculate()">
+          <select id="dP-unit" class="calc-select" onchange="calculate()">
+            <option value="bar">bar</option>
+            <option value="psi">psi</option>
+            <option value="kpa">kPa</option>
+          </select>
+        </div>
+        <p class="calc-hint">Typical sizing &Delta;P: 25&ndash;33% of system loss for good control authority.</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="Pv">Vapour pressure P&#7515; (for choked check)</label>
+        <div class="calc-field-inline">
+          <input type="number" id="Pv" class="calc-input" value="0.023" min="0" step="0.001" oninput="calculate()">
+          <select id="Pv-unit" class="calc-select" onchange="calculate()">
+            <option value="bara">bar a</option>
+            <option value="psia">psi a</option>
+            <option value="kpaa">kPa a</option>
+          </select>
+        </div>
+        <p class="calc-hint">Water 20&deg;C = 0.023 bar a &middot; Water 80&deg;C = 0.473 &middot; Hexane 20&deg;C = 0.16</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="valveType">Valve style (sets F&#7480; recovery factor)</label>
+        <select id="valveType" class="calc-select" onchange="calculate()">
+          <option value="0.90">Globe, single-port, flow-to-open (F&#7480; = 0.90)</option>
+          <option value="0.85">Globe, single-port, flow-to-close (F&#7480; = 0.85)</option>
+          <option value="0.55">Ball, full-port (F&#7480; = 0.55)</option>
+          <option value="0.70">Butterfly, 60&deg; open (F&#7480; = 0.70)</option>
+          <option value="0.55">Butterfly, 90&deg; open (F&#7480; = 0.55)</option>
+          <option value="0.92">V-port ball, 60&deg; (F&#7480; = 0.92)</option>
+        </select>
+        <p class="calc-hint">Critical pressure of fluid (water = 220.6 bar a) used for F&#7584; calc; defaults to 220 bar.</p>
+      </div>
+
+    </div>
+
+    <!-- RESULTS -->
+    <div class="calc-result-panel">
+      <div class="calc-result-title">Result</div>
+
+      <div class="result-block">
+        <div class="result-label">Required C&#7515; (US)</div>
+        <div class="result-value"><span id="r-Cv">&mdash;</span><span class="result-unit">gpm @ 1 psi</span></div>
+        <div class="result-sub">Per ISA S75.01 / IEC 60534-2-1.</div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Required K&#7515; (metric)</div>
+        <div class="result-value small"><span id="r-Kv">&mdash;</span><span class="result-unit">m&sup3;/h @ 1 bar</span></div>
+        <div class="result-sub">K&#7515; = C&#7515; &divide; 1.156</div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Choked-flow check</div>
+        <div id="r-choke" style="margin-top:.4rem;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.3rem;letter-spacing:.04em;text-transform:uppercase;">&mdash;</div>
+        <div class="result-sub" id="r-choke-sub" style="margin-top:.5rem;"></div>
+      </div>
+
+      <div class="result-block" style="border-bottom:0;padding-bottom:0;">
+        <div class="result-label">Calculation detail</div>
+        <div id="r-detail" style="font-family:'JetBrains Mono',monospace;color:#B0C4D8;margin-top:.5rem;line-height:1.8;font-size:0.85rem;">&mdash;</div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Formula explanation -->
+  <div class="calc-formula">
+    <div class="calc-formula-title">Formula &amp; Method</div>
+
+    <code>C&#7515; = Q &middot; &radic;(SG / &Delta;P)   &nbsp;&nbsp; [Q in US gpm, &Delta;P in psi]</code>
+    <code>K&#7515; = Q &middot; &radic;(SG / &Delta;P)   &nbsp;&nbsp; [Q in m&sup3;/h, &Delta;P in bar]</code>
+    <code>C&#7515; = 1.156 &middot; K&#7515;</code>
+    <code>F&#7584; = 0.96 - 0.28 &middot; &radic;(P&#7515;/P_c)   (liquid critical-pressure ratio factor)</code>
+    <code>&Delta;P_choked = F&#7480;&sup2; &middot; (P&#8321; - F&#7584; &middot; P&#7515;)</code>
+    <div class="calc-formula-notes">
+      <strong>What this is:</strong> Cv (Imperial) and Kv (metric) are the universal flow-coefficient definitions used by every control-valve manufacturer. They tell you how much flow the valve passes per unit of pressure drop. Pick a valve whose published full-open Cv comfortably exceeds your required Cv at maximum design flow.
+      <strong>Sizing rule of thumb:</strong>
+      <ul style="margin:.5rem 0 0 1.5rem;color:#B0C4D8;">
+        <li>Required C&#7515; should fall between <strong>30% and 80%</strong> of the valve's max C&#7515; at min and max flow.</li>
+        <li>Below 30% &mdash; valve runs near seat, poor controllability, accelerated wear.</li>
+        <li>Above 80% &mdash; no margin to handle upset conditions or future flow increase.</li>
+      </ul>
+      <strong>Choked flow:</strong> when downstream pressure drops low enough that vapour bubbles form in the vena contracta, additional &Delta;P does not increase flow. The formula returns the <em>maximum useful &Delta;P</em>; if your operating &Delta;P exceeds it you are likely cavitating, which destroys trim. F&#7480; depends on valve style &mdash; globes have high recovery (less prone to cavitation), butterflies and ball valves are lower-recovery.
+      <strong>Brownfield tip:</strong> when a process change pushes flow up 30% on an existing valve, do not just throttle further open. Re-run this calc with the new flow, the actual pressure drop available, and the actual P&#7515; / temperature. Many "noisy" or "shaking" valves on revamped units are simply choking. The fix is a different trim (or the next size down so you regain authority), not more positioner tuning.
+    </div>
+
+  </div>
+
+</div>
+
+<!-- Disclaimer -->
+<div class="calc-disclaimer">
+  <strong>⚠ For preliminary sizing only</strong>
+  Results are based on nominal ASME dimensions and typical material densities. They do not account for manufacturing tolerances, coatings, supports, flanges, fittings, corrosion allowance, or actual site conditions. All final designs must be verified by a qualified engineer and validated against the applicable code edition. Piping Passion accepts no liability for decisions made using this tool.
+</div>
+
+<!-- Related calculators -->
+<div class="related-calcs">
+  <div class="related-title">Other Calculators</div>
+  <div class="related-grid">
+    <a class="related-card" href="orifice-plate.html">
+      <div class="related-card-name">Orifice Plate (ISO 5167)</div>
+      <div class="related-card-desc">Flow measurement sizing.</div>
+    </a>
+    <a class="related-card" href="velocity.html">
+      <div class="related-card-name">Pipe Velocity</div>
+      <div class="related-card-desc">Inlet/outlet velocity check.</div>
+    </a>
+    <a class="related-card" href="pressure-drop.html">
+      <div class="related-card-name">Pressure Drop</div>
+      <div class="related-card-desc">Available &Delta;P across valve.</div>
+    </a>
+    <a class="related-card" href="reynolds-number.html">
+      <div class="related-card-name">Reynolds Number</div>
+      <div class="related-card-desc">Flow regime upstream.</div>
+    </a>
+    <a class="related-card" href="unit-converter.html">
+      <div class="related-card-name">Unit Converter</div>
+      <div class="related-card-desc">Convert flow / pressure units.</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><span>PIPING</span>PASSION</div>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../field-tips.html">Field Tips</a>
+    <a href="../books.html">Books</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../about.html">About</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Geoffroy Falot &middot; pipingpassion.com</p>
+</footer>
+
+<script>
+
+const FLUIDS = {
+  water20: 998, water80: 972, lighthc: 720, heavyhc: 920, brine: 1071, meg: 1067
+};
+
+const CONV = {
+  // Q
+  m3h_to_m3s: 1/3600, lps_to_m3s: 1/1000, gpm_to_m3s: 6.30902e-5,
+  m3h_to_gpm: 4.40287, gpm_to_m3h: 0.227125,
+  // P
+  bar_to_psi: 14.5038, psi_to_bar: 0.0689476,
+  bar_to_kpa: 100, kpa_to_bar: 0.01,
+  // density
+  kgm3_to_lbft3: 0.0624280, lbft3_to_kgm3: 16.0185
+};
+
+const P_CRIT_BAR = 220.6; // water; sufficient for most aqueous service. User can override later.
+
+let currentUnits = 'SI';
+
+function setUnits(u) {
+  currentUnits = u;
+  document.getElementById('btn-si').classList.toggle('active', u === 'SI');
+  document.getElementById('btn-imp').classList.toggle('active', u === 'IMP');
+  // Toggle Q
+  const qU = document.getElementById('Q-unit');
+  if (u === 'IMP' && qU.value === 'm3h') qU.value = 'gpm';
+  if (u === 'SI' && qU.value === 'gpm')  qU.value = 'm3h';
+  // dP
+  const dpU = document.getElementById('dP-unit');
+  if (u === 'IMP' && dpU.value === 'bar') dpU.value = 'psi';
+  if (u === 'SI' && dpU.value === 'psi')  dpU.value = 'bar';
+  // P1
+  const p1U = document.getElementById('P1-unit');
+  if (u === 'IMP' && p1U.value === 'bara') p1U.value = 'psia';
+  if (u === 'IMP' && p1U.value === 'barg') p1U.value = 'psig';
+  if (u === 'SI'  && p1U.value === 'psia') p1U.value = 'bara';
+  if (u === 'SI'  && p1U.value === 'psig') p1U.value = 'barg';
+  // Pv
+  const pvU = document.getElementById('Pv-unit');
+  if (u === 'IMP' && pvU.value === 'bara') pvU.value = 'psia';
+  if (u === 'SI'  && pvU.value === 'psia') pvU.value = 'bara';
+  // density
+  const rU = document.getElementById('rho-unit');
+  const rV = parseFloat(document.getElementById('rho').value);
+  if (u === 'IMP' && rU.value === 'kgm3') {
+    document.getElementById('rho').value = (rV * CONV.kgm3_to_lbft3).toFixed(2);
+    rU.value = 'lbft3';
+  }
+  if (u === 'SI' && rU.value === 'lbft3') {
+    document.getElementById('rho').value = (rV * CONV.lbft3_to_kgm3).toFixed(2);
+    rU.value = 'kgm3';
+  }
+  calculate();
+}
+
+function onFluidChange() {
+  const v = document.getElementById('fluid').value;
+  if (v === 'custom') return;
+  const rho = FLUIDS[v];
+  document.getElementById('rho-unit').value = 'kgm3';
+  document.getElementById('rho').value = rho.toFixed(0);
+  // also seed vapour pressure for water
+  if (v === 'water20') { document.getElementById('Pv').value = '0.023'; document.getElementById('Pv-unit').value = 'bara'; }
+  if (v === 'water80') { document.getElementById('Pv').value = '0.473'; document.getElementById('Pv-unit').value = 'bara'; }
+  calculate();
+}
+
+function onRhoEdit() {
+  // Switching to custom on manual edit
+  document.getElementById('fluid').value = 'custom';
+  calculate();
+}
+
+function calculate() {
+  // Q -> m3/h (working unit for Kv) and gpm (working unit for Cv)
+  const qVal = parseFloat(document.getElementById('Q').value) || 0;
+  const qU = document.getElementById('Q-unit').value;
+  let Q_m3h;
+  switch (qU) {
+    case 'm3h': Q_m3h = qVal; break;
+    case 'lps': Q_m3h = qVal * 3.6; break;
+    case 'gpm': Q_m3h = qVal * CONV.gpm_to_m3h; break;
+  }
+  const Q_gpm = Q_m3h * CONV.m3h_to_gpm;
+
+  // Density -> kg/m3, SG
+  let rhoVal = parseFloat(document.getElementById('rho').value) || 0;
+  const rU = document.getElementById('rho-unit').value;
+  const rho_kgm3 = (rU === 'lbft3') ? rhoVal * CONV.lbft3_to_kgm3 : rhoVal;
+  const SG = rho_kgm3 / 1000;
+
+  // dP -> bar and psi
+  const dpVal = parseFloat(document.getElementById('dP').value) || 0;
+  const dpU = document.getElementById('dP-unit').value;
+  let dP_bar;
+  switch (dpU) {
+    case 'bar': dP_bar = dpVal; break;
+    case 'psi': dP_bar = dpVal * CONV.psi_to_bar; break;
+    case 'kpa': dP_bar = dpVal * CONV.kpa_to_bar; break;
+  }
+  const dP_psi = dP_bar * CONV.bar_to_psi;
+
+  // P1 -> bara
+  const p1Val = parseFloat(document.getElementById('P1').value) || 0;
+  const p1U = document.getElementById('P1-unit').value;
+  let P1_bara;
+  switch (p1U) {
+    case 'bara': P1_bara = p1Val; break;
+    case 'barg': P1_bara = p1Val + 1.01325; break;
+    case 'psia': P1_bara = p1Val * CONV.psi_to_bar; break;
+    case 'psig': P1_bara = (p1Val + 14.696) * CONV.psi_to_bar; break;
+  }
+
+  // Pv -> bara
+  const pvVal = parseFloat(document.getElementById('Pv').value) || 0;
+  const pvU = document.getElementById('Pv-unit').value;
+  let Pv_bara;
+  switch (pvU) {
+    case 'bara': Pv_bara = pvVal; break;
+    case 'psia': Pv_bara = pvVal * CONV.psi_to_bar; break;
+    case 'kpaa': Pv_bara = pvVal * CONV.kpa_to_bar; break;
+  }
+
+  const FL = parseFloat(document.getElementById('valveType').value);
+
+  // Cv / Kv
+  let Kv_req = 0, Cv_req = 0;
+  if (dP_bar > 0 && SG > 0) {
+    Kv_req = Q_m3h * Math.sqrt(SG / dP_bar);
+    Cv_req = 1.156 * Kv_req;
+  }
+
+  // Choked flow check
+  const FF = 0.96 - 0.28 * Math.sqrt(Math.max(Pv_bara / P_CRIT_BAR, 0));
+  const dP_choked_bar = FL * FL * (P1_bara - FF * Pv_bara);
+  const isChoked = dP_bar >= dP_choked_bar;
+
+  // If choked, recompute Cv with limited dP per ISA
+  let Cv_choke = Cv_req, Kv_choke = Kv_req;
+  if (isChoked && dP_choked_bar > 0 && SG > 0) {
+    Kv_choke = Q_m3h * Math.sqrt(SG / dP_choked_bar);
+    Cv_choke = 1.156 * Kv_choke;
+  }
+
+  // Display
+  document.getElementById('r-Cv').textContent = isChoked ? Cv_choke.toFixed(2) : Cv_req.toFixed(2);
+  document.getElementById('r-Kv').textContent = isChoked ? Kv_choke.toFixed(2) : Kv_req.toFixed(2);
+
+  const chokeEl = document.getElementById('r-choke');
+  const chokeSub = document.getElementById('r-choke-sub');
+  if (Cv_req === 0) {
+    chokeEl.textContent = '—';
+    chokeEl.style.color = '#B0C4D8';
+    chokeSub.textContent = 'Enter operating data.';
+  } else if (isChoked) {
+    chokeEl.textContent = '⚠ Choked / cavitating';
+    chokeEl.style.color = '#E87070';
+    chokeSub.innerHTML = 'Operating &Delta;P (' + dP_bar.toFixed(2) + ' bar) exceeds choked &Delta;P (' + dP_choked_bar.toFixed(2) + ' bar). The Cv shown is sized at the choked &Delta;P. Cavitation likely &mdash; review trim, F&#7480;, or stage the pressure letdown.';
+  } else if (dP_bar > 0.7 * dP_choked_bar) {
+    chokeEl.textContent = 'Approaching choke';
+    chokeEl.style.color = '#F0B429';
+    chokeSub.innerHTML = '&Delta;P is ' + (dP_bar/dP_choked_bar*100).toFixed(0) + '% of choked &Delta;P (' + dP_choked_bar.toFixed(2) + ' bar). Margin OK for steady operation; verify upset cases.';
+  } else {
+    chokeEl.textContent = 'Sub-critical, no choke';
+    chokeEl.style.color = '#7CD4A4';
+    chokeSub.innerHTML = '&Delta;P (' + dP_bar.toFixed(2) + ') &lt;&lt; &Delta;P_choked (' + dP_choked_bar.toFixed(2) + ' bar). Linear sizing is valid.';
+  }
+
+  // Detail
+  let detail = '';
+  detail += 'Q  = ' + Q_m3h.toFixed(2) + ' m³/h  =  ' + Q_gpm.toFixed(2) + ' US gpm<br>';
+  detail += 'SG = ' + SG.toFixed(3) + ' (&rho; = ' + rho_kgm3.toFixed(0) + ' kg/m³)<br>';
+  detail += '&Delta;P = ' + dP_bar.toFixed(3) + ' bar  =  ' + dP_psi.toFixed(2) + ' psi<br>';
+  detail += 'P₁ = ' + P1_bara.toFixed(2) + ' bar a<br>';
+  detail += 'Pᵥ = ' + Pv_bara.toFixed(3) + ' bar a<br>';
+  detail += 'Fᴸ = ' + FL.toFixed(2) + '  &middot;  Fᵠ = ' + FF.toFixed(3) + '<br>';
+  detail += '&Delta;P_choked = ' + dP_choked_bar.toFixed(3) + ' bar';
+  document.getElementById('r-detail').innerHTML = detail;
+}
+
+calculate();
+
+</script>
+
+</body>
+</html>

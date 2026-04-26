@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thermal Expansion Calculator &mdash; Piping Passion</title>
+<meta name="description" content="Free thermal expansion calculator for piping. Calculate ΔL per ASME B31.3 Appendix C. Carbon steel, stainless steel, copper, aluminum. SI and Imperial units.">
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   PIPINGPASSION.COM — SHARED STYLESHEET
+   Palette: Navy #09152A · Gold #C9930A · #F0B429
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700&family=Barlow:ital,wght@0,400;0,500;0,600;1,400;1,500&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --navy:    #09152A;
+  --navy-2:  #0D1E38;
+  --navy-3:  #142645;
+  --navy-4:  #06101E;
+  --gold:    #C9930A;
+  --gold-lt: #F0B429;
+  --white:   #F5F0E8;
+  --muted:   #8EA3BE;
+  --dim:     #3D5A7A;
+  --border:  rgba(201,147,10,0.18);
+  --border-s: rgba(201,147,10,0.35);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--navy);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(9,21,42,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 2.5rem;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 62px;
+}
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 1.1rem; letter-spacing: 0.08em;
+  color: var(--white); text-decoration: none;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 1.1rem; list-style: none; }
+.nav-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--gold-lt); }
+.nav-links .nav-cta {
+  color: var(--gold); border: 1px solid var(--border);
+  padding: 0.22rem 0.9rem; border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+/* ── PAGE HEADER ── */
+.page-header {
+  position: relative;
+  padding: 5rem 2.5rem 3.5rem;
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+.page-header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy) 60%);
+  z-index: 0;
+}
+.page-header-inner { position: relative; z-index: 1; max-width: 900px; }
+.page-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.page-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800; letter-spacing: -0.01em;
+  line-height: 1; margin-bottom: 1.2rem;
+}
+.page-title span { color: var(--gold-lt); }
+.page-desc {
+  font-size: 1.08rem; color: #C8D2DE; max-width: 700px;
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 5rem; padding: 3rem 2.5rem 2rem;
+  border-top: 1px solid var(--border);
+  background: var(--navy-4);
+  text-align: center;
+}
+.footer-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; letter-spacing: 0.08em;
+  font-size: 1.05rem; color: var(--white); margin-bottom: 1rem;
+}
+.footer-logo span { color: var(--gold); }
+.footer-links {
+  display: flex; gap: 2rem; justify-content: center;
+  margin-bottom: 1.5rem; flex-wrap: wrap;
+}
+.footer-links a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none;
+}
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-copy {
+  font-size: 0.78rem; color: var(--dim); letter-spacing: 0.04em;
+}
+
+/* ── MOBILE NAV TOGGLE ── */
+.nav-toggle {
+  display: none;
+  background: transparent; border: 0; cursor: pointer;
+  padding: 0.4rem;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 2px;
+  background: var(--gold-lt); margin: 4px 0;
+  transition: transform 0.25s, opacity 0.2s;
+}
+.nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 900px) {
+  nav { padding: 0 1.25rem; }
+  .nav-toggle { display: block; }
+  .nav-links {
+    position: absolute; top: 62px; right: 0;
+    background: rgba(9,21,42,0.98); backdrop-filter: blur(14px);
+    border: 1px solid var(--border); border-right: 0;
+    border-bottom-left-radius: 8px;
+    flex-direction: column; gap: 0;
+    padding: 1rem 0; min-width: 220px;
+    transform: translateX(120%); transition: transform 0.25s;
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links li { width: 100%; }
+  .nav-links a {
+    display: block; padding: 0.7rem 1.5rem;
+  }
+  .nav-links .nav-cta {
+    margin: 0.4rem 1.5rem; padding: 0.4rem 0.9rem;
+    text-align: center;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   CALCULATOR PAGE SPECIFIC STYLES
+   ═══════════════════════════════════════════ */
+
+.calc-wrap {
+  max-width: 1100px; margin: 0 auto;
+  padding: 3rem 2.5rem 0;
+  position: relative; z-index: 1;
+}
+
+/* Units toggle */
+.unit-toggle {
+  display: flex; align-items: center;
+  gap: 0.8rem; margin-bottom: 2rem;
+  justify-content: flex-end;
+}
+.unit-toggle-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--muted);
+}
+.unit-toggle-btn {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem; display: inline-flex;
+}
+.unit-toggle-btn button {
+  background: transparent; border: 0;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted); cursor: pointer;
+  padding: 0.45rem 1.2rem; border-radius: 999px;
+  transition: background 0.2s, color 0.2s;
+}
+.unit-toggle-btn button.active {
+  background: var(--gold); color: var(--navy);
+}
+
+/* Main calc grid */
+.calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Inputs panel */
+.calc-panel {
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+}
+.calc-panel-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.calc-field {
+  margin-bottom: 1.3rem;
+}
+.calc-field:last-child { margin-bottom: 0; }
+.calc-label {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white); font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.calc-input, .calc-select {
+  width: 100%;
+  background: var(--navy);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.98rem;
+  padding: 0.7rem 0.9rem;
+  transition: border-color 0.2s, background 0.2s;
+}
+.calc-input:focus, .calc-select:focus {
+  outline: 0;
+  border-color: var(--gold-lt);
+  background: var(--navy-4);
+}
+.calc-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6' fill='%23F0B429'%3E%3Cpath d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  background-size: 10px;
+  padding-right: 2.3rem;
+}
+.calc-field-inline {
+  display: flex; gap: 0.6rem; align-items: stretch;
+}
+.calc-field-inline .calc-input { flex: 1; }
+.calc-field-inline .calc-select { flex: 0 0 auto; width: auto; min-width: 90px; }
+
+.calc-hint {
+  font-size: 0.8rem; color: var(--muted);
+  margin-top: 0.35rem; font-style: italic;
+}
+
+/* Result panel */
+.calc-result-panel {
+  background: linear-gradient(135deg, var(--navy-3) 0%, var(--navy-2) 100%);
+  border: 1px solid var(--border-s);
+  border-radius: 8px;
+  padding: 2rem 2rem 2.2rem;
+  position: sticky; top: 80px;
+}
+.calc-result-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold-lt);
+  margin-bottom: 1.6rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border-s);
+}
+.result-block {
+  padding: 1.2rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.result-block:last-of-type { border-bottom: 0; padding-bottom: 0.4rem; }
+.result-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.result-value {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 2rem; font-weight: 700;
+  color: var(--gold-lt); line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.result-value.small { font-size: 1.4rem; color: var(--white); }
+.result-unit {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.95rem; color: var(--muted);
+  font-weight: 600; margin-left: 0.35rem;
+  letter-spacing: 0.04em;
+}
+.result-sub {
+  font-size: 0.82rem; color: var(--muted);
+  margin-top: 0.3rem;
+}
+.result-error {
+  color: #E08888;
+  font-size: 0.92rem;
+  padding: 0.8rem 0;
+}
+
+/* Formula section */
+.calc-formula {
+  margin-top: 2.5rem;
+  background: var(--navy-4);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.8rem 2rem;
+}
+.calc-formula-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1rem;
+}
+.calc-formula code {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.95rem;
+  color: var(--white);
+  background: var(--navy);
+  padding: 0.9rem 1.1rem;
+  border-radius: 5px;
+  border-left: 3px solid var(--gold);
+  margin-bottom: 0.9rem;
+  line-height: 1.6;
+  overflow-x: auto;
+}
+.calc-formula-notes {
+  font-size: 0.9rem;
+  color: #B0C4D8;
+  line-height: 1.75;
+}
+.calc-formula-notes strong { color: var(--gold-lt); font-weight: 600; }
+
+/* Disclaimer */
+.calc-disclaimer {
+  margin: 2.5rem auto 0;
+  max-width: 1100px;
+  padding: 1.4rem 1.8rem;
+  background: rgba(224,48,48,0.06);
+  border: 1px solid rgba(224,48,48,0.25);
+  border-radius: 6px;
+  font-size: 0.88rem;
+  color: #D8C0C0;
+  line-height: 1.7;
+}
+.calc-disclaimer strong {
+  display: block;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: #E87070;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+}
+
+/* Related calculators section */
+.related-calcs {
+  max-width: 1100px; margin: 3.5rem auto 0;
+  padding: 0 2.5rem;
+}
+.related-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.85rem; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.2rem;
+}
+.related-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.related-card {
+  display: block;
+  background: var(--navy-2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.1rem 1.3rem;
+  text-decoration: none;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.related-card:hover {
+  border-color: var(--gold-lt);
+  transform: translateY(-2px);
+}
+.related-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1rem;
+  color: var(--white); letter-spacing: 0.02em;
+  margin-bottom: 0.2rem;
+}
+.related-card-desc {
+  font-size: 0.82rem; color: var(--muted);
+  line-height: 1.5;
+}
+.related-card.disabled {
+  opacity: 0.5; pointer-events: none;
+}
+.related-card.disabled .related-card-name::after {
+  content: ' · soon';
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .calc-wrap { padding: 2rem 1.25rem 0; }
+  .calc-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .calc-result-panel { position: static; }
+  .result-value { font-size: 1.7rem; }
+  .related-calcs { padding: 0 1.25rem; }
+  .calc-disclaimer { margin-left: 1.25rem; margin-right: 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../../index.html"><span>PIPING</span>PASSION</a>
+  <ul class="nav-links">
+    <li><a href="../field-tips.html">Field Tips</a></li>
+    <li><a href="../field-stories.html">Field Stories</a></li>
+    <li><a href="../brownfield.html">Brownfield</a></li>
+    <li><a href="../scan-to-model.html">Scan-to-Model</a></li>
+    <li><a href="../codes-standards.html">Codes</a></li>
+    <li><a href="../tools.html" class="active">Tools</a></li>
+    <li><a href="../career.html">Career</a></li>
+    <li><a href="../reference.html">Reference</a></li>
+    <li><a href="../common-mistakes.html">Mistakes</a></li>
+    <li><a href="../glossary.html">Glossary</a></li>
+    <li><a href="../books.html">Books</a></li>
+    <li><a href="../downloads.html" style="color:#E03030;font-weight:700">Downloads</a></li>
+    <li><a class="nav-cta" href="../contact.html">Contact</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<div class="page-header">
+  <div class="page-header-inner">
+    <p class="page-eyebrow">Engineering Calculator</p>
+    <h1 class="page-title">Thermal <span>Expansion</span></h1>
+    <p class="page-desc">Linear thermal expansion calculation for piping per ASME B31.3 Appendix C. Supports cryogenic to elevated temperatures, 10 material classes, SI and Imperial. Built for designers who need fast stress-analysis inputs.</p>
+  </div>
+</div>
+
+<div class="calc-wrap">
+
+  <div class="unit-toggle">
+    <span class="unit-toggle-label">Units</span>
+    <div class="unit-toggle-btn">
+      <button id="btn-si" class="active" onclick="setUnits('SI')">SI</button>
+      <button id="btn-imp" onclick="setUnits('IMP')">Imperial</button>
+    </div>
+  </div>
+
+  <div class="calc-grid">
+
+    <!-- INPUTS -->
+    <div class="calc-panel">
+      <div class="calc-panel-title">Inputs</div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="material">Pipe Material</label>
+        <select id="material" class="calc-select" onchange="calculate()">
+          <option value="cs" selected>Carbon Steel (A53, A106, A333)</option>
+          <option value="lowCrMo">Low Chrome-Moly (1-1/4 Cr - 9 Cr)</option>
+          <option value="ss304">Stainless Steel 304 / 316</option>
+          <option value="ss321">Stainless Steel 321 / 347</option>
+          <option value="duplex">Duplex SS (2205, 2507)</option>
+          <option value="inconel">Nickel Alloys (Inconel 600/625, Monel)</option>
+          <option value="copper">Copper / Copper-Nickel</option>
+          <option value="aluminum">Aluminum (3003, 6061)</option>
+          <option value="titanium">Titanium (Gr 1, Gr 2)</option>
+          <option value="hdpe">HDPE / PE</option>
+        </select>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="length">Pipe Length</label>
+        <div class="calc-field-inline">
+          <input type="number" id="length" class="calc-input" value="100" min="0" step="0.1" oninput="calculate()">
+          <select id="length-unit" class="calc-select" onchange="calculate()">
+            <option value="m">m</option>
+            <option value="ft">ft</option>
+            <option value="in">in</option>
+            <option value="mm">mm</option>
+          </select>
+        </div>
+        <p class="calc-hint">Distance between fixed anchors (virtual or real).</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="t-cold">Installation / Cold Temperature</label>
+        <div class="calc-field-inline">
+          <input type="number" id="t-cold" class="calc-input" value="21" step="1" oninput="calculate()">
+          <select id="t-cold-unit" class="calc-select" onchange="calculate()">
+            <option value="C">&deg;C</option>
+            <option value="F">&deg;F</option>
+          </select>
+        </div>
+        <p class="calc-hint">Typically ambient (~21&deg;C / 70&deg;F).</p>
+      </div>
+
+      <div class="calc-field">
+        <label class="calc-label" for="t-hot">Operating / Hot Temperature</label>
+        <div class="calc-field-inline">
+          <input type="number" id="t-hot" class="calc-input" value="150" step="1" oninput="calculate()">
+          <select id="t-hot-unit" class="calc-select" onchange="calculate()">
+            <option value="C">&deg;C</option>
+            <option value="F">&deg;F</option>
+          </select>
+        </div>
+        <p class="calc-hint">Design / operating temperature. Can be below cold for cryogenic.</p>
+      </div>
+
+    </div>
+
+    <!-- RESULTS -->
+    <div class="calc-result-panel">
+      <div class="calc-result-title">Result</div>
+
+      <div class="result-block">
+        <div class="result-label">Total thermal movement</div>
+        <div class="result-value"><span id="r-total">—</span><span class="result-unit" id="u-total">mm</span></div>
+        <div class="result-sub" id="r-direction"></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Per-metre / per-foot expansion</div>
+        <div class="result-value small"><span id="r-unit-exp">—</span><span class="result-unit" id="u-unit-exp">mm/m</span></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Mean coefficient (over &Delta;T)</div>
+        <div class="result-value small"><span id="r-alpha">—</span><span class="result-unit" id="u-alpha">&times; 10&#8315;&#8310; /&deg;C</span></div>
+      </div>
+
+      <div class="result-block">
+        <div class="result-label">Temperature range</div>
+        <div class="result-sub" id="r-range" style="font-family:'JetBrains Mono',monospace;color:#B0C4D8;margin-top:.5rem;line-height:1.8;">&mdash;</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Formula explanation -->
+  <div class="calc-formula">
+    <div class="calc-formula-title">Formula &amp; Data Source</div>
+    <code>&Delta;L&nbsp;&nbsp;=&nbsp;&nbsp;L &times; [e(T&#8322;) &minus; e(T&#8321;)]</code>
+    <code>where&nbsp;&nbsp;e(T)&nbsp;&nbsp;=&nbsp;&nbsp;total linear expansion from 21&deg;C / 70&deg;F reference</code>
+    <div class="calc-formula-notes">
+      <strong>Data source:</strong> ASME B31.3 Appendix C, Table C-1 (Total Linear Thermal Expansion). Values are cumulative from 21&deg;C (70&deg;F) reference, interpolated linearly between tabulated temperatures.<br><br>
+      <strong>Why it matters:</strong> this &Delta;L is what generates thermal stresses at anchors and nozzles, drives the need for expansion loops and flexibility, and determines spring support settings. Always sized against the larger of operating, design, and steam-out conditions.<br><br>
+      <strong>Brownfield caution:</strong> on revamps, existing pipe may already be partially displaced from a previous thermal cycle. Always reference the pipe&rsquo;s ambient "as-installed" position before sizing new loops or supports.
+    </div>
+  </div>
+
+</div>
+
+<!-- Disclaimer -->
+<div class="calc-disclaimer">
+  <strong>⚠ For preliminary sizing only</strong>
+  Results are based on nominal ASME dimensions and typical material densities. They do not account for manufacturing tolerances, coatings, supports, flanges, fittings, corrosion allowance, or actual site conditions. All final designs must be verified by a qualified engineer and validated against the applicable code edition. Piping Passion accepts no liability for decisions made using this tool.
+</div>
+
+<!-- Related calculators -->
+<div class="related-calcs">
+  <div class="related-title">Other Calculators</div>
+  <div class="related-grid">
+    <a class="related-card" href="pipe-weight.html">
+      <div class="related-card-name">Pipe Weight</div>
+      <div class="related-card-desc">Empty, water-filled and insulated weight per ASME B36.10M.</div>
+    </a>
+    <a class="related-card" href="hydrotest-pressure.html">
+      <div class="related-card-name">Hydrotest Pressure</div>
+      <div class="related-card-desc">Per ASME B31.3 para. 345.4.2.</div>
+    </a>
+    <a class="related-card" href="support-span.html">
+      <div class="related-card-name">Support Span</div>
+      <div class="related-card-desc">Max distance between supports.</div>
+    </a>
+    <a class="related-card" href="wall-thickness.html">
+      <div class="related-card-name">Wall Thickness (B31.3)</div>
+      <div class="related-card-desc">Minimum pipe wall per ASME B31.3.</div>
+    </a>
+    <a class="related-card" href="insulation-thickness.html">
+      <div class="related-card-name">Insulation Thickness</div>
+      <div class="related-card-desc">Skin temperature, heat loss, condensation control.</div>
+    </a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo"><span>PIPING</span>PASSION</div>
+  <div class="footer-links">
+    <a href="../../index.html">Home</a>
+    <a href="../field-tips.html">Field Tips</a>
+    <a href="../books.html">Books</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../about.html">About</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Geoffroy Falot &middot; pipingpassion.com</p>
+</footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════════════
+   THERMAL EXPANSION DATA — ASME B31.3 Appendix C, Table C-1
+   Values: Total Linear Thermal Expansion (mm per metre) from 21°C reference
+   Temperatures in °C; linear interpolation between values.
+   ═══════════════════════════════════════════════════════════════════ */
+const EXPANSION_DATA = {
+  cs: { // Carbon steel (A53, A106, A333) — per ASME B31.3 App C, Carbon Steel column
+    name: 'Carbon Steel',
+    data: [
+      [-200, -2.27], [-150, -1.96], [-100, -1.55], [-50, -0.98],
+      [0, -0.24], [21, 0.00], [50, 0.34], [100, 0.99],
+      [125, 1.33], [150, 1.68], [175, 2.04], [200, 2.40],
+      [225, 2.77], [250, 3.15], [275, 3.54], [300, 3.93],
+      [325, 4.33], [350, 4.74], [375, 5.16], [400, 5.59],
+      [425, 6.01], [450, 6.45], [475, 6.89], [500, 7.33],
+      [525, 7.78], [550, 8.21], [575, 8.65], [600, 9.10]
+    ]
+  },
+  lowCrMo: { // 1-1/4 Cr through 9 Cr low alloy steels (P11, P22, P91)
+    name: 'Low Chrome-Moly (1-1/4 Cr to 9 Cr)',
+    data: [
+      [-200, -2.05], [-150, -1.77], [-100, -1.41], [-50, -0.89],
+      [0, -0.22], [21, 0.00], [50, 0.31], [100, 0.90],
+      [150, 1.53], [200, 2.19], [250, 2.87], [300, 3.58],
+      [350, 4.32], [400, 5.08], [450, 5.87], [500, 6.68],
+      [550, 7.51], [600, 8.36]
+    ]
+  },
+  ss304: { // Austenitic SS 304, 316, 316L — per ASME B31.3 App C
+    name: 'Stainless Steel 304 / 316 (Austenitic)',
+    data: [
+      [-200, -3.11], [-150, -2.71], [-100, -2.11], [-50, -1.34],
+      [0, -0.30], [21, 0.00], [50, 0.47], [100, 1.35],
+      [125, 1.80], [150, 2.26], [175, 2.72], [200, 3.19],
+      [225, 3.66], [250, 4.14], [275, 4.62], [300, 5.11],
+      [325, 5.60], [350, 6.10], [375, 6.60], [400, 7.10],
+      [425, 7.61], [450, 8.13], [475, 8.65], [500, 9.17],
+      [525, 9.69], [550, 10.22], [575, 10.76], [600, 11.30]
+    ]
+  },
+  ss321: { // SS 321/347 — slightly different from 304
+    name: 'Stainless Steel 321 / 347',
+    data: [
+      [-200, -3.00], [-150, -2.62], [-100, -2.04], [-50, -1.30],
+      [0, -0.29], [21, 0.00], [50, 0.46], [100, 1.32],
+      [150, 2.21], [200, 3.12], [250, 4.04], [300, 4.98],
+      [350, 5.93], [400, 6.91], [450, 7.90], [500, 8.91],
+      [550, 9.93], [600, 10.97]
+    ]
+  },
+  duplex: { // Duplex (2205, 2507) — α ≈ 13e-6/°C
+    name: 'Duplex (2205, 2507)',
+    data: [
+      [-100, -1.58], [-50, -1.00], [0, -0.25], [21, 0.00],
+      [50, 0.38], [100, 1.08], [150, 1.82], [200, 2.58],
+      [250, 3.37], [300, 4.18], [350, 5.01]
+    ]
+  },
+  inconel: { // Inconel 600/625, Monel — α ≈ 13.5e-6/°C
+    name: 'Nickel Alloys (Inconel, Monel)',
+    data: [
+      [-200, -2.50], [-150, -2.16], [-100, -1.71], [-50, -1.08],
+      [0, -0.26], [21, 0.00], [50, 0.39], [100, 1.13],
+      [150, 1.90], [200, 2.69], [250, 3.51], [300, 4.35],
+      [350, 5.22], [400, 6.12], [450, 7.03], [500, 7.97],
+      [550, 8.93], [600, 9.91]
+    ]
+  },
+  copper: { // Copper / Cu-Ni — α ≈ 17e-6/°C
+    name: 'Copper / Copper-Nickel',
+    data: [
+      [-200, -3.50], [-150, -3.00], [-100, -2.31], [-50, -1.47],
+      [0, -0.33], [21, 0.00], [50, 0.49], [100, 1.42],
+      [150, 2.37], [200, 3.36], [250, 4.37], [300, 5.40]
+    ]
+  },
+  aluminum: { // Aluminum alloys — α ≈ 23e-6/°C
+    name: 'Aluminum (3003, 6061)',
+    data: [
+      [-200, -4.60], [-150, -3.96], [-100, -3.09], [-50, -1.97],
+      [0, -0.44], [21, 0.00], [50, 0.66], [100, 1.92],
+      [150, 3.22], [200, 4.57], [250, 5.95]
+    ]
+  },
+  titanium: { // Titanium Gr 1/2 — α ≈ 8.6e-6/°C
+    name: 'Titanium (Gr 1, Gr 2)',
+    data: [
+      [-100, -1.06], [-50, -0.67], [0, -0.17], [21, 0.00],
+      [50, 0.26], [100, 0.74], [150, 1.24], [200, 1.75],
+      [250, 2.27], [300, 2.81], [350, 3.36], [400, 3.92]
+    ]
+  },
+  hdpe: { // HDPE polyethylene — α ≈ 200e-6/°C (very high!)
+    name: 'HDPE / PE',
+    data: [
+      [-50, -14.2], [0, -4.2], [21, 0.0], [40, 3.8],
+      [60, 7.8], [80, 11.8]
+    ]
+  }
+};
+
+/* ═══════════════════════════════════════════════════════════════════
+   UNIT CONVERSION HELPERS
+   ═══════════════════════════════════════════════════════════════════ */
+const CONV = {
+  m_to_ft: 3.28084,
+  m_to_in: 39.3701,
+  m_to_mm: 1000,
+  mm_to_in: 0.0393701,
+  in_to_mm: 25.4,
+  ft_to_m: 0.3048,
+  in_to_m: 0.0254,
+  mm_to_m: 0.001,
+  fahrenheit_to_celsius: (f) => (f - 32) * 5 / 9,
+};
+
+let currentUnits = 'SI';
+
+function setUnits(u) {
+  currentUnits = u;
+  document.getElementById('btn-si').classList.toggle('active', u === 'SI');
+  document.getElementById('btn-imp').classList.toggle('active', u === 'IMP');
+  // Length input unit
+  const lenUnit = document.getElementById('length-unit');
+  if (u === 'IMP' && lenUnit.value === 'm') lenUnit.value = 'ft';
+  if (u === 'SI'  && lenUnit.value === 'ft') lenUnit.value = 'm';
+  // Temperature input units
+  const tColdU = document.getElementById('t-cold-unit');
+  const tHotU  = document.getElementById('t-hot-unit');
+  const tCold  = document.getElementById('t-cold');
+  const tHot   = document.getElementById('t-hot');
+  if (u === 'IMP') {
+    if (tColdU.value === 'C') { tCold.value = (parseFloat(tCold.value) * 9/5 + 32).toFixed(0); tColdU.value = 'F'; }
+    if (tHotU.value  === 'C') { tHot.value  = (parseFloat(tHot.value)  * 9/5 + 32).toFixed(0); tHotU.value  = 'F'; }
+  } else {
+    if (tColdU.value === 'F') { tCold.value = ((parseFloat(tCold.value) - 32) * 5/9).toFixed(0); tColdU.value = 'C'; }
+    if (tHotU.value  === 'F') { tHot.value  = ((parseFloat(tHot.value)  - 32) * 5/9).toFixed(0); tHotU.value  = 'C'; }
+  }
+  // Result units
+  document.getElementById('u-total').textContent    = (u === 'SI') ? 'mm' : 'in';
+  document.getElementById('u-unit-exp').textContent = (u === 'SI') ? 'mm/m' : 'in/100ft';
+  document.getElementById('u-alpha').textContent    = (u === 'SI') ? '\u00D7 10\u207B\u2076 /\u00B0C' : '\u00D7 10\u207B\u2076 /\u00B0F';
+  calculate();
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Interpolation in ASME Appendix C table (in Celsius)
+   ═══════════════════════════════════════════════════════════════════ */
+function interpExpansion(materialKey, T_C) {
+  const tbl = EXPANSION_DATA[materialKey].data;
+  if (T_C <= tbl[0][0]) {
+    // Extrapolate conservatively using first two points
+    const [t0, e0] = tbl[0], [t1, e1] = tbl[1];
+    return e0 + (e1 - e0) * (T_C - t0) / (t1 - t0);
+  }
+  if (T_C >= tbl[tbl.length - 1][0]) {
+    const [t0, e0] = tbl[tbl.length - 2], [t1, e1] = tbl[tbl.length - 1];
+    return e1 + (e1 - e0) * (T_C - t1) / (t1 - t0);
+  }
+  for (let i = 0; i < tbl.length - 1; i++) {
+    const [t0, e0] = tbl[i], [t1, e1] = tbl[i + 1];
+    if (T_C >= t0 && T_C <= t1) {
+      return e0 + (e1 - e0) * (T_C - t0) / (t1 - t0);
+    }
+  }
+  return 0;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MAIN CALCULATION
+   ═══════════════════════════════════════════════════════════════════ */
+function calculate() {
+  const mat = document.getElementById('material').value;
+  if (!EXPANSION_DATA[mat]) return;
+
+  // Length in metres
+  const lenVal = parseFloat(document.getElementById('length').value) || 0;
+  const lenUnit = document.getElementById('length-unit').value;
+  let L_m = lenVal;
+  if (lenUnit === 'ft') L_m = lenVal * CONV.ft_to_m;
+  else if (lenUnit === 'in') L_m = lenVal * CONV.in_to_m;
+  else if (lenUnit === 'mm') L_m = lenVal * CONV.mm_to_m;
+
+  // Temperatures in °C
+  const tColdRaw = parseFloat(document.getElementById('t-cold').value);
+  const tColdU   = document.getElementById('t-cold-unit').value;
+  const T_cold_C = (tColdU === 'F') ? CONV.fahrenheit_to_celsius(tColdRaw) : tColdRaw;
+
+  const tHotRaw = parseFloat(document.getElementById('t-hot').value);
+  const tHotU   = document.getElementById('t-hot-unit').value;
+  const T_hot_C = (tHotU === 'F') ? CONV.fahrenheit_to_celsius(tHotRaw) : tHotRaw;
+
+  // Expansion lookup from 21°C reference
+  const e_cold = interpExpansion(mat, T_cold_C); // mm/m
+  const e_hot  = interpExpansion(mat, T_hot_C);  // mm/m
+  const dE_per_m = e_hot - e_cold;               // mm/m between two temps
+  const dL_mm = dE_per_m * L_m;                  // total movement in mm
+
+  const dT_C = T_hot_C - T_cold_C;
+  const alpha = (dT_C !== 0) ? dE_per_m / dT_C * 1000 : 0; // mean α in 10⁻⁶ /°C (dE in mm/m = 10⁻³ m/m; /ΔT gives strain/°C; ×10⁶ → μ/°C)
+
+  // Display
+  if (currentUnits === 'SI') {
+    document.getElementById('r-total').textContent = dL_mm.toFixed(2);
+    document.getElementById('r-unit-exp').textContent = dE_per_m.toFixed(3);
+    document.getElementById('r-alpha').textContent = alpha.toFixed(2);
+    document.getElementById('r-range').innerHTML =
+      T_cold_C.toFixed(0) + '&deg;C &rarr; ' + T_hot_C.toFixed(0) + '&deg;C &nbsp;&middot;&nbsp; &Delta;T = ' +
+      dT_C.toFixed(0) + '&deg;C';
+  } else {
+    const dL_in = dL_mm * CONV.mm_to_in;
+    const dE_per_100ft = dE_per_m * CONV.mm_to_in * (CONV.m_to_ft) * 100 / CONV.m_to_ft; // mm/m to in/ft to in/100ft
+    // Simpler: mm/m × 1.2 (≈ in/100ft exact: 1 mm/m = 0.01200 in/ft = 1.200 in/100ft)
+    const inPer100ft = dE_per_m * 1.20;
+    document.getElementById('r-total').textContent = dL_in.toFixed(3);
+    document.getElementById('r-unit-exp').textContent = inPer100ft.toFixed(3);
+    const alpha_F = alpha * 5/9; // 10⁻⁶/°C → 10⁻⁶/°F
+    document.getElementById('r-alpha').textContent = alpha_F.toFixed(2);
+    const T_cold_F = T_cold_C * 9/5 + 32;
+    const T_hot_F  = T_hot_C  * 9/5 + 32;
+    const dT_F = T_hot_F - T_cold_F;
+    document.getElementById('r-range').innerHTML =
+      T_cold_F.toFixed(0) + '&deg;F &rarr; ' + T_hot_F.toFixed(0) + '&deg;F &nbsp;&middot;&nbsp; &Delta;T = ' +
+      dT_F.toFixed(0) + '&deg;F';
+  }
+
+  // Direction message
+  const dirEl = document.getElementById('r-direction');
+  if (Math.abs(dL_mm) < 0.01) {
+    dirEl.textContent = 'No net expansion (same temperature).';
+  } else if (dL_mm > 0) {
+    dirEl.textContent = 'Expansion &mdash; pipe lengthens at operating temperature.';
+    dirEl.innerHTML = dirEl.textContent;
+  } else {
+    dirEl.textContent = 'Contraction &mdash; pipe shortens (cold service).';
+    dirEl.innerHTML = dirEl.textContent;
+  }
+}
+
+// Boot
+calculate();
+</script>
+
+</body>
+</html>

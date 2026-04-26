@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tools &amp; Software &mdash; Piping Passion</title>
+<title>Tools, Calculators &amp; Software &mdash; Piping Passion</title>
+<meta name="description" content="Free piping engineering calculators (B31.3, ISO 5167, API RP 14E) plus honest software reviews of AVEVA E3D, Plant 3D, Cyclone, CAESAR II and more.">
 <link rel="stylesheet" href="../css/style.css">
 <style>
 /* ═══════════════════════════════════════════
@@ -118,7 +119,6 @@ nav {
   max-width: 620px; line-height: 1.75;
 }
 
-
 /* ── PIPE DECORATION ── */
 .page-header::after {
   content: '';
@@ -132,271 +132,36 @@ nav {
   pointer-events: none;
   z-index: 0;
 }
-.hero::before {
-  content: '';
-  position: absolute;
-  right: 0; top: 0; bottom: 0;
-  width: 420px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='420' height='600' viewBox='0 0 420 600'%3E%3Cg opacity='0.06' stroke='%23C9930A' fill='none' stroke-linecap='round'%3E%3Crect x='40' y='60' width='260' height='48' rx='24' stroke-width='10'/%3E%3Cline x1='40' y1='84' x2='0' y2='84' stroke-width='10'/%3E%3Ccircle cx='0' cy='84' r='20' stroke-width='6'/%3E%3Cline x1='300' y1='84' x2='360' y2='84' stroke-width='8'/%3E%3Crect x='348' y='66' width='30' height='36' rx='5' stroke-width='5'/%3E%3Crect x='40' y='180' width='260' height='48' rx='24' stroke-width='10'/%3E%3Cline x1='40' y1='204' x2='0' y2='204' stroke-width='10'/%3E%3Ccircle cx='0' cy='204' r='20' stroke-width='6'/%3E%3Cline x1='300' y1='204' x2='420' y2='204' stroke-width='8'/%3E%3Crect x='40' y='300' width='180' height='44' rx='22' stroke-width='10'/%3E%3Cline x1='220' y1='322' x2='300' y2='322' stroke-width='8'/%3E%3Ccircle cx='316' cy='322' r='18' stroke-width='5'/%3E%3Cline x1='170' y1='108' x2='170' y2='180' stroke-width='10'/%3E%3Cline x1='120' y1='228' x2='120' y2='300' stroke-width='10'/%3E%3Crect x='40' y='410' width='130' height='38' rx='19' stroke-width='8'/%3E%3Cline x1='170' y1='429' x2='260' y2='429' stroke-width='8'/%3E%3Ccircle cx='275' cy='429' r='16' stroke-width='5'/%3E%3Cline x1='90' y1='448' x2='90' y2='510' stroke-width='10'/%3E%3Crect x='40' y='510' width='260' height='44' rx='22' stroke-width='8'/%3E%3Cline x1='300' y1='532' x2='360' y2='532' stroke-width='7'/%3E%3Ccircle cx='374' cy='532' r='16' stroke-width='5'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: center right;
-  background-size: contain;
-  pointer-events: none;
-  z-index: 0;
-}
 
-/* ── LAYOUT ── */
-.container { max-width: 1100px; margin: 0 auto; width: 100%; padding: 0 2.5rem; }
-.section { padding: 4.5rem 2.5rem; }
-.section-alt { background: var(--navy-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-
-/* ── SECTION LABEL ── */
-.section-tag {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.75rem; font-weight: 700;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 2rem;
-  display: flex; align-items: center; gap: 0.6rem;
-}
-.section-tag::after { content: ''; flex: 1; height: 1px; background: var(--border); max-width: 180px; }
-
-/* ── GOLD BAR ── */
-.gold-bar {
-  height: 3px;
-  background: linear-gradient(to right, transparent, var(--gold), var(--gold-lt), var(--gold), transparent);
-  opacity: 0.55;
-}
-
-/* ── BUTTONS ── */
-.btn-primary {
-  display: inline-block;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700; font-size: 0.95rem;
-  letter-spacing: 0.1em; text-transform: uppercase;
-  background: var(--gold); color: var(--navy);
-  padding: 0.75rem 2rem; border-radius: 4px;
-  text-decoration: none; border: none; cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-}
-.btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
-.btn-ghost {
-  display: inline-block;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600; font-size: 0.95rem;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  color: var(--muted); text-decoration: none;
-  border-bottom: 1px solid var(--border); padding-bottom: 2px;
-  transition: color 0.2s, border-color 0.2s;
-}
-.btn-ghost:hover { color: var(--gold-lt); border-color: var(--gold); }
-
-/* ── TAG / BADGE ── */
-.tag {
-  display: inline-block;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--navy); background: var(--gold);
-  padding: 0.18rem 0.65rem; border-radius: 3px;
-}
-.tag-outline {
-  display: inline-block;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.68rem; font-weight: 700;
-  letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--gold); border: 1px solid var(--border-s);
-  padding: 0.18rem 0.65rem; border-radius: 3px;
-}
-
-/* ── CARD GRID ── */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1px;
-  border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
-}
-.card {
-  background: var(--navy-2); padding: 2rem 1.8rem;
-  text-decoration: none; color: var(--white);
-  transition: background 0.2s; position: relative; overflow: hidden;
-}
-.card::after {
-  content: ''; position: absolute;
-  bottom: 0; left: 0; right: 0; height: 2px;
-  background: var(--gold); transform: scaleX(0);
-  transform-origin: left; transition: transform 0.25s;
-}
-.card:hover { background: var(--navy-3); }
-.card:hover::after { transform: scaleX(1); }
-.card-label {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.6rem;
-}
-.card-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700; font-size: 1.2rem;
-  color: var(--white); margin-bottom: 0.5rem; line-height: 1.2;
-}
-.card-text { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
-.card-arrow {
-  display: block; margin-top: 1.2rem;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--gold); opacity: 0; transition: opacity 0.2s;
-}
-.card:hover .card-arrow { opacity: 1; }
-
-/* ── TIP CARD (listing) ── */
-.tip-list { display: flex; flex-direction: column; gap: 1px; }
-.tip-item {
-  display: grid; grid-template-columns: 4px 1fr;
-  gap: 1.6rem; align-items: start;
-  background: var(--navy-2); padding: 1.8rem 2rem;
-  text-decoration: none; color: var(--white);
-  border-bottom: 1px solid var(--border);
-  transition: background 0.18s;
-}
-.tip-item:hover { background: var(--navy-3); }
-.tip-item-accent { background: var(--gold); border-radius: 2px; }
-.tip-item-accent.brownfield { background: #1D9E75; }
-.tip-item-accent.scan { background: #7F77DD; }
-.tip-item-accent.welding { background: #D85A30; }
-.tip-item-accent.layout { background: var(--gold); }
-.tip-meta-row {
-  display: flex; align-items: center; gap: 0.8rem;
-  margin-bottom: 0.4rem;
-}
-.tip-num {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.16em; color: var(--gold); text-transform: uppercase;
-}
-.tip-heading {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700; font-size: 1.25rem;
-  color: var(--white); line-height: 1.2; margin-bottom: 0.4rem;
-}
-.tip-excerpt { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
-.tip-read {
-  display: inline-block; margin-top: 0.8rem;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.78rem; font-weight: 600;
-  letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--muted); transition: color 0.2s;
-}
-.tip-item:hover .tip-read { color: var(--gold-lt); }
+/* ── REVEAL ── */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ── FOOTER ── */
 footer {
-  border-top: 1px solid var(--border);
   background: var(--navy-4);
-  padding: 2rem 2.5rem;
-  display: flex; justify-content: space-between; align-items: center;
-  flex-wrap: wrap; gap: 1rem;
+  border-top: 1px solid var(--border);
+  padding: 2.5rem 2.5rem;
+  display: flex; flex-wrap: wrap; gap: 2rem;
+  align-items: center; justify-content: space-between;
 }
 .footer-logo {
   font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800; font-size: 1.1rem; color: var(--dim);
+  font-weight: 800; font-size: 1rem; letter-spacing: 0.08em;
 }
 .footer-logo span { color: var(--gold); }
-.footer-copy { font-size: 0.78rem; color: var(--dim); }
-.footer-links { display: flex; gap: 1.5rem; }
+.footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 .footer-links a {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--dim); text-decoration: none; transition: color 0.2s;
+  color: var(--muted); text-decoration: none;
+  font-size: 0.85rem; transition: color 0.2s;
 }
-.footer-links a:hover { color: var(--gold); }
+.footer-links a:hover { color: var(--gold-lt); }
+.footer-copy { font-size: 0.78rem; color: var(--dim); }
 
-/* ── REVEAL ANIMATION ── */
-.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-
-/* ── DIVIDER ── */
-.divider { width: 50px; height: 2px; background: rgba(201,147,10,0.4); margin: 1.5rem 0; }
-
-/* ── PROSE ── */
-.prose { max-width: 720px; }
-.prose h2 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800; font-size: 1.7rem; text-transform: uppercase;
-  color: var(--white); margin: 2rem 0 0.8rem; line-height: 1.1;
-}
-.prose h3 {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 700; font-size: 1.2rem; text-transform: uppercase;
-  color: var(--gold-lt); margin: 1.5rem 0 0.5rem;
-}
-.prose p { color: #B0C4D8; margin-bottom: 1rem; }
-.prose ul { list-style: none; margin-bottom: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
-.prose ul li {
-  color: #B0C4D8; padding-left: 1.2rem; position: relative; font-size: 0.95rem;
-}
-.prose ul li::before {
-  content: ''; position: absolute; left: 0; top: 0.65em;
-  width: 14px; height: 2px; background: var(--gold);
-}
-.prose blockquote {
-  border-left: 3px solid var(--gold); padding-left: 1.4rem;
-  margin: 1.5rem 0; font-style: italic; color: var(--muted);
-}
-
-/* ── TABLE ── */
-.data-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
-.data-table th {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--gold); padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border-s);
-  text-align: left; background: var(--navy-3);
-}
-.data-table td {
-  padding: 0.7rem 1rem; color: #B0C4D8;
-  border-bottom: 1px solid var(--border);
-  font-family: 'Barlow', monospace; font-size: 0.85rem;
-}
-.data-table tr:hover td { background: var(--navy-3); }
-.data-table .col-name { color: var(--white); font-weight: 500; }
-
-/* ── BOOK PROMO BOX ── */
-.book-promo {
-  background: var(--navy-3); border: 1px solid var(--border);
-  border-radius: 8px; padding: 2.5rem;
-  display: flex; gap: 2rem; align-items: center;
-}
-.book-promo-cover {
-  width: 110px; flex-shrink: 0;
-  border-radius: 4px; overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 3px 3px 0 rgba(201,147,10,0.2);
-}
-.book-promo-cover img { width: 100%; display: block; }
-.book-promo-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800; font-size: 1.25rem; text-transform: uppercase;
-  color: var(--white); margin-bottom: 0.4rem;
-}
-.book-promo-meta {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 0.72rem; font-weight: 700;
-  letter-spacing: 0.16em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 0.6rem;
-}
-.book-promo-text { font-size: 0.88rem; color: var(--muted); margin-bottom: 1rem; }
-
-
- }
-
-
-/* ── SIDE SKETCHES ── */
-.deco-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
-.deco-wrap img {
-  position: absolute; opacity: 0.11;
+/* ── DECO ── */
+.deco-wrap { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.sk-l, .sk-r {
+  position: fixed; opacity: 0.05;
   width: calc((100vw - 1100px) / 2 - 10px);
   min-width: 100px; max-width: 220px;
   top: 50%; transform: translateY(-50%);
@@ -404,8 +169,6 @@ footer {
 .deco-wrap .sk-l { left: 10px; }
 .deco-wrap .sk-r { right: 10px; }
 @media (max-width: 1200px) { .deco-wrap { display: none; } }
-
-/* ── RESPONSIVE ── */
 
 /* ── HAMBURGER ── */
 .nav-toggle {
@@ -443,16 +206,35 @@ footer {
 @media (max-width: 768px) {
   nav { padding: 0 1.2rem; }
   .page-header { padding: 3rem 1.2rem 2rem; }
-  .section { padding: 3rem 1.2rem; }
-  .container { padding: 0 1.2rem; }
-  .book-promo { flex-direction: column; }
   footer { flex-direction: column; align-items: flex-start; }
 }
 
 </style>
 <style>
-.tools-wrap { max-width: 1000px; margin: 0 auto; padding: 3.5rem 2.5rem; }
-.tools-category { margin-bottom: 3.5rem; }
+/* ── TOOLS PAGE ── */
+.tools-wrap { max-width: 1100px; margin: 0 auto; padding: 3.5rem 2.5rem 2rem; }
+.tools-section { margin-bottom: 4.5rem; }
+.tools-section-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.6rem;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.tools-section-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--gold); flex-shrink: 0; }
+.tools-section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: 2.1rem;
+  text-transform: uppercase; letter-spacing: -0.005em;
+  color: var(--white); margin-bottom: 0.6rem;
+}
+.tools-section-title span { color: var(--gold-lt); }
+.tools-section-desc {
+  color: var(--muted); margin-bottom: 2.2rem;
+  max-width: 720px; line-height: 1.75; font-size: 0.98rem;
+}
+
+.tools-category { margin-bottom: 3rem; }
 .tools-cat-title {
   font-family: 'Barlow Condensed', sans-serif;
   font-weight: 800; font-size: 1.4rem; text-transform: uppercase;
@@ -460,6 +242,68 @@ footer {
   display: flex; align-items: center; gap: 1rem;
 }
 .tools-cat-title::after { content: ''; flex:1; height:1px; background: var(--border); }
+
+/* ── CALCULATOR CARDS ── */
+.calc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px,1fr));
+  gap: 1px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.calc-card {
+  background: var(--navy-2);
+  padding: 1.6rem 1.5rem 1.4rem;
+  text-decoration: none;
+  display: flex; flex-direction: column;
+  position: relative;
+  transition: background 0.2s;
+  border-right: 1px solid var(--border);
+}
+.calc-card:hover {
+  background: var(--navy-3);
+}
+.calc-card-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 0.5rem;
+}
+.calc-card-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 1.15rem;
+  color: var(--white); margin-bottom: 0.4rem;
+  line-height: 1.2;
+}
+.calc-card:hover .calc-card-name { color: var(--gold-lt); }
+.calc-card-desc {
+  font-size: 0.85rem; color: var(--muted);
+  line-height: 1.55; flex-grow: 1;
+}
+.calc-card-arrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  margin-top: 0.9rem;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold);
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.calc-card:hover .calc-card-arrow { color: var(--gold-lt); }
+.calc-card-arrow::after {
+  content: '→';
+  transition: transform 0.2s;
+}
+.calc-card:hover .calc-card-arrow::after { transform: translateX(3px); }
+
+/* ── DIVIDER ── */
+.tools-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border-s) 50%, transparent 100%);
+  margin: 3.5rem 0 2rem;
+}
+
+/* ── SOFTWARE CARDS (preserved from original) ── */
 .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap: 1px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
 .tool-card { background: var(--navy-2); padding: 1.8rem 1.6rem; border-right: 1px solid var(--border); }
 .tool-name { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:1.1rem; color:var(--white); margin-bottom:0.3rem; }
@@ -470,6 +314,12 @@ footer {
 .verdict-green { background:#1D9E75; }
 .verdict-amber { background:var(--gold); }
 .verdict-muted { background:var(--dim); }
+
+@media (max-width: 800px) {
+  .tools-wrap { padding: 2.5rem 1.2rem; }
+  .tools-section-title { font-size: 1.7rem; }
+  .calc-grid, .tools-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -483,7 +333,7 @@ footer {
     <li><a href="brownfield.html">Brownfield</a></li>
     <li><a href="scan-to-model.html">Scan-to-Model</a></li>
     <li><a href="codes-standards.html">Codes</a></li>
-    <li><a href="tools.html">Tools</a></li>
+    <li><a href="tools.html" class="active">Tools</a></li>
     <li><a href="career.html">Career</a></li>
     <li><a href="reference.html">Reference</a></li>
     <li><a href="common-mistakes.html">Mistakes</a></li>
@@ -494,94 +344,235 @@ footer {
   </ul>
 <button class="nav-toggle" onclick="this.classList.toggle('open');document.querySelector('.nav-links').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
+
 <div class="page-header">
   <div class="page-header-inner">
-    <p class="page-eyebrow">3D Design &middot; Scanning &middot; Productivity</p>
-    <h1 class="page-title">Tools &amp; <span>Software</span></h1>
-    <p class="page-desc">Honest assessments from someone who uses these tools on real projects. Not marketing copy &mdash; field perspective.</p>
+    <p class="page-eyebrow">Calculators &middot; Software &middot; Productivity</p>
+    <h1 class="page-title">Tools, Calculators &amp; <span>Software</span></h1>
+    <p class="page-desc">Fifteen free engineering calculators built to ASME, ISO and API codes &mdash; plus honest assessments of the design and analysis software I actually use on real projects. No marketing fluff, just field perspective.</p>
   </div>
 </div>
+
 <div class="tools-wrap reveal">
 
-  <div class="tools-category">
-    <h2 class="tools-cat-title">3D Piping Design</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-name">AVEVA E3D / PDMS</div>
-        <div class="tool-maker">AVEVA</div>
-        <div class="tool-desc">The industry standard for large EPC projects. Steep learning curve, powerful spec-driven workflow. Dominant in European and Middle Eastern petrochemical.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Industry standard for major EPCs</div>
+  <!-- ════════════════════════════════════════
+       SECTION 1: CALCULATORS
+       ════════════════════════════════════════ -->
+  <div class="tools-section" id="calculators">
+    <p class="tools-section-eyebrow">Free &middot; SI &amp; Imperial &middot; Code-traceable</p>
+    <h2 class="tools-section-title">Engineering <span>Calculators</span></h2>
+    <p class="tools-section-desc">Every calculator runs in your browser, no signup, no data collected. Each cites its source code (ASME B31.3, ISO 5167, API RP 14E&hellip;) and includes a brownfield reality-check. Use them as a sanity check, not as a substitute for stamped engineering.</p>
+
+    <!-- ── Mechanical Design ── -->
+    <div class="tools-category">
+      <h3 class="tools-cat-title">Mechanical Design (B31.3)</h3>
+      <div class="calc-grid">
+        <a class="calc-card" href="calculators/wall-thickness.html">
+          <div class="calc-card-tag">ASME B31.3 &sect;304.1.1</div>
+          <div class="calc-card-name">Wall Thickness</div>
+          <div class="calc-card-desc">Minimum required wall for internal pressure with corrosion, mill tolerance and material allowable stress.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/branch-reinforcement.html">
+          <div class="calc-card-tag">ASME B31.3 &sect;304.3.3</div>
+          <div class="calc-card-name">Branch Reinforcement</div>
+          <div class="calc-card-desc">Area replacement check for unreinforced and reinforced branch connections, with pad sizing suggestion.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/hydrotest-pressure.html">
+          <div class="calc-card-tag">ASME B31.3 &sect;345.4.2</div>
+          <div class="calc-card-name">Hydrotest Pressure</div>
+          <div class="calc-card-desc">Test pressure per B31.3, B31.1, B31.4 and B31.8 with proper allowable stress ratio handling.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/pipe-weight.html">
+          <div class="calc-card-tag">ASME B36.10M / B36.19M</div>
+          <div class="calc-card-name">Pipe Weight</div>
+          <div class="calc-card-desc">Empty, water-filled and insulated weight per linear unit, all NPS &half;&#8243; to 48&#8243; and schedules.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/support-span.html">
+          <div class="calc-card-tag">MSS SP-58</div>
+          <div class="calc-card-name">Support Span</div>
+          <div class="calc-card-desc">Maximum distance between supports based on stress and deflection limits, with insulation allowance.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
       </div>
-      <div class="tool-card">
-        <div class="tool-name">AutoCAD Plant 3D</div>
-        <div class="tool-maker">Autodesk</div>
-        <div class="tool-desc">More accessible entry point, widely used by smaller engineering firms. Good integration with AutoCAD ecosystem. Catalog-driven. Familiar if you come from a 2D AutoCAD background.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Strong for mid-size projects</div>
+    </div>
+
+    <!-- ── Thermal & Stress ── -->
+    <div class="tools-category">
+      <h3 class="tools-cat-title">Thermal &amp; Stress</h3>
+      <div class="calc-grid">
+        <a class="calc-card" href="calculators/thermal-expansion.html">
+          <div class="calc-card-tag">B31.3 App. C</div>
+          <div class="calc-card-name">Thermal Expansion</div>
+          <div class="calc-card-desc">&Delta;L for any pipe material, length and &Delta;T &mdash; carbon steel, stainless, alloy, plastic.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/expansion-loop.html">
+          <div class="calc-card-tag">Guided cantilever</div>
+          <div class="calc-card-name">Expansion Loop Sizing</div>
+          <div class="calc-card-desc">L-leg length for U-loops based on guided cantilever method. Quick first-pass sizing before stress analysis.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/insulation-thickness.html">
+          <div class="calc-card-tag">ASTM C680</div>
+          <div class="calc-card-name">Insulation Thickness</div>
+          <div class="calc-card-desc">Skin-temperature targeting for hot or cold service. Heat loss, condensation control, personnel protection.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
       </div>
-      <div class="tool-card">
-        <div class="tool-name">SmartPlant 3D / S3D</div>
-        <div class="tool-maker">Hexagon / Intergraph</div>
-        <div class="tool-desc">Rule-driven design with strong integration to SmartPlant suite. Common on large US and Asian projects. Data-centric approach. Heavy infrastructure investment required.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>Large project / US market focus</div>
+    </div>
+
+    <!-- ── Flow & Hydraulics ── -->
+    <div class="tools-category">
+      <h3 class="tools-cat-title">Flow &amp; Hydraulics</h3>
+      <div class="calc-grid">
+        <a class="calc-card" href="calculators/velocity.html">
+          <div class="calc-card-tag">API RP 14E</div>
+          <div class="calc-card-name">Fluid Velocity</div>
+          <div class="calc-card-desc">V = Q / A with erosional limit V&#8337; = C / &radic;&rho;. Status indicator vs API recommended limits.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/reynolds-number.html">
+          <div class="calc-card-tag">Re = &rho;VD/&mu;</div>
+          <div class="calc-card-name">Reynolds Number</div>
+          <div class="calc-card-desc">Flow regime classification (laminar / transition / turbulent) with 9 fluid presets at temperature.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/pressure-drop.html">
+          <div class="calc-card-tag">Darcy-Weisbach + Colebrook</div>
+          <div class="calc-card-name">Pressure Drop</div>
+          <div class="calc-card-desc">Iterative Colebrook-White friction factor with 6 fluid presets and 6 surface roughness profiles.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/control-valve-cv.html">
+          <div class="calc-card-tag">ISA S75.01 / IEC 60534</div>
+          <div class="calc-card-name">Control Valve Cv / Kv</div>
+          <div class="calc-card-desc">Liquid Cv sizing with choked-flow and cavitation flag. Six valve styles with FL recovery factors.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/orifice-plate.html">
+          <div class="calc-card-tag">ISO 5167-2</div>
+          <div class="calc-card-name">Orifice Plate Sizing</div>
+          <div class="calc-card-desc">Reader-Harris/Gallagher full equation. Three tap configurations, gas expansibility, &beta;-ratio bisection.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
       </div>
-      <div class="tool-card">
-        <div class="tool-name">Navisworks</div>
-        <div class="tool-maker">Autodesk</div>
-        <div class="tool-desc">The go-to for model review, clash detection and 4D scheduling. Not a design tool &mdash; an aggregation and review tool. Essential for multi-discipline coordination.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Essential for clash review</div>
+    </div>
+
+    <!-- ── Field Utilities ── -->
+    <div class="tools-category">
+      <h3 class="tools-cat-title">Field Utilities</h3>
+      <div class="calc-grid">
+        <a class="calc-card" href="calculators/bolt-length.html">
+          <div class="calc-card-tag">ASME B16.5 / B18.2.2</div>
+          <div class="calc-card-name">Stud Bolt Length</div>
+          <div class="calc-card-desc">Raised-face flange pair stud length with gasket and washer options. Rounded to standard B16.5 lengths.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
+        <a class="calc-card" href="calculators/unit-converter.html">
+          <div class="calc-card-tag">9 categories</div>
+          <div class="calc-card-name">Unit Converter</div>
+          <div class="calc-card-desc">Flow, pressure, viscosity (dyn &amp; kin), length, mass, torque, density, temperature &mdash; piping engineer focused.</div>
+          <div class="calc-card-arrow">Open calculator</div>
+        </a>
       </div>
     </div>
   </div>
 
-  <div class="tools-category">
-    <h2 class="tools-cat-title">Scan-to-Model &amp; Point Cloud</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-name">Leica Cyclone</div>
-        <div class="tool-maker">Leica Geosystems</div>
-        <div class="tool-desc">Industry-leading point cloud registration and processing. The benchmark for accuracy. Pairs naturally with Leica RTC360 and BLK360 scanners.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Benchmark for accuracy</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">Autodesk ReCap</div>
-        <div class="tool-maker">Autodesk</div>
-        <div class="tool-desc">Point cloud management and preparation. Integrates directly with Plant 3D and Navisworks. Good for importing and cleaning scans before design work.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Seamless Autodesk integration</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">CloudCompare</div>
-        <div class="tool-maker">Open source</div>
-        <div class="tool-desc">Free, powerful, and surprisingly capable for point cloud analysis, comparison, and basic processing. Steep learning curve but excellent for verifying registration quality and change detection.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Free &mdash; no excuse not to learn it</div>
-      </div>
-      <div class="tool-card">
-        <div class="tool-name">Trimble RealWorks</div>
-        <div class="tool-maker">Trimble</div>
-        <div class="tool-desc">Strong alternative to Cyclone for registration and feature extraction. Paired with Trimble X7 scanners. Growing presence in construction and industrial markets.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>Strong Trimble ecosystem fit</div>
+  <div class="tools-divider"></div>
+
+  <!-- ════════════════════════════════════════
+       SECTION 2: SOFTWARE REVIEWS
+       ════════════════════════════════════════ -->
+  <div class="tools-section" id="software">
+    <p class="tools-section-eyebrow">Honest Assessments &middot; Field Perspective</p>
+    <h2 class="tools-section-title">Software <span>Reviews</span></h2>
+    <p class="tools-section-desc">The design, scanning and analysis tools I actually use on real projects. Honest assessments from someone who&rsquo;s on the model every day &mdash; not marketing copy, not vendor pitches.</p>
+
+    <div class="tools-category">
+      <h3 class="tools-cat-title">3D Piping Design</h3>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">AVEVA E3D / PDMS</div>
+          <div class="tool-maker">AVEVA</div>
+          <div class="tool-desc">The industry standard for large EPC projects. Steep learning curve, powerful spec-driven workflow. Dominant in European and Middle Eastern petrochemical.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Industry standard for major EPCs</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">AutoCAD Plant 3D</div>
+          <div class="tool-maker">Autodesk</div>
+          <div class="tool-desc">More accessible entry point, widely used by smaller engineering firms. Good integration with AutoCAD ecosystem. Catalog-driven. Familiar if you come from a 2D AutoCAD background.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Strong for mid-size projects</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">SmartPlant 3D / S3D</div>
+          <div class="tool-maker">Hexagon / Intergraph</div>
+          <div class="tool-desc">Rule-driven design with strong integration to SmartPlant suite. Common on large US and Asian projects. Data-centric approach. Heavy infrastructure investment required.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>Large project / US market focus</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">Navisworks</div>
+          <div class="tool-maker">Autodesk</div>
+          <div class="tool-desc">The go-to for model review, clash detection and 4D scheduling. Not a design tool &mdash; an aggregation and review tool. Essential for multi-discipline coordination.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Essential for clash review</div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="tools-category">
-    <h2 class="tools-cat-title">Stress Analysis</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-name">CAESAR II</div>
-        <div class="tool-maker">Hexagon</div>
-        <div class="tool-desc">The global standard for pipe stress analysis. Every stress engineer knows it. As a piping designer, you don&rsquo;t run it yourself &mdash; but you need to understand what it&rsquo;s checking and how your routing decisions affect the results.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Global stress analysis standard</div>
+    <div class="tools-category">
+      <h3 class="tools-cat-title">Scan-to-Model &amp; Point Cloud</h3>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">Leica Cyclone</div>
+          <div class="tool-maker">Leica Geosystems</div>
+          <div class="tool-desc">Industry-leading point cloud registration and processing. The benchmark for accuracy. Pairs naturally with Leica RTC360 and BLK360 scanners.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Benchmark for accuracy</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">Autodesk ReCap</div>
+          <div class="tool-maker">Autodesk</div>
+          <div class="tool-desc">Point cloud management and preparation. Integrates directly with Plant 3D and Navisworks. Good for importing and cleaning scans before design work.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Seamless Autodesk integration</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">CloudCompare</div>
+          <div class="tool-maker">Open source</div>
+          <div class="tool-desc">Free, powerful, and surprisingly capable for point cloud analysis, comparison, and basic processing. Steep learning curve but excellent for verifying registration quality and change detection.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Free &mdash; no excuse not to learn it</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">Trimble RealWorks</div>
+          <div class="tool-maker">Trimble</div>
+          <div class="tool-desc">Strong alternative to Cyclone for registration and feature extraction. Paired with Trimble X7 scanners. Growing presence in construction and industrial markets.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>Strong Trimble ecosystem fit</div>
+        </div>
       </div>
-      <div class="tool-card">
-        <div class="tool-name">ROHR2</div>
-        <div class="tool-maker">SIGMA Ingenieurgesellschaft</div>
-        <div class="tool-desc">Widely used in European (especially German) engineering. Full-featured stress analysis with strong code coverage including EN 13480. Common on German and Dutch EPC projects.</div>
-        <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>European market focus</div>
+    </div>
+
+    <div class="tools-category">
+      <h3 class="tools-cat-title">Stress Analysis</h3>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-name">CAESAR II</div>
+          <div class="tool-maker">Hexagon</div>
+          <div class="tool-desc">The global standard for pipe stress analysis. Every stress engineer knows it. As a piping designer, you don&rsquo;t run it yourself &mdash; but you need to understand what it&rsquo;s checking and how your routing decisions affect the results.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-green"></span>Global stress analysis standard</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-name">ROHR2</div>
+          <div class="tool-maker">SIGMA Ingenieurgesellschaft</div>
+          <div class="tool-desc">Widely used in European (especially German) engineering. Full-featured stress analysis with strong code coverage including EN 13480. Common on German and Dutch EPC projects.</div>
+          <div class="tool-verdict"><span class="verdict-dot verdict-amber"></span>European market focus</div>
+        </div>
       </div>
     </div>
   </div>
 
 </div>
+
 <footer>
   <div class="footer-logo"><span>PIPING</span>PASSION</div>
   <div class="footer-links">
@@ -591,7 +582,7 @@ footer {
     <a href="contact.html">Contact</a>
     <a href="about.html">About</a>
   </div>
-  <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
+  <p class="footer-copy">&copy; 2026 Geoffroy Falot &middot; pipingpassion.com</p>
 </footer>
 <script>
   const obs = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), { threshold: 0.08 });
