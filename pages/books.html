@@ -653,11 +653,19 @@ footer {
 <script>
 /**
  * Submit Notify Me form to Kit API v4.
- * Uses X-Kit-Api-Key header authentication.
+ * 2-step process required by V4:
+ *   1. Create subscriber (POST /v4/subscribers, state=inactive)
+ *   2. Add subscriber to form (POST /v4/forms/{id}/subscribers)
+ * Subscriber starts inactive, gets activated after double opt-in confirmation.
  */
 const KIT_API_KEY = 'kit_95bab07e7fdd645bee772345b9ed62ac';
+const KIT_HEADERS = {
+  'Content-Type': 'application/json; charset=utf-8',
+  'Accept': 'application/json',
+  'X-Kit-Api-Key': KIT_API_KEY
+};
 
-function submitNotify(form) {
+async function submitNotify(form) {
   event.preventDefault();
   const btn = form.querySelector('button');
   const input = form.querySelector('input[name="email_address"]');
@@ -671,47 +679,57 @@ function submitNotify(form) {
     return false;
   }
 
-  // Disable form & show "Sending..." state
+  // Disable form
   input.disabled = true;
   btn.disabled = true;
   btn.textContent = 'Sending...';
 
-  // POST to Kit API v4
-  fetch(form.action, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8',
-      'Accept': 'application/json',
-      'X-Kit-Api-Key': KIT_API_KEY
-    },
-    body: JSON.stringify({
-      email_address: email
-    })
-  })
-  .then(async response => {
-    const data = await response.json().catch(() => ({}));
-    if (response.ok) {
-      // Success
-      btn.textContent = 'Noted! Check your email.';
-      btn.style.background = '#1D9E75';
-      btn.style.color = '#fff';
-      console.log('Notify success for:', bookName, email, data);
-    } else {
-      // Kit returned an error
-      btn.textContent = 'Try again';
-      btn.style.background = '#E03030';
-      input.disabled = false;
-      btn.disabled = false;
-      console.error('Kit API error:', response.status, data);
+  try {
+    // STEP 1: Create subscriber (inactive — will be activated after double opt-in)
+    const createResp = await fetch('https://api.kit.com/v4/subscribers', {
+      method: 'POST',
+      headers: KIT_HEADERS,
+      body: JSON.stringify({
+        email_address: email,
+        state: 'inactive'
+      })
+    });
+
+    if (!createResp.ok) {
+      const errData = await createResp.json().catch(() => ({}));
+      // 422 means subscriber already exists - that's OK, continue to step 2
+      if (createResp.status !== 422) {
+        throw new Error('Create subscriber failed: ' + createResp.status + ' ' + JSON.stringify(errData));
+      }
     }
-  })
-  .catch((err) => {
+
+    // STEP 2: Add subscriber to the form
+    const addResp = await fetch(form.action, {
+      method: 'POST',
+      headers: KIT_HEADERS,
+      body: JSON.stringify({
+        email_address: email
+      })
+    });
+
+    if (!addResp.ok) {
+      const errData = await addResp.json().catch(() => ({}));
+      throw new Error('Add to form failed: ' + addResp.status + ' ' + JSON.stringify(errData));
+    }
+
+    // Success
+    btn.textContent = 'Noted! Check your email.';
+    btn.style.background = '#1D9E75';
+    btn.style.color = '#fff';
+    console.log('Notify success for:', bookName, email);
+
+  } catch (err) {
     btn.textContent = 'Try again';
     btn.style.background = '#E03030';
     input.disabled = false;
     btn.disabled = false;
-    console.error('Network error:', err);
-  });
+    console.error('Kit error:', err);
+  }
 
   return false;
 }
