@@ -573,7 +573,7 @@ footer {
       <div class="book-meta">Fundamentals &amp; Rotating Equipment &middot; 13 Chapters &middot; 80+ Figures</div>
       <p class="book-desc">Pipe racks, pumps, compressors and turbines &mdash; the foundations every designer must master. Volume 1 of the Piping Layout trilogy, written for the junior-to-mid designer who wants to understand the WHY behind every routing decision around rotating equipment.</p>
       <div class="book-cta-row">
-        <form class="notify-form" action="https://api.convertkit.com/v3/forms/9372492/subscribe" method="post" data-book="Layout Vol 1" onsubmit="return submitNotify(this)">
+        <form class="notify-form" action="https://api.kit.com/v4/forms/9372492/subscribers" method="post" data-book="Layout Vol 1" onsubmit="return submitNotify(this)">
           <input type="email" class="notify-input" name="email_address" placeholder="your@email.com" required>
           <button type="submit" class="btn-primary">Notify me</button>
         </form>
@@ -592,7 +592,7 @@ footer {
       <div class="book-meta">Static, Thermal &amp; Utility Equipment &middot; 14 Chapters &middot; 70+ Figures</div>
       <p class="book-desc">Vessels, exchangers, fired heaters and utility systems &mdash; the process backbone of every plant. Volume 2 dives into static and thermal equipment, where most piping volume is concentrated and where good layout makes the difference between a smooth turnaround and a nightmare.</p>
       <div class="book-cta-row">
-        <form class="notify-form" action="https://api.convertkit.com/v3/forms/9372507/subscribe" method="post" data-book="Layout Vol 2" onsubmit="return submitNotify(this)">
+        <form class="notify-form" action="https://api.kit.com/v4/forms/9372507/subscribers" method="post" data-book="Layout Vol 2" onsubmit="return submitNotify(this)">
           <input type="email" class="notify-input" name="email_address" placeholder="your@email.com" required>
           <button type="submit" class="btn-primary">Notify me</button>
         </form>
@@ -611,7 +611,7 @@ footer {
       <div class="book-meta">Execution, Specialization &amp; Reference &middot; 11 Chapters &middot; 6 Appendices &middot; 60+ Figures</div>
       <p class="book-desc">Supports, stress, 3D modeling and industry-specific practices &mdash; the senior designer&rsquo;s toolkit. Volume 3 covers everything that separates a competent designer from a senior one, plus reference appendices you&rsquo;ll keep coming back to throughout your career.</p>
       <div class="book-cta-row">
-        <form class="notify-form" action="https://api.convertkit.com/v3/forms/9372510/subscribe" method="post" data-book="Layout Vol 3" onsubmit="return submitNotify(this)">
+        <form class="notify-form" action="https://api.kit.com/v4/forms/9372510/subscribers" method="post" data-book="Layout Vol 3" onsubmit="return submitNotify(this)">
           <input type="email" class="notify-input" name="email_address" placeholder="your@email.com" required>
           <button type="submit" class="btn-primary">Notify me</button>
         </form>
@@ -630,7 +630,7 @@ footer {
       <div class="book-meta">Designer-Focused &middot; Flexibility &middot; Supports &middot; Nozzle Loads</div>
       <p class="book-desc">A designer-friendly introduction to flexibility, supports, and nozzle loads &mdash; bridging the gap between stress engineering theory and what piping designers actually need to know on the job.</p>
       <div class="book-cta-row">
-        <form class="notify-form" action="https://api.convertkit.com/v3/forms/9372514/subscribe" method="post" data-book="Stress" onsubmit="return submitNotify(this)">
+        <form class="notify-form" action="https://api.kit.com/v4/forms/9372514/subscribers" method="post" data-book="Stress" onsubmit="return submitNotify(this)">
           <input type="email" class="notify-input" name="email_address" placeholder="your@email.com" required>
           <button type="submit" class="btn-primary">Notify me</button>
         </form>
@@ -652,11 +652,10 @@ footer {
 </footer>
 <script>
 /**
- * Submit Notify Me form to Kit API v3.
- * Uses the official ConvertKit/Kit API to subscribe email to a form.
- * Returns proper success/error responses (full CORS support).
+ * Submit Notify Me form to Kit API v4.
+ * Uses X-Kit-Api-Key header authentication.
  */
-const KIT_API_KEY = 'fmIVlK9upNrjTUlY1gNe1Q';
+const KIT_API_KEY = 'kit_95bab07e7fdd645bee772345b9ed62ac';
 
 function submitNotify(form) {
   event.preventDefault();
@@ -677,32 +676,33 @@ function submitNotify(form) {
   btn.disabled = true;
   btn.textContent = 'Sending...';
 
-  // POST to Kit API v3
+  // POST to Kit API v4
   fetch(form.action, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json; charset=utf-8'
+      'Content-Type': 'application/json; charset=utf-8',
+      'Accept': 'application/json',
+      'X-Kit-Api-Key': KIT_API_KEY
     },
     body: JSON.stringify({
-      api_key: KIT_API_KEY,
-      email: email
+      email_address: email
     })
   })
-  .then(response => response.json())
-  .then(data => {
-    if (data.subscription) {
+  .then(async response => {
+    const data = await response.json().catch(() => ({}));
+    if (response.ok) {
       // Success
       btn.textContent = 'Noted! Check your email.';
       btn.style.background = '#1D9E75';
       btn.style.color = '#fff';
-      console.log('Notify success for:', bookName, email);
+      console.log('Notify success for:', bookName, email, data);
     } else {
       // Kit returned an error
       btn.textContent = 'Try again';
       btn.style.background = '#E03030';
       input.disabled = false;
       btn.disabled = false;
-      console.error('Kit API error:', data);
+      console.error('Kit API error:', response.status, data);
     }
   })
   .catch((err) => {
