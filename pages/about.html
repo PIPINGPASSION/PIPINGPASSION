@@ -479,7 +479,7 @@ footer {
     flex-shrink: 0; margin-top: 10px;
   }
   .sidebar-link {
-    display: flex; align-items: center; gap: 0.6rem; padding: 0.6rem 0;
+    display: flex; align-items: center; gap: 0.7rem; padding: 0.7rem 0;
     text-decoration: none; border-bottom: 1px solid var(--border);
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em;
@@ -488,6 +488,17 @@ footer {
   }
   .sidebar-link:hover { color: var(--gold); }
   .sidebar-link:last-child { border-bottom: none; }
+  .sidebar-icon {
+    width: 18px; height: 18px; flex-shrink: 0;
+    color: var(--gold);
+    transition: color 0.2s, transform 0.2s;
+  }
+  .sidebar-link:hover .sidebar-icon { color: var(--gold-lt); transform: translateX(2px); }
+  .sidebar-link-arrow {
+    margin-left: auto; opacity: 0.4;
+    font-size: 0.75rem; transition: opacity 0.2s, transform 0.2s;
+  }
+  .sidebar-link:hover .sidebar-link-arrow { opacity: 1; transform: translateX(3px); }
 
   .mission-statement {
     background: var(--navy-3); border-left: 3px solid var(--gold);
@@ -549,7 +560,7 @@ footer {
 
       <p>That's not just a tagline. It's the reason this site exists.</p>
 
-      <p>I've spent seven years as an industrial piping designer, mostly on brownfield and revamp projects in petrochemical and process industries. The majority of that time has been spent learning not from textbooks, but from the people standing next to me on site &mdash; veterans with twenty, thirty, forty years of accumulated judgment that you can't get anywhere else.</p>
+      <p>I've worked as a piping designer on brownfield and revamp projects, primarily in petrochemical and mining industries. The majority of that time has been spent learning not from textbooks, but from the people standing next to me on site &mdash; veterans with twenty, thirty, forty years of accumulated judgment that you can't get anywhere else.</p>
 
       <p>Most of what they know has never been written down. It lives in their heads, gets transmitted informally across decades, and walks out the door when they retire. The piping community is losing this knowledge faster than it's replacing it.</p>
 
@@ -567,9 +578,9 @@ footer {
 
       <h2>The author</h2>
 
-      <p>Geoffroy Falot is an industrial piping designer specialising in brownfield and revamp projects in the petrochemical sector. Based in Canada. Currently building pipingpassion.com in parallel with a second book project on brownfield methods.</p>
+      <p>Geoffroy Falot is an experienced piping designer trained in Canada. His work has been primarily on brownfield and revamp projects in the petrochemical sector, with additional experience in mining. Currently building pipingpassion.com in parallel with a second book project: <em>Piping Layout &mdash; The Complete Guide to Equipment Piping &amp; Routing</em>, a three-volume series targeting piping designers across all industries. Volume 1 is in progress.</p>
 
-      <p>If you found something useful on this site, or if you're a senior professional with knowledge worth preserving &mdash; feel free to reach out on LinkedIn.</p>
+      <p>If you found something useful on this site, or if you're a senior professional with knowledge worth preserving &mdash; feel free to reach out.</p>
 
       <div class="divider"></div>
 
@@ -584,11 +595,10 @@ footer {
     <div class="sidebar-card">
       <p class="sidebar-card-title">Quick profile</p>
       <ul class="sidebar-list">
-        <li>Industrial piping designer</li>
-        <li>7 years field experience</li>
-        <li>Brownfield & revamp specialist</li>
-        <li>Petrochemical sector</li>
-        <li>Canada</li>
+        <li>Experienced piping designer</li>
+        <li>Brownfield &amp; revamp specialist</li>
+        <li>Petrochemical &amp; mining</li>
+        <li>Trained in Canada</li>
         <li>Scan-to-model practitioner</li>
       </ul>
     </div>
@@ -609,8 +619,23 @@ footer {
 
     <div class="sidebar-card">
       <p class="sidebar-card-title">Connect</p>
-      <a class="sidebar-link" href="https://linkedin.com" target="_blank">â LinkedIn</a>
-      <a class="sidebar-link" href="https://mybook.to/pgMcn1" target="_blank">â Amazon KDP</a>
+      <a class="sidebar-link" href="https://linkedin.com" target="_blank" rel="noopener">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/>
+          <rect x="2" y="9" width="4" height="12"/>
+          <circle cx="4" cy="4" r="2"/>
+        </svg>
+        <span>LinkedIn</span>
+        <span class="sidebar-link-arrow">&rarr;</span>
+      </a>
+      <a class="sidebar-link" href="contact.html">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <span>Contact</span>
+        <span class="sidebar-link-arrow">&rarr;</span>
+      </a>
     </div>
 
   </div>
@@ -625,7 +650,7 @@ footer {
     <a href="contact.html">Contact</a>
     <a href="about.html">About</a>
   </div>
-  <p class="footer-copy">&copy; 2025 Geoffroy Falot &middot; pipingpassion.com</p>
+  <p class="footer-copy">&copy; 2026 Geoffroy Falot &middot; pipingpassion.com</p>
 </footer>
 
 <script>
