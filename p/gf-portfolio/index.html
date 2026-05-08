@@ -1,1 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<title>Portfolio &mdash; Geoffroy Falot, Piping Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: #09152A;
+  color: #F5F0E8;
+  font-family: 'Barlow', -apple-system, sans-serif;
+  display: flex; flex-direction: column;
+}
 
+/* ── HEADER ── */
+header {
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #142645 0%, #09152A 100%);
+  border-bottom: 1px solid rgba(201,147,10,0.18);
+  padding: 1.2rem 1.8rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 1rem;
+}
+.identity { display: flex; flex-direction: column; gap: 0.15rem; }
+.name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  color: #F5F0E8;
+  text-transform: uppercase;
+}
+.role {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #C9930A;
+}
+
+/* ── BUTTON ── */
+.btn-open {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 1.1rem;
+  background: transparent;
+  color: #C9930A;
+  border: 1px solid rgba(201,147,10,0.5);
+  border-radius: 4px;
+  text-decoration: none;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.8rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-open:hover { background: #C9930A; color: #09152A; }
+
+/* ── PDF VIEWER ── */
+.viewer {
+  flex: 1;
+  width: 100%;
+  border: none;
+  background: #1a1a1a;
+}
+
+/* ── FOOTER ── */
+footer {
+  flex-shrink: 0;
+  padding: 0.85rem 1.8rem;
+  background: #06101E;
+  border-top: 1px solid rgba(201,147,10,0.18);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.5rem;
+  font-family: 'Barlow', sans-serif;
+  font-size: 0.78rem;
+  color: #5D7596;
+}
+footer .left { color: #8EA3BE; }
+footer a {
+  color: #8EA3BE;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+footer a:hover { color: #F0B429; }
+.dot { color: #3D5A7A; margin: 0 0.5rem; }
+
+@media (max-width: 600px) {
+  header { padding: 1rem 1.2rem; }
+  .name { font-size: 1.1rem; }
+  .role { font-size: 0.7rem; }
+  .btn-open { font-size: 0.7rem; padding: 0.4rem 0.8rem; }
+  footer { padding: 0.75rem 1.2rem; flex-direction: column; gap: 0.3rem; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="identity">
+    <div class="name">Geoffroy Falot</div>
+    <div class="role">Piping Designer &middot; Brownfield Specialist</div>
+  </div>
+  <a class="btn-open" href="portfolio.pdf" target="_blank" rel="noopener">Open in new tab &#8599;</a>
+</header>
+
+<iframe class="viewer" src="portfolio.pdf#view=FitH" title="Portfolio &mdash; Geoffroy Falot"></iframe>
+
+<footer>
+  <div class="left">Project Portfolio &middot; 2026</div>
+  <div>
+    <a href="https://pipingpassion.com" target="_blank" rel="noopener">pipingpassion.com</a>
+    <span class="dot">&middot;</span>
+    <a href="mailto:falotg@gmail.com">falotg@gmail.com</a>
+  </div>
+</footer>
+
+</body>
+</html>
