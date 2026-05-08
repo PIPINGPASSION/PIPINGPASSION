@@ -1,0 +1,10 @@
+# pipingpassion.com — robots.txt
+# Allow indexing of public site
+User-agent: *
+Allow: /
+
+# Block private areas
+Disallow: /p/
+
+# Sitemap location
+Sitemap: https://pipingpassion.com/sitemap.xml
