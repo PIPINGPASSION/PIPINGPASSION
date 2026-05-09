@@ -11,12 +11,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html, body { height: 100%; }
+html, body { min-height: 100%; }
 body {
   background: #09152A;
   color: #F5F0E8;
   font-family: 'Barlow', -apple-system, sans-serif;
   display: flex; flex-direction: column;
+  min-height: 100vh;
 }
 
 /* ── HEADER ── */
@@ -31,22 +32,18 @@ header {
 .identity { display: flex; flex-direction: column; gap: 0.15rem; }
 .name {
   font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800;
-  font-size: 1.3rem;
-  letter-spacing: 0.04em;
-  color: #F5F0E8;
+  font-weight: 800; font-size: 1.3rem;
+  letter-spacing: 0.04em; color: #F5F0E8;
   text-transform: uppercase;
 }
 .role {
   font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 600;
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
+  font-weight: 600; font-size: 0.78rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
   color: #C9930A;
 }
 
-/* ── BUTTON ── */
+/* ── BUTTON (HEADER) ── */
 .btn-open {
   display: inline-flex; align-items: center; gap: 0.4rem;
   padding: 0.5rem 1.1rem;
@@ -62,13 +59,15 @@ header {
 }
 .btn-open:hover { background: #C9930A; color: #09152A; }
 
-/* ── PDF VIEWER ── */
-.viewer {
-  flex: 1;
-  width: 100%;
-  border: none;
-  background: #1a1a1a;
+/* ── PDF VIEWER (DESKTOP) ── */
+.viewer-desktop {
+  flex: 1; width: 100%;
+  border: none; background: #1a1a1a;
+  display: block;
 }
+
+/* ── MOBILE LIST (HIDDEN ON DESKTOP) ── */
+.mobile-content { display: none; }
 
 /* ── FOOTER ── */
 footer {
@@ -79,24 +78,108 @@ footer {
   display: flex; justify-content: space-between; align-items: center;
   flex-wrap: wrap; gap: 0.5rem;
   font-family: 'Barlow', sans-serif;
-  font-size: 0.78rem;
-  color: #5D7596;
+  font-size: 0.78rem; color: #5D7596;
 }
 footer .left { color: #8EA3BE; }
-footer a {
-  color: #8EA3BE;
-  text-decoration: none;
-  transition: color 0.2s;
-}
+footer a { color: #8EA3BE; text-decoration: none; transition: color 0.2s; }
 footer a:hover { color: #F0B429; }
 .dot { color: #3D5A7A; margin: 0 0.5rem; }
 
-@media (max-width: 600px) {
+/* ═══════════════════════════════════════
+   MOBILE BREAKPOINT (≤ 800px)
+   ═══════════════════════════════════════ */
+@media (max-width: 800px) {
+  /* Hide iframe, show list */
+  .viewer-desktop { display: none; }
+  .mobile-content {
+    display: block;
+    flex: 1;
+    padding: 1.5rem 1.2rem 2rem;
+  }
+
+  /* Header smaller on mobile */
   header { padding: 1rem 1.2rem; }
   .name { font-size: 1.1rem; }
   .role { font-size: 0.7rem; }
   .btn-open { font-size: 0.7rem; padding: 0.4rem 0.8rem; }
-  footer { padding: 0.75rem 1.2rem; flex-direction: column; gap: 0.3rem; text-align: center; }
+
+  /* Mobile intro text */
+  .mobile-intro {
+    color: #8EA3BE;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(201,147,10,0.18);
+  }
+  .mobile-intro strong {
+    color: #F5F0E8;
+    font-weight: 600;
+  }
+
+  /* Project list label */
+  .projects-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: #C9930A;
+    margin-bottom: 0.8rem;
+  }
+
+  /* Project cards */
+  .project-card {
+    display: block;
+    padding: 1rem 1.1rem;
+    background: #0D1E38;
+    border: 1px solid rgba(201,147,10,0.12);
+    border-radius: 6px;
+    margin-bottom: 0.6rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .project-card:active { background: #142645; border-color: rgba(201,147,10,0.35); }
+  .project-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #C9930A; margin-bottom: 0.3rem;
+  }
+  .project-name {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700; font-size: 1rem;
+    color: #F5F0E8; line-height: 1.25;
+    margin-bottom: 0.25rem;
+  }
+  .project-value {
+    font-size: 0.78rem;
+    color: #8EA3BE;
+    font-style: italic;
+  }
+
+  /* "Open Full Portfolio" button */
+  .btn-open-full {
+    display: flex; justify-content: center; align-items: center;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    background: #C9930A;
+    color: #09152A;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.95rem; font-weight: 800;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    transition: background 0.2s;
+  }
+  .btn-open-full:active { background: #F0B429; }
+  .btn-open-full::after {
+    content: '\00a0\2197';
+    margin-left: 0.3rem;
+  }
+
+  /* Footer mobile */
+  footer { padding: 0.85rem 1.2rem; flex-direction: column; gap: 0.3rem; text-align: center; font-size: 0.72rem; }
 }
 </style>
 </head>
@@ -110,7 +193,72 @@ footer a:hover { color: #F0B429; }
   <a class="btn-open" href="portfolio.pdf" target="_blank" rel="noopener">Open in new tab &#8599;</a>
 </header>
 
-<iframe class="viewer" src="portfolio.pdf" title="Portfolio &mdash; Geoffroy Falot"></iframe>
+<!-- DESKTOP: iframe viewer -->
+<iframe class="viewer-desktop" src="portfolio.pdf" title="Portfolio &mdash; Geoffroy Falot"></iframe>
+
+<!-- MOBILE: project list -->
+<div class="mobile-content">
+  <p class="mobile-intro">
+    <strong>Selected projects</strong> from brownfield revamp work in petrochemical and process industries.
+    Tap any project to jump to its page, or open the full portfolio below.
+  </p>
+
+  <p class="projects-label">Project Portfolio</p>
+
+  <a class="project-card" href="portfolio.pdf#page=2" target="_blank" rel="noopener">
+    <div class="project-tag">Hydrogen Service &middot; 6&#8243; Class 900</div>
+    <div class="project-name">Butt-Weld Ball Valves Replacement</div>
+    <div class="project-value">PWHT &middot; C$148,000 (&euro;95,000)</div>
+  </a>
+
+  <a class="project-card" href="portfolio.pdf#page=3" target="_blank" rel="noopener">
+    <div class="project-tag">Raw Water &middot; 10&#8243; Class 300</div>
+    <div class="project-name">Fire Hydrants Upgrade</div>
+  </a>
+
+  <a class="project-card" href="portfolio.pdf#page=4" target="_blank" rel="noopener">
+    <div class="project-tag">Carbon Capture Integration</div>
+    <div class="project-name">Carbon Capture Unit into Paper Mill</div>
+    <div class="project-value">Project value: $23.7M CAD</div>
+  </a>
+
+  <a class="project-card" href="portfolio.pdf#page=5" target="_blank" rel="noopener">
+    <div class="project-tag">Light Cycle Oil &middot; 6&#8243; Class 150</div>
+    <div class="project-name">Tank Dike Line Replacement</div>
+  </a>
+
+  <a class="project-card" href="portfolio.pdf#page=6" target="_blank" rel="noopener">
+    <div class="project-tag">Oily Water &middot; 10&#8243; Class 150</div>
+    <div class="project-name">Well Retrofit</div>
+  </a>
+
+  <a class="project-card" href="portfolio.pdf#page=7" target="_blank" rel="noopener">
+    <div class="project-tag">Slope Oil Tank &middot; 4&#8243; Class 150</div>
+    <div class="project-name">Breather Valve Set-Up</div>
+  </a>
+
+  <a class="project-card" href="portfolio.pdf#page=8" target="_blank" rel="noopener">
+    <div class="project-tag">Hot Water Pit &middot; 3&#8243; Class 150</div>
+    <div class="project-name">Steam Injection Set-Up</div>
+  </a>
+
+  <a class="project-card" href="portfolio.pdf#page=9" target="_blank" rel="noopener">
+    <div class="project-tag">Engineering Analysis</div>
+    <div class="project-name">Pipe Support Stress Analysis</div>
+  </a>
+
+  <a class="project-card" href="portfolio.pdf#page=10" target="_blank" rel="noopener">
+    <div class="project-tag">Detail Engineering</div>
+    <div class="project-name">Mechanical Drawings</div>
+  </a>
+
+  <a class="project-card" href="portfolio.pdf#page=11" target="_blank" rel="noopener">
+    <div class="project-tag">Field Documentation</div>
+    <div class="project-name">As-Built &amp; Redline Drawings</div>
+  </a>
+
+  <a class="btn-open-full" href="portfolio.pdf" target="_blank" rel="noopener">Open Full Portfolio</a>
+</div>
 
 <footer>
   <div class="left">Project Portfolio &middot; 2026</div>
